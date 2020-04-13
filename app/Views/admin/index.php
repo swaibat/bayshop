@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <?php include 'includes/head.php'; ?>
@@ -11,7 +10,8 @@
 		<div class="container-fluid mt-4">
 			<?php include 'pages/'. $folder_name . '/'. $page_name . '.php'; ?>
 		</div>
-    </main>
-    <?php include 'pages/script.php'; ?>
+	</main>
 </body>
+<?php include 'includes/script.php'; ?>
+
 </html>

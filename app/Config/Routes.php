@@ -35,6 +35,7 @@ $routes->setAutoRoute(true);
 $routes->get('news/(:segment)', 'News::view/$1');
 // $routes->get('news', 'Admin::index');
 $routes->get('news', 'Admin::index');
+$routes->match(['get', 'post'], 'admin/product_create', 'Admin::product_create');
 
 /**
  * --------------------------------------------------------------------

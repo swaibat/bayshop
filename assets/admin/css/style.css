@@ -1,4 +1,7 @@
 @import "./../../shared/bootstrap-4.4.1/css/bootstrap.min.css";
+@import "./../../plugins/dataTables/datatables.min.css";
+@import "./../../plugins/select2/dist/css/select2.min.css";
+@import "./../../plugins/summernote/summernote-bs4.min.css";
 @import "./app.css";
 @import "./partials/sidenav.css";
 @import "./partials/products.css";
