@@ -86,7 +86,7 @@
               foreach ($comments as $comment) : ?>
                 <tr>
                   <td><?php echo $this->common_model->get_name_by_id($comment['user_id']); ?></td>
-                  <td><?php echo $this->common_model->get_Product_title_by_id($comment['Product_id']); ?></td>
+                  <td><?php echo $this->common_model->get_Product_title_by_id($comment['id']); ?></td>
                   <td><?php echo $comment['comment']; ?></td>
                   <td><?php echo $comment['comment_at']; ?></td>
                 </tr>

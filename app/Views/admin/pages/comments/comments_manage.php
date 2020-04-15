@@ -76,43 +76,43 @@
           }
           foreach ($comments as $comments) :
 
-            ?>
-              <tr id='row_<?php echo $comments['comments_id']; ?>'>
-                <td>
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-white btn-xs dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a data-toggle="modal" data-target="#mymodal" data-id="<?php echo base_url() . 'admin/view_modal/comments_edit/' . $comments['comments_id'] . '/product'; ?>" id="menu" title="<?php echo trans('edit'); ?>"><?php echo trans('edit_comments'); ?></a>
-                      <li><a title="<?php echo trans('delete'); ?>" href="#" onclick="delete_row(<?php echo " 'comments' " . ',' . $comments['comments_id']; ?>)" class="delete"><?php echo trans('delete'); ?></a> </li>
-                    </ul>
-                  </div>
-                </td>
-                <td><?php echo $sl++; ?></td>
-                <td>
-                  <img src="<?php echo $this->common_model->get_img('user', $comments['user_id']) . '?' . time(); ?>" class="img-circle " alt="photo" height="30">
-                  <strong><?php echo $this->common_model->get_name_by_id($comments['user_id']); ?></strong><br>
-                </td>
-                <td> <?php echo $comments['comment']; ?></td>
-                <td><?php echo $this->common_model->get_title_by_product_id($comments['Product_id']); ?></td>
-                <td><?php echo $comments['comment_at']; ?></td>
-                <td>
-                  <?php
-                    // 0-Unapproved, 1 -Approved, 2-Spam, 3-Trash
-                    if ($comments['publication'] == '1') {
-                      echo '<span class="label label-success label-xs">Approved</span>';
-                    } else if ($comments['publication'] == '0') {
-                      echo '<span class="label label-primary label-xs">Unapproved</span>';
-                    } else if ($comments['publication'] == '3') {
-                      echo '<span class="label label-danger label-xs">Trash</span>';
-                    } else if ($comments['publication'] == '2') {
-                      echo '<span class="label label-warning label-xs">Spam</span>';
-                    } else {
-                      echo '<span class="label label-warning label-mini">Spam</span>';
-                    }
-                    ?>
-                </td>
-              </tr>
-            <?php endforeach; ?>
+          ?>
+            <tr id='row_<?php echo $comments['comments_id']; ?>'>
+              <td>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-white btn-xs dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a data-toggle="modal" data-target="#mymodal" data-id="<?php echo base_url() . 'admin/view_modal/comments_edit/' . $comments['comments_id'] . '/product'; ?>" id="menu" title="<?php echo trans('edit'); ?>"><?php echo trans('edit_comments'); ?></a>
+                    <li><a title="<?php echo trans('delete'); ?>" href="#" onclick="delete_row(<?php echo " 'comments' " . ',' . $comments['comments_id']; ?>)" class="delete"><?php echo trans('delete'); ?></a> </li>
+                  </ul>
+                </div>
+              </td>
+              <td><?php echo $sl++; ?></td>
+              <td>
+                <img src="<?php echo $this->common_model->get_img('user', $comments['user_id']) . '?' . time(); ?>" class="img-circle " alt="photo" height="30">
+                <strong><?php echo $this->common_model->get_name_by_id($comments['user_id']); ?></strong><br>
+              </td>
+              <td> <?php echo $comments['comment']; ?></td>
+              <td><?php echo $this->common_model->get_title_by_product_id($comments['id']); ?></td>
+              <td><?php echo $comments['comment_at']; ?></td>
+              <td>
+                <?php
+                // 0-Unapproved, 1 -Approved, 2-Spam, 3-Trash
+                if ($comments['publication'] == '1') {
+                  echo '<span class="label label-success label-xs">Approved</span>';
+                } else if ($comments['publication'] == '0') {
+                  echo '<span class="label label-primary label-xs">Unapproved</span>';
+                } else if ($comments['publication'] == '3') {
+                  echo '<span class="label label-danger label-xs">Trash</span>';
+                } else if ($comments['publication'] == '2') {
+                  echo '<span class="label label-warning label-xs">Spam</span>';
+                } else {
+                  echo '<span class="label label-warning label-mini">Spam</span>';
+                }
+                ?>
+              </td>
+            </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
     </div>

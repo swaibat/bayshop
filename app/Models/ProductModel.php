@@ -2,23 +2,12 @@
 
 namespace App\Models;
 
+use CodeIgniter\Database\ConnectionInterface;
 use CodeIgniter\Model;
-class ProductModel extends Model {
 
-    var $table = 'products';
-    
-    public function __construct() {
-        parent::__construct();
-        $this->db  = \Config\Database::connect();
-    }
+class ProductModel extends Model
+{
+    protected $table = 'products';
 
-    public function get_products() {;
-        $query = $this->db->table($this->table)->get();
-        return $query->getResult();
-        
-    }
-    public function create_product($data) {
-        $this->db->table($this->table)->insert($data);
-    }
-
+    protected $allowedFields = ['id', 'title'];
 }
