@@ -32,10 +32,21 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 // $routes->get('/', 'Home::index');
-$routes->get('news/(:segment)', 'News::view/$1');
 // $routes->get('news', 'Admin::index');
-$routes->get('news', 'Admin::index');
-$routes->match(['get', 'post'], 'admin/product_create', 'Admin::product_create');
+// $routes->get('news', 'Admin::index');
+// $routes->match(['get', 'post'], 'admin/products/create', 'Admin::create');
+// $routes->match(['get', 'post'], 'admin/products/(:num)/update', 'Admin::update/$1');
+
+
+$routes->group('admin', function($routes)
+{
+	$routes->add('products', 'Product',);
+	$routes->add('products/create', 'Product::create');
+	$routes->add('products/(:num)/update', 'Product::update/$1');
+	$routes->add('categories', 'Category');
+	$routes->add('categories/create', 'Category::create');
+	$routes->add('categories/(:num)/update', 'Category::update/$1');
+});
 
 /**
  * --------------------------------------------------------------------

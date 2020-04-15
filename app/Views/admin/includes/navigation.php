@@ -39,14 +39,29 @@
 
 		<!-- Products -->
 		<li class="nav-item">
-			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'products') ? 'selected' : ''; ?>" href="<?= base_url() . "admin/products"; ?>">
+			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'products') ? 'selected show' : ''; ?>" id="hasSubItems" data-toggle="collapse" data-target="#Products" aria-expanded="false" href="/admin/products">
 				<ion-icon name="basket-outline"></ion-icon><span class="nav-item-text">Products</span>
 			</a>
+			<ul class="nav-second-level cv-collapse collapse <?= ($folder_name == 'products') ? 'show' : ''; ?>" id="Products" data-parent="#navAccordion">
+				<li class="nav-item">
+					<a class="nav-link pl-2" href="<?= base_url('/admin/products/') ?>"><span class="nav-link -text p-0 ml-n3">
+							<ion-icon name="radio-button-<?php menu($page_name, '(products|create|update)', 'child') ?>"></ion-icon>All Products
+						</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/product_types/' ?>">
+						<span class="nav-link -text p-0 ml-n3">
+							<ion-icon name="radio-button-<?php menu($page_name, 'product_types', 'child'); ?>"></ion-icon>Products types
+						</span>
+					</a>
+				</li>
+			</ul>
 		</li>
 
 		<!-- Categories -->
 		<li class="nav-item">
-			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'categories') ? 'selected' : ''; ?>" href="<?= base_url() . "admin/category"; ?>">
+			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'categories') ? 'selected' : ''; ?>" href="<?= base_url() . "/admin/categories"; ?>">
 				<ion-icon name="folder-open-outline"></ion-icon><span class="nav-item-text">Categories</span>
 			</a>
 		</li>

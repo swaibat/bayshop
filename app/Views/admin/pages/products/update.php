@@ -1,70 +1,62 @@
 <div class="card border-0 shadow-xs">
 	<div class="row">
 		<div class="col-sm-12">
-			<form method="post" action="<?= base_url('/admin/product_create/') ?>">
-				<div class="form-row modal-body p-4">
+			<form id='form' method="post" action="<?= base_url() ?>/admin/products/<?= $product['id']?>/update/">
+				<div class="form-row p-4">
 					<div class="col-md-9">
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input id='title' name="title" type="text" class="form-control custom-input" required><span class="bar"></span><label class="cv-label left text-capitalize">title</label>
+								</span></div><input id='title' name="title" type="text" class="form-control custom-input" value='<?= $product['title'] ?>' required><span class="bar"></span><label class="cv-label left text-capitalize">title</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group form-group mt-4 px-3">
-							<select id='product_type' name='category_id[]' class="form-control js-select2">
-								<?php foreach ($categories as $category) { ?>
-									<script><?= $category->category_id; ?></script>
-									<option value='<?= $category->category_id; ?>'><?= $category->name; ?></option>
+							<select id='vendor' name='vendor' class="form-control js-select2">
+								<?php foreach ($product_types as $type) { ?>
+									<option value='<?= $type['id']; ?>'><?= $type['name']; ?></option>
 								<?php } ?>
 							</select>
 						</div>
 					</div>
-					<div class="col-md-6 d-none">
-						<div class="cv-form-group input-group mb-3 mt-4 px-3">
-							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-									<ion-icon name="person-outline"></ion-icon>
-								</span></div><input id="slug" name="slug" type="text" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">slug</label>
-						</div>
-					</div>
 					<div class="col-md-12 pt-3">
 						<div class="form-group px-3">
-							<textarea class="wysihtml5 form-control rounded" name="description" id="description" rows="20"></textarea>
+							<textarea class="wysihtml5 form-control rounded" name="description" id="description" rows="20"><?= $product['description'] ?></textarea>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input name="price" type="text" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">Price</label>
+								</span></div><input name="price" type="number" class="form-control custom-input" value='<?= $product['price'] ?>' required=""><span class="bar"></span><label class="cv-label left text-capitalize">Price</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input name="compare_price" type="text" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">Compare to price</label>
+								</span></div><input name="compare_price" value='<?= $product['compare_price'] ?>' type="number" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">Compare to price</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input name="available_quantity" type="text" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">available quantity</label>
+								</span></div><input name="available_quantity" value='<?= $product['available_quantity'] ?>' type="number" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">available quantity</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input name="sku" type="text" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">SKU (Stock Keeping Unit)</label>
+								</span></div><input name="sku" value='<?= $product['sku'] ?>' type="text" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">SKU (Stock Keeping Unit)</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group form-group mt-4 px-3">
 							<select id='category' name='category' class="form-control js-select2">
 								<?php foreach ($categories as $category) { ?>
-									<option value='<?= $category->category_id; ?>'><?= $category->name; ?></option>
+									<option value='<?= $category['category_id']; ?>' <?= ($product['category'] === $category['category_id']) ? 'selected' : '' ?>><?= $category['name']; ?></option>
 								<?php } ?>
 							</select>
 						</div>
@@ -72,8 +64,8 @@
 					<div class="col-md-3">
 						<div class="cv-form-group form-group mt-4 px-3">
 							<select id='country' name='country' class="form-control js-select2">
-								<?php foreach ($categories as $category) { ?>
-									<option value='<?= $category->category_id; ?>'><?= $category->name; ?></option>
+								<?php foreach ($countries as $country) { ?>
+									<option value='<?= $country['name']; ?>' <?= ($product['country'] === $country['name']) ? 'selected' : '' ?>><?= $country['name']; ?></option>
 								<?php } ?>
 							</select>
 						</div>
@@ -81,8 +73,8 @@
 					<div class="col-md-3">
 						<div class="cv-form-group form-group mt-4 px-3">
 							<select id='vendor' name='vendor' class="form-control js-select2">
-								<?php foreach ($categories as $category) { ?>
-									<option value='<?= $category->category_id; ?>'><?= $category->name; ?></option>
+								<?php foreach ($product_types as $type) { ?>
+									<option value='<?= $type['id']; ?>'><?= $type['name']; ?></option>
 								<?php } ?>
 							</select>
 						</div>
@@ -90,13 +82,12 @@
 					<div class="col-md-3">
 						<div class="input-group mb-3 mt-4 px-3 d-flex align-items-center">
 							<span class="mt-2">Publish the product :</span>
-							<span class="button b2 mt-0 ml-3 mt-2" id="button-10"><input id='status' value='1' type="checkbox" name="status" class="checkbox">
+							<span class="button b2 mt-0 ml-3 mt-2" id="button-10"><input id='status' <?= ($product['status'] == '0') ? 'checked' : '' ?> type="checkbox" name="status" class="checkbox">
 								<div class="knobs"><span>YES</span></div>
 								<div class="layer"></div>
 							</span>
 						</div>
 					</div>
-
 					<div class="col-md-12 px-3">
 						<div class="input-group mb-3 mt-4 py-3 d-flex align-items-center border-dashed d-flex justify-content-center">
 							<div class="p-2 d-flex flex-column text">
@@ -118,21 +109,22 @@
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="briefcase-outline"></ion-icon>
-								</span></div><input name="focus_keyword" type="text" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">focus keywords separated by commas</label>
+								</span></div><input name="focus_keyword" type="text" class="form-control custom-input" required="" autocomplete="new-password" value="<?= $product['focus_keyword'] ?>"><span class="bar"></span><label class="cv-label left text-capitalize">focus keywords separated by commas</label>
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="input-group mb-3 mt-4 px-3">
-							<textarea name="meta_description" class="form-control custom-input px-0"></textarea>
+							<textarea name="meta_description" class="form-control custom-input px-0"><?= $product['meta_description'] ?></textarea>
 							<span class="bar"></span>
 							<label class="cv-label left text-capitalize position-absolute mt-n4">description</label>
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+				<div class="card-footer bg-white d-flex justify-content-between">
+					<button type="button" class="btn btn-secondary btn-sm">back</button>
 					<button type="submit" class="btn btn-primary btn-sm">submit</button>
 				</div>
 			</form>
-
-			
+		</div>
+	</div>
+</div>
