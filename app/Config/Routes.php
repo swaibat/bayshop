@@ -31,22 +31,27 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-// $routes->get('/', 'Home::index');
-// $routes->get('news', 'Admin::index');
-// $routes->get('news', 'Admin::index');
-// $routes->match(['get', 'post'], 'admin/products/create', 'Admin::create');
-// $routes->match(['get', 'post'], 'admin/products/(:num)/update', 'Admin::update/$1');
 
-
-$routes->group('admin', function($routes)
+$routes->group('admin',['namespace' => 'App\Controllers\Admin'], function($routes)
 {
 	$routes->add('products', 'Product',);
 	$routes->add('products/create', 'Product::create');
 	$routes->add('products/(:num)/update', 'Product::update/$1');
+	// POSTS
+	$routes->add('posts', 'Post',);
+	$routes->add('posts/create', 'Post::create');
+	$routes->add('posts/(:num)/update', 'Post::update/$1');
+	// PAGES
+	$routes->add('pages', 'Page');
+	$routes->add('pages/create', 'Page::create');
+	$routes->add('pages/(:num)/update', 'Page::update/$1');
+	// CATEGORIES
 	$routes->add('categories', 'Category');
 	$routes->add('categories/create', 'Category::create');
 	$routes->add('categories/(:num)/update', 'Category::update/$1');
 	$routes->add('delete/(:segment)/(:num)', 'Delete');
+	// COUNRRIES
+	$routes->add('countries', 'Country');
 });
 
 /**
