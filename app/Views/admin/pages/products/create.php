@@ -4,10 +4,13 @@
 			<form id='form' method="post" action="<?= base_url('/admin/products/create/') ?>">
 				<div class="form-row p-4">
 					<div class="col-md-9">
-						<div class="cv-form-group input-group mb-3 mt-4 px-3">
-							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
+						<div id='form-title' class="cv-form-group input-group mb-3 mt-4 px-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input id='title' name="title" type="text" class="form-control custom-input" required><span class="bar"></span><label class="cv-label left text-capitalize">title</label>
+								</span>
+							</div>
+							<input id='title' name="title" type="text" class="form-control custom-input" required><span class="bar"></span><label class="cv-label left text-capitalize">title</label>
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -31,7 +34,7 @@
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input name="price" type="number" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">Price</label>
+								</span></div><input id="price" name="price" type="number" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">Price</label>
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -134,17 +137,20 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script>
 	$("#form").submit(function(event) {
-		event.preventDefault(); //prevent default action 
+		event.preventDefault(); //prevent default action
 		var post_url = $(this).attr("action"); //get form action url
 		var request_method = $(this).attr("method"); //get form GET/POST method
 		var form_data = $(this).serialize(); //Encode form elements for submission
-		const msg = '<?= $_SESSION['msg'] ?>'
-
 		$.ajax({
 			url: post_url,
 			type: request_method,
 			data: form_data
-		}).done(function(response) { //	
+		}).done(function(response) { //
+			<?php foreach ($errors as $key => $value) { ?>
+				$(`#<?= $key ?>`).after(`<div class="custom-validator"><?= $value ?></div>`);
+			<?php } ?>
+			const msg = '<?= $_SESSION['msg'] ?>'
+			console.log(response);
 			Toastify({
 				text: msg,
 				duration: 3000,
