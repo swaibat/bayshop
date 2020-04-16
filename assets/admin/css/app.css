@@ -650,3 +650,11 @@ label.false {
 .border-dashed {
   border: dashed 1.5px gainsboro;
 }
+
+.custom-validator {
+  position: absolute;
+  margin-top: 2.3rem;
+  font-size: smaller;
+  padding: 0;
+  color: rgb(187, 4, 4);
+}

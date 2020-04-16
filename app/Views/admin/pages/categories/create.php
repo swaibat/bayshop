@@ -1,4 +1,4 @@
-<form action="<?= base_url('categories/create') ?>" type='post'>
+<form id='form' action="<?= base_url('admin/categories/create') ?>" type='post'>
 	<div class="modal-header border-0">
 		<h6 class="modal-title position-absolute bg-primary text-white" id="mymodalLabel"><?= $page_title ?></h6>
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -10,7 +10,7 @@
 			<div class="cv-form-group input-group mb-3 mt-2 px-3">
 				<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 						<ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon>
-					</span></div><input name="name" type="text" class="form-control custom-input" required=""  value=""><span class="bar"></span><label class="cv-label left text-capitalize">Category Name</label>
+					</span></div><input name="name" type="text" class="form-control custom-input" required="" value=""><span class="bar"></span><label class="cv-label left text-capitalize">Category Name</label>
 			</div>
 		</div>
 		<div class="col-md-12">
@@ -50,3 +50,20 @@
 		<button type="submit" class="btn btn-primary btn-sm">submit</button>
 	</div>
 </form>
+
+<script>
+	$("#form").submit(function(event) {
+		event.preventDefault(); //prevent default action 
+		var post_url = $(this).attr("action"); //get form action url
+		var request_method = $(this).attr("method"); //get form GET/POST method
+		var form_data = $(this).serialize(); //Encode form elements for submission
+
+		$.ajax({
+			url: post_url,
+			type: request_method,
+			data: form_data
+		}).done(function(response) { //
+			console.log(response)
+		});
+	});
+</script>

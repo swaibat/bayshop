@@ -20,6 +20,7 @@ class Category extends Controller
         $this->product_types    = new ProductTypeModel();
         $this->categories       = new CategoryModel();
         $this->countries        = new CountryModel();
+        $this->validation       = \Config\Services::validation();
     }
 
 
@@ -37,18 +38,16 @@ class Category extends Controller
 
 
     // CREATE A NEW CATEGORY
-    public function create()
-    {
-        helper('form');
-        if ($this->validate([
-            'name' => 'required',
-        ])) {
+    public function create(){
+        helper(['form','url']);
+        if (isset($_POST) && !empty($_POST)) {
             $this->categories->save([
                 'name'          => $this->request->getVar('name'),
                 'slug'          => url_title($this->request->getVar('slug')),
                 'status'        => $this->request->getVar('status'),
                 'type'          => $this->request->getVar('type'),
                 'created_at'    => $this->request->getVar('created_at'),
+
             ]);
             return redirect()->to('/admin/categories');
         }
@@ -59,34 +58,7 @@ class Category extends Controller
             'page_title'        => 'Add New Category',
             'categories'        => $this->categories->findAll(),
             'types'             => $this->product_types->findAll(),
-        ];
-        echo view('admin/view', $data);
-    }
-
-    // UPDATE CATEGORY
-    public function update($id = null)
-    {
-        helper('form');
-        if ($this->validate([
-            'name' => 'required',
-        ])) {
-            $this->categories->save([
-                'name'          => $this->request->getVar('name'),
-                'slug'          => url_title($this->request->getVar('slug')),
-                'status'        => $this->request->getVar('status'),
-                'type'          => $this->request->getVar('type'),
-                'created_at'    => $this->request->getVar('created_at'),
-            ]);
-            return redirect()->to(base_url('admin/products'));
-        }
-        $id                     = $this->request->uri->getSegment(3);
-        $data = [
-            'folder_name'       => 'categories',
-            'page_name'         => 'update',
-            'page_title'        => 'Edit Category',
-            'category'          => $this->categories->find($id),
-            'categories'        => $this->categories->findAll(),
-            'types'             => $this->product_types->findAll(),
+            'errors'            => $this->validation->getErrors()
         ];
         echo view('admin/view', $data);
     }

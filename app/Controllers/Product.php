@@ -9,7 +9,7 @@ use App\Models\ProductModel;
 use App\Models\ProductTypeModel;
 use App\Models\CategoryModel;
 use App\Models\CountryModel;
-
+use Config\Validation;
 
 class Product extends Controller
 {
@@ -23,9 +23,24 @@ class Product extends Controller
         $this->countries        = new CountryModel();
         $this->session          = \Config\Services::session();
         $this->validation       = \Config\Services::validation();
-        $this->validation       = \Config\Services::validation()->listErrors();
     }
-    
+
+    public $signup = [
+        'username'     => 'required',
+        'password'     => 'required',
+        'pass_confirm' => 'required|matches[password]',
+        'email'        => 'required|valid_email'
+    ];
+
+    public $signup_errors = [
+        'username' => [
+            'required'    => 'You must choose a username.',
+        ],
+        'email'    => [
+            'valid_email' => 'Please check the Email field. It does not appear to be valid.'
+        ]
+    ];
+
     // GET CATEGORIES
     public function index()
     {
@@ -37,15 +52,22 @@ class Product extends Controller
         ];
         echo view('admin/index', $data);
     }
-
+    // if ($this->validate([
+    //     'title'                     => 'required|is_unique[products.title]',
+    //     'price'                     => 'required|integer|greater_than[compare_price]',
+    //     'product_type'              => 'permit_empty|integer',
+    //     'vendor'                    => 'required|integer',
+    //     'category'                  => 'required|integer',
+    //     'compare_price'             => 'permit_empty|integer',
+    //     'available_quantity'        => 'permit_empty|integer',
+    //     'status'                    => 'required|integer',
+    // ]))
     // UPDATE CATEGORIES
     public function update($id)
     {
         helper('form');
-        if ($this->validate([
-            'title' => 'required',
-        ])) {
-            $this->products->update($id,[
+        if (isset($_POST) && !empty($_POST)) {
+            $this->products->update($id, [
                 'title'               => $this->request->getVar('title'),
                 'slug'                => url_title($this->request->getVar('title')),
                 'price'               => $this->request->getVar('price'),
@@ -61,14 +83,14 @@ class Product extends Controller
                 'focus_keyword'       => $this->request->getVar('focus_keyword'),
                 'meta_description'    => $this->request->getVar('meta_description'),
             ]);
-            return redirect()->to( base_url('admin/products') );
+            return redirect()->to(base_url('admin/products'));
         }
 
         $data = [
             'folder_name'       => 'products',
             'page_name'         => 'update',
             'page_title'        => 'Update Product',
-            'id'                =>$this->request->uri->getSegment(3),
+            'id'                => $this->request->uri->getSegment(3),
             'product'           => $this->products->find($id),
             'product_types'     => $this->product_types->findAll(),
             'categories'        => $this->categories->findAll(),
@@ -82,29 +104,25 @@ class Product extends Controller
     {
         helper(['form', 'url']);
         if ($this->validate([
-            'title' => 'required|is_unique[products.title]',
-            'meta_description' => 'required',
+            'title' => 'required|min_length[3]|max_length[255]',
         ])) {
             $this->products->save([
-                'title'               => $this->request->getVar('title'),
-                'slug'                => url_title($this->request->getVar('title')),
-                'price'               => $this->request->getVar('price'),
-                'compare_price'       => $this->request->getVar('compare_price'),
-                'available_quantity'  => $this->request->getVar('available_quantity'),
-                'product_type'        => $this->request->getVar('product_type'),
-                'description'         => $this->request->getVar('description'),
-                'vendor'              => $this->request->getVar('vendor'),
-                'country'             => $this->request->getVar('country'),
-                'category'            => $this->request->getVar('category'),
-                'status'              => $this->request->getVar('status'),
-                'focus_keyword'       => $this->request->getVar('focus_keyword'),
-                'meta_description'    => $this->request->getVar('meta_description'),
+                'title'                 => $this->request->getVar('title'),
+                'slug'                  => url_title($this->request->getVar('title')),
+                'price'                 => $this->request->getVar('price'),
+                'compare_price'         => $this->request->getVar('compare_price'),
+                'available_quantity'    => $this->request->getVar('available_quantity'),
+                'product_type'          => $this->request->getVar('product_type'),
+                'description'           => $this->request->getVar('description'),
+                'vendor'                => $this->request->getVar('vendor'),
+                'country'               => $this->request->getVar('country'),
+                'category'              => $this->request->getVar('category'),
+                'status'                => $this->request->getVar('status'),
+                'focus_keyword'         => $this->request->getVar('focus_keyword'),
+                'meta_description'      => $this->request->getVar('meta_description'),
             ]);
-            $this->session->setFlashdata('msg', 'product created successfully');
-        }else{
-            $this->session->setFlashdata('msg', 'Error Product creation failed');
+            return $this->session->setFlashdata('msg', 'product created successfully');
         }
-
         $data = [
             'folder_name'       => 'products',
             'page_name'         => 'create',
@@ -112,9 +130,8 @@ class Product extends Controller
             'product_types'     => $this->product_types->findAll(),
             'categories'        => $this->categories->findAll(),
             'countries'         => $this->countries->findAll(),
+            'errors'            => $this->validation->getErrors()
         ];
-        echo view('admin/index', $data);
+        return view('admin/index', $data);
     }
-
 }
-
