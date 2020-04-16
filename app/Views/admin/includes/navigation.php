@@ -68,25 +68,25 @@
 
 		<!-- Pages -->
 		<li class="nav-item">
-			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'pages') ? 'selected' : ''; ?>" href="<?= base_url() . "admin/pages"; ?>">
+			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'pages') ? 'selected' : ''; ?>" href="<?= base_url() . "/admin/pages"; ?>">
 				<ion-icon name="documents-outline"></ion-icon><span class="nav-item-text">Pages</span>
 			</a>
 		</li>
 
 		<!-- Posts -->
 		<li class="nav-item">
-			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'blog') ? 'selected show' : ''; ?>" id="hasSubItems" data-toggle="collapse" data-target="#Pages" aria-expanded="false" href="/admin/pages">
+			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'posts') ? 'selected show' : ''; ?>" id="hasSubItems" data-toggle="collapse" data-target="#posts" aria-expanded="false" href="#">
 				<ion-icon name="documents-outline"></ion-icon><span class="nav-item-text">Blogs</span>
 			</a>
-			<ul class="nav-second-level cv-collapse collapse <?= ($folder_name == 'blog') ? 'show' : ''; ?>" id="Pages" data-parent="#navAccordion">
+			<ul class="nav-second-level cv-collapse collapse <?= ($folder_name == 'posts') ? 'show' : ''; ?>" id="posts" data-parent="#navAccordion">
 				<li class="nav-item">
-					<a class="nav-link pl-2" href="<?= base_url() . 'admin/posts/' ?>"><span class="nav-link -text p-0 ml-n3">
+					<a class="nav-link pl-2" href="<?= base_url() . '/admin/posts/' ?>"><span class="nav-link -text p-0 ml-n3">
 							<ion-icon name="radio-button-<?php menu($page_name, 'post', 'child') ?>"></ion-icon>All Posts
 						</span>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link  pl-2" href="<?= base_url() . 'admin/post_category/' ?>">
+					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/post_category/' ?>">
 						<span class="nav-link -text p-0 ml-n3">
 							<ion-icon name="radio-button-<?php menu($page_name, 'Post_category', 'child'); ?>"></ion-icon>Post Category
 						</span>
@@ -103,13 +103,13 @@
 			</a>
 			<ul class="nav-second-level cv-collapse collapse <?= ($folder_name == 'sliders') ? 'show' : ''; ?>" id="slider" data-parent="#navAccordion">
 				<li class="nav-item">
-					<a class="nav-link pl-2" href="<?= base_url() . 'admin/slider/' ?>"><span class="nav-link -text p-0 ml-n3">
+					<a class="nav-link pl-2" href="<?= base_url() . '/admin/slider/' ?>"><span class="nav-link -text p-0 ml-n3">
 							<ion-icon name="radio-button-<?php menu($page_name, 'slider_manage', 'child') ?>"></ion-icon>Image slider
 						</span>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link  pl-2" href="<?= base_url() . 'admin/slider_setting/' ?>">
+					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/slider_setting/' ?>">
 						<span class="nav-link -text p-0 ml-n3">
 							<ion-icon name="radio-button-<?php menu($page_name, 'slider_setting', 'child') ?>"></ion-icon>Slider settings
 						</span>
@@ -120,14 +120,14 @@
 
 		<!-- Users -->
 		<li class="nav-item">
-			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'users') ? 'selected' : ''; ?>" href="<?= base_url() . 'admin/users/' ?>">
+			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'users') ? 'selected' : ''; ?>" href="<?= base_url() . '/admin/users/' ?>">
 				<ion-icon name="people-outline" role="img" class="md hydrated" aria-label="people outline"></ion-icon><span class="nav-item-text">Users</span>
 			</a>
 		</li>
 
-		<!-- Products -->
+		<!-- Countries -->
 		<li class="nav-item">
-			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'countries') ? 'selected' : ''; ?>" href="<?= base_url() . "admin/countries"; ?>">
+			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'countries') ? 'selected' : ''; ?>" href="<?= base_url() . "/admin/countries"; ?>">
 				<ion-icon name="basket-outline"></ion-icon><span class="nav-item-text">Countries</span>
 			</a>
 		</li>
@@ -139,13 +139,13 @@
 			</a>
 			<ul class="nav-second-level cv-collapse collapse <?= ($folder_name == 'comments') ? 'show' : ''; ?>" id="comments" data-parent="#navAccordion">
 				<li class="nav-item">
-					<a class="nav-link pl-2" href="<?= base_url() . 'admin/comments/' ?>"><span class="nav-link -text p-0 ml-n3">
+					<a class="nav-link pl-2" href="<?= base_url() . '/admin/comments/' ?>"><span class="nav-link -text p-0 ml-n3">
 							<ion-icon name="radio-button-<?php menu($page_name, 'comments_manage', 'child') ?>"></ion-icon>Products comments
 						</span>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link  pl-2" href="<?= base_url() . 'admin/comments_setting/' ?>">
+					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/comments_setting/' ?>">
 						<span class="nav-link -text p-0 ml-n3">
 							<ion-icon name="radio-button-<?php menu($page_name, 'comments_setting', 'child') ?>"></ion-icon>comments settings
 						</span>
@@ -160,32 +160,32 @@
 			</a>
 			<ul class="nav-second-level cv-collapse collapse <?= ($folder_name == 'settings') ? 'show' : ''; ?>" id="Settings" data-parent="#navAccordion">
 				<li class="nav-item">
-					<a class="nav-link  pl-2" href="<?= base_url() . 'admin/system_setting/' ?>">
+					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/system_setting/' ?>">
 						<span class="nav-link -text p-0 ml-n3">
 							<ion-icon name="radio-button-<?php menu($page_name, 'system_setting', 'child') ?>"></ion-icon>system
 						</span>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link  pl-2" href="<?= base_url() . 'admin/theme_options/' ?>">
+					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/theme_options/' ?>">
 						<span class="nav-link -text p-0 ml-n3">
 							<ion-icon name="radio-button-<?php menu($page_name, 'theme_options', 'child') ?>"></ion-icon>theme
 						</span>
 					</a>
 				</li>
-				<li class="nav-item"><a class="nav-link  pl-2" href="<?= base_url() . 'admin/email_setting/' ?>"><span class="nav-link -text p-0 ml-n3">
+				<li class="nav-item"><a class="nav-link  pl-2" href="<?= base_url() . '/admin/email_setting/' ?>"><span class="nav-link -text p-0 ml-n3">
 							<ion-icon name="radio-button-off" role="img" class="md hydrated" aria-label="radio button off"></ion-icon>Emails
 						</span></a></li>
-				<li class="nav-item"><a class="nav-link  pl-2" href="<?= base_url() . 'admin/logo_setting/' ?>"><span class="nav-link -text p-0 ml-n3">
+				<li class="nav-item"><a class="nav-link  pl-2" href="<?= base_url() . '/admin/logo_setting/' ?>"><span class="nav-link -text p-0 ml-n3">
 							<ion-icon name="radio-button-off" role="img" class="md hydrated" aria-label="radio button off"></ion-icon>Media
 						</span></a></li>
-				<li class="nav-item"><a class="nav-link  pl-2" href="<?= base_url() . 'admin/footer_setting/' ?>"><span class="nav-link -text p-0 ml-n3">
+				<li class="nav-item"><a class="nav-link  pl-2" href="<?= base_url() . '/admin/footer_setting/' ?>"><span class="nav-link -text p-0 ml-n3">
 							<ion-icon name="radio-button-off" role="img" class="md hydrated" aria-label="radio button off"></ion-icon>Footer
 						</span></a></li>
-				<li class="nav-item"><a class="nav-link  pl-2" href="<?= base_url() . 'admin/seo_setting/' ?>"><span class="nav-link -text p-0 ml-n3">
+				<li class="nav-item"><a class="nav-link  pl-2" href="<?= base_url() . '/admin/seo_setting/' ?>"><span class="nav-link -text p-0 ml-n3">
 							<ion-icon name="radio-button-off" role="img" class="md hydrated" aria-label="radio button off"></ion-icon>SEO
 						</span></a></li>
-				<li class="nav-item"><a class="nav-link  pl-2" href="<?= base_url() . 'admin/copyright_privacy/' ?>"><span class="nav-link -text p-0 ml-n3">
+				<li class="nav-item"><a class="nav-link  pl-2" href="<?= base_url() . '/admin/copyright_privacy/' ?>"><span class="nav-link -text p-0 ml-n3">
 							<ion-icon name="radio-button-off" role="img" class="md hydrated" aria-label="radio button off"></ion-icon>Copyright & privacy
 						</span></a></li>
 				<li class="nav-item"><a class="nav-link  pl-2" href="/admin/settings/seo"><span class="nav-link -text p-0 ml-n3">
@@ -209,7 +209,7 @@
 		</li>
 		<!-- Backup -->
 		<li class="nav-item">
-			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'backup') ? 'selected' : ''; ?>" href="<?= base_url() . 'admin/backup_restore' ?>">
+			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'backup') ? 'selected' : ''; ?>" href="<?= base_url() . '/admin/backup_restore' ?>">
 				<ion-icon name="people-outline" role="img" class="md hydrated" aria-label="people outline"></ion-icon><span class="nav-item-text">Backup</span>
 			</a>
 		</li>
