@@ -15,8 +15,8 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * Router Setup
  * --------------------------------------------------------------------
  */
-$routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultNamespace('App\Controllers\admin');
+$routes->setDefaultController('Dashboard');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -41,6 +41,8 @@ $routes->group('admin',['namespace' => 'App\Controllers\Admin'], function($route
 	$routes->add('posts', 'Post',);
 	$routes->add('posts/create', 'Post::create');
 	$routes->add('posts/(:num)/update', 'Post::update/$1');
+	$routes->add('posts/categories', 'Postcategory',);
+	$routes->add('posts/categories/create', 'Postcategory::create');
 	// PAGES
 	$routes->add('pages', 'Page');
 	$routes->add('pages/create', 'Page::create');
@@ -52,6 +54,13 @@ $routes->group('admin',['namespace' => 'App\Controllers\Admin'], function($route
 	$routes->add('delete/(:segment)/(:num)', 'Delete');
 	// COUNRRIES
 	$routes->add('countries', 'Country');
+	// USERS
+	$routes->add('users', 'User');
+	$routes->add('users/create', 'User::create');
+	$routes->add('users/(:num)/update', 'User::update/$1');
+	// UNIVERSAL DELETE
+	$routes->add('dashboard', 'Dashboard');
+	$routes->add('delete/(:segment)/(:num)', 'Delete');
 });
 
 /**

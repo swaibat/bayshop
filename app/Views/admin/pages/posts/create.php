@@ -56,3 +56,32 @@
 					<button type="submit" class="btn btn-primary btn-sm">submit</button>
 				</div>
 			</form>
+		</div>
+	</div>
+</div>
+<script>
+	$("#form").submit(function(event) {
+		event.preventDefault();
+		var post_url = $(this).attr("action");
+		var request_method = $(this).attr("method");
+		var form_data = $(this).serialize();
+		$.ajax({
+			url: post_url,
+			type: request_method,
+			data: form_data
+		}).done(function(response) {
+			Toastify({
+				text: response.status_code == '201' ? response.message : 'Error operation failed',
+				duration: 3000,
+				gravity: "top",
+				position: 'right',
+				backgroundColor: response.status_code == '201' ? "#228B22" : '#FFA500',
+				stopOnFocus: true,
+			}).showToast();
+			setTimeout(() => {
+				$("#mymodal").modal("toggle");
+			}, 1500);
+
+		});
+	});
+</script>

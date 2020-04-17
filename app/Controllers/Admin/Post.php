@@ -43,7 +43,7 @@ class Post extends Controller
     {
         helper(['form', 'url']);
         if ($this->validate([])) {
-            $this->posts->save([
+            $data= [
                 'title'                 => $this->request->getVar('title'),
                 'slug'                  => url_title($this->request->getVar('title')),
                 'content'               => $this->request->getVar('description'),
@@ -52,8 +52,11 @@ class Post extends Controller
                 'status'                => $this->request->getVar('status'),
                 'focus_keyword'         => $this->request->getVar('focus_keyword'),
                 'meta_description'      => $this->request->getVar('meta_description'),
-            ]);
-            return $this->session->setFlashdata('msg', 'product created successfully');
+                'status_code'                => 201,
+                'message'               => 'user created successfully'
+            ];
+            $this->users->save($data);
+            return $this->response->setJSON($data);
         }
         $data = [
             'folder_name'       => 'posts',

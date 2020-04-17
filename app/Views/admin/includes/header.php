@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark bg-transparent align-items-center w-100 h-3 mb-3">
+<nav class="navbar navbar-dark bg-transparent align-items-center w-100 h-3">
 	<li class="nav-item js-hamburger mt-n4 d-flex flex-row-reverse align-items-center">
 		<button class="hamburger-toggle  "><span class="bar-top"></span><span class="bar-mid"></span><span class="bar-bot"></span></button>
 		<h6 class="text-white ml-4 mb-0 text-capitalize"><?php echo $page_title; ?></h6>

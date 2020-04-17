@@ -134,31 +134,4 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-<script>
-	$("#form").submit(function(event) {
-		event.preventDefault(); //prevent default action
-		var post_url = $(this).attr("action"); //get form action url
-		var request_method = $(this).attr("method"); //get form GET/POST method
-		var form_data = $(this).serialize(); //Encode form elements for submission
-		$.ajax({
-			url: post_url,
-			type: request_method,
-			data: form_data
-		}).done(function(response) { //
-			<?php foreach ($errors as $key => $value) { ?>
-				$(`#<?= $key ?>`).after(`<div class="custom-validator"><?= $value ?></div>`);
-			<?php } ?>
-			const msg = '<?= $_SESSION['msg'] ?>'
-			console.log(response);
-			Toastify({
-				text: msg,
-				duration: 3000,
-				gravity: "top", // `top` or `bottom`
-				position: 'right', // `left`, `center` or `right`
-				backgroundColor: msg.match(/success/g) ? "#228B22" : '#FFA500',
-				stopOnFocus: true, // Prevents dismissing of toast on hover
-			}).showToast();
-		});
-	});
-</script>
+
