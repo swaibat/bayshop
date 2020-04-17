@@ -1,6 +1,6 @@
-<form id="form" action="<?= base_url('admin/posts/categories/create') ?>" enctype="multipart/form-data" method="post" accept-charset="utf-8" novalidate="">
+<form id="form" action="<?= base_url('admin/posts/categories/create') ?>" method="post" accept-charset="utf-8" novalidate="">
   <div class="modal-header border-0">
-    <h6 class="modal-title position-absolute bg-primary text-white" id="mymodalLabel">Add User</h6>
+    <h6 class="modal-title position-absolute bg-primary text-white" id="mymodalLabel"><?= $page_title ?></h6>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -30,6 +30,10 @@
 </form>
 
 <script>
+   $("#status").on("change", (e) => {
+    const { target } = e;
+    target.checked === true ? (target.value = "0") : (target.value = "1");
+  });
   $("#form").submit(function(event) {
     event.preventDefault();
     var post_url = $(this).attr("action");
@@ -41,11 +45,11 @@
       data: form_data
     }).done(function(response) {
       Toastify({
-        text: response.status == '201' ? response.message : 'Error operation failed',
+        text: response.status_code == '201' ? response.message : 'Error operation failed',
         duration: 3000,
         gravity: "top",
         position: 'right',
-        backgroundColor: response.status == '201' ? "#228B22" : '#FFA500',
+        backgroundColor: response.status_code == '201' ? "#228B22" : '#FFA500',
         stopOnFocus: true,
       }).showToast();
       setTimeout(() => {

@@ -31,9 +31,8 @@ class Postcategory extends Controller
     }
 
 
-    // CREATE A NEW PRODUCT
-    public function create()
-    {
+    // CREATE A NEW POST CATEGORY
+    public function create(){
         helper(['form', 'url']);
         if ($this->validate([
             'name' => 'required|min_length[3]|max_length[255]',
@@ -43,7 +42,7 @@ class Postcategory extends Controller
                 'slug'                  => url_title($this->request->getVar('name')),
                 'status'                => $this->request->getVar('status'),
                 'status_code'           => 201,
-                'message'               => 'user created successfully'
+                'message'               => 'Category created successfully'
 
             ];
             $this->post_categories->save($data);
