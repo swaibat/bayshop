@@ -1,5 +1,5 @@
+
 $(document).ready(() => {
-  // delete item functionality
   $(".delete").click((e) => {
     e.preventDefault();
     $("#del-confirm").click(() => {
@@ -18,7 +18,7 @@ $(document).ready(() => {
 
   $(document).on("click", "#menu", function (e) {
     e.preventDefault();
-    $("modal-dialog").addClass($(this).data("modal"));
+    $(".modal-dialog").addClass($(this).data("modal"));
     var url = $(this).data("id"); // it will get action url
     $("#dynamic-content").html(""); // leave it blank before ajax call
     $("#modal-loader").show(); // load ajax loader
@@ -33,12 +33,10 @@ $(document).ready(() => {
         $("#modal-loader").hide(); // hide ajax loader
       })
       .fail(function () {
-        $("#dynamic-content").html(
-          '<i class="glyphicon glyphicon-info-sign"></i> Something went wrong, Please try again...'
-        );
         $("#modal-loader").hide();
       });
   });
+
   $("#example").DataTable({
     dom:
       "<'top'f>" +
