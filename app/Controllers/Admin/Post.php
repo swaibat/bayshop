@@ -6,10 +6,8 @@ use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\PostModel;
-use App\Models\CategoryModel;
-use App\Models\CountryModel;
+use App\Models\PostcategoryModel;
 use App\Models\UserModel;
-use Config\Validation;
 
 class Post extends Controller
 {
@@ -18,8 +16,7 @@ class Post extends Controller
     {
         parent::initController($request, $response, $logger);
         $this->posts            = new PostModel();
-        $this->categories       = new CategoryModel();
-        $this->countries        = new CountryModel();
+        $this->post_categories  = new PostcategoryModel();
         $this->user             = new UserModel();
         $this->session          = \Config\Services::session();
         $this->validation       = \Config\Services::validation();
@@ -38,9 +35,8 @@ class Post extends Controller
     }
 
 
-    // CREATE A NEW PRODUCT
-    public function create()
-    {
+    // CREATE A NEW POST
+    public function create(){
         helper(['form', 'url']);
         if ($this->validate([])) {
             $data= [
@@ -52,8 +48,8 @@ class Post extends Controller
                 'status'                => $this->request->getVar('status'),
                 'focus_keyword'         => $this->request->getVar('focus_keyword'),
                 'meta_description'      => $this->request->getVar('meta_description'),
-                'status_code'                => 201,
-                'message'               => 'user created successfully'
+                'status_code'           => 201,
+                'message'               => 'post created successfully'
             ];
             $this->users->save($data);
             return $this->response->setJSON($data);
@@ -62,9 +58,8 @@ class Post extends Controller
             'folder_name'       => 'posts',
             'page_name'         => 'create',
             'page_title'        => 'Create Post',
-            'categories'        => $this->categories->findAll(),
-            'countries'         => $this->countries->findAll(),
-            'errors'            => $this->validation->getErrors()
+            'errors'            => $this->validation->getErrors(),
+            'post_categories'   => $this->post_categories->orderBy('id', 'ASC')->findAll()
         ];
         return view('admin/index', $data);
     }

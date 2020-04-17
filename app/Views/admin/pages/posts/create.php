@@ -22,6 +22,15 @@
 							<textarea class="wysihtml5 form-control rounded" name="content" id="content" rows="20"></textarea>
 						</div>
 					</div>
+					<div class="col-md-4">
+						<div class="cv-form-group form-group mt-4 px-3">
+							<select id='category' name='category' class="form-control js-select2">
+								<?php foreach ($post_categories as $category) { ?>
+									<option value='<?= $category['id']; ?>'><?= $category['name']; ?></option>
+								<?php } ?>
+							</select>
+						</div>
+					</div>
 
 					<div class="col-md-5">
 						<div class="input-group mb-3 mt-4 px-3 d-flex align-items-center">

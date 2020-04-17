@@ -1,4 +1,3 @@
-
 $(document).ready(() => {
   $(".delete").click((e) => {
     e.preventDefault();
@@ -43,11 +42,7 @@ $(document).ready(() => {
       "<'bottom't>" +
       "<'row'<'col-sm-3'i><'col-sm-3'l><'col-sm-6'p>>",
   });
-  $("#status").on("change", (e) => {
-    const { target } = e;
-    target.checked === true ? (target.value = "0") : (target.value = "1");
-    console.log(e.target.value);
-  });
+
   $("#content").summernote({
     height: 200, // set editor height
     minHeight: null, // set minimum height of editor

@@ -1,6 +1,6 @@
 <form id="form" action="<?= base_url('admin/users/create') ?>" enctype="multipart/form-data" method="post" accept-charset="utf-8" novalidate="">
 	<div class="modal-header border-0">
-		<h6 class="modal-title position-absolute bg-primary text-white" id="mymodalLabel">Add User</h6>
+		<h6 class="modal-title position-absolute bg-primary text-white" id="mymodalLabel"><?= $page_title ?></h6>
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
