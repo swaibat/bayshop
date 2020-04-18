@@ -1,20 +1,13 @@
 <div class="card">
 	<div class="row">
 		<div class="col-sm-12">
-			<form id='form' action="<?= base_url() . 'admin/posts/create/' ?>" method="post">
+			<form id='form' action="<?= base_url('admin/posts/create') ?>" method="post" enctype="multipart/form-data" accept-charset="utf-8" novalidate="">
 				<div class="form-row modal-body p-4">
 					<div class="col-md-12">
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input id='title' name="post_title" type="text" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">title</label>
-						</div>
-					</div>
-					<div class="col-md-6 d-none">
-						<div class="cv-form-group input-group mb-3 mt-4 px-3">
-							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-									<ion-icon name="person-outline"></ion-icon>
-								</span></div><input id="slug" name="slug" type="text" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">slug</label>
+								</span></div><input id='title' name="title" type="text" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">title</label>
 						</div>
 					</div>
 					<div class="col-md-12 pt-3">
@@ -24,15 +17,23 @@
 					</div>
 					<div class="col-md-4">
 						<div class="cv-form-group form-group mt-4 px-3">
-							<select id='category' name='category' class="form-control js-select2">
+							<select id='category' name='category_id' class="form-control js-select2">
 								<?php foreach ($post_categories as $category) { ?>
 									<option value='<?= $category['id']; ?>'><?= $category['name']; ?></option>
 								<?php } ?>
 							</select>
 						</div>
 					</div>
-
-					<div class="col-md-5">
+					<div class="col-md-4">
+						<div class="cv-form-group form-group mt-4 px-3">
+							<select id='user_id' name='user_id' class="form-control js-select2">
+								<?php foreach ($users as $user) { ?>
+									<option value='<?= $user['id']; ?>'><?= $user['username']; ?></option>
+								<?php } ?>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-4">
 						<div class="input-group mb-3 mt-4 px-3 d-flex align-items-center">
 							<span class="mt-2">Publish the post :</span>
 							<span class="button b2 mt-0 ml-3 mt-2" id="button-10"><input id='status' value='1' type="checkbox" name="status" class="checkbox">
@@ -69,28 +70,41 @@
 	</div>
 </div>
 <script>
+	$("#status").on("change", (e) => {
+		const target = e.target;
+		target.checked ? $("#status").val("1") : $("#status").val("0");
+	});
 	$("#form").submit(function(event) {
 		event.preventDefault();
 		var post_url = $(this).attr("action");
 		var request_method = $(this).attr("method");
 		var form_data = $(this).serialize();
+		console.log(form_data);
 		$.ajax({
 			url: post_url,
 			type: request_method,
-			data: form_data
+			data: form_data,
 		}).done(function(response) {
+			console.log(response)
 			Toastify({
-				text: response.status_code == '201' ? response.message : 'Error operation failed',
+				text: response.message,
 				duration: 3000,
 				gravity: "top",
 				position: 'right',
-				backgroundColor: response.status_code == '201' ? "#228B22" : '#FFA500',
+				backgroundColor: "#228B22",
 				stopOnFocus: true,
 			}).showToast();
-			setTimeout(() => {
-				$("#mymodal").modal("toggle");
-			}, 1500);
 
+		}).fail(function(err) {
+			console.log(err.message)
+			Toastify({
+				text: 'Error operation failed',
+				duration: 3000,
+				gravity: "top",
+				position: 'right',
+				backgroundColor: '#FFA500',
+				stopOnFocus: true,
+			}).showToast();
 		});
 	});
 </script>

@@ -184,7 +184,7 @@ ion-icon {
 }
 .layer {
 	width: 100%;
-	background-color: gainsboro;
+	background-color: #fcebeb;
 	transition: 0.3s ease all;
 	z-index: 1;
 }
@@ -206,10 +206,10 @@ ion-icon {
 #button-10 .knobs:before {
 	content: "";
 	left: 4px;
-	background-color: #0f0f0f;
+	background-color: #f44336;;
 }
 #button-10 .knobs:after {
-	content: "NO";
+	content: "YES";
 	right: 4px;
 	color: #4e4e4e;
 }
@@ -224,13 +224,12 @@ ion-icon {
 }
 #button-10 .checkbox:checked + .knobs:before {
 	left: 42px;
-	background-color: #f44336;
+	background-color: #0f0f0f;
 }
 #button-10 .checkbox:checked + .knobs:after {
 	color: #fff;
 }
 #button-10 .checkbox:checked ~ .layer {
-	background-color: #fcebeb;
+	background-color: gainsboro;
 }
-
 

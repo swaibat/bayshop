@@ -12,6 +12,7 @@
 		</div>
 	</main>
 </body>
+
 <?php include 'includes/script.php'; ?>
 
 </html>

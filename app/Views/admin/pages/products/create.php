@@ -135,3 +135,42 @@
 	</div>
 </div>
 
+<script>
+	$("#status").on("change", (e) => {
+		const target = e.target;
+		target.checked ? $("#status").val("1") : $("#status").val("0");
+	});
+	$("#form").submit(function(event) {
+		event.preventDefault();
+		var post_url = $(this).attr("action");
+		var request_method = $(this).attr("method");
+		var form_data = $(this).serialize();
+		console.log(form_data);
+		$.ajax({
+			url: post_url,
+			type: request_method,
+			data: form_data,
+		}).done(function(response) {
+			console.log(response)
+			Toastify({
+				text: response.message,
+				duration: 3000,
+				gravity: "top",
+				position: 'right',
+				backgroundColor: "#228B22",
+				stopOnFocus: true,
+			}).showToast();
+
+		}).fail(function(err) {
+			console.log(err.message)
+			Toastify({
+				text: 'Error operation failed',
+				duration: 3000,
+				gravity: "top",
+				position: 'right',
+				backgroundColor: '#FFA500',
+				stopOnFocus: true,
+			}).showToast();
+		});
+	});
+</script>

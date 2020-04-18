@@ -25,7 +25,7 @@ class Postcategory extends Controller
             'folder_name'   => 'posts',
             'page_name'     => 'categories',
             'page_title'    => 'post categories',
-            'post_categories'      => $this->post_categories->orderBy('id', 'ASC')->findAll()
+            'post_categories'      => $this->post_categories->orderBy('id', 'DESC')->findAll()
         ];
         echo view('admin/index', $data);
     }
@@ -36,14 +36,14 @@ class Postcategory extends Controller
         helper(['form', 'url']);
         if ($this->validate([
             'name' => 'required|min_length[3]|max_length[255]',
+            
         ])) {
+            print_r($this->request->getVar('status'));
             $data = [
                 'name'                  => $this->request->getVar('name'),
                 'slug'                  => url_title($this->request->getVar('name')),
                 'status'                => $this->request->getVar('status'),
-                'status_code'           => 201,
-                'message'               => 'Category created successfully'
-
+                'message'               => 'Category created successfully',
             ];
             $this->post_categories->save($data);
             return $this->response->setJSON($data);

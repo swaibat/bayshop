@@ -37,16 +37,7 @@ class Product extends Controller
         ];
         echo view('admin/index', $data);
     }
-    // if ($this->validate([
-    //     'title'                     => 'required|is_unique[products.title]',
-    //     'price'                     => 'required|integer|greater_than[compare_price]',
-    //     'product_type'              => 'permit_empty|integer',
-    //     'vendor'                    => 'required|integer',
-    //     'category'                  => 'required|integer',
-    //     'compare_price'             => 'permit_empty|integer',
-    //     'available_quantity'        => 'permit_empty|integer',
-    //     'status'                    => 'required|integer',
-    // ]))
+
     // UPDATE CATEGORIES
     public function update($id)
     {
@@ -67,8 +58,8 @@ class Product extends Controller
                 'status'              => $this->request->getVar('status'),
                 'focus_keyword'       => $this->request->getVar('focus_keyword'),
                 'meta_description'    => $this->request->getVar('meta_description'),
+                'message'             => 'post created successfully'
             ]);
-            return redirect()->to(base_url('admin/products'));
         }
 
         $data = [
@@ -91,7 +82,7 @@ class Product extends Controller
         if ($this->validate([
             'title' => 'required|min_length[3]|max_length[255]',
         ])) {
-            $this->products->save([
+            $data = [
                 'title'                 => $this->request->getVar('title'),
                 'slug'                  => url_title($this->request->getVar('title')),
                 'price'                 => $this->request->getVar('price'),
@@ -105,8 +96,10 @@ class Product extends Controller
                 'status'                => $this->request->getVar('status'),
                 'focus_keyword'         => $this->request->getVar('focus_keyword'),
                 'meta_description'      => $this->request->getVar('meta_description'),
-            ]);
-            return $this->session->setFlashdata('msg', 'product created successfully');
+                'message'               => 'product created successfully'
+            ];
+            $this->products->save($data);
+            return $this->response->setJSON($data);
         }
         $data = [
             'folder_name'       => 'products',
