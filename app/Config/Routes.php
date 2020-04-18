@@ -1,12 +1,13 @@
-<?php namespace Config;
+<?php
+
+namespace Config;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes(true);
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
-if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
-{
+if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
 	require SYSTEMPATH . 'Config/Routes.php';
 }
 
@@ -32,11 +33,13 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 
-$routes->group('admin',['namespace' => 'App\Controllers\Admin'], function($routes)
-{
+$routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
 	$routes->add('products', 'Product',);
 	$routes->add('products/create', 'Product::create');
 	$routes->add('products/(:num)/update', 'Product::update/$1');
+	$routes->add('products/types', 'Producttype',);
+	$routes->add('products/types/create', 'Producttype::create');
+	$routes->add('products/types/(:num)update', 'Producttype::update/$1');
 	// POSTS
 	$routes->add('posts', 'Post',);
 	$routes->add('posts/create', 'Post::create');
@@ -76,7 +79,6 @@ $routes->group('admin',['namespace' => 'App\Controllers\Admin'], function($route
  * You will have access to the $routes object within that file without
  * needing to reload it.
  */
-if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
-{
+if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }

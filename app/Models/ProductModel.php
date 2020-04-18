@@ -9,5 +9,5 @@ class ProductModel extends Model
 {
     protected $table = 'products';
 
-    protected $allowedFields = ['id', 'title'];
+    protected $allowedFields = ['title', 'slug', 'country', 'description', 'price', 'compare_price', 'country', 'sku', 'available_quantity', 'category_id', 'product_type', 'vendor_id', 'status', 'focus_keyword', 'meta_description'];
 }

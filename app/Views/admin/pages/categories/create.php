@@ -1,4 +1,4 @@
-<form id='form' action="<?= base_url('admin/categories/create') ?>" type='post'>
+<form id='form' action="<?= base_url('admin/categories/create') ?>" method="post" enctype="multipart/form-data" accept-charset="utf-8" novalidate="">
 	<div class="modal-header border-0">
 		<h6 class="modal-title position-absolute bg-primary text-white" id="mymodalLabel"><?= $page_title ?></h6>
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -53,17 +53,40 @@
 
 <script>
 	$("#form").submit(function(event) {
-		event.preventDefault(); //prevent default action 
-		var post_url = $(this).attr("action"); //get form action url
-		var request_method = $(this).attr("method"); //get form GET/POST method
-		var form_data = $(this).serialize(); //Encode form elements for submission
-
+		console.log(event)
+		event.preventDefault();
+		var post_url = $(this).attr("action");
+		var request_method = $(this).attr("method");
+		var form_data = $(this).serialize();
+		console.log(form_data)
 		$.ajax({
 			url: post_url,
 			type: request_method,
-			data: form_data
-		}).done(function(response) { //
-			console.log(response)
+			data: form_data,
+		}).done(function(response) {
+			Toastify({
+				text: response.message,
+				duration: 3000,
+				gravity: "top",
+				position: 'right',
+				backgroundColor: "#228B22",
+				stopOnFocus: true,
+			}).showToast();
+			$("#mymodal").modal("toggle");
+
+		}).fail(function(error) {
+			Toastify({
+				text: 'Error operation failed',
+				duration: 3000,
+				gravity: "top",
+				position: 'right',
+				backgroundColor: '#FFA500',
+				stopOnFocus: true,
+			}).showToast();
+		});
+		$("#status").on("change", (e) => {
+			const target = e.target;
+			target.checked ? $("#status").val("1") : $("#status").val("0");
 		});
 	});
 </script>

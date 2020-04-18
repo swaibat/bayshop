@@ -8,4 +8,6 @@ use CodeIgniter\Model;
 class ProductTypeModel extends Model
 {
     protected $table = 'product_type';
+    protected $allowedFields = ['name','slug','status','location'];
+
 }

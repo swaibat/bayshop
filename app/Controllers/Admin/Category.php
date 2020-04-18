@@ -38,18 +38,23 @@ class Category extends Controller
 
 
     // CREATE A NEW CATEGORY
-    public function create(){
-        helper(['form','url']);
-        if (isset($_POST) && !empty($_POST)) {
-            $this->categories->save([
+    public function create()
+    {
+        helper(['form', 'url']);
+        if ($this->validate([
+            'name' => 'required|min_length[3]|max_length[255]',
+        ])) {
+            printf($this->request->getVar('name'));
+            $data = [
                 'name'          => $this->request->getVar('name'),
-                'slug'          => url_title($this->request->getVar('slug')),
+                'slug'          => url_title($this->request->getVar('name')),
                 'status'        => $this->request->getVar('status'),
                 'type'          => $this->request->getVar('type'),
-                'created_at'    => $this->request->getVar('created_at'),
-
-            ]);
-            return redirect()->to('/admin/categories');
+                'message'       => 'Category created successfully'
+            ];
+            $this->categories->save($data);
+            return $this->response->setJSON($data);
+            return view('admin/view', $data);
         }
 
         $data = [

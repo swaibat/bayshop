@@ -17,7 +17,7 @@ class Post extends Controller
         parent::initController($request, $response, $logger);
         $this->posts            = new PostModel();
         $this->post_categories  = new PostcategoryModel();
-        $this->user             = new UserModel();
+        $this->users             = new UserModel();
         $this->session          = \Config\Services::session();
         $this->validation       = \Config\Services::validation();
     }
@@ -38,20 +38,21 @@ class Post extends Controller
     // CREATE A NEW POST
     public function create(){
         helper(['form', 'url']);
-        if ($this->validate([])) {
+        if ($this->validate([
+            'title' => 'required|min_length[3]|max_length[255]',
+        ])) {
             $data= [
                 'title'                 => $this->request->getVar('title'),
                 'slug'                  => url_title($this->request->getVar('title')),
-                'content'               => $this->request->getVar('description'),
+                'content'               => $this->request->getVar('content'),
                 'category_id'           => $this->request->getVar('category_id'),
                 'user_id'               => $this->request->getVar('user_id'),
                 'status'                => $this->request->getVar('status'),
                 'focus_keyword'         => $this->request->getVar('focus_keyword'),
                 'meta_description'      => $this->request->getVar('meta_description'),
-                'status_code'           => 201,
                 'message'               => 'post created successfully'
             ];
-            $this->users->save($data);
+            $this->posts->save($data);
             return $this->response->setJSON($data);
         }
         $data = [
@@ -59,16 +60,10 @@ class Post extends Controller
             'page_name'         => 'create',
             'page_title'        => 'Create Post',
             'errors'            => $this->validation->getErrors(),
-            'post_categories'   => $this->post_categories->orderBy('id', 'ASC')->findAll()
+            'users'             => $this->users->findAll(),
+            'post_categories'   => $this->post_categories->orderBy('id', 'DESC')->findAll()
         ];
         return view('admin/index', $data);
-    }
-
-    public function get_username($id)
-    {
-        $user = $this->products->find($id);
-		foreach ($user as $row)
-			return $row['name'];
     }
 
 }

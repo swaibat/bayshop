@@ -1,4 +1,13 @@
 $(document).ready(() => {
+  $("#reload").click(() => {
+    location.reload();
+  });
+  $("#back").click(() => {
+    history.back();
+  });
+  $("#foward").click(() => {
+    history.forward();
+  });
   $(".delete").click((e) => {
     e.preventDefault();
     $("#del-confirm").click(() => {

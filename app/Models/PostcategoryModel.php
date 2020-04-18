@@ -8,6 +8,5 @@ use CodeIgniter\Model;
 class PostcategoryModel extends Model
 {
     protected $table = 'post_categories';
-    protected $allowedFields = ['name','slug','status'];
-
+    protected $allowedFields = ['name', 'slug', 'status'];
 }

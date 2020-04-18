@@ -50,9 +50,9 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/product_types/' ?>">
+					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/products/types/' ?>">
 						<span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-<?php menu($page_name, 'product_types', 'child'); ?>"></ion-icon>Products types
+							<ion-icon name="radio-button-<?php menu($page_name, '(products|types)', 'child'); ?>"></ion-icon>Products types
 						</span>
 					</a>
 				</li>
@@ -173,36 +173,40 @@
 						</span>
 					</a>
 				</li>
-				<li class="nav-item"><a class="nav-link  pl-2" href="<?= base_url() . '/admin/email_setting/' ?>"><span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-off" role="img" class="md hydrated" aria-label="radio button off"></ion-icon>Emails
-						</span></a></li>
-				<li class="nav-item"><a class="nav-link  pl-2" href="<?= base_url() . '/admin/logo_setting/' ?>"><span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-off" role="img" class="md hydrated" aria-label="radio button off"></ion-icon>Media
-						</span></a></li>
-				<li class="nav-item"><a class="nav-link  pl-2" href="<?= base_url() . '/admin/footer_setting/' ?>"><span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-off" role="img" class="md hydrated" aria-label="radio button off"></ion-icon>Footer
-						</span></a></li>
-				<li class="nav-item"><a class="nav-link  pl-2" href="<?= base_url() . '/admin/seo_setting/' ?>"><span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-off" role="img" class="md hydrated" aria-label="radio button off"></ion-icon>SEO
-						</span></a></li>
-				<li class="nav-item"><a class="nav-link  pl-2" href="<?= base_url() . '/admin/copyright_privacy/' ?>"><span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-off" role="img" class="md hydrated" aria-label="radio button off"></ion-icon>Copyright & privacy
-						</span></a></li>
-				<li class="nav-item"><a class="nav-link  pl-2" href="/admin/settings/seo"><span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-off" role="img" class="md hydrated" aria-label="radio button off"></ion-icon>SEO
-						</span></a></li>
-				<li class="nav-item"><a class="nav-link  pl-2" href="/admin/settings/intergrations"><span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-off" role="img" class="md hydrated" aria-label="radio button off"></ion-icon>Intergrations
-						</span></a></li>
-				<li class="nav-item"><a class="nav-link  pl-2" href="/admin/settings/seo"><span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-off" role="img" class="md hydrated" aria-label="radio button off"></ion-icon>SEO
-						</span></a></li>
-				<li class="nav-item"><a class="nav-link  pl-2" href="/admin/settings/intergrations"><span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-off" role="img" class="md hydrated" aria-label="radio button off"></ion-icon>Intergrations
-						</span></a></li>
-				<li class="nav-item"><a class="nav-link  pl-2" href="/admin/settings/seo"><span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-off" role="img" class="md hydrated" aria-label="radio button off"></ion-icon>SEO
-						</span></a>
+				<li class="nav-item">
+					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/email_setting/' ?>">
+						<span class="nav-link -text p-0 ml-n3"><ion-icon name="radio-button-off"></ion-icon>Emails</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/email_setting/' ?>">
+						<span class="nav-link -text p-0 ml-n3"><ion-icon name="radio-button-off"></ion-icon>Media</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/email_setting/' ?>">
+						<span class="nav-link -text p-0 ml-n3"><ion-icon name="radio-button-off"></ion-icon>API</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/email_setting/' ?>">
+						<span class="nav-link -text p-0 ml-n3"><ion-icon name="radio-button-off"></ion-icon>seo</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/email_setting/' ?>">
+						<span class="nav-link -text p-0 ml-n3"><ion-icon name="radio-button-off"></ion-icon>intergrations</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/email_setting/' ?>">
+						<span class="nav-link -text p-0 ml-n3"><ion-icon name="radio-button-off"></ion-icon>products</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/email_setting/' ?>">
+						<span class="nav-link -text p-0 ml-n3"><ion-icon name="radio-button-off"></ion-icon>social login</span>
+					</a>
 				</li>
 
 			</ul>
