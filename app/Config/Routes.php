@@ -64,6 +64,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
 	// UNIVERSAL DELETE
 	$routes->add('dashboard', 'Dashboard');
 	$routes->add('delete/(:segment)/(:num)', 'Delete');
+	// SETTINGS
+	$routes->add('settings/(:segment)', 'Setting');
 });
 
 /**
