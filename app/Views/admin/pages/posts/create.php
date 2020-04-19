@@ -7,7 +7,7 @@
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input id='title' name="title" type="text" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">title</label>
+								</span></div><input id='title' name="title" type="text" class="form-control custom-input"><span class="bar"></span><label class="cv-label left text-capitalize">title</label>
 						</div>
 					</div>
 					<div class="col-md-12 pt-3">
@@ -50,7 +50,7 @@
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="briefcase-outline"></ion-icon>
-								</span></div><input name="focus_keyword" type="text" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">focus keywords separated by commas</label>
+								</span></div><input name="focus_keyword" type="text" class="form-control custom-input" ><span class="bar"></span><label class="cv-label left text-capitalize">focus keywords separated by commas</label>
 						</div>
 					</div>
 					<div class="col-md-12">

@@ -64,19 +64,5 @@ $(document).ready(() => {
     maxHeight: null, // set maximum height of editor
     focus: false, // set focus to editable area after initializing summernote
   });
-  $("#country").select2({
-    placeholder: "Select Country",
-  });
-  $("#category").select2({
-    placeholder: "Select category",
-  });
-  $("#product_type").select2({
-    placeholder: "Select product Type",
-  });
-  $("#vendor").select2({
-    placeholder: "Select product Type",
-  });
-  $("#type").select2({
-    placeholder: "Select Type",
-  });
+  $(".js-select2").select2();
 });

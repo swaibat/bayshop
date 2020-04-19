@@ -65,7 +65,11 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
 	$routes->add('dashboard', 'Dashboard');
 	$routes->add('delete/(:segment)/(:num)', 'Delete');
 	// SETTINGS
-	$routes->add('settings/(:segment)', 'Setting');
+	$routes->add('settings', 'Setting');
+	// USERS
+	$routes->add('sliders', 'Slider');
+	$routes->add('sliders/create', 'Slider::create');
+	$routes->add('users/(:num)/update', 'User::update/$1');
 });
 
 /**
