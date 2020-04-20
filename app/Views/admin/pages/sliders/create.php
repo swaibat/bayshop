@@ -7,14 +7,14 @@
             <div class="cv-form-group input-group mb-3 mt-2 px-3">
               <div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
                   <ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon>
-                </span></div><input name="name" type="text" class="form-control custom-input" required="" value=""><span class="bar"></span><label class="cv-label left text-capitalize">Slide title</label>
+                </span></div><input name="name" type="text" class="form-control custom-input" value=""><span class="bar"></span><label class="cv-label left text-capitalize">Slide title</label>
             </div>
           </div>
           <div class="col-md-12 pt-3">
-						<div class="form-group px-3">
-							<textarea class="wysihtml5 form-control rounded" name="description" id="description" rows="20"></textarea>
-						</div>
-					</div>
+            <div class="form-group px-3">
+              <textarea class="wysihtml5 form-control rounded" name="description" id="description" rows="20"></textarea>
+            </div>
+          </div>
           <div class="col-md-12 px-3">
             <div class="input-group mb-3 mt-3 py-3 d-flex align-items-center border-dashed d-flex justify-content-center">
               <div class="p-2 d-flex flex-column text">

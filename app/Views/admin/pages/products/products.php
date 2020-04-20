@@ -17,9 +17,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($products as $product) { ?>
+					<?php $count = 1;
+					foreach ($products as $product) { ?>
 						<tr id="row_<?= $product['id'] ?>">
-							<td><?= $product['id']; ?></td>
+							<td><?= $count++; ?></td>
 							<td><img class='rounded border' src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cdefs%3E%3Cstyle%3E.a%7Bfill:%23fff;%7D.b,.e,.g%7Bfill:none;%7D.b,.e%7Bstroke:%23e3e3e3;%7D.b%7Bstroke-dasharray:1 2;%7D.c%7Bfill:%23f7f7f7;%7D.d%7Bfill:%23e3e3e3;%7D.f%7Bstroke:none;%7D%3C/style%3E%3C/defs%3E%3Cg transform='translate(-886 -624)'%3E%3Crect class='a' width='120' height='120' transform='translate(886 624)'/%3E%3Cg transform='translate(23 123.33)'%3E%3Cg transform='translate(882 522)'%3E%3Cg class='b' transform='translate(0 16.67)'%3E%3Crect class='f' width='67' height='55'/%3E%3Crect class='g' x='0.5' y='0.5' width='66' height='54'/%3E%3C/g%3E%3Crect class='c' width='64' height='63' transform='translate(16 -0.33)'/%3E%3Cellipse class='d' cx='11' cy='10.5' rx='11' ry='10.5' transform='translate(21 9.67)'/%3E%3Crect class='a' width='25' height='23' transform='matrix(1, -0.017, 0.017, 1, 31.014, 23.2)'/%3E%3Cpath class='d' d='M11,0,22,16H0Z' transform='translate(48 30.67)'/%3E%3Cline class='e' x2='38.108' y2='0.212' transform='translate(21.5 50.17)'/%3E%3Cline class='e' x2='12' transform='translate(64.657 50.382)'/%3E%3Cline class='e' x2='27' transform='translate(21.5 54.17)'/%3E%3Cline class='e' x2='17' transform='translate(55.657 54.382)'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E" height="50"></td>
 							<td><?= $product['title']; ?></td>
 							<td><?= $product['product_type']; ?></td>

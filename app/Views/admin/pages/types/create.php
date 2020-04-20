@@ -1,4 +1,4 @@
-<form id='form' action="<?= base_url('admin/products/types/create') ?>" method="post" enctype="multipart/form-data" accept-charset="utf-8" novalidate="">
+<form id='form' action="<?= base_url('admin/types/create') ?>" method="post" enctype="multipart/form-data" accept-charset="utf-8" novalidate="">
   <div class="modal-header border-0">
     <h6 class="modal-title position-absolute bg-primary text-white" id="mymodalLabel"><?= $page_title ?></h6>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -10,7 +10,7 @@
       <div class="cv-form-group input-group mb-3 mt-2 px-3">
         <div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
             <ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon>
-          </span></div><input name="name" type="text" class="form-control custom-input" required="" value=""><span class="bar"></span><label class="cv-label left text-capitalize">Category Name</label>
+          </span></div><input name="name" type="text" class="form-control custom-input" value=""><span class="bar"></span><label class="cv-label left text-capitalize">Type Name</label>
       </div>
     </div>
     <div class="col-md-12">
@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="col-md-12">
-      <div class="input-group mb-3 mt-2 px-3 d-flex align-items-center">
+      <div class="input-group mb-3 mt-3 px-3 d-flex align-items-center">
         <span class="mt-2">Publish the product :</span>
         <span class="button b2 mt-0 ml-3 mt-2" id="button-10"><input id='status' value='1' type="checkbox" name="status" class="checkbox">
           <div class="knobs"><span>YES</span></div>
@@ -38,9 +38,10 @@
 </form>
 
 <script>
-  $("#location").select2({
-    placeholder: "Select type location",
-  });
+  $("#status").on("change", (e) => {
+		const target = e.target;
+		target.checked ? $("#status").val("1") : $("#status").val("0");
+	});
   $("#form").submit(function(event) {
     event.preventDefault();
     var post_url = $(this).attr("action");

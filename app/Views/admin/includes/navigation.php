@@ -12,9 +12,9 @@
 		<a class="navbar-brand p-0" href="/"><img height="40" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='1521' height='455.43' viewBox='0 0 1521 455.43'%3E%3Cdefs%3E%3Cstyle%3E.a%7Bfill:%23b5b3b3;%7D.b%7Bfill:%23e8e8e8;%7D.c%7Bstroke:%23fff;%7D.d%7Bfont-size:336px;font-family:SimplyRounded, Simply Rounded;%7D.e%7Bfilter:url(%23a);%7D%3C/style%3E%3Cfilter id='a' x='96.5' y='68.101' width='287.788' height='319.45' filterUnits='userSpaceOnUse'%3E%3CfeOffset dy='3' input='SourceAlpha'/%3E%3CfeGaussianBlur stdDeviation='3' result='b'/%3E%3CfeFlood flood-opacity='0.161'/%3E%3CfeComposite operator='in' in2='b'/%3E%3CfeComposite in='SourceGraphic'/%3E%3C/filter%3E%3C/defs%3E%3Cg transform='translate(-0.301 0)'%3E%3Cpath class='a' d='M405.493,412.764c-69.689,56.889-287.289,56.889-355.556,0-69.689-56.889-62.578-300.089,0-364.089s292.978-64,355.556,0S475.182,355.876,405.493,412.764Z'/%3E%3Cpath class='b' d='M229.138,313.209c-62.578,49.778-132.267,75.378-197.689,76.8C-16.907,307.52-6.951,106.987,49.938,48.676,101.138-3.946,261.849-13.9,354.294,18.809,377.049,112.676,330.116,232.142,229.138,313.209Z'/%3E%3Cg class='e' transform='matrix(1, 0, 0, 1, 0.3, 0)'%3E%3Cpath class='c' d='M288.294,407.437H140.96V106.987H272.367c23.893,0,41.812,1.767,59.731,7.07,15.928,5.3,29.865,10.6,37.829,19.44,15.928,15.906,21.9,33.58,21.9,53.021,0,22.976-7.964,40.649-25.883,53.021-5.973,3.534-9.955,7.07-11.946,7.07q-2.986,2.651-11.946,5.3c21.9,3.534,37.829,12.372,49.776,24.743s17.919,28.278,17.919,47.719c0,21.209-7.964,38.882-23.893,54.788C367.935,398.6,334.089,407.437,288.294,407.437Zm-71.676-178.5h35.838c21.9,0,35.838-1.767,45.793-5.3s15.928-12.372,15.928-26.51-3.981-22.976-13.938-26.51-25.883-7.07-47.784-7.07H216.618v65.392Zm0,121.947h51.767c21.9,0,37.829-1.767,47.784-7.07S332.1,329.673,332.1,315.534s-5.973-22.976-17.919-28.278-29.865-7.07-55.748-7.07h-43.8V350.88h1.991Z' transform='translate(-34.96 -32.39)'/%3E%3C/g%3E%3Ctext class='d' transform='translate(469.301 315)'%3E%3Ctspan x='0' y='0'%3Eayshop%3C/tspan%3E%3C/text%3E%3C/g%3E%3C/svg%3E" alt="logo"></a>
 	</li>
 	<li class="nav-item h-7 d-flex justify-content-between">
-		<div class="nav-link m-auto d-flex flex-column text-center" href="#"><img class="nav-avatar img-thumbnail" src="<?= base_url('assets/shared/images/user.svg'); ?>" alt="user"><span>Admin</span></div>
+		<div class="nav-link m-auto d-flex flex-column text-center" href="#"><img class="nav-avatar img-thumbnail" src="<?= base_url('assets/shared/images/user.svg'); ?>" alt="user"><span class="text-secondary">Admin</span></div>
 	</li>
-	<ul class="shadow-sm-top pl-0 h-90 scroll-nav mCustomScrollbar" data-mcs-theme="dark-2">
+	<ul class="shadow-sm-top pl-0 h-90" data-mcs-theme="dark-2">
 		<div class="d-flex justify-content-between -light px-2 pt-2">
 			<svg aria-hidden="true" height='15' focusable="false" data-prefix="fas" data-icon="minus-circle" class="svg-inline--fa fa-minus-circle fa-w-16 rotate-90" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
 				<path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zM124 296c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h264c6.6 0 12 5.4 12 12v56c0 6.6-5.4 12-12 12H124z"></path>
@@ -29,7 +29,6 @@
 				<div class="input-group-append"><span class="input-group-text bg-white rounded-sm-right -light" id="basic-addon2"></span></div>
 			</div>
 		</li>
-
 		<!-- Dashboard -->
 		<li class="nav-item">
 			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'dashboard') ? 'selected' : ''; ?>" href="<?= base_url('admin/dashboard'); ?>">
@@ -50,9 +49,9 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/products/types/' ?>">
+					<a class="nav-link  pl-2" href="<?= base_url() . '/admin/types' ?>">
 						<span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-<?php menu($page_name, '(products|types)', 'child'); ?>"></ion-icon>types
+							<ion-icon name="radio-button-<?php menu($page_name, 'types', 'child'); ?>"></ion-icon>types
 						</span>
 					</a>
 				</li>

@@ -10,7 +10,7 @@
 			<div class="cv-form-group input-group mb-3 mt-2 px-3">
 				<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 						<ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon>
-					</span></div><input name="name" type="text" class="form-control custom-input" required="" value=""><span class="bar"></span><label class="cv-label left text-capitalize">Category Name</label>
+					</span></div><input name="name" type="text" class="form-control custom-input" value=""><span class="bar"></span><label class="cv-label left text-capitalize">Category Name</label>
 			</div>
 		</div>
 		<div class="col-md-12">

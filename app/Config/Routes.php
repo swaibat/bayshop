@@ -37,9 +37,10 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
 	$routes->add('products', 'Product',);
 	$routes->add('products/create', 'Product::create');
 	$routes->add('products/(:num)/update', 'Product::update/$1');
-	$routes->add('products/types', 'Producttype',);
-	$routes->add('products/types/create', 'Producttype::create');
-	$routes->add('products/types/(:num)update', 'Producttype::update/$1');
+	// TYPES
+	$routes->add('types', 'Type',);
+	$routes->add('types/create', 'Type::create');
+	$routes->add('types/(:num)/update', 'Type::update/$1');
 	// POSTS
 	$routes->add('posts', 'Post',);
 	$routes->add('posts/create', 'Post::create');

@@ -1,22 +1,23 @@
 <div class="card border-0 shadow-xs">
 	<div class="row">
 		<div class="col-sm-12">
-			<form id='form' method="post" action="<?= base_url() ?>/admin/products/<?= $product['id']?>/update/">
+			<form id='form' action="<?= base_url('admin/products/' . $product['id'] . '/update') ?>" method="post" enctype="multipart/form-data" accept-charset="utf-8" novalidate="">
 				<div class="form-row p-4">
 					<div class="col-md-9">
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input id='title' name="title" type="text" class="form-control custom-input" value='<?= $product['title'] ?>' required><span class="bar"></span><label class="cv-label left text-capitalize">title</label>
+								</span></div><input id='title' name="title" type="text" class="form-control custom-input" value='<?= $product['title'] ?>'><span class="bar"></span><label class="cv-label left text-capitalize">title</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group form-group mt-4 px-3">
-							<select id='vendor' name='vendor' class="form-control js-select2">
-								<?php foreach ($product_types as $type) { ?>
+							<select name='type_id' class="form-control js-select2">
+								<?php foreach ($types as $type) { ?>
 									<option value='<?= $type['id']; ?>'><?= $type['name']; ?></option>
 								<?php } ?>
 							</select>
+							<span class="bar"></span><label class="cv-label left text-capitalize">Select product location</label>
 						</div>
 					</div>
 					<div class="col-md-12 pt-3">
@@ -28,37 +29,38 @@
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input name="price" type="number" class="form-control custom-input" value='<?= $product['price'] ?>' required=""><span class="bar"></span><label class="cv-label left text-capitalize">Price</label>
+								</span></div><input name="price" type="number" class="form-control custom-input" value='<?= $product['price'] ?>'><span class="bar"></span><label class="cv-label left text-capitalize">Price</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input name="compare_price" value='<?= $product['compare_price'] ?>' type="number" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">Compare to price</label>
+								</span></div><input name="compare_price" value='<?= $product['compare_price'] ?>' type="number" class="form-control custom-input"><span class="bar"></span><label class="cv-label left text-capitalize">Compare to price</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input name="available_quantity" value='<?= $product['available_quantity'] ?>' type="number" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">available quantity</label>
+								</span></div><input name="available_quantity" value='<?= $product['available_quantity'] ?>' type="number" class="form-control custom-input"><span class="bar"></span><label class="cv-label left text-capitalize">available quantity</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input name="sku" value='<?= $product['sku'] ?>' type="text" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">SKU (Stock Keeping Unit)</label>
+								</span></div><input name="sku" value='<?= $product['sku'] ?>' type="text" class="form-control custom-input"><span class="bar"></span><label class="cv-label left text-capitalize">SKU (Stock Keeping Unit)</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group form-group mt-4 px-3">
-							<select id='category' name='category' class="form-control js-select2">
+							<select id='category' name='category_id' class="form-control js-select2">
 								<?php foreach ($categories as $category) { ?>
-									<option value='<?= $category['category_id']; ?>' <?= ($product['category'] === $category['category_id']) ? 'selected' : '' ?>><?= $category['name']; ?></option>
+									<option value='<?= $category['id']; ?>' <?= ($product['category_id'] === $category['id']) ? 'selected' : '' ?>><?= $category['name']; ?></option>
 								<?php } ?>
 							</select>
+							<span class="bar"></span><label class="cv-label left text-capitalize">Select product category</label>
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -68,22 +70,24 @@
 									<option value='<?= $country['name']; ?>' <?= ($product['country'] === $country['name']) ? 'selected' : '' ?>><?= $country['name']; ?></option>
 								<?php } ?>
 							</select>
+							<span class="bar"></span><label class="cv-label left text-capitalize">Select product location</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group form-group mt-4 px-3">
-							<select id='vendor' name='vendor' class="form-control js-select2">
-								<?php foreach ($product_types as $type) { ?>
-									<option value='<?= $type['id']; ?>'><?= $type['name']; ?></option>
+							<select id='vendor' name='vendor_id' class="form-control js-select2">
+								<?php foreach ($types as $type) { ?>
+									<option value='<?= $type['id']; ?>' <?= ($type['id'] === $product['type_id']) ? 'selected' : '' ?>><?= $type['name']; ?></option>
 								<?php } ?>
 							</select>
+							<span class="bar"></span><label class="cv-label left text-capitalize">Select Seller/vendor</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="input-group mb-3 mt-4 px-3 d-flex align-items-center">
 							<span class="mt-2">Publish the product :</span>
-							<span class="button b2 mt-0 ml-3 mt-2" id="button-10"><input id='status' <?= ($product['status'] == '0') ? 'checked' : '' ?> type="checkbox" name="status" class="checkbox">
-								<div class="knobs"><span>YES</span></div>
+							<span class="button b2 mt-0 ml-3 mt-2" id="button-10"><input id='status' <?= ($product['status'] == '1') ? 'checked' : '' ?> type="checkbox" name="status" class="checkbox">
+								<div class="knobs"><span>NO</span></div>
 								<div class="layer"></div>
 							</span>
 						</div>
@@ -109,7 +113,7 @@
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="briefcase-outline"></ion-icon>
-								</span></div><input name="focus_keyword" type="text" class="form-control custom-input" required="" autocomplete="new-password" value="<?= $product['focus_keyword'] ?>"><span class="bar"></span><label class="cv-label left text-capitalize">focus keywords separated by commas</label>
+								</span></div><input name="focus_keyword" type="text" class="form-control custom-input" autocomplete="new-password" value="<?= $product['focus_keyword'] ?>"><span class="bar"></span><label class="cv-label left text-capitalize">focus keywords separated by commas</label>
 						</div>
 					</div>
 					<div class="col-md-12">
@@ -128,3 +132,40 @@
 		</div>
 	</div>
 </div>
+<script>
+	$("#status").on("change", (e) => {
+		const target = e.target;
+		target.checked ? $("#status").val("1") : $("#status").val("0");
+	});
+	$("#form").submit(function(event) {
+		event.preventDefault();
+		var post_url = $(this).attr("action");
+		var request_method = $(this).attr("method");
+		var form_data = $(this).serialize();
+		$.ajax({
+			url: post_url,
+			type: request_method,
+			data: form_data,
+		}).done(function(response) {
+			console.log(response);
+			Toastify({
+				text: response.message,
+				duration: 3000,
+				gravity: "top",
+				position: 'right',
+				backgroundColor: "#228B22",
+				stopOnFocus: true,
+			}).showToast();
+
+		}).fail(function(err) {
+			Toastify({
+				text: 'Error operation failed',
+				duration: 3000,
+				gravity: "top",
+				position: 'right',
+				backgroundColor: '#FFA500',
+				stopOnFocus: true,
+			}).showToast();
+		});
+	});
+</script>

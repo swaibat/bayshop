@@ -1,7 +1,7 @@
 <div class="card border-0 shadow-xs">
 	<div class="row">
 		<div class="col-sm-12">
-			<form id='form' method="post" action="<?= base_url('/admin/products/create/') ?>">
+			<form id='form' action="<?= base_url('/admin/products/create/') ?>" method="post" enctype="multipart/form-data" accept-charset="utf-8" novalidate="">
 				<div class="form-row p-4">
 					<div class="col-md-9">
 						<div id='form-title' class="cv-form-group input-group mb-3 mt-4 px-3">
@@ -10,19 +10,17 @@
 									<ion-icon name="trail-sign-outline"></ion-icon>
 								</span>
 							</div>
-							<input id='title' name="title" type="text" class="form-control custom-input" required><span class="bar"></span><label class="cv-label left text-capitalize">title</label>
+							<input id='title' name="title" type="text" class="form-control custom-input"><span class="bar"></span><label class="cv-label left text-capitalize">title</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group form-group mt-4 px-3">
-							<select id='product_type' name='category_id[]' class="form-control js-select2">
-								<?php foreach ($categories as $category) { ?>
-									<script>
-										<?= $category['category_id']; ?>
-									</script>
-									<option value='<?= $category['category_id']; ?>'><?= $category['name']; ?></option>
+							<select name='type_id' class="form-control js-select2">
+								<?php foreach ($types as $type) { ?>
+									<option value='<?= $type['id']; ?>'><?= $type['name']; ?></option>
 								<?php } ?>
 							</select>
+							<span class="bar"></span><label class="cv-label left text-capitalize">Select product type</label>
 						</div>
 					</div>
 					<div class="col-md-12 pt-3">
@@ -34,37 +32,38 @@
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input id="price" name="price" type="number" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">Price</label>
+								</span></div><input id="price" name="price" type="number" class="form-control custom-input"><span class="bar"></span><label class="cv-label left text-capitalize">Price</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input name="compare_price" type="number" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">Compare to price</label>
+								</span></div><input name="compare_price" type="number" class="form-control custom-input"><span class="bar"></span><label class="cv-label left text-capitalize">Compare to price</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input name="available_quantity" type="number" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">available quantity</label>
+								</span></div><input name="available_quantity" type="number" class="form-control custom-input"><span class="bar"></span><label class="cv-label left text-capitalize">available quantity</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input name="sku" type="text" class="form-control custom-input" required=""><span class="bar"></span><label class="cv-label left text-capitalize">SKU (Stock Keeping Unit)</label>
+								</span></div><input name="sku" type="text" class="form-control custom-input"><span class="bar"></span><label class="cv-label left text-capitalize">SKU (Stock Keeping Unit)</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group form-group mt-4 px-3">
-							<select id='category' name='category' class="form-control js-select2">
+							<select name='category_id' class="form-control js-select2">
 								<?php foreach ($categories as $category) { ?>
-									<option value='<?= $category['category_id']; ?>' <?= ($product['category'] === $category['category_id']) ? 'selected' : '' ?>><?= $category['name']; ?></option>
+									<option value='<?= $category['id']; ?>'><?= $category['name']; ?></option>
 								<?php } ?>
 							</select>
+							<span class="bar"></span><label class="cv-label left text-capitalize">Select product Category</label>
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -74,22 +73,24 @@
 									<option value='<?= $country['name']; ?>' <?= ($product['country'] === $country['name']) ? 'selected' : '' ?>><?= $country['name']; ?></option>
 								<?php } ?>
 							</select>
+							<span class="bar"></span><label class="cv-label left text-capitalize">Select product Location</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="cv-form-group form-group mt-4 px-3">
-							<select id='vendor' name='vendor' class="form-control js-select2">
-								<?php foreach ($product_types as $type) { ?>
+							<select name='vendor_id' class="form-control js-select2">
+								<?php foreach ($types as $type) { ?>
 									<option value='<?= $type['id']; ?>'><?= $type['name']; ?></option>
 								<?php } ?>
 							</select>
+							<span class="bar"></span><label class="cv-label left text-capitalize">Select seller/vendor</label>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="input-group mb-3 mt-4 px-3 d-flex align-items-center">
 							<span class="mt-2">Publish the product :</span>
-							<span class="button b2 mt-0 ml-3 mt-2" id="button-10"><input id='status' value='1' type="checkbox" name="status" class="checkbox">
-								<div class="knobs"><span>YES</span></div>
+							<span class="button b2 mt-0 ml-3 mt-2" id="button-10"><input id='status' checked type="checkbox" name="status" class="checkbox">
+								<div class="knobs"><span>NO</span></div>
 								<div class="layer"></div>
 							</span>
 						</div>
@@ -115,7 +116,7 @@
 						<div class="cv-form-group input-group mb-3 mt-4 px-3">
 							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
 									<ion-icon name="briefcase-outline"></ion-icon>
-								</span></div><input name="focus_keyword" type="text" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">focus keywords separated by commas</label>
+								</span></div><input name="focus_keyword" type="text" class="form-control custom-input"><span class="bar"></span><label class="cv-label left text-capitalize">focus keywords separated by commas</label>
 						</div>
 					</div>
 					<div class="col-md-12">
@@ -151,7 +152,6 @@
 			type: request_method,
 			data: form_data,
 		}).done(function(response) {
-			console.log(response)
 			Toastify({
 				text: response.message,
 				duration: 3000,
@@ -162,7 +162,6 @@
 			}).showToast();
 
 		}).fail(function(err) {
-			console.log(err.message)
 			Toastify({
 				text: 'Error operation failed',
 				duration: 3000,

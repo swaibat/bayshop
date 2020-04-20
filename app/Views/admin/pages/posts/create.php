@@ -37,7 +37,7 @@
 						<div class="input-group mb-3 mt-4 px-3 d-flex align-items-center">
 							<span class="mt-2">Publish the post :</span>
 							<span class="button b2 mt-0 ml-3 mt-2" id="button-10"><input id='status' value='1' type="checkbox" name="status" class="checkbox">
-								<div class="knobs"><span>YES</span></div>
+								<div class="knobs"><span>NO</span></div>
 								<div class="layer"></div>
 							</span>
 						</div>
