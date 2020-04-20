@@ -6,7 +6,7 @@ use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\ProductModel;
-use App\Models\ProductTypeModel;
+use App\Models\TypeModel;
 use App\Models\CategoryModel;
 use App\Models\CountryModel;
 
@@ -17,7 +17,7 @@ class Category extends Controller
     {
         parent::initController($request, $response, $logger);
         $this->products         = new ProductModel();
-        $this->product_types    = new ProductTypeModel();
+        $this->types            = new TypeModel();
         $this->categories       = new CategoryModel();
         $this->countries        = new CountryModel();
         $this->validation       = \Config\Services::validation();
@@ -62,7 +62,7 @@ class Category extends Controller
             'page_name'         => 'create',
             'page_title'        => 'Add New Category',
             'categories'        => $this->categories->findAll(),
-            'types'             => $this->product_types->findAll(),
+            'types'             => $this->types->findAll(),
             'errors'            => $this->validation->getErrors()
         ];
         echo view('admin/view', $data);

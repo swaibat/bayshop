@@ -6,10 +6,9 @@ use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\ProductModel;
-use App\Models\ProductTypeModel;
+use App\Models\TypeModel;
 use App\Models\CategoryModel;
 use App\Models\CountryModel;
-use Config\Validation;
 
 class Product extends Controller
 {
@@ -18,7 +17,7 @@ class Product extends Controller
     {
         parent::initController($request, $response, $logger);
         $this->products         = new ProductModel();
-        $this->product_types    = new ProductTypeModel();
+        $this->types    = new TypeModel();
         $this->categories       = new CategoryModel();
         $this->countries        = new CountryModel();
         $this->session          = \Config\Services::session();
@@ -26,7 +25,7 @@ class Product extends Controller
     }
 
 
-    // GET CATEGORIES
+    // GET PRODUCTS
     public function index()
     {
         $data = [
@@ -34,43 +33,6 @@ class Product extends Controller
             'page_name'     => 'products',
             'page_title'    => 'products',
             'products'      => $this->products->orderBy('id', 'DESC')->findAll()
-        ];
-        echo view('admin/index', $data);
-    }
-
-    // UPDATE CATEGORIES
-    public function update($id)
-    {
-        helper('form');
-        if (isset($_POST) && !empty($_POST)) {
-            $this->products->update($id, [
-                'title'               => $this->request->getVar('title'),
-                'slug'                => url_title($this->request->getVar('title')),
-                'price'               => $this->request->getVar('price'),
-                'sku'                 => $this->request->getVar('sku'),
-                'compare_price'       => $this->request->getVar('compare_price'),
-                'available_quantity'  => $this->request->getVar('available_quantity'),
-                'product_type'        => $this->request->getVar('product_type'),
-                'description'         => $this->request->getVar('description'),
-                'vendor'              => $this->request->getVar('vendor'),
-                'country'             => $this->request->getVar('country'),
-                'category'            => $this->request->getVar('category'),
-                'status'              => $this->request->getVar('status'),
-                'focus_keyword'       => $this->request->getVar('focus_keyword'),
-                'meta_description'    => $this->request->getVar('meta_description'),
-                'message'             => 'post created successfully'
-            ]);
-        }
-
-        $data = [
-            'folder_name'       => 'products',
-            'page_name'         => 'update',
-            'page_title'        => 'Update Product',
-            'id'                => $this->request->uri->getSegment(3),
-            'product'           => $this->products->find($id),
-            'product_types'     => $this->product_types->findAll(),
-            'categories'        => $this->categories->findAll(),
-            'countries'         => $this->countries->findAll(),
         ];
         echo view('admin/index', $data);
     }
@@ -89,10 +51,14 @@ class Product extends Controller
                 'compare_price'         => $this->request->getVar('compare_price'),
                 'available_quantity'    => $this->request->getVar('available_quantity'),
                 'product_type'          => $this->request->getVar('product_type'),
+                'sku'                   => $this->request->getVar('sku'),
+                'type_id'               => $this->request->getVar('type_id'),
+                'vendor_id'             => $this->request->getVar('vendor_id'),
+                'compare_price'         => $this->request->getVar('compare_price'),
+                'available_quantity'    => $this->request->getVar('available_quantity'),
                 'description'           => $this->request->getVar('description'),
-                'vendor'                => $this->request->getVar('vendor'),
                 'country'               => $this->request->getVar('country'),
-                'category'              => $this->request->getVar('category'),
+                'category_id'           => $this->request->getVar('category_id'),
                 'status'                => $this->request->getVar('status'),
                 'focus_keyword'         => $this->request->getVar('focus_keyword'),
                 'meta_description'      => $this->request->getVar('meta_description'),
@@ -105,11 +71,55 @@ class Product extends Controller
             'folder_name'       => 'products',
             'page_name'         => 'create',
             'page_title'        => 'Create Product',
-            'product_types'     => $this->product_types->findAll(),
+            'types'     => $this->types->findAll(),
             'categories'        => $this->categories->findAll(),
             'countries'         => $this->countries->findAll(),
             'errors'            => $this->validation->getErrors()
         ];
         return view('admin/index', $data);
+    }
+
+    // UPDATE PRODUCT
+    public function update()
+    {
+        helper('form');
+        $id                = $this->request->uri->getSegment(3);
+        if ($this->validate([
+            'title' => 'required|min_length[3]|max_length[255]',
+        ])) {
+            $data = [
+                'title'                 => $this->request->getVar('title'),
+                'slug'                  => url_title($this->request->getVar('title')),
+                'price'                 => $this->request->getVar('price'),
+                'compare_price'         => $this->request->getVar('compare_price'),
+                'available_quantity'    => $this->request->getVar('available_quantity'),
+                'product_type'          => $this->request->getVar('product_type'),
+                'sku'                   => $this->request->getVar('sku'),
+                'type_id'               => $this->request->getVar('type_id'),
+                'vendor_id'             => $this->request->getVar('vendor_id'),
+                'compare_price'         => $this->request->getVar('compare_price'),
+                'available_quantity'    => $this->request->getVar('available_quantity'),
+                'description'           => $this->request->getVar('description'),
+                'country'               => $this->request->getVar('country'),
+                'category_id'           => $this->request->getVar('category_id'),
+                'status'                => $this->request->getVar('status'),
+                'focus_keyword'         => $this->request->getVar('focus_keyword'),
+                'meta_description'      => $this->request->getVar('meta_description'),
+                'message'               => 'Product updated successfully'
+            ];
+            $this->products->update($id, $data);
+            return $this->response->setJSON($data);
+        }
+
+        $data = [
+            'folder_name'       => 'products',
+            'page_name'         => 'update',
+            'page_title'        => 'Update Product',
+            'product'           => $this->products->find($id),
+            'types'             => $this->types->findAll(),
+            'categories'        => $this->categories->findAll(),
+            'countries'         => $this->countries->findAll(),
+        ];
+        echo view('admin/index', $data);
     }
 }

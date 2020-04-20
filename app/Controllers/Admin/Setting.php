@@ -6,7 +6,7 @@ use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\ProductModel;
-use App\Models\ProductTypeModel;
+use App\Models\TypeModel;
 use App\Models\CategoryModel;
 use App\Models\CountryModel;
 
@@ -17,7 +17,7 @@ class Setting extends Controller
     {
         parent::initController($request, $response, $logger);
         $this->products         = new ProductModel();
-        $this->product_types    = new ProductTypeModel();
+        $this->types            = new TypeModel();
         $this->categories       = new CategoryModel();
         $this->countries        = new CountryModel();
         $this->session          = \Config\Services::session();
@@ -54,7 +54,7 @@ class Setting extends Controller
             'folder_name'       => 'settings',
             'page_name'         => 'settings',
             'page_title'        => 'Create Product',
-            'product_types'     => $this->product_types->findAll(),
+            'types'             => $this->types->findAll(),
             'categories'        => $this->categories->findAll(),
             'countries'         => $this->countries->findAll(),
             'errors'            => $this->validation->getErrors()

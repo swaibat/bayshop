@@ -5,9 +5,9 @@ namespace App\Models;
 use CodeIgniter\Database\ConnectionInterface;
 use CodeIgniter\Model;
 
-class ProductTypeModel extends Model
+class TypeModel extends Model
 {
-    protected $table = 'product_type';
+    protected $table = 'types';
     protected $allowedFields = ['name','slug','status','location'];
 
 }
