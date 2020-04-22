@@ -17,9 +17,10 @@ class User extends Controller
         parent::initController($request, $response, $logger);
         $this->categories       = new CategoryModel();
         $this->users            = new UserModel();
-        $this->roles             = new RoleModel();
+        $this->roles            = new RoleModel();
         $this->session          = \Config\Services::session();
         $this->validation       = \Config\Services::validation();
+        $this->email            = \Config\Services::email();
     }
 
     // GET USERS
@@ -29,7 +30,7 @@ class User extends Controller
             'folder_name'   => 'users',
             'page_name'     => 'users',
             'page_title'    => 'users',
-            'users'      => $this->users->orderBy('id', 'ASC')->findAll()
+            'users'      => $this->users->orderBy('id', 'DESC')->findAll()
         ];
         echo view('admin/index', $data);
     }
@@ -90,8 +91,16 @@ class User extends Controller
                 'message'               => 'User updated successfully'
 
             ];
+            if ($imagefile = $this->request->getFiles()) {
+                foreach ($imagefile['images'] as $img) {
+                    if ($img->isValid() && !$img->hasMoved()) {
+                        $newName = $img->getRandomName();
+                        $img->move(WRITEPATH . 'uploads', $newName);
+                    }
+                }
+            }
             $this->users->update($id, $data);
-            return $this->response->setJSON($data);
+            return $this->response->setJSON(json_decode($data));
         }
         $data = [
             'folder_name'       => 'users',
