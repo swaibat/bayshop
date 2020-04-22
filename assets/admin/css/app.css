@@ -718,3 +718,89 @@ table.dataTable thead .sorting::before {
   color: #fff;
   background-color: #0f0f0f;
 }
+.MultiFile-list {
+  width: 100%;
+  min-height: 180px;
+  padding: 5px 5px 0px 5px;
+  position: relative;
+  display: flex;
+}
+
+.multi {
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  min-height: 180px;
+  opacity: 0;
+}
+
+#img-holder {
+  width: 100%;
+  min-height: 180px;
+  /* display: flex; */
+  padding: 5px 5px 0px 5px;
+  position: relative;
+  overflow: auto;
+}
+
+.upload-btn {
+  height: 90px;
+  width: 90px;
+  border: dashed 1.5px gainsboro;
+  border-radius: 0;
+}
+
+.upload-btn:hover {
+  background: #eeeeee;
+  cursor: pointer;
+}
+
+.first:first-child {
+  height: 185px !important;
+  width: 185px !important;
+}
+.first:first-child .MultiFile-label {
+  height: 100% !important;
+  width: 100% !important;
+}
+.MultiFile-remove {
+  position: absolute;
+  margin-left: -1.5rem;
+  color: #e80000;
+  z-index: 10;
+  background: gainsboro;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 1rem;
+  border-radius: 10px;
+}
+
+.MultiFile-preview {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  margin-right: 0.7rem;
+  float: left;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.MultiFile-label {
+  height: 90px;
+  width: 90px;
+  position: relative;
+  margin-right: 0.7rem;
+  float: left;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.ui-sortable-helper {
+  width: 90px !important;
+  height: 90px !important;
+}
+
+.MultiFile-title {
+  display: none;
+}

@@ -87,17 +87,27 @@
 			data: form_data
 		}).done(function(response) {
 			Toastify({
-				text: response.status == '201' ? response.message : 'Error operation failed',
+				text: response.message,
 				duration: 3000,
 				gravity: "top",
 				position: 'right',
-				backgroundColor: response.status == '201' ? "#228B22" : '#FFA500',
+				backgroundColor: "#228B22",
 				stopOnFocus: true,
 			}).showToast();
 			setTimeout(() => {
+				location.reload()
 				$("#mymodal").modal("toggle");
 			}, 1500);
 
+		}).fail(function(err) {
+			Toastify({
+				text: 'Error operation failed',
+				duration: 3000,
+				gravity: "top",
+				position: 'right',
+				backgroundColor: '#FFA500',
+				stopOnFocus: true,
+			}).showToast();
 		});
 	});
 </script>

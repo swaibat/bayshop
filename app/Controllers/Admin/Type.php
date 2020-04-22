@@ -42,12 +42,11 @@ class Type extends Controller
                 'name'                 => $this->request->getVar('name'),
                 'slug'                  => url_title($this->request->getVar('name')),
                 'location'              => $this->request->getVar('location'),
-                'status'                => $this->request->getVar('status'),
+                'status'                => $this->request->getVar('status') || '0',
                 'message'               => 'type created successfully'
             ];
             $this->types->save($data);
             return $this->response->setJSON($data);
-            return view('admin/view', $data);
         }
         $data = [
             'folder_name'       => 'types',

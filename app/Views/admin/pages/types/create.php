@@ -24,8 +24,8 @@
     <div class="col-md-12">
       <div class="input-group mb-3 mt-3 px-3 d-flex align-items-center">
         <span class="mt-2">Publish the product :</span>
-        <span class="button b2 mt-0 ml-3 mt-2" id="button-10"><input id='status' value='1' type="checkbox" name="status" class="checkbox">
-          <div class="knobs"><span>YES</span></div>
+        <span class="button b2 mt-0 ml-3 mt-2" id="button-10"><input id='status' value="1" checked type="checkbox" name="status" class="checkbox">
+          <div class="knobs"><span>NO</span></div>
           <div class="layer"></div>
         </span>
       </div>
@@ -38,10 +38,12 @@
 </form>
 
 <script>
-  $("#status").on("change", (e) => {
-		const target = e.target;
-		target.checked ? $("#status").val("1") : $("#status").val("0");
-	});
+  $(document).ready(() => {
+    $("#status").on("change", (e) => {
+      const target = e.target;
+      target.checked ? $("#status").val("1") : $("#status").val("0");
+    });
+  })
   $("#form").submit(function(event) {
     event.preventDefault();
     var post_url = $(this).attr("action");
@@ -52,8 +54,9 @@
       type: request_method,
       data: form_data,
     }).done(function(response) {
+
       Toastify({
-        text: response.message || 'Operation successful',
+        text: response.message,
         duration: 3000,
         gravity: "top",
         position: 'right',
@@ -63,6 +66,7 @@
       $("#mymodal").modal("toggle");
 
     }).fail(function(error) {
+      console.log(error);
       Toastify({
         text: 'Error operation failed',
         duration: 3000,
@@ -71,10 +75,6 @@
         backgroundColor: '#FFA500',
         stopOnFocus: true,
       }).showToast();
-    });
-    $("#status").on("change", (e) => {
-      const target = e.target;
-      target.checked ? $("#status").val("1") : $("#status").val("0");
     });
   });
 </script>
