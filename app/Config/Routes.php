@@ -73,6 +73,14 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
 	$routes->add('users/(:num)/update', 'User::update/$1');
 	// CHAT
 	$routes->add('messages', 'Message');
+	$routes->add('messages/create', 'Message::create');
+});
+
+$routes->group('auth', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
+	$routes->add('register', 'Auth::register');
+	$routes->add('login', 'Auth::login');
+	$routes->add('logout', 'Auth::logout');
+	$routes->add('verify', 'Auth::verify');
 });
 
 /**

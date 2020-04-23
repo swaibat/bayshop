@@ -2,21 +2,10 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\Controller;
-use CodeIgniter\HTTP\RequestInterface;
-use CodeIgniter\HTTP\ResponseInterface;
-use App\Models\PostcategoryModel;
+use App\Controllers\BaseController;
 
-class Postcategory extends Controller
+class Postcategory extends BaseController
 {
-
-    public function initController(RequestInterface $request, ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
-    {
-        parent::initController($request, $response, $logger);
-        $this->post_categories      = new PostcategoryModel();
-        $this->session              = \Config\Services::session();
-        $this->validation           = \Config\Services::validation();
-    }
 
     // GET USERS
     public function index()

@@ -2,25 +2,11 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\Controller;
-use CodeIgniter\HTTP\RequestInterface;
-use CodeIgniter\HTTP\ResponseInterface;
-use App\Models\PageModel;
-use App\Models\UserModel;
+use App\Controllers\BaseController;
 
-class Page extends Controller
+class Page extends BaseController
 {
-
-    public function initController(RequestInterface $request, ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
-    {
-        parent::initController($request, $response, $logger);
-        $this->pages            = new PageModel();
-        $this->user             = new UserModel();
-        $this->session          = \Config\Services::session();
-        $this->validation       = \Config\Services::validation();
-    }
-
-    // GET POSTS
+    // GET PAGES
     public function index()
     {
         $data = [
@@ -33,7 +19,7 @@ class Page extends Controller
     }
 
 
-    // CREATE A NEW PRODUCT
+    // CREATE A NEW PAGE
     public function create()
     {
         helper(['form', 'url']);
@@ -62,7 +48,7 @@ class Page extends Controller
         return view('admin/index', $data);
     }
 
-    // CREATE A NEW PRODUCT
+    // UPDATE PAGE
     public function update($id){
         helper(['form', 'url']);
         if ($this->validate([

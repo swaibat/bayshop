@@ -2,23 +2,10 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\Controller;
-use CodeIgniter\HTTP\RequestInterface;
-use CodeIgniter\HTTP\ResponseInterface;
-use App\Models\TypeModel;
+use App\Controllers\BaseController;
 
-class Type extends Controller
+class Type extends BaseController
 {
-
-    public function initController(RequestInterface $request, ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
-    {
-        parent::initController($request, $response, $logger);
-        $this->types            = new TypeModel();
-        $this->session          = \Config\Services::session();
-        $this->validation       = \Config\Services::validation();
-    }
-
-
     // GET TYPES
     public function index()
     {

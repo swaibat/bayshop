@@ -2,61 +2,54 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\Controller;
-use CodeIgniter\HTTP\RequestInterface;
-use CodeIgniter\HTTP\ResponseInterface;
-use App\Models\CategoryModel;
-use App\Models\CountryModel;
-use App\Models\UserModel;
+use App\Controllers\BaseController;
 
-class Message extends Controller
+class Message extends BaseController
 {
 
-    public function initController(RequestInterface $request, ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
-    {
-        parent::initController($request, $response, $logger);
-        $this->categories       = new CategoryModel();
-        $this->countries        = new CountryModel();
-        $this->user             = new UserModel();
-        $this->session          = \Config\Services::session();
-        $this->validation       = \Config\Services::validation();
-    }
+    // public function get_user_info()
+    // {
+    //     $req_url = 'https://get.client-ip.com/lookup';
+    //     $data = file_get_contents($req_url);
+    //     $this->session->set('hello', $data);
+    // }
 
     // GET CHAT MESSAGES
     public function index()
     {
+        print_r($this->clientInfo->index());
         $data = [
             'folder_name'   => 'messages',
             'page_name'     => 'messages',
             'page_title'    => 'chat messages',
+            // 'user_info'     => $this->get_user_info(),
         ];
         echo view('admin/index', $data);
     }
 
-    // CREATE A NEW TYPE
+    // CREATE A NEW MESSAGE
     public function create()
     {
         helper(['form', 'url']);
         if ($this->validate([
-            'name' => 'required|min_length[3]|max_length[255]',
+            'message' => 'required',
         ])) {
             $data = [
-                'name'                 => $this->request->getVar('name'),
-                'slug'                  => url_title($this->request->getVar('name')),
-                'location'              => $this->request->getVar('location'),
+                'sender_id'             => $this->request->getVar('sender_id'),
+                'receiver_id'           => $this->request->getVar('receiver_id'),
                 'status'                => $this->request->getVar('status') || '0',
-                'message'               => 'type created successfully'
+                'message'               => $this->request->getVar('message'),
             ];
-            $this->types->save($data);
+            $this->messages->save($data);
             return $this->response->setJSON($data);
         }
         $data = [
             'folder_name'   => 'messages',
             'page_name'     => 'messages',
             'page_title'    => 'chat messages',
-            'errors'            => $this->validation->getErrors()
+            // 'user_info'     => $this->get_user_info(),
+            'errors'        => $this->validation->getErrors()
         ];
         return view('admin/view', $data);
     }
-
 }
