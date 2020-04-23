@@ -2,28 +2,10 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\Controller;
-use CodeIgniter\HTTP\RequestInterface;
-use CodeIgniter\HTTP\ResponseInterface;
-use App\Models\ProductModel;
-use App\Models\TypeModel;
-use App\Models\CategoryModel;
-use App\Models\CountryModel;
+use App\Controllers\BaseController;
 
-class Category extends Controller
-{
-
-    public function initController(RequestInterface $request, ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
-    {
-        parent::initController($request, $response, $logger);
-        $this->products         = new ProductModel();
-        $this->types            = new TypeModel();
-        $this->categories       = new CategoryModel();
-        $this->countries        = new CountryModel();
-        $this->validation       = \Config\Services::validation();
-    }
-
-
+class Category extends BaseController{
+    
     // GET CATEGORIES
     public function index()
     {

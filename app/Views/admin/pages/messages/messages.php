@@ -234,17 +234,24 @@
             </ul>
         </div>
         <div class="message-input">
-            <div class="wrap">
-                <input type="text" placeholder="Write your message..." />
+            <form id="chat-form" action="<?= base_url('admin/messages/create') ?>" method="post" class="wrap">
+                <input class="text-secondary" name="message" type="text" placeholder="Write your message..." />
                 <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-                <button class="submit">
+                <button type="submit" class="submit">
                     <i class="fa fa-paper-plane" aria-hidden="true"></i>
                 </button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
 <script>
+    socket.on('new message', function(msg) {
+        $(
+            '<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' +
+            msg +
+            "</p></li>"
+        ).appendTo($(".messages ul"));
+    });
     $(".messages").animate({
         scrollTop: $(document).height()
     }, "fast");
@@ -281,6 +288,56 @@
         $("#status-options").removeClass("active");
     });
 
+    $("#chat-form").submit(function(event) {
+        event.preventDefault();
+        var data = new FormData($('#chat-form')[0]);
+        data.append('sender_id', '2')
+        data.append('receiver_id', '1')
+        console.log(data.get('message'));
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: $(this).attr("action"),
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+        }).done(function(response) {
+            console.log(response)
+            socket.emit('new message', {
+                response
+            });
+            Toastify({
+                text: response.message,
+                duration: 3000,
+                gravity: "top",
+                position: 'right',
+                backgroundColor: "#228B22",
+                stopOnFocus: true,
+            }).showToast();
+
+        }).fail(function(err) {
+            console.log(err);
+            Toastify({
+                text: 'Error operation failed',
+                duration: 3000,
+                gravity: "top",
+                position: 'right',
+                backgroundColor: '#FFA500',
+                stopOnFocus: true,
+            }).showToast();
+        });
+        newMessage();
+
+    });
+
+    $(window).on("keydown", function(e) {
+        if (e.which == 13) {
+            newMessage();
+            return false;
+        }
+    });
+    // CREATE A NEW MESSAGE
     function newMessage() {
         message = $(".message-input input").val();
         if ($.trim(message) == "") {
@@ -297,15 +354,4 @@
             scrollTop: $(document).height()
         }, "fast");
     }
-
-    $(".submit").click(function() {
-        newMessage();
-    });
-
-    $(window).on("keydown", function(e) {
-        if (e.which == 13) {
-            newMessage();
-            return false;
-        }
-    });
 </script>

@@ -2,22 +2,10 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\Controller;
-use CodeIgniter\HTTP\RequestInterface;
-use CodeIgniter\HTTP\ResponseInterface;
-use App\Models\SliderModel;
+use App\Controllers\BaseController;
 
-
-class Slider extends Controller
+class Slider extends BaseController
 {
-
-    public function initController(RequestInterface $request, ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
-    {
-        parent::initController($request, $response, $logger);
-        $this->slider           = new SliderModel();
-        $this->session          = \Config\Services::session();
-        $this->validation       = \Config\Services::validation();
-    }
 
     // GET POSTS
     public function index()

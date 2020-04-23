@@ -69,7 +69,11 @@
 <style>
 </style>
 <script>
+	console.log('ffgfggfgfgfgf', <?= $_SESSION['location'] ?>)
 	$(document).ready(function() {
+		const user = JSON.parse(localStorage.getItem("user")) || <?= $_SESSION['location'] ?>;
+		socket.emit('online', user);
+
 		$('#chat-text').keyup((evt) => {
 			if (evt.target.value.length) {
 				socket.emit('typing', 'swaibu is typing')
@@ -136,5 +140,5 @@
 
 	});
 </script>
-<script src="<?= base_url('/assets/admin/js/script.js'); ?>"></script>
 
+<script src="<?= base_url('/assets/admin/js/script.js'); ?>"></script>

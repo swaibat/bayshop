@@ -2,26 +2,10 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\Controller;
-use CodeIgniter\HTTP\RequestInterface;
-use CodeIgniter\HTTP\ResponseInterface;
-use App\Models\CategoryModel;
-use App\Models\UserModel;
-use App\Models\RoleModel;
+use App\Controllers\BaseController;
 
-class User extends Controller
+class User extends BaseController
 {
-
-    public function initController(RequestInterface $request, ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
-    {
-        parent::initController($request, $response, $logger);
-        $this->categories       = new CategoryModel();
-        $this->users            = new UserModel();
-        $this->roles            = new RoleModel();
-        $this->session          = \Config\Services::session();
-        $this->validation       = \Config\Services::validation();
-        $this->email            = \Config\Services::email();
-    }
 
     // GET USERS
     public function index()
@@ -36,7 +20,7 @@ class User extends Controller
     }
 
 
-    // CREATE A NEW PRODUCT
+    // CREATE A NEW USER
     public function create()
     {
         helper(['form', 'url']);
@@ -70,7 +54,7 @@ class User extends Controller
         echo view('admin/view', $data);
     }
 
-    // UPDATE PRODUCT
+    // UPDATE USER
     public function update($id)
     {
         helper(['form', 'url']);
