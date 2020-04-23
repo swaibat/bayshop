@@ -1,4 +1,33 @@
 <footer></footer>
+<div class="accordion chat-modal d-none" id="chatModel">
+	<div class="card border-0 chat-card shadow-sm">
+		<div class="card-header cursor-pointer p-2 chat-modal-header" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+			<div class="d-flex align-items-center"><img height="40" width="40" class="mr-2" src="<?= base_url('assets/shared/images/user.svg'); ?>" alt="agent">
+				<div class="d-flex flex-fill justify-content-between">
+					<div>
+						<p class="mb-0 p-0">admin ug</p><small class="mt-n1">customer support</small>
+					</div>
+					<div><span class="badge badge-success">online</span></div>
+				</div>
+			</div>
+		</div>
+		<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#chatModel" style="">
+			<div>
+				<div class="card-body py-1">
+					<div class="p-0 mb-auto chat-window w-100 overflow-y-auto chat-container" id="chat">
+
+					</div>
+				</div>
+				<div class="card-footer  px-2 py-1 bg-white border-0"><small>shau is typing . . .</small>
+					<form id="chat-input" class="input-group d-flex align-items-end py-2">
+						<input type="text" id="chat-text" class="form-control rounded-left" min="1" required="" value="">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="mymodalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
@@ -31,15 +60,37 @@
 <script src="<?= base_url('/assets/shared/jquery/jquery-3.4.1.min.js'); ?>"></script>
 <script src="<?= base_url('assets/plugins/toastify-js/toastify-js.js'); ?>"></script>
 <script src="<?= base_url('/assets/plugins/jquery-multifile/jquery-multifile.js'); ?>"></script>
-<script src="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="<?= base_url('/assets/shared/bootstrap-4.4.1/js/bootstrap.bundle.js'); ?>"></script>
+<!-- <script src="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script> -->
+<script src="<?= base_url('/assets/shared/bootstrap-4.4.1/js/bootstrap.min.js'); ?>"></script>
 <script src="<?= base_url('/assets/plugins/select2/dist/js/select2.min.js'); ?>"></script>
 <script src="<?= base_url('/assets/plugins/dataTables/datatables.min.js'); ?>"></script>
 <script src="<?= base_url('/assets/plugins/summernote/summernote-bs4.min.js'); ?>"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<style>
+</style>
 <script>
 	$(document).ready(function() {
-		$(".MultiFile-list").sortable();
+		$('#chat-text').keyup((evt) => {
+			if (evt.target.value.length) {
+				socket.emit('typing', 'swaibu is typing')
+			} else {
+				socket.emit('typing', null)
+			};
+		})
+		$('#chat-input').submit((e) => {
+			e.preventDefault()
+			const msg = $('#chat-text').val()
+			socket.emit('sendMessage', msg)
+			$('#chat').append($('<p>').text(msg));
+			$('#chat-text').val('')
+		})
+	})
+</script>
+<script>
+	$(document).ready(function() {
+		$(".MultiFile-list").sortable({
+			placeholder: "upload-btn"
+		});
 		$(".MultiFile-list").disableSelection();
 		$('#photo-upload').change(() => {
 			$('#olden').removeClass('d-flex').addClass('d-none');
@@ -54,7 +105,7 @@
 			$.ajax({
 				type: "POST",
 				enctype: 'multipart/form-data',
-				url: "/admin/products/create",
+				url: $(this).attr("action"),
 				data: data,
 				processData: false,
 				contentType: false,
@@ -86,3 +137,4 @@
 	});
 </script>
 <script src="<?= base_url('/assets/admin/js/script.js'); ?>"></script>
+

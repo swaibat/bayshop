@@ -9,5 +9,9 @@
 	<script type="text/javascript" src="<?= base_url('/assets/plugins/toJson/formToJson.min.js'); ?>"></script>
 	<script src="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+	<script src="/server/node_modules/socket.io-client/dist/socket.io.dev.js"></script>
+	<script>
+		const socket = io('http://localhost:1000/');
+	</script>
 	<title><?= $page_title ?></title>
 </head>

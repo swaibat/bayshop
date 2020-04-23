@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <?php include 'includes/head.php'; ?>
-
 <body id="body">
 <?php include 'includes/navigation.php'; ?>
 	<main class="content-wrapper d-flex flex-column align-items-center min-h-display mb-5">
