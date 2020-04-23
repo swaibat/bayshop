@@ -64,6 +64,7 @@
 				</li>
 			</ul>
 		</li>
+
 		<!-- Pages -->
 		<li class="nav-item">
 			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'pages') ? 'selected' : ''; ?>" href="<?= base_url() . "/admin/pages"; ?>">
@@ -91,6 +92,13 @@
 					</a>
 				</li>
 			</ul>
+		</li>
+
+		<!-- Users -->
+		<li class="nav-item">
+			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'users') ? 'selected' : ''; ?>" href="<?= base_url() . '/admin/messages/' ?>">
+				<ion-icon name="people-outline" role="img" class="md hydrated" aria-label="people outline"></ion-icon><span class="nav-item-text">Messages</span>
+			</a>
 		</li>
 
 

@@ -36,8 +36,10 @@ a:hover {
 body {
   height: 100vh;
   background: #eef2f4;
-  font-weight: 100;
+  font-weight: 200;
+  font-size: .9rem;
   color: #222222 !important;
+  font-family: 'Poppins', sans-serif;
 }
 .nav-link:hover {
   transition: all 0.4s;
@@ -755,14 +757,26 @@ table.dataTable thead .sorting::before {
   cursor: pointer;
 }
 
+.upload-btn:first-child {
+  height: 185px;
+  width: 185px;
+  margin-right: 0.7rem;
+  float: left;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
 .first:first-child {
   height: 185px !important;
   width: 185px !important;
 }
+
 .first:first-child .MultiFile-label {
   height: 100% !important;
   width: 100% !important;
+  display: flex;
 }
+
 .MultiFile-remove {
   position: absolute;
   margin-left: -1.5rem;
@@ -803,4 +817,21 @@ table.dataTable thead .sorting::before {
 
 .MultiFile-title {
   display: none;
+}
+
+.chat-modal {
+  width: 350px;
+  max-height: 600px;
+  right: 1rem;
+  bottom: 0;
+  position: fixed;
+  z-index: 1000;
+}
+.chat-modal .chat-card {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.chat-window{
+  min-height: 12rem;
 }
