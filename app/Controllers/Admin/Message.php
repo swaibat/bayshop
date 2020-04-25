@@ -7,22 +7,16 @@ use App\Controllers\BaseController;
 class Message extends BaseController
 {
 
-    // public function get_user_info()
-    // {
-    //     $req_url = 'https://get.client-ip.com/lookup';
-    //     $data = file_get_contents($req_url);
-    //     $this->session->set('hello', $data);
-    // }
-
     // GET CHAT MESSAGES
     public function index()
     {
-        print_r($this->clientInfo->index());
+        $this->admin;
         $data = [
             'folder_name'   => 'messages',
             'page_name'     => 'messages',
             'page_title'    => 'chat messages',
-            // 'user_info'     => $this->get_user_info(),
+            'users'         => $this->messages->get_users_by_messages(),
+            'messages'      => $this->messages->get_users_by_messages(),
         ];
         echo view('admin/index', $data);
     }
@@ -47,9 +41,18 @@ class Message extends BaseController
             'folder_name'   => 'messages',
             'page_name'     => 'messages',
             'page_title'    => 'chat messages',
-            // 'user_info'     => $this->get_user_info(),
             'errors'        => $this->validation->getErrors()
         ];
         return view('admin/view', $data);
+    }
+
+    // CREATE A NEW MESSAGE
+    public function user()
+    {
+        helper(['form', 'url']);
+        $this->session->remove('active-chat');
+        $user_id = $this->request->uri->getSegment(4);
+        $messages = $this->messages->where('receiver_id', $user_id)->orWhere('sender_id', $user_id)->findAll();
+        return $this->response->setJSON($messages);
     }
 }

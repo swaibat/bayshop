@@ -23,6 +23,7 @@ io.on("connect", (socket) => {
     console.log(users)
   });
   socket.on("new message", (data, callback) => {
+    console.log(data);
     const user = users && users.find((user) => user.id == data.response.receiver_id);
     user && socket.broadcast.to(user.socketId).emit( 'new message', data.response.message);
   });

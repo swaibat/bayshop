@@ -16,8 +16,8 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * Router Setup
  * --------------------------------------------------------------------
  */
-$routes->setDefaultNamespace('App\Controllers\admin');
-$routes->setDefaultController('Dashboard');
+$routes->setDefaultNamespace('App\Controllers');
+$routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -74,9 +74,10 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
 	// CHAT
 	$routes->add('messages', 'Message');
 	$routes->add('messages/create', 'Message::create');
+	$routes->add('messages/user/(:num)', 'Message::user/$1');
 });
 
-$routes->group('auth', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
+$routes->group('auth', ['namespace' => 'App\Controllers\User'], function ($routes) {
 	$routes->add('register', 'Auth::register');
 	$routes->add('login', 'Auth::login');
 	$routes->add('logout', 'Auth::logout');

@@ -1,4 +1,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css">
+<style>
+    .contact * {
+        pointer-events: none;
+    }
+</style>
 <div id="frame" class="shadow-xs">
     <div id="sidepanel">
         <div id="profile">
@@ -46,121 +51,19 @@
         </div>
         <div id="contacts">
             <ul class="pl-0 ">
-                <li class="contact">
-                    <div class="wrap">
-                        <span class="contact-status online"></span>
-                        <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Louis Litt</p>
-                            <p class="preview">You just got LITT up, Mike.</p>
+                <?php foreach ($messages as $message) { ?>
+                    <li class="contact" id="<?= $message['id'] ?>">
+                        <div class="wrap">
+
+                            <span class="contact-status online"></span>
+                            <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
+                            <div class="meta">
+                                <p class="name"><?= $message['username'] ?></p>
+                                <p class="preview"><?= $message['message'] ?></p>
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <li class="contact active">
-                    <div class="wrap">
-                        <span class="contact-status offline"></span>
-                        <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Harvey Specter</p>
-                            <p class="preview">
-                                Wrong. You take the gun, or you pull out a bigger one. Or,
-                                you call their bluff. Or, you do any one of a hundred and
-                                forty six other things.
-                            </p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <span class="contact-status away"></span>
-                        <img src="http://emilcarlsson.se/assets/rachelzane.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Rachel Zane</p>
-                            <p class="preview">
-                                I was thinking that we could have chicken tonight, sounds
-                                good?
-                            </p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <span class="contact-status online"></span>
-                        <img src="http://emilcarlsson.se/assets/donnapaulsen.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Donna Paulsen</p>
-                            <p class="preview">Mike, I know everything! I'm Donna..</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <span class="contact-status offline"></span>
-                        <img src="http://emilcarlsson.se/assets/jessicapearson.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Jessica Pearson</p>
-                            <p class="preview">
-                                Have you finished the draft on the Hinsenburg deal?
-                            </p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <span class="contact-status"></span>
-                        <img src="http://emilcarlsson.se/assets/haroldgunderson.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Harold Gunderson</p>
-                            <p class="preview">Thanks Mike! :)</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <span class="contact-status"></span>
-                        <img src="http://emilcarlsson.se/assets/danielhardman.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Daniel Hardman</p>
-                            <p class="preview">
-                                We'll meet again, Mike. Tell Jessica I said 'Hi'.
-                            </p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <span class="contact-status offline"></span>
-                        <img src="http://emilcarlsson.se/assets/katrinabennett.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Katrina Bennett</p>
-                            <p class="preview">
-                                I've sent you the files for the Garrett trial.
-                            </p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <span class="contact-status"></span>
-                        <img src="http://emilcarlsson.se/assets/charlesforstman.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Charles Forstman</p>
-                            <p class="preview">Mike, this isn't over.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <span class="contact-status"></span>
-                        <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Jonathan Sidwell</p>
-                            <p class="preview">
-                                <span>You:</span> That's bullshit. This deal is solid.
-                            </p>
-                        </div>
-                    </div>
-                </li>
+                    </li>
+                <?php } ?>
             </ul>
         </div>
         <div id="bottom-bar" class="shadow-sm-top">
@@ -185,53 +88,7 @@
             </div>
         </div>
         <div class="messages d-flex justify-content-between">
-            <ul class="chat-content">
-                <li class="sent">
-                    <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                    <p>
-                        How the hell am I supposed to get a jury to believe you when I
-                        am not even sure that I do?!
-                    </p>
-                </li>
-                <li class="replies">
-                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                    <p>
-                        When you're backed against the wall, break the god damn thing
-                        down.
-                    </p>
-                </li>
-                <li class="replies">
-                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                    <p>Excuses don't win championships.</p>
-                </li>
-                <li class="sent">
-                    <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                    <p>Oh yeah, did Michael Jordan tell you that?</p>
-                </li>
-                <li class="replies">
-                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                    <p>No, I told him that.</p>
-                </li>
-                <li class="replies">
-                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                    <p>What are your choices when someone puts a gun to your head?</p>
-                </li>
-                <li class="sent">
-                    <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                    <p>
-                        What are you talking about? You do what they say or they shoot
-                        you.
-                    </p>
-                </li>
-                <li class="replies">
-                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                    <p>
-                        Wrong. You take the gun, or you pull out a bigger one. Or, you
-                        call their bluff. Or, you do any one of a hundred and forty six
-                        other things.
-                    </p>
-                </li>
-            </ul>
+
         </div>
         <div class="message-input">
             <form id="chat-form" action="<?= base_url('admin/messages/create') ?>" method="post" class="wrap">
@@ -288,11 +145,55 @@
         $("#status-options").removeClass("active");
     });
 
+    // get user chat
+    $('#contacts .contact').click(evt => {
+        $.ajax({
+            type: "GET",
+            url: `messages/user/${evt.target.id}`,
+        }).done(function(response) {
+            const id = '75'
+            $(".messages").empty();
+            $(`
+                <ul class="chat-content">
+                ${response && response.map(e =>{
+                        return (`<li class=${id===evt.target.id ? "replies" : "sent"}>
+                            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                            <p>
+                                ${e.message}
+                            </p>
+                        </li>`
+                        )})
+                }
+                </ul>
+        `).appendTo($(".messages"));
+            console.log(response)
+            Toastify({
+                text: response.message,
+                duration: 3000,
+                gravity: "top",
+                position: 'right',
+                backgroundColor: "#228B22",
+                stopOnFocus: true,
+            }).showToast();
+
+        }).fail(function(err) {
+            Toastify({
+                text: 'Error operation failed',
+                duration: 3000,
+                gravity: "top",
+                position: 'right',
+                backgroundColor: '#FFA500',
+                stopOnFocus: true,
+            }).showToast();
+        });
+    })
+
+    // chat form
     $("#chat-form").submit(function(event) {
         event.preventDefault();
         var data = new FormData($('#chat-form')[0]);
         data.append('sender_id', '2')
-        data.append('receiver_id', '1')
+        data.append('receiver_id', '75')
         console.log(data.get('message'));
         $.ajax({
             type: "POST",
@@ -344,7 +245,7 @@
             return false;
         }
         $(
-            '<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' +
+            '<li class="reply"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' +
             message +
             "</p></li>"
         ).appendTo($(".messages ul"));

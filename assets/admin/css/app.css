@@ -37,9 +37,9 @@ body {
   height: 100vh;
   background: #eef2f4;
   font-weight: 200;
-  font-size: .9rem;
+  font-size: 0.9rem;
   color: #222222 !important;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .nav-link:hover {
   transition: all 0.4s;
@@ -832,6 +832,29 @@ table.dataTable thead .sorting::before {
   border-bottom-right-radius: 0 !important;
 }
 
-.chat-window{
+.chat-window {
   min-height: 12rem;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 450px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+  z-index: 2;
 }
