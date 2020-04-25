@@ -30,6 +30,7 @@ use App\Models\ProductfileModel;
 use App\Models\SliderModel;
 use App\Models\RoleModel;
 use App\Models\ClientinfoModel;
+use CodeIgniter\I18n\Time;
 
 
 class BaseController extends Controller
@@ -42,7 +43,7 @@ class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = [];
+    protected $helpers = ['custom_helper'];
 
     /**
      * Constructor.
@@ -51,7 +52,7 @@ class BaseController extends Controller
     {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
-
+        helper(['form', 'url', 'html', 'inflector']);
         $this->categories       = new CategoryModel();
         $this->countries        = new CountryModel();
         $this->user             = new UserModel();
@@ -66,9 +67,11 @@ class BaseController extends Controller
         $this->slider           = new SliderModel();
         $this->roles            = new RoleModel();
         $this->clientInfo       = new ClientinfoModel();
+        $this->location         = location_info();
+        $this->user_agent       = $this->request->getUserAgent();
         $this->session          = \Config\Services::session();
         $this->validation       = \Config\Services::validation();
         $this->validation       = \Config\Services::validation();
+        $this->email            = \Config\Services::email();
     }
-
 }

@@ -69,11 +69,10 @@
 <style>
 </style>
 <script>
-	console.log('ffgfggfgfgfgf', <?= $_SESSION['location'] ?>)
+	console.log('ffgfggfgfgfgf', <?= $_SESSION['user'] ?>)
 	$(document).ready(function() {
-		const user = JSON.parse(localStorage.getItem("user")) || <?= $_SESSION['location'] ?>;
+		const user = <?= $_SESSION['user'] ?>;
 		socket.emit('online', user);
-
 		$('#chat-text').keyup((evt) => {
 			if (evt.target.value.length) {
 				socket.emit('typing', 'swaibu is typing')

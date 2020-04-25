@@ -3,6 +3,7 @@
 @import "./../../plugins/dataTables/datatables.min.css";
 @import "./../../plugins/select2/dist/css/select2.min.css";
 @import "./../../plugins/summernote/summernote-bs4.min.css";
+@import "./../../plugins/toastify-js/toastify-js.min.css";
 @import "./app.css";
 @import "./partials/sidenav.css";
 @import "./partials/products.css";

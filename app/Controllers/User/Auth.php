@@ -3,75 +3,68 @@
 namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
+use CodeIgniter\I18n\Time;
+
 
 
 class Auth extends BaseController
 {
-    // CREATE A NEW PRODUCT
-    public function login(){
-        helper(['form', 'url']);
-        if ($this->validate([
-            'name' => 'required|min_length[3]|max_length[255]',
-        ])) {
+    // USER LOGIN
+    public function login()
+    {
+        if (isset($_POST) && !empty($_POST)) {
             $data = [
-                'name'                  => $this->request->getVar('name'),
-                'slug'                  => url_title($this->request->getVar('name')),
-                'username'              => $this->request->getVar('username'),
-                'email'                 => $this->request->getVar('email'),
-                'password'              => $this->request->getVar('password'),
-                'company'               => $this->request->getVar('company'),
-                'role'                  => $this->request->getVar('role'),
-                'phone'                 => $this->request->getVar('phone'),
-                'address'               => $this->request->getVar('address'),
-                'status_code'           => 201,
-                'message'               => 'user created successfully'
-
+                'username' => $this->request->getVar('username'),
+                'password' => md5($this->request->getVar('password'))
             ];
-            $this->users->save($data);
-            return $this->response->setJSON($data);
+            $user = $this->user->where($data)->first();
+            print_r($user);
+            if ($user) {
+                $_SESSION['user'] = user_session($this->user_agent, $user);
+                // json_encode(['browser' => $user['username'], 'username' => $user['username'], 'role' => $user['role']]);
+                $this->session->setFlashdata('message ', 'Login Successfully');
+            } else {
+                $this->session->setFlashdata('message', 'Login failed');
+            }
         }
+
         $data = [
-            'folder_name'       => 'users',
-            'page_name'         => 'create',
-            'page_title'        => 'Create User',
+            'page_name'         => 'login',
+            'page_title'        => 'User Login',
             'roles'             => $this->roles->findAll(),
             'errors'            => $this->validation->getErrors()
         ];
-        echo view('admin/view', $data);
+        echo view('login', $data);
     }
 
-    // UPDATE PRODUCT
-    public function register(){
-        helper(['form', 'url']);
+    // USER REGISTER
+    public function register()
+    {
         if ($this->validate([
-            'name' => 'required|min_length[3]|max_length[255]',
+            'username' => 'required|min_length[3]|max_length[255]',
         ])) {
             $data = [
-                'name'                  => $this->request->getVar('name'),
-                'slug'                  => url_title($this->request->getVar('name')),
                 'username'              => $this->request->getVar('username'),
+                'slug'                  => url_title($this->request->getVar('username')),
                 'email'                 => $this->request->getVar('email'),
-                'password'              => $this->request->getVar('password'),
-                'company'               => $this->request->getVar('company'),
-                'phone'                 => $this->request->getVar('phone'),
-                'address'               => $this->request->getVar('address'),
-                'message'               => 'User updated successfully'
+                'password'              => md5($this->request->getVar('password')),
             ];
-            $this->users->save($data);
-            return $this->response->setJSON(json_decode($data));
+            $this->user->save($data);
+            $_SESSION['user'] = json_encode($data);
+            $this->session->setFlashdata('message', 'Registraton Successfully');
         }
         $data = [
-            'folder_name'       => 'users',
-            'page_name'         => 'update',
+            'page_name'         => 'register',
             'page_title'        => 'Update User',
             'roles'             => $this->roles->findAll(),
             'errors'            => $this->validation->getErrors()
         ];
-        echo view('admin/view', $data);
+        echo view('register', $data);
     }
 
-    public function logout(){
-		session()->destroy();
-		return redirect()->to('/');
-	}
+    public function logout()
+    {
+        session()->destroy();
+        return redirect()->to('/');
+    }
 }

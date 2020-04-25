@@ -10,7 +10,13 @@
 									<ion-icon name="trail-sign-outline"></ion-icon>
 								</span>
 							</div>
-							<input id='title' name="title" type="text" class="form-control custom-input"><span class="bar"></span><label class="cv-label left text-capitalize">title</label>
+							<?= form_input([
+								'name'      => 'title',
+								'id'        => 'title',
+								'type'     	=> 'text',
+								'class' 	=> 'form-control custom-input',
+							]); ?>
+							<span class="bar"></span><label class="cv-label left text-capitalize">title</label>
 						</div>
 					</div>
 					<div class="col-md-3">
