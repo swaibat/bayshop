@@ -146,17 +146,20 @@
     });
 
     // get user chat
+    const sessionUser = <?= $_SESSION['user'] ?>;
+    let activeChat;
     $('#contacts .contact').click(evt => {
+        activeChat = evt.target.id;
         $.ajax({
             type: "GET",
             url: `messages/user/${evt.target.id}`,
         }).done(function(response) {
-            const id = '75'
             $(".messages").empty();
             $(`
                 <ul class="chat-content">
                 ${response && response.map(e =>{
-                        return (`<li class=${id===evt.target.id ? "replies" : "sent"}>
+                    console.log(sessionUser.id === (e.sender_id || e.receiver_id))
+                        return (`<li class=${sessionUser.id === (e.sender_id || e.receiver_id) ? "replies" : "sent"}>
                             <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
                             <p>
                                 ${e.message}
@@ -166,16 +169,6 @@
                 }
                 </ul>
         `).appendTo($(".messages"));
-            console.log(response)
-            Toastify({
-                text: response.message,
-                duration: 3000,
-                gravity: "top",
-                position: 'right',
-                backgroundColor: "#228B22",
-                stopOnFocus: true,
-            }).showToast();
-
         }).fail(function(err) {
             Toastify({
                 text: 'Error operation failed',
@@ -190,11 +183,11 @@
 
     // chat form
     $("#chat-form").submit(function(event) {
+        console.log(activeChat);
         event.preventDefault();
-        var data = new FormData($('#chat-form')[0]);
-        data.append('sender_id', '2')
-        data.append('receiver_id', '75')
-        console.log(data.get('message'));
+        const data = new FormData($('#chat-form')[0]);
+        data.append('sender_id', sessionUser.id)
+        data.append('receiver_id', activeChat)
         $.ajax({
             type: "POST",
             enctype: 'multipart/form-data',
@@ -204,26 +197,19 @@
             contentType: false,
             cache: false,
         }).done(function(response) {
-            console.log(response)
             socket.emit('new message', {
                 response
             });
             Toastify({
                 text: response.message,
                 duration: 3000,
-                gravity: "top",
-                position: 'right',
                 backgroundColor: "#228B22",
-                stopOnFocus: true,
             }).showToast();
 
         }).fail(function(err) {
-            console.log(err);
             Toastify({
                 text: 'Error operation failed',
                 duration: 3000,
-                gravity: "top",
-                position: 'right',
                 backgroundColor: '#FFA500',
                 stopOnFocus: true,
             }).showToast();
@@ -245,7 +231,7 @@
             return false;
         }
         $(
-            '<li class="reply"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' +
+            '<li class="replies"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' +
             message +
             "</p></li>"
         ).appendTo($(".messages ul"));

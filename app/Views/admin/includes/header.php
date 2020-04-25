@@ -19,9 +19,36 @@
 				<span class="badge badge-light position-absolute notify-badge">5</span>
 			</a>
 		</li>
-		<li class="dropdown ml-3" data-toggle="tooltip" data-placement="bottom" title="Notifications">
-			<button class="btn bg-transparent text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a></div>
+		<li class='dropdown mx-2 d-flex flex-row align-items-center font-weight-light'>
+			<button class='btn nav-link dropdown-toggle text-white' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>
+				<span class="admin-nav-icons">
+					<ion-icon name="person-circle-outline"></ion-icon>
+				</span>
+			</button>
+			<ul class='dropdown-menu shadow notification-pane' aria-labelledby='dropdownMenuButton'>
+				<li class='dropdown-item rounded'>
+					<a class='py-3 d-flex' to='/profile'>
+						<span class='dropdown-icon'>
+							<FontAwesomeIcon class='mr-1' icon={faCog} />
+						</span>
+						<span class='d-flex flex-column ml-2'>
+							<h5 class='text-primary-dark-30'>Settings</h5>
+							<span class=''>set up your profile</span>
+						</span>
+					</a>
+				</li>
+				<li class='dropdown-item rounded'>
+					<a class='py-3 d-flex' href="<?= base_url('auth/logout') ?>" onClick={this.logout}>
+						<span class='dropdown-icon'>
+							<FontAwesomeIcon class='mr-1' icon={faPowerOff} />
+						</span>
+						<span class='d-flex flex-column ml-2'>
+							<h5 class='text-primary-dark-30'>Logout</h5>
+							<span class=''>To keep your account secure</span>
+						</span>
+					</a>
+				</li>
+			</ul>
 		</li>
 	</ul>
 </nav>

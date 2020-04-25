@@ -14,7 +14,7 @@ class User extends BaseController
             'folder_name'   => 'users',
             'page_name'     => 'users',
             'page_title'    => 'users',
-            'users'      => $this->users->orderBy('id', 'DESC')->findAll()
+            'users'      => $this->user->orderBy('id', 'DESC')->findAll()
         ];
         echo view('admin/index', $data);
     }
@@ -41,7 +41,7 @@ class User extends BaseController
                 'message'               => 'user created successfully'
 
             ];
-            $this->users->save($data);
+            $this->user->save($data);
             return $this->response->setJSON($data);
         }
         $data = [
@@ -83,7 +83,7 @@ class User extends BaseController
                     }
                 }
             }
-            $this->users->update($id, $data);
+            $this->user->update($id, $data);
             return $this->response->setJSON(json_decode($data));
         }
         $data = [
