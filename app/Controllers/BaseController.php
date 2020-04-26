@@ -31,6 +31,7 @@ use App\Models\SliderModel;
 use App\Models\RoleModel;
 use App\Models\ClientinfoModel;
 use CodeIgniter\I18n\Time;
+use App\Libraries\Paypal;
 
 
 class BaseController extends Controller
@@ -44,6 +45,7 @@ class BaseController extends Controller
      * @var array
      */
     protected $helpers = ['custom_helper'];
+    protected $paypal;
 
     /**
      * Constructor.

@@ -77,6 +77,13 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
 	$routes->add('messages/user/(:num)', 'Message::user/$1');
 });
 
+$routes->group('payments', ['namespace' => 'App\Controllers\Payment'], function ($routes) {
+	$routes->add('stripe', 'Stripe');
+	$routes->add('stripe/pay', 'Stripe::payment');
+	$routes->add('paypal', 'Paypal');
+	$routes->add('paypal/pay', 'Paypal::payment');
+});
+
 $routes->group('auth', ['namespace' => 'App\Controllers\User'], function ($routes) {
 	$routes->add('register', 'Auth::register');
 	$routes->add('login', 'Auth::login');
