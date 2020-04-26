@@ -52,22 +52,40 @@
                     // You can access the token ID with `token.id`.
                     // Get the token ID to your server-side code for use.
                     console.log('Token Created!!');
-                    console.log(token)
+                    // console.log(token)
                     $('#token_response').html(JSON.stringify(token));
 
                     $.ajax({
-                        url: "<?php echo base_url('stripe/payment'); ?>",
+                        url: "<?php echo base_url('payments/stripe/pay'); ?>",
                         method: 'post',
                         data: {
                             tokenId: token.id,
                             amount: amount
                         },
                         dataType: "json",
-                        success: function(response) {
-                            console.log(response.data);
-                            $('#token_response').append('<br />' + JSON.stringify(response.data));
-                        }
-                    })
+                    }).done(function(response) {
+                        console.log('hello', response.data);
+                        $('#token_response').append('<br />' + JSON.stringify(response.data));
+                        Toastify({
+                            text: response.message,
+                            duration: 3000,
+                            gravity: "top",
+                            position: 'right',
+                            backgroundColor: "#228B22",
+                            stopOnFocus: true,
+                        }).showToast();
+
+                    }).fail(function(err) {
+                        console.log(err)
+                        Toastify({
+                            text: 'Error operation failed',
+                            duration: 3000,
+                            gravity: "top",
+                            position: 'right',
+                            backgroundColor: '#FFA500',
+                            stopOnFocus: true,
+                        }).showToast();
+                    });
                 }
             });
 
