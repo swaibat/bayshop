@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.min.css">
 <style>
     .contact * {
         pointer-events: none;
@@ -51,15 +52,14 @@
         </div>
         <div id="contacts">
             <ul class="pl-0 ">
-                <?php foreach ($messages as $message) { ?>
-                    <li class="contact" id="<?= $message['id'] ?>">
+                <?php foreach ($users as $user) { ?>
+                    <li class="contact" id="<?= $user['id'] ?>">
                         <div class="wrap">
-
                             <span class="contact-status online"></span>
                             <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
                             <div class="meta">
-                                <p class="name"><?= $message['username'] ?></p>
-                                <p class="preview"><?= $message['message'] ?></p>
+                                <p class="name"><?= $user['username'] ?></p>
+                                <p class="preview"><?= $user['message'] ?></p>
                             </div>
                         </div>
                     </li>
@@ -88,7 +88,12 @@
             </div>
         </div>
         <div class="messages d-flex justify-content-between">
-
+            <div class="d-flex flex-column text-center w-100">
+                <span class="my-auto">
+                    <h3>No Chat</h3>
+                    <p>Start a new conversation</p>
+                </span>
+            </div>
         </div>
         <div class="message-input">
             <form id="chat-form" action="<?= base_url('admin/messages/create') ?>" method="post" class="wrap">
@@ -146,17 +151,19 @@
     });
 
     // get user chat
+    const sessionUser = <?= $_SESSION['user'] ?>;
+    let activeChat;
     $('#contacts .contact').click(evt => {
+        activeChat = evt.target.id;
         $.ajax({
             type: "GET",
             url: `messages/user/${evt.target.id}`,
         }).done(function(response) {
-            const id = '75'
             $(".messages").empty();
             $(`
                 <ul class="chat-content">
-                ${response && response.map(e =>{
-                        return (`<li class=${id===evt.target.id ? "replies" : "sent"}>
+                ${response && response.messages.map(e =>{
+                        return (`<li class=${sessionUser.id === (e.sender_id || e.receiver_id) ? "replies" : "sent"}>
                             <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
                             <p>
                                 ${e.message}
@@ -165,17 +172,8 @@
                         )})
                 }
                 </ul>
+                
         `).appendTo($(".messages"));
-            console.log(response)
-            Toastify({
-                text: response.message,
-                duration: 3000,
-                gravity: "top",
-                position: 'right',
-                backgroundColor: "#228B22",
-                stopOnFocus: true,
-            }).showToast();
-
         }).fail(function(err) {
             Toastify({
                 text: 'Error operation failed',
@@ -191,10 +189,9 @@
     // chat form
     $("#chat-form").submit(function(event) {
         event.preventDefault();
-        var data = new FormData($('#chat-form')[0]);
-        data.append('sender_id', '2')
-        data.append('receiver_id', '75')
-        console.log(data.get('message'));
+        const data = new FormData($('#chat-form')[0]);
+        data.append('sender_id', sessionUser.id)
+        data.append('receiver_id', activeChat)
         $.ajax({
             type: "POST",
             enctype: 'multipart/form-data',
@@ -204,26 +201,13 @@
             contentType: false,
             cache: false,
         }).done(function(response) {
-            console.log(response)
             socket.emit('new message', {
                 response
             });
-            Toastify({
-                text: response.message,
-                duration: 3000,
-                gravity: "top",
-                position: 'right',
-                backgroundColor: "#228B22",
-                stopOnFocus: true,
-            }).showToast();
-
         }).fail(function(err) {
-            console.log(err);
             Toastify({
                 text: 'Error operation failed',
                 duration: 3000,
-                gravity: "top",
-                position: 'right',
                 backgroundColor: '#FFA500',
                 stopOnFocus: true,
             }).showToast();
@@ -239,20 +223,22 @@
         }
     });
     // CREATE A NEW MESSAGE
+    var docHeight = $(document).height();
+
     function newMessage() {
         message = $(".message-input input").val();
         if ($.trim(message) == "") {
             return false;
         }
         $(
-            '<li class="reply"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' +
+            '<li class="replies"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' +
             message +
             "</p></li>"
         ).appendTo($(".messages ul"));
         $(".message-input input").val(null);
         $(".contact.active .preview").html("<span>You: </span>" + message);
         $(".messages").animate({
-            scrollTop: $(document).height()
+            scrollTop: docHeight + 93
         }, "fast");
     }
 </script>

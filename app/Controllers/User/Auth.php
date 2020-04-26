@@ -12,29 +12,25 @@ class Auth extends BaseController
     // USER LOGIN
     public function login()
     {
+
         if (isset($_POST) && !empty($_POST)) {
             $data = [
                 'username' => $this->request->getVar('username'),
                 'password' => md5($this->request->getVar('password'))
             ];
-            $user = $this->user->where($data)->first();
-            print_r($user);
-            if ($user) {
+            if ($user = $this->user->where($data)->first()) {
                 $_SESSION['user'] = user_session($this->user_agent, $user);
-                // json_encode(['browser' => $user['username'], 'username' => $user['username'], 'role' => $user['role']]);
-                $this->session->setFlashdata('message ', 'Login Successfully');
+                return $this->res->setJSON(['status' => 200, 'message' => 'Login Successfully']);
             } else {
-                $this->session->setFlashdata('message', 'Login failed');
+                return $this->res->setJSON(['status' => 400, 'message' => 'Invalid Username or Password']);
             }
         }
 
         $data = [
             'page_name'         => 'login',
             'page_title'        => 'User Login',
-            'roles'             => $this->roles->findAll(),
-            'errors'            => $this->validation->getErrors()
         ];
-        echo view('login', $data);
+        return (isset($_SESSION['user'])) ? redirect()->to(base_url('admin/dashboard')) : view('login', $data);
     }
 
     // USER REGISTER
@@ -50,8 +46,7 @@ class Auth extends BaseController
                 'password'              => md5($this->request->getVar('password')),
             ];
             $this->user->save($data);
-            $_SESSION['user'] = json_encode($data);
-            $this->session->setFlashdata('message', 'Registraton Successfully');
+            return $this->res->setJSON(['status' => 201, 'message' => 'Registraton Successfully']);
         }
         $data = [
             'page_name'         => 'register',
@@ -59,12 +54,12 @@ class Auth extends BaseController
             'roles'             => $this->roles->findAll(),
             'errors'            => $this->validation->getErrors()
         ];
-        echo view('register', $data);
+        return (isset($_SESSION['user'])) ? redirect()->to(base_url('admin/dashboard')) : view('register', $data);
     }
 
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('/');
+        return redirect()->to(base_url('auth/login'));
     }
 }

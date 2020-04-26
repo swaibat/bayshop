@@ -28,7 +28,7 @@ html {
 
 a {
   text-decoration: none;
-  color: gray;
+  color: #4a4a4a;
 }
 a:hover {
   text-decoration: none;
@@ -371,8 +371,8 @@ label.false {
   border-radius: 5px !important;
 }
 .dropdown-icon ion-icon {
-  font-size: 15px;
-  color: gray;
+  font-size: 25px;
+  color: rgb(87, 87, 87);
 }
 .cv-form-group .custom-input {
   padding-left: 0;

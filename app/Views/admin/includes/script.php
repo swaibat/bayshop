@@ -11,7 +11,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#chatModel" style="">
+		<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#chatModel" >
 			<div>
 				<div class="card-body py-1">
 					<div class="p-0 mb-auto chat-window w-100 overflow-y-auto chat-container" id="chat">
@@ -60,7 +60,7 @@
 <script src="<?= base_url('/assets/shared/jquery/jquery-3.4.1.min.js'); ?>"></script>
 <script src="<?= base_url('assets/plugins/toastify-js/toastify-js.js'); ?>"></script>
 <script src="<?= base_url('/assets/plugins/jquery-multifile/jquery-multifile.js'); ?>"></script>
-<!-- <script src="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="<?= base_url('/assets/shared/bootstrap-4.4.1/js/bootstrap.min.js'); ?>"></script>
 <script src="<?= base_url('/assets/plugins/select2/dist/js/select2.min.js'); ?>"></script>
 <script src="<?= base_url('/assets/plugins/dataTables/datatables.min.js'); ?>"></script>
@@ -102,41 +102,6 @@
 			$(".MultiFile-preview").removeAttr("style")
 			$('.MultiFile-list').find(">").addClass("first");
 		})
-		$('#form').submit(function(event) {
-			event.preventDefault();
-			var data = new FormData($('#form')[0]);
-			$.ajax({
-				type: "POST",
-				enctype: 'multipart/form-data',
-				url: $(this).attr("action"),
-				data: data,
-				processData: false,
-				contentType: false,
-				cache: false,
-				timeout: 800000,
-			}).done(function(response) {
-				Toastify({
-					text: response.message,
-					duration: 3000,
-					gravity: "top",
-					position: 'right',
-					backgroundColor: "#228B22",
-					stopOnFocus: true,
-				}).showToast();
-
-			}).fail(function(err) {
-				Toastify({
-					text: 'Error operation failed',
-					duration: 3000,
-					gravity: "top",
-					position: 'right',
-					backgroundColor: '#FFA500',
-					stopOnFocus: true,
-				}).showToast();
-			});;
-
-		});
-
 	});
 </script>
 

@@ -17,7 +17,7 @@
 
 <body class="bg-white d-flex align-items-center">
     <div class="container">
-        <?= form_open('auth/login', ['class' => 'form-signin', 'method' => 'post', 'id' => 'form', 'novalidate' => '',]); ?>
+        <?= form_open(base_url('auth/login'), ['class' => 'form-signin', 'method' => 'post', 'id' => 'form', 'novalidate' => '',]); ?>
         <div class="form-row p-4">
             <div class="col-md-12">
                 <?= custom_inputs([
@@ -42,38 +42,27 @@
     </div>
 </body>
 <script>
+    console.log('ffgfggfgfgfgf', <?= $_SESSION['user'] ?>)
     $('#form').submit(function(event) {
         event.preventDefault();
         var data = new FormData($('#form')[0]);
         $.ajax({
             type: "POST",
-            enctype: 'multipart/form-data',
             url: $(this).attr("action"),
             data: data,
             processData: false,
             contentType: false,
             cache: false,
-            timeout: 800000,
-        }).done(function(re) {
-            console.log(re, <?= $_SESSION['user'] ?>)
+        }).done(function(res) {
+            location.replace('<?= base_url('admin/dashboard') ?>')
             Toastify({
-                text: '<?= $_SESSION['message'] ?>',
-                duration: 3000,
-                gravity: "top",
-                position: 'right',
-                backgroundColor: "#228B22",
-                stopOnFocus: true,
+                text: res.message,
+                backgroundColor: JSON.stringify(res.status).match('20') ? "#228B22" : '#FFA500',
             }).showToast();
-
         }).fail(function(err) {
-            console.log(err);
             Toastify({
                 text: 'Error operation failed',
-                duration: 3000,
-                gravity: "top",
-                position: 'right',
                 backgroundColor: '#FFA500',
-                stopOnFocus: true,
             }).showToast();
         });;
 

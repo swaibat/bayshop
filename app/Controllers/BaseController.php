@@ -73,5 +73,6 @@ class BaseController extends Controller
         $this->validation       = \Config\Services::validation();
         $this->validation       = \Config\Services::validation();
         $this->email            = \Config\Services::email();
+        $this->res              = $this->response;
     }
 }
