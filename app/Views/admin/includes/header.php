@@ -25,26 +25,26 @@
 					<ion-icon name="person-circle-outline"></ion-icon>
 				</span>
 			</button>
-			<ul class='dropdown-menu shadow notification-pane' aria-labelledby='dropdownMenuButton'>
+			<ul class='dropdown-menu shadow notification-pane font-weight-light' aria-labelledby='dropdownMenuButton'>
 				<li class='dropdown-item rounded'>
-					<a class='py-3 d-flex' to='/profile'>
+					<a class='py-3 d-flex' href="<?= base_url('admin/profile') ?>">
 						<span class='dropdown-icon'>
-							<FontAwesomeIcon class='mr-1' icon={faCog} />
+							<ion-icon name="person-outline"></ion-icon>
 						</span>
 						<span class='d-flex flex-column ml-2'>
-							<h5 class='text-primary-dark-30'>Settings</h5>
-							<span class=''>set up your profile</span>
+							<h6 class='text-primary-dark-30'>Settings</h6>
+							<small class=''>set up your profile</small>
 						</span>
 					</a>
 				</li>
 				<li class='dropdown-item rounded'>
 					<a class='py-3 d-flex' href="<?= base_url('auth/logout') ?>" onClick={this.logout}>
 						<span class='dropdown-icon'>
-							<FontAwesomeIcon class='mr-1' icon={faPowerOff} />
+							<ion-icon name="settings-outline"></ion-icon>
 						</span>
 						<span class='d-flex flex-column ml-2'>
-							<h5 class='text-primary-dark-30'>Logout</h5>
-							<span class=''>To keep your account secure</span>
+							<h6 class='text-primary-dark-30'>Logout</h6>
+							<small class=''>To keep your account secure</small>
 						</span>
 					</a>
 				</li>

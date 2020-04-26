@@ -17,7 +17,6 @@ class Message extends BaseController
             'page_name'     => 'messages',
             'page_title'    => 'chat messages',
             'users'         => $this->messages->get_users_by_messages($session_user),
-            'messages'      => $this->messages->get_users_by_messages($session_user),
         ];
         echo view('admin/index', $data);
     }
@@ -50,11 +49,8 @@ class Message extends BaseController
     // CREATE A NEW MESSAGE
     public function user()
     {
-        helper(['form', 'url']);
-        $this->session->remove('active_chat_user_id');
         $user_id = $this->request->uri->getSegment(4);
-        $messages = $this->messages->where('receiver_id', $user_id)->orWhere('sender_id', $user_id)->findAll();
-        $_SESSION['active_chat_user_id'] = $user_id;
-        return $this->response->setJSON($messages);
+        $data=['messages'   =>  $this->messages->where('receiver_id', $user_id)->orWhere('sender_id', $user_id)->findAll()];
+        return $this->response->setJSON($data);
     }
 }
