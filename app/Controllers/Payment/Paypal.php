@@ -14,6 +14,7 @@ use PayPal\Api\Payment;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use App\Models\PaypalModel;
+use PayPal\Api\PaymentExecution;
 
 
 class Paypal extends Controller
