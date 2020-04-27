@@ -2,7 +2,7 @@
 
 namespace App\Controllers\payment;
 
-require_once(APPPATH . 'libraries/paypal-php-sdk/paypal/rest-api-sdk-php/sample/bootstrap.php'); // require paypal files
+require_once 'vendor/autoload.php';
 
 use CodeIgniter\Controller;
 use PayPal\Api\ItemList;
@@ -94,7 +94,7 @@ class Paypal extends Controller
         // Set the urls that the buyer must be redirected to after
         // payment approval/ cancellation.
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl( "http://localhost:8888/payments/paypal/status/")
+        $redirectUrls->setReturnUrl("http://localhost:8888/payments/paypal/status/")
             ->setCancelUrl("http://localhost:8888/payments/paypal/status/");
 
         // ### Payment

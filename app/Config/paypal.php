@@ -20,7 +20,7 @@ class Paypal extends BaseConfig
         /**
          * Specify the file that want to write on
          */
-        'log.FileName' => 'application/logs/paypal.log',
+        'log.FileName' => 'writable/logs/paypal.log',
         /**
          * Available option 'FINE', 'INFO', 'WARN' or 'ERROR'
          *
