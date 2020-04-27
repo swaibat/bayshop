@@ -49,7 +49,7 @@
 <script src="<?= base_url('/assets/plugins/dataTables/datatables.min.js'); ?>"></script>
 <script src="<?= base_url('/assets/plugins/summernote/summernote-bs4.min.js'); ?>"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
+<!-- <script>
     $("#form").submit(function(event) {
         event.preventDefault();
         var post_url = $(this).attr("action");
@@ -83,4 +83,4 @@
             }).showToast();
         });
     });
-</script>
+</script> -->

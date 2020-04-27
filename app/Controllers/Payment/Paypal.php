@@ -2,13 +2,17 @@
 
 namespace App\Controllers\payment;
 
-require_once(APPPATH . 'libraries/paypal-php-sdk/paypal/rest-api-sdk-php/sample/bootstrap.php'); // require paypal files
+require_once 'vendor/autoload.php';
 
 use CodeIgniter\Controller;
+use PayPal\Api\Amount;
+use PayPal\Api\Details;
+use PayPal\Api\Item;
 use PayPal\Api\ItemList;
+use PayPal\Api\Payer;
 use PayPal\Api\Payment;
 use PayPal\Api\RedirectUrls;
-use PayPal\Api\PaymentExecution;
+use PayPal\Api\Transaction;
 use App\Models\PaypalModel;
 
 
@@ -50,82 +54,67 @@ class Paypal extends Controller
         // For direct credit card payments, set payment method
         // to 'credit_card' and add an array of funding instruments.
 
-        $payer['payment_method'] = 'paypal';
+        $payer = new Payer();
+        $payer->setPaymentMethod("paypal");
 
-        // ### Itemized information
-        // (Optional) Lets you specify item wise
-        // information
-        $data = [
-            "name" => $this->request->getVar('name'),
-            "sku" => $this->request->getVar('item_number'),  // Similar to `item_number` in Classic API
-            "description" => $this->request->getVar('item_description'),
-            "currency" => "USD",
-            "quantity" => 1,
-            "price" => $this->request->getVar('item_price'),
-        ];
-
-
+        $item1 = new Item();
+        $item1->setName('Ground Coffee 40 oz')
+            ->setCurrency('USD')
+            ->setQuantity(1)
+            ->setSku("123123") // Similar to `item_number` in Classic API
+            ->setPrice(7.5);
+        $item2 = new Item();
+        $item2->setName('Granola bars')
+            ->setCurrency('USD')
+            ->setQuantity(5)
+            ->setSku("321321") // Similar to `item_number` in Classic API
+            ->setPrice(2);
         $itemList = new ItemList();
-        $itemList->setItems(array($data));
+        $itemList->setItems(array($item1, $item2));
 
-        // ### Additional payment details
-        // Use this optional field to set additional
-        // payment information such as tax, shipping
-        // charges etc.
-        $details['tax'] = $this->request->getVar('details_tax');
-        $details['subtotal'] = $this->request->getVar('details_subtotal');
-        // ### Amount
-        // Lets you specify a payment amount.
-        // You can also specify additional details
-        // such as shipping, tax.
-        $amount['currency'] = "USD";
-        $amount['total'] = $details['tax'] + $details['subtotal'];
-        $amount['details'] = $details;
-        // ### Transaction
-        // A transaction defines the contract of a
-        // payment - what is the payment for and who
-        // is fulfilling it.
-        $transaction['description'] = 'Payment description';
-        $transaction['amount'] = $amount;
-        $transaction['invoice_number'] = uniqid();
-        $transaction['item_list'] = $itemList;
 
-        // ### Redirect urls
-        // Set the urls that the buyer must be redirected to after
-        // payment approval/ cancellation.
+        $details = new Details();
+        $details->setShipping(1.2)
+            ->setTax(1.3)
+            ->setSubtotal(17.50);
+
+        $amount = new Amount();
+        $amount->setCurrency("USD")
+            ->setTotal(20)
+            ->setDetails($details);
+
+        $transaction = new Transaction();
+        $transaction->setAmount($amount)
+            ->setItemList($itemList)
+            ->setDescription("Payment description")
+            ->setInvoiceNumber(uniqid());
+
+        $baseUrl = base_url();
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl( "http://localhost:8888/payments/paypal/status/")
-            ->setCancelUrl("http://localhost:8888/payments/paypal/status/");
+        $redirectUrls->setReturnUrl("$baseUrl/ExecutePayment.php?success=true")
+            ->setCancelUrl("$baseUrl/ExecutePayment.php?success=false");
 
-        // ### Payment
-        // A Payment Resource; create one using
-        // the above types and intent set to sale 'sale'
+
         $payment = new Payment();
         $payment->setIntent("sale")
             ->setPayer($payer)
             ->setRedirectUrls($redirectUrls)
             ->setTransactions(array($transaction));
 
+        $request = clone $payment;
+
         try {
             $payment->create($this->_api_context);
         } catch (\Exception $ex) {
+
             die($ex->getMessage());
-            exit(1);
-        }
-        foreach ($payment->getLinks() as $link) {
-            if ($link->getRel() == 'approval_url') {
-                $redirect_url = $link->getHref();
-                break;
-            }
         }
 
-        if (isset($redirect_url)) {
-            /** redirect to paypal **/
-            redirect($redirect_url);
-        }
+        $approvalUrl = $payment->getApprovalLink();
 
-        $this->session->set_flashdata('success_msg', 'Unknown error occurred');
-        redirect('paypal/index');
+        print_r("<a href='$approvalUrl' >$approvalUrl</a>");
+
+        return $payment;
     }
 
 
