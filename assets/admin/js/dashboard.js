@@ -237,7 +237,7 @@ var optionsCircle4 = {
     lineCap: "round",
   },
   series: [71, 63, 77],
-  colors: [ '#C0C0C0','#696969','#0f0f0f'],
+  colors: ["#C0C0C0", "#696969", "#0f0f0f"],
   labels: ["Phone", "Tablet", "Computer"],
   legend: {
     show: true,
@@ -254,29 +254,28 @@ var chartCircle4 = new ApexCharts(
 );
 chartCircle4.render();
 
-
 var optionsArea = {
   chart: {
     height: 380,
     type: "area",
     stacked: false,
   },
-  title: {
-    text: "Statistics",
-    align: "left",
-    offsetY: 25,
-    offsetX: 20,
-  },
+  // title: {
+  //   text: "Statistics",
+  //   align: "left",
+  //   offsetY: 25,
+  //   offsetX: 20,
+  // },
   grid: {
     show: true,
     padding: {
       bottom: 0,
     },
-    borderColor: '#e3e3e3',
+    borderColor: "#e3e3e3",
     xaxis: {
-        lines: {
-            show: false
-        }
+      lines: {
+        show: false,
+      },
     },
   },
   stroke: {
@@ -395,9 +394,9 @@ var optionsArea = {
   fill: {
     opacity: 1,
   },
-  colors: ['#0f0f0f', '#CED4DC'],
+  colors: ["#0f0f0f", "#CED4DC"],
   legend: {
-    show: true,
+    show: false,
     floating: true,
     position: "right",
     offsetY: -20,
@@ -411,3 +410,250 @@ var chartArea = new ApexCharts(
 
 chartArea.render();
 
+// sparkline chats
+
+var options5 = {
+  series: [
+    {
+      data: [
+        25,
+        66,
+        41,
+        89,
+        63,
+        25,
+        44,
+        12,
+        36,
+        9,
+        54,
+        25,
+        66,
+        41,
+        89,
+        63,
+        25,
+        44,
+        12,
+        36,
+        9,
+        54,
+        25,
+        66,
+        41,
+        89,
+        63,
+        25,
+        44,
+        12,
+        36,
+        9,
+        54,
+        25,
+        66,
+        41,
+        89,
+        63,
+        25,
+        44,
+        12,
+        36,
+        9,
+        54,
+      ],
+    },
+  ],
+  chart: {
+    type: "bar",
+    height: 35,
+    sparkline: {
+      enabled: true,
+    },
+    animations: {
+      enabled: false,
+      easing: "easeinout",
+      speed: 80,
+      animateGradually: {
+        enabled: true,
+        delay: 10,
+      },
+      dynamicAnimation: {
+        enabled: true,
+        speed: 30,
+      },
+    },
+  },
+  plotOptions: {
+    bar: {
+      columnWidth: "80%",
+    },
+  },
+  xaxis: {
+    crosshairs: {
+      width: 1,
+    },
+  },
+  tooltip: {
+    fixed: {
+      enabled: false,
+    },
+    x: {
+      show: false,
+    },
+    y: {
+      title: {
+        formatter: function (seriesName) {
+          return "";
+        },
+      },
+    },
+    marker: {
+      show: false,
+    },
+  },
+};
+
+var chart5 = new ApexCharts(document.querySelector("#chart-5"), options5);
+chart5.render();
+// get online users in the past
+const getOlineUsers = (data) => {
+  var options6 = {
+    series: [
+      {
+        data: data.map((e) => e.users),
+      },
+    ],
+    labels: data.map((e) => e.timeLabel),
+    animations: {
+      enabled: false,
+    },
+    chart: {
+      type: "bar",
+      height: 35,
+      sparkline: {
+        enabled: true,
+      },
+      animations: {
+        enabled: true,
+        easing: "easeinout",
+        speed: 80,
+        animateGradually: {
+          enabled: true,
+          delay: 10,
+        },
+        dynamicAnimation: {
+          enabled: true,
+          speed: 350,
+        },
+      },
+    },
+    plotOptions: {
+      bar: {
+        columnWidth: "70%",
+        startingShape: "rounded",
+      },
+    },
+    xaxis: {
+      crosshairs: {
+        width: 1,
+      },
+    },
+    tooltip: {
+      custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+        return `<div class="mt-n2 p-2">
+          <small>${w.globals.labels[dataPointIndex]}</small>
+          <h5 class="text-success mb-0">${series[seriesIndex][dataPointIndex]}</h5>`;
+      },
+    },
+  };
+  document.getElementById("chart-6").innerHTML = "";
+  var chart6 = new ApexCharts(document.querySelector("#chart-6"), options6);
+  return chart6.render();
+};
+
+var options7 = {
+  series: [
+    {
+      data: [
+        12,
+        14,
+        2,
+        47,
+        42,
+        15,
+        47,
+        75,
+        65,
+        19,
+        14,
+        12,
+        12,
+        14,
+        2,
+        47,
+        42,
+        15,
+        47,
+        75,
+        65,
+        19,
+        14,
+        12,
+        12,
+        14,
+        2,
+        47,
+        42,
+        15,
+        47,
+        75,
+        65,
+        19,
+        14,
+        12,
+        20,
+        14,
+        14,
+        40,
+      ],
+    },
+  ],
+  chart: {
+    type: "bar",
+    height: 35,
+    sparkline: {
+      enabled: true,
+    },
+  },
+  plotOptions: {
+    bar: {
+      columnWidth: "80%",
+    },
+  },
+  xaxis: {
+    crosshairs: {
+      width: 1,
+    },
+  },
+  tooltip: {
+    fixed: {
+      enabled: false,
+    },
+    x: {
+      show: false,
+    },
+    y: {
+      title: {
+        formatter: function (seriesName) {
+          return "";
+        },
+      },
+    },
+    marker: {
+      show: false,
+    },
+  },
+};
+
+var chart7 = new ApexCharts(document.querySelector("#chart-7"), options7);
+chart7.render();

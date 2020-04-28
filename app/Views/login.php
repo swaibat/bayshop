@@ -19,13 +19,25 @@
     <div class="container">
         <?= form_open(base_url('auth/login'), ['class' => 'form-signin', 'method' => 'post', 'id' => 'form', 'novalidate' => '',]); ?>
         <div class="form-row p-4">
+            <div class="w-100 btn-group">
+                <?php foreach ($hybridauth->getProviders() as $name) : ?>
+                    <?php if (!isset($adapters[$name])) : ?>
+                        <?= form_button([
+                            'class'       => 'social btn ' . $name . ' border flex-fill',
+                            'content' =>  "<ion-icon name='logo-$name'></ion-icon> $name"
+                        ]) ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+            <div class="position-relative w-100 mt-3">
+                <hr><span class="login-text">or login with</span></div>
             <div class="col-md-12">
                 <?= custom_inputs([
                     'name'        => 'username',
                     'id'          => 'username',
                     'type'        => 'text',
                     'class'       => 'form-control custom-input',
-                ], ['group-class' => 'mt-5', 'icon-name' => 'person-outline']) ?>
+                ], ['group-class' => 'mt-4', 'icon-name' => 'person-outline']) ?>
                 <?= custom_inputs([
                     'name'        => 'password',
                     'id'          => 'password',
@@ -42,7 +54,11 @@
     </div>
 </body>
 <script>
-    console.log('ffgfggfgfgfgf', <?= $_SESSION['user'] ?>)
+    $('.social').click((event) => {
+        const provider = event.target.textContent.trim()
+        var authWindow = window.open('http://localhost:8888/hauth/callback?provider=' + provider, 'authWindow', 'width=600,height=400,scrollbars=yes');
+        return false;
+    })
     $('#form').submit(function(event) {
         event.preventDefault();
         var data = new FormData($('#form')[0]);

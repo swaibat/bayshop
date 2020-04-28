@@ -48,3 +48,24 @@ function user_session($agent, $user)
     'os'        => $agent->getPlatform()
   ]);
 }
+
+function send_email()
+{
+  $email = \Config\Services::email();
+  $config['protocol'] = 'smtp';
+  $config['smtp_host'] = 'ssl://smtp.googlemail.com';
+  $config['smtp_user'] = 'rumbiihas@gmail.com';
+  $config['smtp_pass'] = 'Kanyanyama01';
+  $config['smtp_port'] = 465;
+
+  $config['charset'] = 'utf-8';
+  $config['mailtype'] = 'html';
+  $config['newline'] = "\r\n";
+
+  $email->initialize($config);
+  $email->setFrom('admin@gmail.com', 'Your Name');
+  $email->setTo('rswaib@gmail.com');
+  $email->setSubject('Email Test');
+  $email->setMessage('Testing the email class.');
+  $email->send();
+}
