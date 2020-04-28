@@ -1,9 +1,9 @@
-<link href='<?= base_url('/assets/plugins/jvectormap/jquery-jvectormap-2.0.5.css')?>'>
+<link href='<?= base_url('/assets/plugins/jvectormap/jquery-jvectormap-2.0.5.css') ?>'>
 <div id="wrapper">
   <div class="content-area">
     <div class="container-fluid">
-      <div class="main">
-        <div class="row bg-white rounded mt-2 shadow-xs p-3">
+      <div class="main row">
+        <div class="d-flex flex-wrap w-100 bg-white rounded mt-2 shadow-xs p-3">
           <div class="col-md-3 border-right">
             <div class="d-flex box1">
               <div class="d-flex flex-column">
@@ -42,18 +42,37 @@
           </div>
         </div>
 
-        <div class="row mt-4">
-          <div class="col-md-12 bg-white rounded shadow-xs">
-            <div class="box mt-4">
-              <div id="areachart"></div>
+        <div class="col-md-10 mt-4 bg-white rounded">
+          <ul class="nav nav-pills mb-3 ml-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Users</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Sales</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Orders</a>
+            </li>
+          </ul>
+          <div class="tab-content w-100" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+              <div class="box">
+                <div id="areachart"></div>
+              </div>
             </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
           </div>
         </div>
+        <div class="col-md-2 mt-4 pr-0">
+          <div class="bg-white rounded p-5"></div>
+        </div>
+
 
         <div class="row mt-4">
           <div class="col-md-8 bg-white rounded">
             <div class="box shadow mt-4">
-            <div id="map" style="width: 100%; height: 350px"></div>
+              <div id="map" style="width: 100%; height: 350px"></div>
             </div>
           </div>
           <div class="col-md-4 bg-white">
@@ -540,12 +559,14 @@
     </div>
   </div>
 </div>
-<script src='<?= base_url('/assets/plugins/jvectormap/jquery-jvectormap-2.0.5.min.js')?>'></script>
+<script src='<?= base_url('/assets/plugins/jvectormap/jquery-jvectormap-2.0.5.min.js') ?>'></script>
 <script src='https://jvectormap.com/js/jquery-jvectormap-world-mill.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="<?= base_url('assets/admin/js/dashboard.js') ?>"></script>
 <script>
- $(function(){
-      $('#map').vectorMap({map: 'world_mill'});
+  $(function() {
+    $('#map').vectorMap({
+      map: 'world_mill'
     });
+  });
 </script>

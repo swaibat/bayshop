@@ -13,9 +13,9 @@ class Hauth extends BaseConfig {
 //	HybridAuth Config file: http://hybridauth.sourceforge.net/userguide/Configuration.html
 // ----------------------------------------------------------------------------------------
 
-public $config = array(
+public $config = [
 		// set on "base_url" the relative url that point to HybridAuth Endpoint
-		'base_url' => 'http://localhost:8888/',
+		'callback' => 'https://localhost:8888/hauth//callback',
 
 		"providers" => array (
 			// openid providers
@@ -24,7 +24,7 @@ public $config = array(
 			),
 
 			"Google" => array (
-				"enabled" => false,
+				"enabled" => true,
 				"keys"    => array ( "id" => "687240882097-819dhmtv2mgf5k6f8npm09kv3paflau5.apps.googleusercontent.com", "secret" => " 3GBFCLn4P4g5PsUSygGwbNdT" ),
 				"redirect_uri"=>"http://localhost:8888/codeigniter_social_login/hauth/?hauth.done=google",
 
@@ -50,7 +50,8 @@ public $config = array(
 		"debug_mode" => (ENVIRONMENT == 'development'),
 
 		"debug_file" => APPPATH.'/logs/hybridauth.log',
-	);}
+	];
+}
 
 
 /* End of file hybridauthlib.php */

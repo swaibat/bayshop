@@ -261,12 +261,12 @@ var optionsArea = {
     type: "area",
     stacked: false,
   },
-  title: {
-    text: "Statistics",
-    align: "left",
-    offsetY: 25,
-    offsetX: 20,
-  },
+  // title: {
+  //   text: "Statistics",
+  //   align: "left",
+  //   offsetY: 25,
+  //   offsetX: 20,
+  // },
   grid: {
     show: true,
     padding: {
@@ -397,7 +397,7 @@ var optionsArea = {
   },
   colors: ['#0f0f0f', '#CED4DC'],
   legend: {
-    show: true,
+    show: false,
     floating: true,
     position: "right",
     offsetY: -20,

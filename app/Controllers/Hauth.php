@@ -28,11 +28,11 @@ class Hauth extends Controller
     public function index()
     {
         $hybridauth = new Hybridauth($this->hauth->config);
+        $adapters  = $hybridauth->getConnectedAdapters();
         $data = [
-            'hybridauth' => new Hybridauth($this->hauth->config),
-            'adapters' => $hybridauth->getConnectedAdapters()
+            'hybridauth'    => $hybridauth,
+            'adapters'      => $adapters
         ];
-
         return view('content/login', $data);
     }
 
@@ -86,4 +86,3 @@ class Hauth extends Controller
         }
     }
 }
-

@@ -1,14 +1,26 @@
 <?php
 
 namespace App\Controllers\User;
-
+require_once 'vendor/autoload.php';
 use App\Controllers\BaseController;
-use CodeIgniter\I18n\Time;
+use Hybridauth\Exception\Exception;
+use Hybridauth\Hybridauth;
+use Hybridauth\HttpClient;
+use Hybridauth\Storage\Session;
 
 
 
 class Auth extends BaseController
 {
+    public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
+    {
+        // Do Not Edit This Line
+        parent::initController($request, $response, $logger);
+        helper(['form', 'url', 'html', 'inflector']);
+        $this->hauth       = new \Config\Hauth();
+        $this->hybridauth = new Hybridauth($this->hauth->config);
+        $this->adapters  = $this->hybridauth->getConnectedAdapters();
+    }
     // USER LOGIN
     public function login()
     {
@@ -30,6 +42,8 @@ class Auth extends BaseController
         $data = [
             'page_name'         => 'login',
             'page_title'        => 'User Login',
+            'hybridauth'    => $this->hybridauth,
+            'adapters'      => $this->adapters,
         ];
         return (isset($_SESSION['user'])) ? redirect()->to(base_url('admin/dashboard')) : view('login', $data);
     }

@@ -858,3 +858,35 @@ table.dataTable thead .sorting::before {
 .form-signin .form-control:focus {
   z-index: 2;
 }
+
+.login-text {
+  position: absolute;
+  margin-top: -1.8rem;
+  text-align: center;
+  width: 30%;
+  background-color: #fff;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.twitter {
+  color: #00acee;
+}
+.twitter:hover {
+  color: white;
+  background: #00acee;
+}
+.facebook {
+  color: #3b5998;
+}
+.facebook:hover {
+  color: white;
+  background: #3b5998;
+}
+.google {
+  color: #be0505;
+}
+.google:hover {
+  color: white;
+  background: #be0505;
+}
