@@ -1,47 +1,188 @@
 <link href='<?= base_url('/assets/plugins/jvectormap/jquery-jvectormap-2.0.5.css') ?>'>
+<style>
+  #chart-bar {
+    position: relative;
+    margin-top: -38px;
+  }
+</style>
 <div id="wrapper">
   <div class="content-area">
     <div class="container-fluid">
       <div class="main row">
         <div class="d-flex flex-wrap w-100 bg-white rounded mt-2 shadow-xs p-3">
+          <!-- Orders -->
           <div class="col-md-3 border-right">
-            <div class="d-flex box1">
-              <div class="d-flex flex-column">
-                <h4>1213</h4>
-                <h6>Orders</h6>
+            <div class="d-flex w-100 flex-column box2">
+              <div class="d-flex justify-content-between">
+                <span class="d-flex">
+                  <img height="35" class="mr-3" src="http://127.0.0.1:5500/app/Views/admin/pages/dashboard/clip.svg">
+                  <span class="d-flex mt-2">
+                    <h3 id="online" class="mb-1 mr-2"><?= $total_users ?></h3>
+                    <h6>Orders</h6>
+                  </span>
+                </span>
+                <div class="mt-2">
+                  <small class="">Last 7 days</small>
+                  <small class="d-flex ml-3">
+                    <span class="text-success">
+                      <ion-icon name="arrow-up"></ion-icon>
+                    </span>
+                    44
+                  </small>
+                </div>
               </div>
-              <div id="spark1"></div>
+              <div class="btn-group mt-2">
+                <span>
+                  <small class="mb-0 ml-1 text-secondary">
+                    <ion-icon name="alarm"></ion-icon>
+                  </small>
+                  <small class="mb-0">53 Today</small>
+                </span>
+                <span class="ml-2 border-left">
+                  <small class="mb-0 ml-1 text-success">
+                    <ion-icon name="checkmark-circle"></ion-icon>
+                  </small>
+                  <small class="mb-0">534 Done</small>
+                </span>
+                <span class="ml-2 border-left">
+                  <small class="mb-0 ml-1 text-warning">
+                    <ion-icon name="hourglass"></ion-icon>
+                  </small>
+                  <small class="mb-0">20 Pending</small>
+                </span>
+              </div>
             </div>
           </div>
+          <!-- users -->
           <div class="col-md-3 border-right">
-            <div class="d-flex box2">
-              <div class="d-flex flex-column">
-                <h4 id="online">422</h4>
-                <h6>Users</h6>
+            <div class="d-flex w-100 flex-column box2">
+              <div class="d-flex justify-content-between">
+                <span class="d-flex">
+                  <img height="35" class="mr-3" src="http://127.0.0.1:5500/app/Views/admin/pages/dashboard/users.svg">
+                  <span class="d-flex mt-2">
+                    <h3 id="online" class="mb-1 mr-2"><?= $total_users ?></h3>
+                    <h6>Users</h6>
+                  </span>
+                </span>
+                <div class="mt-2">
+                  <small class="">Last 7 days</small>
+                  <small class="d-flex ml-3">
+                    <span class="text-success">
+                      <ion-icon name="arrow-up"></ion-icon>
+                    </span>
+                    44
+                  </small>
+                </div>
               </div>
-              <div id="spark2"></div>
+              <div class="btn-group mt-2">
+                <span>
+                  <small class="mb-0 ml-1 text-secondary">
+                    <ion-icon name="alarm"></ion-icon>
+                  </small>
+                  <small class="mb-0">53 today</small>
+                </span>
+                <span class="ml-2 border-left">
+                  <small class="mb-0 ml-1 text-success">
+                    <ion-icon name="ellipse"></ion-icon>
+                  </small>
+                  <small class="mb-0">534 Online</small>
+                </span>
+                <span class="ml-2 border-left">
+                  <small class="mb-0 ml-1 text-secondary">
+                    <ion-icon name="ellipse"></ion-icon>
+                  </small>
+                  <small class="mb-0">20 Offline</small>
+                </span>
+              </div>
             </div>
           </div>
+          <!-- Products -->
           <div class="col-md-3 border-right">
-            <div class="d-flex box3">
-              <div class="details d-flex flex-column">
-                <h4>311</h4>
-                <h6>Products</h6>
+            <div class="d-flex w-100 flex-column box2">
+              <div class="d-flex justify-content-between">
+                <span class="d-flex">
+                  <img height="35" class="mr-3" src="http://127.0.0.1:5500/app/Views/admin/pages/dashboard/orders.svg">
+                  <span class="d-flex mt-2">
+                    <h3 id="online" class="mb-1 mr-2"><?= $total_products ?></h3>
+                    <h6>Producsts</h6>
+                  </span>
+                </span>
+                <div class="mt-2">
+                  <small class="">Last 7 days</small>
+                  <small class="d-flex ml-3">
+                    <span class="text-danger">
+                      <ion-icon name="arrow-up"></ion-icon>
+                    </span>
+                    44
+                  </small>
+                </div>
               </div>
-              <div id="spark3"></div>
+              <div class="btn-group mt-2">
+                <span>
+                  <small class="mb-0 ml-1 text-secondary">
+                    <ion-icon name="alarm"></ion-icon>
+                  </small>
+                  <small class="mb-0">53 Today</small>
+                </span>
+                <span class="ml-2 border-left">
+                  <small class="mb-0 ml-1 text-success">
+                    <ion-icon name="checkmark-circle"></ion-icon>
+                  </small>
+                  <small class="mb-0">534 Active</small>
+                </span>
+                <span class="ml-2 border-left">
+                  <small class="mb-0 ml-1 text-warning">
+                    <ion-icon name="hourglass"></ion-icon>
+                  </small>
+                  <small class="mb-0">20 Pending</small>
+                </span>
+              </div>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="d-flex box4">
-              <div class="details d-flex flex-column">
-                <h4>22</h4>
-                <h6>Users</h6>
+          <!-- Messages -->
+          <div class="col-md-3 border-right">
+            <div class="d-flex w-100 flex-column box2">
+              <div class="d-flex justify-content-between">
+                <span class="d-flex">
+                  <img height="35" class="mr-3" src="http://127.0.0.1:5500/app/Views/admin/pages/dashboard/messages.svg">
+                  <span class="d-flex mt-2">
+                    <h3 id="online" class="mb-1 mr-2"><?= $total_products ?></h3>
+                    <h6>Messages</h6>
+                  </span>
+                </span>
+                <div class="mt-2">
+                  <small class="">Last 7 days</small>
+                  <small class="d-flex ml-3">
+                    <span class="text-danger">
+                      <ion-icon name="arrow-up"></ion-icon>
+                    </span>
+                    44
+                  </small>
+                </div>
               </div>
-              <div id="spark4"></div>
+              <div class="btn-group mt-2">
+                <span>
+                  <small class="mb-0 ml-1 text-secondary">
+                    <ion-icon name="alarm"></ion-icon>
+                  </small>
+                  <small class="mb-0">53 Today</small>
+                </span>
+                <span class="ml-2 border-left">
+                  <small class="mb-0 ml-1 text-success">
+                    <ion-icon name="checkmark-circle"></ion-icon>
+                  </small>
+                  <small class="mb-0">534 Read</small>
+                </span>
+                <span class="ml-2 border-left">
+                  <small class="mb-0 ml-1 text-warning">
+                    <ion-icon name="hourglass"></ion-icon>
+                  </small>
+                  <small class="mb-0">20 Un Read</small>
+                </span>
+              </div>
             </div>
           </div>
         </div>
-
         <div class="col-md-8 mt-4 bg-white rounded">
           <ul class="nav nav-pills mb-3 ml-3" id="pills-tab" role="tablist">
             <li class="nav-item">
@@ -56,8 +197,11 @@
           </ul>
           <div class="tab-content w-100" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-              <div class="box">
-                <div id="areachart"></div>
+              <div id="wrapper">
+                <div id="chart-area">
+                </div>
+                <div id="chart-bar">
+                </div>
               </div>
             </div>
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
@@ -78,13 +222,45 @@
             <div class="col-12">
               <h6>2324</h6>
               <p>Online users . Last 48 hours</p>
-              <div id="chart-6" style="min-height: 35px;"></div>
-            </div>
-            <hr>
-            <div class="col-12">
-              <h6>2324</h6>
-              <p>Orders . Last 48 hours</p>
-              <div id="chart-7" style="min-height: 35px;"></div>
+              <div id="chart-6" style="min-height: 35px;">
+                <table>
+                  <caption>Statement Summary</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Account</th>
+                      <th scope="col">Due Date</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Period</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td data-label="Account">Visa - 3412</td>
+                      <td data-label="Due Date">04/01/2016</td>
+                      <td data-label="Amount">$1,190</td>
+                      <td data-label="Period">03/01/2016 - 03/31/2016</td>
+                    </tr>
+                    <tr>
+                      <td scope="row" data-label="Account">Visa - 6076</td>
+                      <td data-label="Due Date">03/01/2016</td>
+                      <td data-label="Amount">$2,443</td>
+                      <td data-label="Period">02/01/2016 - 02/29/2016</td>
+                    </tr>
+                    <tr>
+                      <td scope="row" data-label="Account">Corporate AMEX</td>
+                      <td data-label="Due Date">03/01/2016</td>
+                      <td data-label="Amount">$1,181</td>
+                      <td data-label="Period">02/01/2016 - 02/29/2016</td>
+                    </tr>
+                    <tr>
+                      <td scope="row" data-label="Acount">Visa - 3412</td>
+                      <td data-label="Due Date">02/01/2016</td>
+                      <td data-label="Amount">$842</td>
+                      <td data-label="Period">01/01/2016 - 01/31/2016</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -582,17 +758,149 @@
 <script src='https://jvectormap.com/js/jquery-jvectormap-world-mill.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script>
+  var data = generateDayWiseTimeSeries(new Date("22 Apr 2017").getTime(), 115, {
+    min: 30,
+    max: 90
+  });
+  var options1 = {
+    chart: {
+      id: "chart2",
+      type: "area",
+      height: 230,
+      foreColor: "#ccc",
+      toolbar: {
+        autoSelected: "pan",
+        show: false
+      }
+    },
+    colors: ["#0F0F0F"],
+    stroke: {
+      width: 3
+    },
+    grid: {
+      borderColor: "#555",
+      clipMarkers: false,
+      yaxis: {
+        lines: {
+          show: false
+        }
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    fill: {
+      gradient: {
+        enabled: true,
+        opacityFrom: 0.55,
+        opacityTo: 0
+      }
+    },
+    markers: {
+      size: 5,
+      colors: ["#a5a8a9"],
+      strokeColor: "#0F0F0F",
+      strokeWidth: 3
+    },
+    series: [{
+      data: data
+    }],
+    tooltip: {
+      theme: "dark"
+    },
+    xaxis: {
+      type: "datetime"
+    },
+    yaxis: {
+      min: 0,
+      tickAmount: 4
+    }
+  };
+
+  var chart1 = new ApexCharts(document.querySelector("#chart-area"), options1);
+
+  chart1.render();
+
+  var options2 = {
+    chart: {
+      id: "chart1",
+      height: 130,
+      type: "bar",
+      foreColor: "#ccc",
+      brush: {
+        target: "chart2",
+        enabled: true
+      },
+      selection: {
+        enabled: true,
+        fill: {
+          color: "#fff",
+          opacity: 0.4
+        },
+        xaxis: {
+          min: new Date("27 Jul 2017 10:00:00").getTime(),
+          max: new Date("14 Aug 2017 10:00:00").getTime()
+        }
+      }
+    },
+    colors: ["#0F0F0F"],
+    series: [{
+      data: data
+    }],
+    stroke: {
+      width: 2
+    },
+    grid: {
+      borderColor: "#444"
+    },
+    markers: {
+      size: 0
+    },
+    xaxis: {
+      type: "datetime",
+      tooltip: {
+        enabled: false
+      }
+    },
+    yaxis: {
+      tickAmount: 2
+    }
+  };
+
+  var chart2 = new ApexCharts(document.querySelector("#chart-bar"), options2);
+
+  chart2.render();
+
+  function generateDayWiseTimeSeries(baseval, count, yrange) {
+    var i = 0;
+    var series = [];
+    while (i < count) {
+      var x = baseval;
+      var y =
+        Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+
+      series.push([x, y]);
+      baseval += 86400000;
+      i++;
+    }
+    return series;
+  }
+</script>
 <script src="<?= base_url('assets/admin/js/dashboard.js') ?>"></script>
 
 <script>
   socket.on('online', function(users) {
-    console.log(users)
-    $("#online").text(users.length);
+    $("#onlinef").text(users.length);
   })
 
   socket.on('test', function(data) {
-    console.log(data)
-    getOlineUsers(data);
+    chart7.updateSeries([{
+      data: data.map((e) => e.users)
+    }])
+    chart7.updateOptions({
+      labels: data.map((e) => e.timeLabel),
+    })
   })
 
   $(function() {

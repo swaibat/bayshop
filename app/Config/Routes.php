@@ -61,6 +61,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
 	// USERS
 	$routes->add('users', 'User');
 	$routes->add('users/create', 'User::create');
+	$routes->add('users/cache', 'User::save_cache');
+	$routes->add('users/getcache', 'User::get_cache');
 	$routes->add('users/(:num)/update', 'User::update/$1');
 	// UNIVERSAL DELETE
 	$routes->add('dashboard', 'Dashboard');

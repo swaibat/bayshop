@@ -69,3 +69,4 @@ function send_email()
   $email->setMessage('Testing the email class.');
   $email->send();
 }
+

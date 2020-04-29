@@ -1,4 +1,5 @@
 <footer></footer>
+
 <div class="accordion chat-modal d-none" id="chatModel">
 	<div class="card border-0 chat-card shadow-sm">
 		<div class="card-header cursor-pointer p-2 chat-modal-header" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
@@ -69,7 +70,6 @@
 <style>
 </style>
 <script>
-	console.log('ffgfggfgfgfgf', <?= $_SESSION['user'] ?>)
 	$(document).ready(function() {
 		const user = <?= $_SESSION['user'] ?>;
 		socket.emit('online', user);
