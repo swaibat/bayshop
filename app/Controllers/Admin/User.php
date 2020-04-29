@@ -97,4 +97,18 @@ class User extends BaseController
         ];
         echo view('admin/view', $data);
     }
+    public function save_cache()
+    {
+        $cache = \Config\Services::cache();
+        $cache->save('online_users', $this->request->getVar('online_users'));
+        $data['online_users'] = $cache->get('online_users');
+        return $this->response->setJSON(json_decode($data));
+    }
+
+    public function get_cache()
+    {
+        $cache = \Config\Services::cache();
+        $data['online_users'] = $cache->get('online_users');
+        return $this->response->setJSON(json_decode($data));
+    }
 }

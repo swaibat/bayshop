@@ -3,6 +3,7 @@ if (!isset($_SESSION['user'])) {
 	header("Location:" . base_url() . "/auth/login");
 	exit();
 }
+$cache = \Config\Services::cache();
 ?>
 
 <head>
@@ -17,7 +18,7 @@ if (!isset($_SESSION['user'])) {
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 	<script src="/server/node_modules/socket.io-client/dist/socket.io.dev.js"></script>
 	<script>
-		const socket = io('http://localhost:1000/',<?= $_SESSION['user'] ?>);
+		const socket = io('http://localhost:1000/', <?= $_SESSION['user'] ?>);
 	</script>
 	<title><?= $page_title ?></title>
 </head>

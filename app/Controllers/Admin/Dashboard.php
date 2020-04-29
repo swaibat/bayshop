@@ -10,9 +10,11 @@ class Dashboard extends BaseController
     public function index()
     {
         $data = [
-            'folder_name'   => 'dashboard',
-            'page_name'     => 'dashboard',
-            'page_title'    => 'Dashboard',
+            'folder_name'       => 'dashboard',
+            'page_name'         => 'dashboard',
+            'page_title'        => 'Dashboard',
+            'total_users'       => count($this->user->findAll()),
+            'total_products'    => count($this->products->findAll()),
         ];
         echo view('admin/index', $data);
     }
