@@ -1,249 +1,50 @@
-<link href='<?= base_url('/assets/plugins/jvectormap/jquery-jvectormap-2.0.5.css') ?>'>
-<link rel="stylesheet" href="http://jvectormap.com/css/jquery-jvectormap-2.0.3.css" type="text/css" media="screen" />
-<script src="http://jvectormap.com/js/jquery-1.8.2.min.js"></script>
-<script src="http://jvectormap.com/js/jquery-jvectormap-2.0.3.min.js"></script>
-<script src="http://jvectormap.com/js/jquery-jvectormap-world-mill-en.js"></script>
-<style>
-  #chart-bar {
-    position: relative;
-    margin-top: -38px;
-  }
-
-  table {
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    table-layout: fixed;
-    color: #4a4a4a;
-  }
-
-  table caption {
-    font-size: 1.5em;
-    margin: .5em 0 .75em;
-  }
-
-  table tr {
-    border: 1px solid #ddd;
-    padding: .35em;
-  }
-
-  table th,
-  table td {
-    padding: .625em;
-    /* text-align: center; */
-  }
-
-  table th {
-    font-size: .85em;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-  }
-
-  @media screen and (max-width: 600px) {
-    table {
-      border: 0;
-    }
-
-    table caption {
-      font-size: 1.3em;
-    }
-
-    table thead {
-      border: none;
-      clip: rect(0 0 0 0);
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-      padding: 0;
-      position: absolute;
-      width: 1px;
-    }
-
-    table tr {
-      border-bottom: 3px solid #ddd;
-      display: block;
-      margin-bottom: .625em;
-    }
-
-    table td {
-      border-bottom: 1px solid #ddd;
-      display: block;
-      font-size: .8em;
-      text-align: right;
-    }
-
-    table td::before {
-      /*
-    * aria-label has no advantage, it won't be read inside a table
-    content: attr(aria-label);
-    */
-      content: attr(data-label);
-      float: left;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-
-    table td:last-child {
-      border-bottom: 0;
-    }
-  }
-</style>
+<!-- start of dashboard -->
 <div id="wrapper">
   <div class="content-area">
     <div class="container-fluid">
       <div class="main row">
         <div class="d-flex flex-wrap w-100 bg-white rounded border mt-2 shadow-xs p-3">
           <!-- Orders -->
-          <div class="col-md-3 border-right">
-            <div class="d-flex w-100 flex-column box2">
-              <div class="d-flex justify-content-between">
-                <span class="d-flex">
-                  <img height="35" class="mr-3" src="http://127.0.0.1:5500/app/Views/admin/pages/dashboard/clip.svg">
-                  <span class="d-flex mt-2">
-                    <h3 id="online" class="mb-1 mr-2"><?= $total_users ?></h3>
-                    <h6>Orders</h6>
-                  </span>
-                </span>
-                <div class="mt-2">
-                  <small class="">Last 7 days</small>
-                  <small class="d-flex ml-3">
-                    <span class="text-success">
-                      <ion-icon name="arrow-up"></ion-icon>
-                    </span>
-                    44
-                  </small>
-                </div>
-              </div>
-              <div class="btn-group mt-2">
-                <span>
-                  <small class="mb-0 ml-1 text-success">
-                    <ion-icon name="checkmark-circle"></ion-icon>
-                  </small>
-                  <small class="mb-0">534 Done</small>
-                </span>
-                <span class="ml-2 border-left">
-                  <small class="mb-0 ml-1 text-warning">
-                    <ion-icon name="hourglass"></ion-icon>
-                  </small>
-                  <small class="mb-0">20 Pending</small>
-                </span>
-              </div>
-            </div>
-          </div>
+          <?= stat_card([
+            'name'      => "Orders",
+            "data"      => $total_users,
+            "last_7"    => 49,
+            "footer1"  => '546 Complete',
+            "footer2"  => '20  Pending',
+            'icon'      => "data:image/svg+xml,%3Csvg aria-hidden='true' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cg%3E%3Cpath fill='%23a5a8a9' d='M336 64h-80a64 64 0 0 1 64 64H64a64 64 0 0 1 64-64H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V112a48 48 0 0 0-48-48zM96 424a24 24 0 1 1 24-24 23.94 23.94 0 0 1-24 24zm0-96a24 24 0 1 1 24-24 23.94 23.94 0 0 1-24 24zm0-96a24 24 0 1 1 24-24 23.94 23.94 0 0 1-24 24zm224 176a8 8 0 0 1-8 8H168a8 8 0 0 1-8-8v-16a8 8 0 0 1 8-8h144a8 8 0 0 1 8 8zm0-96a8 8 0 0 1-8 8H168a8 8 0 0 1-8-8v-16a8 8 0 0 1 8-8h144a8 8 0 0 1 8 8zm0-96a8 8 0 0 1-8 8H168a8 8 0 0 1-8-8v-16a8 8 0 0 1 8-8h144a8 8 0 0 1 8 8z'%3E%3C/path%3E%3Cpath d='M96 376a24 24 0 1 0 24 24 23.94 23.94 0 0 0-24-24zm0-96a24 24 0 1 0 24 24 23.94 23.94 0 0 0-24-24zm0-96a24 24 0 1 0 24 24 23.94 23.94 0 0 0-24-24zM256 64a64 64 0 0 0-128 0 64 64 0 0 0-64 64h256a64 64 0 0 0-64-64zm-64 24a24 24 0 1 1 24-24 23.94 23.94 0 0 1-24 24z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E%0A",
+          ]) ?>
           <!-- users -->
-          <div class="col-md-3 border-right">
-            <div class="d-flex w-100 flex-column box2">
-              <div class="d-flex justify-content-between">
-                <span class="d-flex">
-                  <img height="35" class="mr-3" src="http://127.0.0.1:5500/app/Views/admin/pages/dashboard/users.svg">
-                  <span class="d-flex mt-2">
-                    <h3 id="online" class="mb-1 mr-2"><?= $total_users ?></h3>
-                    <h6>Users</h6>
-                  </span>
-                </span>
-                <div class="mt-2">
-                  <small class="">Last 7 days</small>
-                  <small class="d-flex ml-3">
-                    <span class="text-success">
-                      <ion-icon name="arrow-up"></ion-icon>
-                    </span>
-                    44
-                  </small>
-                </div>
-              </div>
-              <div class="btn-group mt-2">
-                <span>
-                  <small class="mb-0 ml-1 text-success">
-                    <ion-icon name="ellipse"></ion-icon>
-                  </small>
-                  <small class="mb-0">534 Online</small>
-                </span>
-                <span class="ml-2 border-left">
-                  <small class="mb-0 ml-1 text-secondary">
-                    <ion-icon name="ellipse"></ion-icon>
-                  </small>
-                  <small class="mb-0">20 Offline</small>
-                </span>
-              </div>
-            </div>
-          </div>
+          <?= stat_card([
+            'name'      => "Users",
+            "data"      => $total_users,
+            "last_7"    => 12,
+            "footer1"  => '546 Online',
+            "footer2"  => '20  Offline',
+            'icon'     => "data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cg %3E%3Cpath d='M96 224a64 64 0 1 0-64-64 64.06 64.06 0 0 0 64 64zm480 32h-64a63.81 63.81 0 0 0-45.1 18.6A146.27 146.27 0 0 1 542 384h66a32 32 0 0 0 32-32v-32a64.06 64.06 0 0 0-64-64zm-512 0a64.06 64.06 0 0 0-64 64v32a32 32 0 0 0 32 32h65.9a146.64 146.64 0 0 1 75.2-109.4A63.81 63.81 0 0 0 128 256zm480-32a64 64 0 1 0-64-64 64.06 64.06 0 0 0 64 64z'%3E%3C/path%3E%3Cpath fill='%23a5a8a9' d='M396.8 288h-8.3a157.53 157.53 0 0 1-68.5 16c-24.6 0-47.6-6-68.5-16h-8.3A115.23 115.23 0 0 0 128 403.2V432a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48v-28.8A115.23 115.23 0 0 0 396.8 288zM320 256a112 112 0 1 0-112-112 111.94 111.94 0 0 0 112 112z' %3E%3C/path%3E%3C/g%3E%3C/svg%3E%0A",
+          ]) ?>
+
           <!-- Products -->
-          <div class="col-md-3 border-right">
-            <div class="d-flex w-100 flex-column box2">
-              <div class="d-flex justify-content-between">
-                <span class="d-flex">
-                  <img height="35" class="mr-3" src="http://127.0.0.1:5500/app/Views/admin/pages/dashboard/orders.svg">
-                  <span class="d-flex mt-2">
-                    <h3 id="online" class="mb-1 mr-2"><?= $total_products ?></h3>
-                    <h6>Producsts</h6>
-                  </span>
-                </span>
-                <div class="mt-2">
-                  <small class="">Last 7 days</small>
-                  <small class="d-flex ml-3">
-                    <span class="text-danger">
-                      <ion-icon name="arrow-up"></ion-icon>
-                    </span>
-                    44
-                  </small>
-                </div>
-              </div>
-              <div class="btn-group mt-2">
-                <span>
-                  <small class="mb-0 ml-1 text-success">
-                    <ion-icon name="checkmark-circle"></ion-icon>
-                  </small>
-                  <small class="mb-0">534 Active</small>
-                </span>
-                <span class="ml-2 border-left">
-                  <small class="mb-0 ml-1 text-warning">
-                    <ion-icon name="hourglass"></ion-icon>
-                  </small>
-                  <small class="mb-0">20 Pending</small>
-                </span>
-              </div>
-            </div>
-          </div>
+          <?= stat_card([
+            'name'      => "Products",
+            "data"      => $total_products,
+            "last_7"    => 64,
+            "footer1"  => '534 Active',
+            "footer2"  => '20 Pending',
+            'icon'     => "data:image/svg+xml,%3Csvg aria-hidden='true' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cg%3E%3Cpath fill='%23a5a8a9' d='M552 64H159.21l52.36 256h293.15a24 24 0 0 0 23.4-18.68l47.27-208a24 24 0 0 0-18.08-28.72A23.69 23.69 0 0 0 552 64zM444.42 196.48l-67.83 72a12.27 12.27 0 0 1-17.18 0l-67.83-72c-7.65-7.55-2.23-20.48 8.59-20.48h43.54v-52a12.07 12.07 0 0 1 12.14-12h24.29a12.07 12.07 0 0 1 12.15 12v52h43.54c10.82 0 16.24 12.93 8.59 20.48z' class='secondary'%3E%3C/path%3E%3Cpath d='M504.42 405.6l5.52-24.28a24 24 0 0 0-23.4-29.32H218.12L150 19.19A24 24 0 0 0 126.53 0H24A24 24 0 0 0 0 24v16a24 24 0 0 0 24 24h69.88l70.25 343.43a56 56 0 1 0 67.05 8.57h209.64a56 56 0 1 0 63.6-10.4zm-145-137.12a12.27 12.27 0 0 0 17.18 0l67.83-72c7.65-7.55 2.23-20.48-8.59-20.48h-43.55v-52a12.07 12.07 0 0 0-12.15-12h-24.29a12.07 12.07 0 0 0-12.14 12v52h-43.54c-10.82 0-16.24 12.93-8.59 20.48z' class='primary'%3E%3C/path%3E%3C/g%3E%3C/svg%3E%0A",
+          ]) ?>
+
           <!-- Messages -->
-          <div class="col-md-3 border-right">
-            <div class="d-flex w-100 flex-column box2">
-              <div class="d-flex justify-content-between">
-                <span class="d-flex">
-                  <img height="35" class="mr-3" src="http://127.0.0.1:5500/app/Views/admin/pages/dashboard/messages.svg">
-                  <span class="d-flex mt-2">
-                    <h3 id="online" class="mb-1 mr-2"><?= $total_products ?></h3>
-                    <h6>Messages</h6>
-                  </span>
-                </span>
-                <div class="mt-2">
-                  <small class="">Last 7 days</small>
-                  <small class="d-flex ml-3">
-                    <span class="text-danger">
-                      <ion-icon name="arrow-up"></ion-icon>
-                    </span>
-                    44
-                  </small>
-                </div>
-              </div>
-              <div class="btn-group mt-2">
-                <span>
-                  <small class="mb-0 ml-1 text-success">
-                    <ion-icon name="checkmark-circle"></ion-icon>
-                  </small>
-                  <small class="mb-0">534 Read</small>
-                </span>
-                <span class="ml-2 border-left">
-                  <small class="mb-0 ml-1 text-warning">
-                    <ion-icon name="hourglass"></ion-icon>
-                  </small>
-                  <small class="mb-0">20 Un Read</small>
-                </span>
-              </div>
-            </div>
-          </div>
+          <?= stat_card([
+            'name'      => "Messages",
+            "data"      => $total_products,
+            "last_7"    => 343,
+            "footer1"  => '534 sent',
+            "footer2"  => '20 received',
+            'icon'     => "data:image/svg+xml,%3Csvg aria-hidden='true' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' %3E%3Cg%3E%3Cpath fill='%23a5a8a9' d='M64,257.6,227.9,376a47.72,47.72,0,0,0,56.2,0L448,257.6V96a32,32,0,0,0-32-32H96A32,32,0,0,0,64,96ZM160,160a16,16,0,0,1,16-16H336a16,16,0,0,1,16,16v16a16,16,0,0,1-16,16H176a16,16,0,0,1-16-16Zm0,80a16,16,0,0,1,16-16H336a16,16,0,0,1,16,16v16a16,16,0,0,1-16,16H176a16,16,0,0,1-16-16Z' class='secondary'%3E%3C/path%3E%3Cpath d='M352,160a16,16,0,0,0-16-16H176a16,16,0,0,0-16,16v16a16,16,0,0,0,16,16H336a16,16,0,0,0,16-16Zm-16,64H176a16,16,0,0,0-16,16v16a16,16,0,0,0,16,16H336a16,16,0,0,0,16-16V240A16,16,0,0,0,336,224ZM329.4,41.4C312.6,29.2,279.2-.3,256,0c-23.2-.3-56.6,29.2-73.4,41.4L152,64H360ZM64,129c-23.9,17.7-42.7,31.6-45.6,34A48,48,0,0,0,0,200.7v10.7l64,46.2Zm429.6,34c-2.9-2.3-21.7-16.3-45.6-33.9V257.6l64-46.2V200.7A48,48,0,0,0,493.6,163ZM256,417.1a80,80,0,0,1-46.9-15.2L0,250.9V464a48,48,0,0,0,48,48H464a48,48,0,0,0,48-48V250.9l-209.1,151A80,80,0,0,1,256,417.1Z' class='primary'%3E%3C/path%3E%3C/g%3E%3C/svg%3E%0A",
+          ]) ?>
         </div>
+
+        <!-- main stats Chart -->
         <div class="col-md-8 mt-4 bg-white shadow-xs rounded border">
           <div class="btn-group btn-group-sm mt-2 mb-n2 btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-primary active" style="background:#0f0f0f;">
@@ -260,6 +61,8 @@
             </div>
           </div>
         </div>
+
+        <!-- real time chats -->
         <div class="col-md-4 mt-4 pr-0">
           <div class="bg-white shadow-xs rounded border p-2">
             <h6>Realtime</h6>
@@ -273,400 +76,92 @@
           </div>
         </div>
 
+        <!-- online users table -->
         <div class="col-md-12 mt-4 bg-white p-3 shadow-xs rounded">
           <h6>Online Users</h6>
-          <table>
-            <!-- <thead>
-              <tr>
-                <th scope="col">Country</th>
-                <th scope="col">username</th>
-                <th scope="col">info</th>
-                <th scope="col">info</th>
-              </tr>
-            </thead> -->
-            <tbody>
-              <tr>
-                <td data-label="Account">
-                  <img height="25" width="35" class="rounded" src="http://localhost:8888/assets/shared/images/user.svg" alt="user">
-                  <img height="25" width="35" class="rounded border" src="https://restcountries.eu/data/uga.svg" alt="" srcset="">
-                  <span class="ml-2">Rumbiiha Swaibu</span>
-                </td>
-                <td data-label="Amount" class="text-center" style="font-size: large;">
-                  <ion-icon name="logo-chrome"></ion-icon>
-                  <ion-icon name="logo-android"></ion-icon>
-                  <ion-icon name="phone-portrait"></ion-icon>
-                </td>
-                <td>
-                  <ion-icon name="document-text"></ion-icon> dashboard
-                </td>
-                <td id="time">
-                  <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-                </td>
-                <td class="text-right" id="time">
-                  2 <ion-icon name="stats-chart"></ion-icon>
-                  <span>
-                    0 <ion-icon name="chatbox"></ion-icon>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td data-label="Account">
-                  <img height="25" width="35" class="rounded" src="http://localhost:8888/assets/shared/images/user.svg" alt="user">
-                  <img height="25" width="35" class="rounded border" src="https://restcountries.eu/data/usa.svg" alt="" srcset="">
-                  <span class="ml-2">Rumbiiha Swaibu</span>
-                </td>
-                <td data-label="Amount" class="text-center" style="font-size: large;">
-                  <ion-icon name="logo-firefox"></ion-icon>
-                  <ion-icon name="logo-apple"></ion-icon>
-                  <ion-icon name="desktop-outline"></ion-icon>
-                </td>
-                <td>
-                  <ion-icon name="document-text"></ion-icon> dashboard
-                </td>
-                <td id="time">
-                  <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-                </td>
-                <td class="text-right" id="time">
-                  2 <ion-icon name="stats-chart"></ion-icon>
-                  <span>
-                    0 <ion-icon name="chatbox"></ion-icon>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td data-label="Account">
-                  <img height="25" width="35" class="rounded" src="http://localhost:8888/assets/shared/images/user.svg" alt="user">
-                  <img height="25" width="35" class="rounded border" src="https://restcountries.eu/data/rwa.svg" alt="" srcset="">
-                  <span class="ml-2">Rumbiiha Swaibu</span>
-                </td>
-                <td data-label="Amount" class="text-center" style="font-size: large;">
-                  <ion-icon name="logo-firefox"></ion-icon>
-                  <ion-icon name="logo-windows"></ion-icon>
-                  <ion-icon name="phone-portrait"></ion-icon>
-                </td>
-                <td>
-                  <ion-icon name="document-text"></ion-icon> dashboard
-                </td>
-                <td id="time">
-                  <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-                </td>
-                <td class="text-right" id="time">
-                  2 <ion-icon name="stats-chart"></ion-icon>
-                  <span>
-                    0 <ion-icon name="chatbox"></ion-icon>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td data-label="Account">
-                  <img height="25" width="35" class="rounded" src="http://localhost:8888/assets/shared/images/user.svg" alt="user">
-                  <img height="25" width="35" class="rounded border" src="https://restcountries.eu/data/mex.svg" alt="" srcset="">
-                  <span class="ml-2">Rumbiiha Swaibu</span>
-                </td>
-                <td data-label="Amount" class="text-center" style="font-size: large;">
-                  <ion-icon name="logo-firefox"></ion-icon>
-                  <ion-icon name="logo-apple"></ion-icon>
-                  <ion-icon name="desktop-outline"></ion-icon>
-                </td>
-                <td>
-                  <ion-icon name="document-text"></ion-icon> dashboard
-                </td>
-                <td id="time">
-                  <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-                </td>
-                <td class="text-right" id="time">
-                  2 <ion-icon name="stats-chart"></ion-icon>
-                  <span>
-                    0 <ion-icon name="chatbox"></ion-icon>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td data-label="Account">
-                  <img height="25" width="35" class="rounded border" src="http://localhost:8888/assets/shared/images/user.svg" alt="user">
-                  <img height="25" width="35" class="rounded border" src="https://restcountries.eu/data/rus.svg" alt="" srcset="">
-                  <span class="ml-2">Rumbiiha Swaibu</span>
-                </td>
-                <td data-label="Amount" class="text-center" style="font-size: large;">
-                  <ion-icon name="logo-firefox"></ion-icon>
-                  <ion-icon name="logo-windows"></ion-icon>
-                  <ion-icon name="desktop-outline"></ion-icon>
-                </td>
-                <td>
-                  <ion-icon name="document-text"></ion-icon> dashboard
-                </td>
-                <td id="time">
-                  <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-                </td>
-                <td class="text-right" id="time">
-                  2 <ion-icon name="stats-chart"></ion-icon>
-                  <span>
-                    0 <ion-icon name="chatbox"></ion-icon>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td data-label="Account">
-                  <img height="25" width="35" class="rounded" src="http://localhost:8888/assets/shared/images/user.svg" alt="user">
-                  <img height="25" width="35" class="rounded border" src="https://restcountries.eu/data/ken.svg" alt="" srcset="">
-                  <span class="ml-2">Rumbiiha Swaibu</span>
-                </td>
-                <td data-label="Amount" class="text-center" style="font-size: large;">
-                  <ion-icon name="logo-firefox"></ion-icon>
-                  <ion-icon name="logo-apple"></ion-icon>
-                  <ion-icon name="desktop-outline"></ion-icon>
-                </td>
-                <td>
-                  <ion-icon name="document-text"></ion-icon> dashboard
-                </td>
-                <td id="time">
-                  <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-                </td>
-                <td class="text-right" id="time">
-                  2 <ion-icon name="stats-chart"></ion-icon>
-                  <span>
-                    0 <ion-icon name="chatbox"></ion-icon>
-                  </span>
-                </td>
-                <script>
-                  var sec = -1;
-
-                  function pad(val) {
-                    return val > 9 ? val : "0" + val;
-                  }
-                  setInterval(function() {
-                    $(".seconds").html(pad(++sec % 60));
-                    $(".minutes").html(pad(parseInt(sec / 60, 10) % 60));
-                    $(".hours").html(pad(parseInt(sec / 3600, 10)));
-                  }, 1000);
-                </script>
-              </tr>
-            </tbody>
-          </table>
+          <table id="table"></table>
         </div>
 
+        <!-- map and radial area -->
         <div class="d-flex w-100 flex-wrap mt-4">
           <div class="col-md-8 bg-white rounded border">
             <div class='world' id="world-map" style="width: 100%; height: 350px"></div>
-            <script>
-              $(function() {
-                $('#world-map').vectorMap();
-              });
-              var visitorsData = {
-                "AF": 16,
-                "AL": 11,
-                "DZ": 158,
-                "PK": 158,
-              };
-              $('#world-map').vectorMap({
-                map: 'world_mill_en',
-                series: {
-                  regions: [{
-                    values: visitorsData,
-                    scale: ['#e9887c', '#dd4b39'],
-                    normalizeFunction: 'polynomial'
-                  }]
-                },
-                onRegionTipShow: function(e, el, code) {
-                  el.html(el.html() + ' (Visitors - ' + visitorsData[code] + ')');
-                }
-              });
-            </script>
           </div>
           <div class="col-md-4 bg-white">
-
             <div id="radialBarBottom"></div>
-
           </div>
         </div>
       </div>
+      <!-- end of starts -->
     </div>
   </div>
 </div>
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-  var data = generateDayWiseTimeSeries(new Date("22 Apr 2017").getTime(), 115, {
-    min: 30,
-    max: 90
-  });
-  var options1 = {
-    chart: {
-      id: "chart2",
-      type: "area",
-      height: 230,
-      foreColor: "#ccc",
-      toolbar: {
-        autoSelected: "pan",
-        show: false
-      }
-    },
-    colors: ["#0F0F0F"],
-    stroke: {
-      width: 3
-    },
-    grid: {
-      borderColor: "#555",
-      clipMarkers: false,
-      yaxis: {
-        lines: {
-          show: false
-        }
-      }
-    },
-    dataLabels: {
-      enabled: false
-    },
-    fill: {
-      gradient: {
-        enabled: true,
-        opacityFrom: 0.55,
-        opacityTo: 0
-      }
-    },
-    markers: {
-      size: 5,
-      colors: ["#a5a8a9"],
-      strokeColor: "#0F0F0F",
-      strokeWidth: 3
-    },
-    series: [{
-      data: data
-    }],
-    tooltip: {
-      theme: "dark"
-    },
-    xaxis: {
-      type: "datetime"
-    },
-    yaxis: {
-      min: 0,
-      tickAmount: 4
-    }
-  };
-
-  var chart1 = new ApexCharts(document.querySelector("#chart-area"), options1);
-
-  chart1.render();
-
-  var options2 = {
-    chart: {
-      id: "chart1",
-      height: 130,
-      type: "bar",
-      foreColor: "#ccc",
-      brush: {
-        target: "chart2",
-        enabled: true
-      },
-      selection: {
-        enabled: true,
-        fill: {
-          color: "#fff",
-          opacity: 0.4
-        },
-        xaxis: {
-          min: new Date("27 Jul 2017 10:00:00").getTime(),
-          max: new Date("14 Aug 2017 10:00:00").getTime()
-        }
-      }
-    },
-    colors: ["#0F0F0F"],
-    series: [{
-      data: data
-    }],
-    stroke: {
-      width: 2
-    },
-    grid: {
-      borderColor: "#444"
-    },
-    markers: {
-      size: 0
-    },
-    xaxis: {
-      type: "datetime",
-      tooltip: {
-        enabled: false
-      }
-    },
-    yaxis: {
-      tickAmount: 2
-    }
-  };
-
-  var chart2 = new ApexCharts(document.querySelector("#chart-bar"), options2);
-
-  chart2.render();
-
-  function generateDayWiseTimeSeries(baseval, count, yrange) {
-    var i = 0;
-    var series = [];
-    while (i < count) {
-      var x = baseval;
-      var y =
-        Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
-
-      series.push([x, y]);
-      baseval += 86400000;
-      i++;
-    }
-    return series;
-  }
-</script>
+<script src="http://jvectormap.com/js/jquery-jvectormap-2.0.3.min.js"></script>
+<script src="http://jvectormap.com/js/jquery-jvectormap-world-mill-en.js"></script>
+<?= script_tag('assets/admin/js/map.js'); ?>
+<?= script_tag('assets/admin/js/watch.js'); ?>
+<?= script_tag('assets/plugins/apexCharts/apexchats.js'); ?>
+<?= script_tag('assets/admin/js/main.chart.js'); ?>
 <script src="<?= base_url('assets/admin/js/dashboard.js') ?>"></script>
 
 <script>
   socket.on('online', function(users) {
-    $("#onlinef").text(users.length);
+    // $("#online-users").text(users.length);
+    // $("#ofline-users").text(JSON.parse($("#users").text()) - users.length);
+    $("#table").empty();
+    $(`<tbody>
+                ${users.map(user =>(`<tr>
+                <td data-label="Account">
+                  <img height="25" width="35" class="rounded" src="http://localhost:8888/assets/shared/images/user.svg" alt="user">
+                  <img height="25" width="35" class="rounded border" src="https://restcountries.eu/data/uga.svg" alt="" srcset="">
+                  <span class="ml-2">${user.username}</span>
+                </td>
+                <td data-label="Amount" class="text-center" style="font-size: large;">
+                  <ion-icon data-toggle="tooltip" data-placement="top" title="Tooltip on top" name="logo-${user.browser.split(' ')[0].toLocaleLowerCase()}"></ion-icon>
+                  <ion-icon data-toggle="tooltip" data-placement="top" title="Tooltip on top" name="logo-${user.os.match('Mac')?'apple':''}"></ion-icon>
+                </td>
+                <td>
+                  <ion-icon name="document-text"></ion-icon> <a href="${user.pageLink}">${user.pageTitle}</a>
+                </td>
+                <td class='time'>
+                  <h6 id="time-${user.id}"></h6>
+                </td>
+                <td class="text-right" id="time">
+                  2 <ion-icon name="stats-chart"></ion-icon>
+                  <span>
+                    0 <ion-icon name="chatbox"></ion-icon>
+                  </span>
+                </td>
+                </tr>
+                ${
+                    setInterval(function() {
+                      date_future = new Date(user.time);
+                      date_now = new Date();
+
+                      seconds = (Math.floor(((date_now) - date_future) / 1000));
+                      minutes = Math.floor(seconds / 60);
+                      hours = Math.floor(minutes / 60);
+                      days = Math.floor(hours / 24);
+
+                      hours = hours - (days * 24);
+                      minutes = minutes - (days * 24 * 60) - (hours * 60);
+                      seconds = seconds - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
+                      seconds = seconds.toString().length === 2 ? seconds : '0'+seconds;
+                      minutes = minutes.toString().length === 2 ? minutes : '0'+minutes;
+                      $(`#time-${user.id}`).text(`${hours} : ${minutes} : ${seconds}`);
+                    }, 1000)
+                  }
+                `))}
+        </tbody>`).appendTo($("#table"));
   })
 
-  socket.on('test', function(data) {
-    chart7.updateSeries([{
-      data: data.map((e) => e.users)
-    }])
-    chart7.updateOptions({
-      labels: data.map((e) => e.timeLabel),
-    })
-  })
 
-  $(function() {
-    $('#map').vectorMap({
-      map: 'world_mill'
-    });
-  });
+  // socket.on('test', function(data) {
+  //   chart7.updateSeries([{
+  //     data: data.map((e) => e.users)
+  //   }])
+  //   chart7.updateOptions({
+  //     labels: data.map((e) => e.timeLabel),
+  //   })
+  // })
 </script>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-  var Tawk_API = Tawk_API || {},
-    Tawk_LoadStart = new Date();
-  (function() {
-    var s1 = document.createElement("script"),
-      s0 = document.getElementsByTagName("script")[0];
-    s1.async = true;
-    s1.src = 'https://embed.tawk.to/5a84b77bd7591465c707ad76/default';
-    s1.charset = 'UTF-8';
-    s1.setAttribute('crossorigin', '*');
-    s0.parentNode.insertBefore(s1, s0);
-  })();
-</script>
-<!--End of Tawk.to Script-->

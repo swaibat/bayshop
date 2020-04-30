@@ -12,7 +12,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#chatModel" >
+		<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#chatModel">
 			<div>
 				<div class="card-body py-1">
 					<div class="p-0 mb-auto chat-window w-100 overflow-y-auto chat-container" id="chat">
@@ -61,7 +61,6 @@
 <script src="<?= base_url('/assets/shared/jquery/jquery-3.4.1.min.js'); ?>"></script>
 <script src="<?= base_url('assets/plugins/toastify-js/toastify-js.js'); ?>"></script>
 <script src="<?= base_url('/assets/plugins/jquery-multifile/jquery-multifile.js'); ?>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="<?= base_url('/assets/shared/bootstrap-4.4.1/js/bootstrap.min.js'); ?>"></script>
 <script src="<?= base_url('/assets/plugins/select2/dist/js/select2.min.js'); ?>"></script>
 <script src="<?= base_url('/assets/plugins/dataTables/datatables.min.js'); ?>"></script>
@@ -70,9 +69,16 @@
 <style>
 </style>
 <script>
+	$(function() {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
 	$(document).ready(function() {
 		const user = <?= $_SESSION['user'] ?>;
-		socket.emit('online', user);
+		socket.emit('online', {
+			...user,
+			pageTitle: document.title,
+			pageLink: location.href,
+		});
 		$('#chat-text').keyup((evt) => {
 			if (evt.target.value.length) {
 				socket.emit('typing', 'swaibu is typing')

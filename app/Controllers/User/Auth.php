@@ -31,7 +31,7 @@ class Auth extends BaseController
                 'password' => md5($this->request->getVar('password'))
             ];
             if ($user = $this->user->where($data)->first()) {
-                send_email();
+                // send_email();
                 $_SESSION['user'] = user_session($this->user_agent, $user);
                 return $this->res->setJSON(['status' => 200, 'message' => 'Login Successfully']);
             } else {

@@ -20,9 +20,9 @@
 			</a>
 		</li>
 		<li class='dropdown mx-2 d-flex flex-row align-items-center font-weight-light'>
-			<button class='btn nav-link dropdown-toggle text-white' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>
+			<button class='btn mt-n1 py-0 nav-link dropdown-toggle text-white' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>
 				<span class="admin-nav-icons">
-					<ion-icon name="person-circle-outline"></ion-icon>
+				<img height="30" src="<?= base_url('assets/shared/images/user.svg'); ?>" alt="user">
 				</span>
 			</button>
 			<ul class='dropdown-menu shadow notification-pane font-weight-light' aria-labelledby='dropdownMenuButton'>

@@ -24,7 +24,6 @@ window.Apex = {
   },
 };
 
-
 var optionsCircle4 = {
   chart: {
     type: "radialBar",
@@ -61,13 +60,10 @@ var optionsCircle4 = {
     offsetY: 240,
   },
 };
-
-var chartCircle4 = new ApexCharts(
-  document.querySelector("#radialBarBottom"),
-  optionsCircle4
-);
-chartCircle4.render();
-
+$(function () {
+  var chartCircle4 = new ApexCharts($("#radialBarBottom"), optionsCircle4);
+  return chartCircle4.render();
+});
 
 // sparkline chats
 
@@ -171,7 +167,7 @@ var options5 = {
     },
   },
 };
-
-var chart5 = new ApexCharts(document.querySelector("#chart-5"), options5);
-chart5.render();
-
+$(function () {
+  var chart5 = new ApexCharts($("#chart-5"), options5);
+  return chart5.render();
+});
