@@ -275,174 +275,7 @@
 
         <div class="col-md-12 mt-4 bg-white p-3 shadow-xs rounded">
           <h6>Online Users</h6>
-          <table>
-            <!-- <thead>
-              <tr>
-                <th scope="col">Country</th>
-                <th scope="col">username</th>
-                <th scope="col">info</th>
-                <th scope="col">info</th>
-              </tr>
-            </thead> -->
-            <tbody>
-              <tr>
-                <td data-label="Account">
-                  <img height="25" width="35" class="rounded" src="http://localhost:8888/assets/shared/images/user.svg" alt="user">
-                  <img height="25" width="35" class="rounded border" src="https://restcountries.eu/data/uga.svg" alt="" srcset="">
-                  <span class="ml-2">Rumbiiha Swaibu</span>
-                </td>
-                <td data-label="Amount" class="text-center" style="font-size: large;">
-                  <ion-icon name="logo-chrome"></ion-icon>
-                  <ion-icon name="logo-android"></ion-icon>
-                  <ion-icon name="phone-portrait"></ion-icon>
-                </td>
-                <td>
-                  <ion-icon name="document-text"></ion-icon> dashboard
-                </td>
-                <td id="time">
-                  <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-                </td>
-                <td class="text-right" id="time">
-                  2 <ion-icon name="stats-chart"></ion-icon>
-                  <span>
-                    0 <ion-icon name="chatbox"></ion-icon>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td data-label="Account">
-                  <img height="25" width="35" class="rounded" src="http://localhost:8888/assets/shared/images/user.svg" alt="user">
-                  <img height="25" width="35" class="rounded border" src="https://restcountries.eu/data/usa.svg" alt="" srcset="">
-                  <span class="ml-2">Rumbiiha Swaibu</span>
-                </td>
-                <td data-label="Amount" class="text-center" style="font-size: large;">
-                  <ion-icon name="logo-firefox"></ion-icon>
-                  <ion-icon name="logo-apple"></ion-icon>
-                  <ion-icon name="desktop-outline"></ion-icon>
-                </td>
-                <td>
-                  <ion-icon name="document-text"></ion-icon> dashboard
-                </td>
-                <td id="time">
-                  <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-                </td>
-                <td class="text-right" id="time">
-                  2 <ion-icon name="stats-chart"></ion-icon>
-                  <span>
-                    0 <ion-icon name="chatbox"></ion-icon>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td data-label="Account">
-                  <img height="25" width="35" class="rounded" src="http://localhost:8888/assets/shared/images/user.svg" alt="user">
-                  <img height="25" width="35" class="rounded border" src="https://restcountries.eu/data/rwa.svg" alt="" srcset="">
-                  <span class="ml-2">Rumbiiha Swaibu</span>
-                </td>
-                <td data-label="Amount" class="text-center" style="font-size: large;">
-                  <ion-icon name="logo-firefox"></ion-icon>
-                  <ion-icon name="logo-windows"></ion-icon>
-                  <ion-icon name="phone-portrait"></ion-icon>
-                </td>
-                <td>
-                  <ion-icon name="document-text"></ion-icon> dashboard
-                </td>
-                <td id="time">
-                  <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-                </td>
-                <td class="text-right" id="time">
-                  2 <ion-icon name="stats-chart"></ion-icon>
-                  <span>
-                    0 <ion-icon name="chatbox"></ion-icon>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td data-label="Account">
-                  <img height="25" width="35" class="rounded" src="http://localhost:8888/assets/shared/images/user.svg" alt="user">
-                  <img height="25" width="35" class="rounded border" src="https://restcountries.eu/data/mex.svg" alt="" srcset="">
-                  <span class="ml-2">Rumbiiha Swaibu</span>
-                </td>
-                <td data-label="Amount" class="text-center" style="font-size: large;">
-                  <ion-icon name="logo-firefox"></ion-icon>
-                  <ion-icon name="logo-apple"></ion-icon>
-                  <ion-icon name="desktop-outline"></ion-icon>
-                </td>
-                <td>
-                  <ion-icon name="document-text"></ion-icon> dashboard
-                </td>
-                <td id="time">
-                  <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-                </td>
-                <td class="text-right" id="time">
-                  2 <ion-icon name="stats-chart"></ion-icon>
-                  <span>
-                    0 <ion-icon name="chatbox"></ion-icon>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td data-label="Account">
-                  <img height="25" width="35" class="rounded border" src="http://localhost:8888/assets/shared/images/user.svg" alt="user">
-                  <img height="25" width="35" class="rounded border" src="https://restcountries.eu/data/rus.svg" alt="" srcset="">
-                  <span class="ml-2">Rumbiiha Swaibu</span>
-                </td>
-                <td data-label="Amount" class="text-center" style="font-size: large;">
-                  <ion-icon name="logo-firefox"></ion-icon>
-                  <ion-icon name="logo-windows"></ion-icon>
-                  <ion-icon name="desktop-outline"></ion-icon>
-                </td>
-                <td>
-                  <ion-icon name="document-text"></ion-icon> dashboard
-                </td>
-                <td id="time">
-                  <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-                </td>
-                <td class="text-right" id="time">
-                  2 <ion-icon name="stats-chart"></ion-icon>
-                  <span>
-                    0 <ion-icon name="chatbox"></ion-icon>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td data-label="Account">
-                  <img height="25" width="35" class="rounded" src="http://localhost:8888/assets/shared/images/user.svg" alt="user">
-                  <img height="25" width="35" class="rounded border" src="https://restcountries.eu/data/ken.svg" alt="" srcset="">
-                  <span class="ml-2">Rumbiiha Swaibu</span>
-                </td>
-                <td data-label="Amount" class="text-center" style="font-size: large;">
-                  <ion-icon name="logo-firefox"></ion-icon>
-                  <ion-icon name="logo-apple"></ion-icon>
-                  <ion-icon name="desktop-outline"></ion-icon>
-                </td>
-                <td>
-                  <ion-icon name="document-text"></ion-icon> dashboard
-                </td>
-                <td id="time">
-                  <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-                </td>
-                <td class="text-right" id="time">
-                  2 <ion-icon name="stats-chart"></ion-icon>
-                  <span>
-                    0 <ion-icon name="chatbox"></ion-icon>
-                  </span>
-                </td>
-                <script>
-                  var sec = -1;
-
-                  function pad(val) {
-                    return val > 9 ? val : "0" + val;
-                  }
-                  setInterval(function() {
-                    $(".seconds").html(pad(++sec % 60));
-                    $(".minutes").html(pad(parseInt(sec / 60, 10) % 60));
-                    $(".hours").html(pad(parseInt(sec / 3600, 10)));
-                  }, 1000);
-                </script>
-              </tr>
-            </tbody>
-          </table>
+          <table id="table"></table>
         </div>
 
         <div class="d-flex w-100 flex-wrap mt-4">
@@ -484,25 +317,10 @@
   </div>
 </div>
 
-
-
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.7/jquery.timeago.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <script>
   var data = generateDayWiseTimeSeries(new Date("22 Apr 2017").getTime(), 115, {
@@ -637,36 +455,67 @@
 
 <script>
   socket.on('online', function(users) {
-    $("#onlinef").text(users.length);
+    console.log(users)
+    $("#table").text(users.length);
+    $("#table").empty();
+    $(`<tbody>
+                ${users.map(user =>(`<tr>
+                <td data-label="Account">
+                  <img height="25" width="35" class="rounded" src="http://localhost:8888/assets/shared/images/user.svg" alt="user">
+                  <img height="25" width="35" class="rounded border" src="https://restcountries.eu/data/uga.svg" alt="" srcset="">
+                  <span class="ml-2">${user.username}</span>
+                </td>
+                <td data-label="Amount" class="text-center" style="font-size: large;">
+                  <ion-icon data-toggle="tooltip" data-placement="top" title="Tooltip on top" name="logo-${user.browser.split(' ')[0].toLocaleLowerCase()}"></ion-icon>
+                  <ion-icon data-toggle="tooltip" data-placement="top" title="Tooltip on top" name="logo-${user.os.match('Mac')?'apple':''}"></ion-icon>
+                </td>
+                <td>
+                  <ion-icon name="document-text"></ion-icon> <a href="${user.pageLink}">${user.pageTitle}</a>
+                </td>
+                <td class='time'>
+                  <h6 id="time-${user.id}">${
+                    setInterval(function() {
+                      date_future = new Date(user.time);
+                      date_now = new Date();
+
+                      seconds = (Math.floor(((date_now) - date_future) / 1000));
+                      minutes = Math.floor(seconds / 60);
+                      hours = Math.floor(minutes / 60);
+                      days = Math.floor(hours / 24);
+
+                      hours = hours - (days * 24);
+                      minutes = minutes - (days * 24 * 60) - (hours * 60);
+                      seconds = seconds - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
+                      seconds = seconds.toString().length === 2 ? seconds : '0'+seconds;
+                      minutes = minutes.toString().length === 2 ? minutes : '0'+minutes;
+                      $(`#time-${user.id}`).text(`${hours} : ${minutes} : ${seconds}`);
+                    }, 1000)
+                  }</h6>
+                </td>
+                <td class="text-right" id="time">
+                  2 <ion-icon name="stats-chart"></ion-icon>
+                  <span>
+                    0 <ion-icon name="chatbox"></ion-icon>
+                  </span>
+                </td>
+                </tr>`))}
+        </tbody>`).appendTo($("#table"));
   })
 
-  socket.on('test', function(data) {
-    chart7.updateSeries([{
-      data: data.map((e) => e.users)
-    }])
-    chart7.updateOptions({
-      labels: data.map((e) => e.timeLabel),
-    })
-  })
+
+  // socket.on('test', function(data) {
+  //   chart7.updateSeries([{
+  //     data: data.map((e) => e.users)
+  //   }])
+  //   chart7.updateOptions({
+  //     labels: data.map((e) => e.timeLabel),
+  //   })
+  // })
 
   $(function() {
     $('#map').vectorMap({
       map: 'world_mill'
     });
   });
+  $('#tbody').tooltip('show')
 </script>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-  var Tawk_API = Tawk_API || {},
-    Tawk_LoadStart = new Date();
-  (function() {
-    var s1 = document.createElement("script"),
-      s0 = document.getElementsByTagName("script")[0];
-    s1.async = true;
-    s1.src = 'https://embed.tawk.to/5a84b77bd7591465c707ad76/default';
-    s1.charset = 'UTF-8';
-    s1.setAttribute('crossorigin', '*');
-    s0.parentNode.insertBefore(s1, s0);
-  })();
-</script>
-<!--End of Tawk.to Script-->

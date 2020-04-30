@@ -73,7 +73,9 @@ io.on("connection", (socket) => {
     data.socketId = socket.id;
     visits.push(data);
     const user = users && users.find((user) => user.id === data.id);
-    user ? (user.socketId = data.socketId) : users.push(data);
+    user
+      ? (user.socketId = data.socketId)
+      : users.push({ ...data, time: new Date() });
     io.emit("online", users);
     // update the last hour data only by replacing data
 
