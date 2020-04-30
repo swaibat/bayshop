@@ -15,7 +15,7 @@ app.use(cors());
 app.use(router);
 
 let users = [];
-let visits = [];
+let connection = [];
 let last_48_users = [
   { timeLabel: "14:00-15:00", users: 0 },
   { timeLabel: "14:00-15:00", users: 0 },
@@ -68,14 +68,16 @@ let last_48_users = [
 ];
 const hour = new Date().getHours();
 io.on("connection", (socket) => {
-  // check online users
+  connection = [];
+  connection.push({ live: true });
   socket.on("online", (data, callback) => {
     data.socketId = socket.id;
-    visits.push(data);
     const user = users && users.find((user) => user.id === data.id);
-    user
-      ? (user.socketId = data.socketId)
-      : users.push({ ...data, time: new Date() });
+    if (user) {
+      user.socketId = data.socketId;
+    } else {
+      users.push({ ...data, time: new Date() });
+    }
     io.emit("online", users);
     // update the last hour data only by replacing data
 
@@ -95,11 +97,8 @@ io.on("connection", (socket) => {
         .to(user.socketId)
         .emit("new message", data.response.message);
   });
-  setInterval(tick, 1000 * 60 * 60);
 
-  // Last 48 hours statistics
-
-  function tick() {
+  cron.schedule("00 00 */1 * * * *", () => {
     last_48_users.push({
       timeLabel: `${hour - 1}:00-${hour}:00`,
       users: users.length,
@@ -107,12 +106,21 @@ io.on("connection", (socket) => {
     last_48_users.splice(0, 1);
     io.emit("test", last_48_users);
     console.log(last_48_users);
-  }
+    },{
+    scheduled: true,
+    });
+
+  // Last 48 hours statistics
+
 
   socket.on("disconnect", () => {
-    users = users.filter((user) => user.socketId !== socket.id);
-    io.emit("online", users);
-    // io.emit("test", last_48_users);
+    connection.push({ live: false });
+    setTimeout(() => {
+      if (connection.length > 1) {
+        users = users.filter((user) => user.socketId !== socket.id);
+        io.emit("online", users);
+      }
+    }, 3000);
   });
 });
 
