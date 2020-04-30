@@ -1,8 +1,4 @@
-<link href='<?= base_url('/assets/plugins/jvectormap/jquery-jvectormap-2.0.5.css') ?>'>
-<link rel="stylesheet" href="http://jvectormap.com/css/jquery-jvectormap-2.0.3.css" type="text/css" media="screen" />
-<script src="http://jvectormap.com/js/jquery-1.8.2.min.js"></script>
-<script src="http://jvectormap.com/js/jquery-jvectormap-2.0.3.min.js"></script>
-<script src="http://jvectormap.com/js/jquery-jvectormap-world-mill-en.js"></script>
+<!-- start of dashboard -->
 <div id="wrapper">
   <div class="content-area">
     <div class="container-fluid">
@@ -100,6 +96,8 @@
     </div>
   </div>
 </div>
+<script src="http://jvectormap.com/js/jquery-jvectormap-2.0.3.min.js"></script>
+<script src="http://jvectormap.com/js/jquery-jvectormap-world-mill-en.js"></script>
 <?= script_tag('assets/admin/js/map.js'); ?>
 <?= script_tag('assets/admin/js/watch.js'); ?>
 <?= script_tag('assets/plugins/apexCharts/apexchats.js'); ?>
@@ -108,8 +106,8 @@
 
 <script>
   socket.on('online', function(users) {
-    $("#online-users").text(users.length);
-    $("#ofline-users").text(JSON.parse($("#users").text()) - users.length);
+    // $("#online-users").text(users.length);
+    // $("#ofline-users").text(JSON.parse($("#users").text()) - users.length);
     $("#table").empty();
     $(`<tbody>
                 ${users.map(user =>(`<tr>

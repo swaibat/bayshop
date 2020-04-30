@@ -61,9 +61,7 @@
 <script src="<?= base_url('/assets/shared/jquery/jquery-3.4.1.min.js'); ?>"></script>
 <script src="<?= base_url('assets/plugins/toastify-js/toastify-js.js'); ?>"></script>
 <script src="<?= base_url('/assets/plugins/jquery-multifile/jquery-multifile.js'); ?>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="<?= base_url('/assets/shared/bootstrap-4.4.1/js/bootstrap.min.js'); ?>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.0/cjs/popper.min.js"></script>
 <script src="<?= base_url('/assets/plugins/select2/dist/js/select2.min.js'); ?>"></script>
 <script src="<?= base_url('/assets/plugins/dataTables/datatables.min.js'); ?>"></script>
 <script src="<?= base_url('/assets/plugins/summernote/summernote-bs4.min.js'); ?>"></script>
