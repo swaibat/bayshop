@@ -65,103 +65,59 @@
         <!-- real time chats -->
         <div class="col-md-4 mt-4 pr-0">
           <div class="bg-white shadow-xs rounded border p-2">
-            <h6>Realtime</h6>
-            <p class="d-flex"><span class="dot"></span>Updating live</p>
-            <hr>
-            <div class="col-12">
-              <h6>4039</h6>
-              <p>views . Last 48 hours</p>
-              <div id="chart-5"> </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- online users table -->
-        <div class="col-md-12 mt-4 bg-white p-3 shadow-xs rounded">
-          <h6>Online Users</h6>
-          <table id="table"></table>
-        </div>
-
-        <!-- map and radial area -->
-        <div class="d-flex w-100 flex-wrap mt-4">
-          <div class="col-md-8 bg-white rounded border">
-            <div class='world' id="world-map" style="width: 100%; height: 350px"></div>
-          </div>
-          <div class="col-md-4 bg-white">
+            <h6 class="mb-0">Users by devices</h6>
             <div id="radialBarBottom"></div>
           </div>
         </div>
+
+
+      <!-- online users table -->
+      <div class="col-md-12 mt-4 bg-white p-3 shadow-xs rounded">
+        <h6>Online Users</h6>
+        <table id="table"></table>
       </div>
-      <!-- end of starts -->
+
+      <!-- map and radial area -->
+      <div class="d-flex w-100 flex-wrap mt-4">
+        <div class="col-md-8 bg-white rounded p-3">
+          <h6>visitors By countries</h6>
+          <div class='world' id="world-map" style="width: 100%; height: 350px"></div>
+        </div>
+        <div class="col-md-4 bg-white">
+          <div id="chart">
+            <div id="apex-chart"></div>
+          </div>
+          <!-- <div id="radialBarBottom"></div> -->
+        </div>
+      </div>
     </div>
+    <!-- end of starts -->
   </div>
 </div>
-<script src="http://jvectormap.com/js/jquery-jvectormap-2.0.3.min.js"></script>
-<script src="http://jvectormap.com/js/jquery-jvectormap-world-mill-en.js"></script>
-<?= script_tag('assets/admin/js/map.js'); ?>
-<?= script_tag('assets/admin/js/watch.js'); ?>
+</div>
+<!-- dashboard plugins -->
+<?= script_tag('/assets/plugins/jvectormap/jquery-jvectormap-2.0.5.min.js'); ?>
+<?= script_tag('assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'); ?>
 <?= script_tag('assets/plugins/apexCharts/apexchats.js'); ?>
 <?= script_tag('assets/admin/js/main.chart.js'); ?>
-<script src="<?= base_url('assets/admin/js/dashboard.js') ?>"></script>
-
+<?= script_tag('assets/admin/js/dashboard.js'); ?>
 <script>
-  socket.on('online', function(users) {
-    // $("#online-users").text(users.length);
-    // $("#ofline-users").text(JSON.parse($("#users").text()) - users.length);
-    $("#table").empty();
-    $(`<tbody>
-                ${users.map(user =>(`<tr>
-                <td data-label="Account">
-                  <img height="25" width="35" class="rounded" src="http://localhost:8888/assets/shared/images/user.svg" alt="user">
-                  <img height="25" width="35" class="rounded border" src="https://restcountries.eu/data/uga.svg" alt="" srcset="">
-                  <span class="ml-2">${user.username}</span>
-                </td>
-                <td data-label="Amount" class="text-center" style="font-size: large;">
-                  <ion-icon data-toggle="tooltip" data-placement="top" title="Tooltip on top" name="logo-${user.browser.split(' ')[0].toLocaleLowerCase()}"></ion-icon>
-                  <ion-icon data-toggle="tooltip" data-placement="top" title="Tooltip on top" name="logo-${user.os.match('Mac')?'apple':''}"></ion-icon>
-                </td>
-                <td>
-                  <ion-icon name="document-text"></ion-icon> <a href="${user.pageLink}">${user.pageTitle}</a>
-                </td>
-                <td class='time'>
-                  <h6 id="time-${user.id}"></h6>
-                </td>
-                <td class="text-right" id="time">
-                  2 <ion-icon name="stats-chart"></ion-icon>
-                  <span>
-                    0 <ion-icon name="chatbox"></ion-icon>
-                  </span>
-                </td>
-                </tr>
-                ${
-                    setInterval(function() {
-                      date_future = new Date(user.time);
-                      date_now = new Date();
-
-                      seconds = (Math.floor(((date_now) - date_future) / 1000));
-                      minutes = Math.floor(seconds / 60);
-                      hours = Math.floor(minutes / 60);
-                      days = Math.floor(hours / 24);
-
-                      hours = hours - (days * 24);
-                      minutes = minutes - (days * 24 * 60) - (hours * 60);
-                      seconds = seconds - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
-                      seconds = seconds.toString().length === 2 ? seconds : '0'+seconds;
-                      minutes = minutes.toString().length === 2 ? minutes : '0'+minutes;
-                      $(`#time-${user.id}`).text(`${hours} : ${minutes} : ${seconds}`);
-                    }, 1000)
-                  }
-                `))}
-        </tbody>`).appendTo($("#table"));
+  console.log(<?= $visitors ?>)
+  getVisitorsByLocation({
+    RU: 10,
+    US: 9,
+    TZ: 8,
+    BR: 7,
+    AL: 6,
+    UG: 5,
+    AU: 4,
+    AF: 3,
+    IN: 2,
+    RW: 1
   })
-
-
-  // socket.on('test', function(data) {
-  //   chart7.updateSeries([{
-  //     data: data.map((e) => e.users)
-  //   }])
-  //   chart7.updateOptions({
-  //     labels: data.map((e) => e.timeLabel),
-  //   })
-  // })
+  getDevicesOfUsers({
+    Tablet: 10,
+    Mobile: 30,
+    Desktop: 60
+  })
 </script>

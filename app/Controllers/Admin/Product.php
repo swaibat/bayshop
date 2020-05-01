@@ -10,11 +10,13 @@ class Product extends BaseController
     // GET PRODUCTS
     public function index()
     {
+
         $data = [
             'folder_name'   => 'products',
             'page_name'     => 'products',
             'page_title'    => 'products',
-            'products'      => $this->products->orderBy('id', 'DESC')->findAll()
+            'products'      => $this->products->orderBy('id', 'DESC')->findAll(),
+            'table'         => $this->table->generate($this->products->orderBy('id', 'DESC')->findAll())
         ];
         echo view('admin/index', $data);
     }

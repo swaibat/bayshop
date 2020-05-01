@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use PHPUnit\Util\Json;
 
 class Dashboard extends BaseController
 {
@@ -15,6 +16,8 @@ class Dashboard extends BaseController
             'page_title'        => 'Dashboard',
             'total_users'       => count($this->user->findAll()),
             'total_products'    => count($this->products->findAll()),
+            'user_agents'       => $this->products->findAll(),
+            'visitors'          => json_encode($this->logs->get_countries_visitors())
         ];
         echo view('admin/index', $data);
     }
