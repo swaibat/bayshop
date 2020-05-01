@@ -66,3 +66,21 @@ $(document).ready(() => {
   });
   $(".js-select2").select2();
 });
+
+/**
+ * multifile
+ * image upload Heleper
+ */
+$(function() {
+  $(".MultiFile-list").sortable({
+    placeholder: "upload-btn"
+  });
+  $(".MultiFile-list").disableSelection();
+  $('#photo-upload').change(() => {
+    $('#olden').removeClass('d-flex').addClass('d-none');
+    $('#img-holder').removeClass('d-flex justify-content-center align-items-center');
+    $('.upload-btn').addClass('mt-1').removeClass('d-none');
+    $(".MultiFile-preview").removeAttr("style")
+    $('.MultiFile-list').find(">").addClass("first");
+  })
+});

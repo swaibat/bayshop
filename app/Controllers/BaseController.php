@@ -25,6 +25,7 @@ use App\Models\CurrencyModel;
 use App\Models\PageModel;
 use App\Models\UserModel;
 use App\Models\PostModel;
+use App\Models\LogModel;
 use App\Models\PostcategoryModel;
 use App\Models\ProductfileModel;
 use App\Models\SliderModel;
@@ -68,6 +69,7 @@ class BaseController extends Controller
         $this->slider           = new SliderModel();
         $this->roles            = new RoleModel();
         $this->clientInfo       = new ClientinfoModel();
+        $this->logs             = new LogModel();
         $this->location         = location_info();
         $this->user_agent       = $this->request->getUserAgent();
         $this->session          = \Config\Services::session();
@@ -75,5 +77,6 @@ class BaseController extends Controller
         $this->validation       = \Config\Services::validation();
         $this->email            = \Config\Services::email();
         $this->res              = $this->response;
+        $this->table            = new \CodeIgniter\View\Table();
     }
 }

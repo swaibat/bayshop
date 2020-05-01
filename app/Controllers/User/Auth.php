@@ -32,7 +32,7 @@ class Auth extends BaseController
             ];
             if ($user = $this->user->where($data)->first()) {
                 // send_email();
-                $_SESSION['user'] = user_session($this->user_agent, $user);
+                $_SESSION['user'] = user_session($user);
                 return $this->res->setJSON(['status' => 200, 'message' => 'Login Successfully']);
             } else {
                 return $this->res->setJSON(['status' => 400, 'message' => 'Invalid Username or Password']);

@@ -4,47 +4,19 @@
 			<a href="<?= base_url('admin/products/create'); ?>" class="btn btn-sm btn-primary mb-n5"><span class="btn-label"><i class="fa fa-plus"></i></span>
 				Add Product
 			</a>
-			<table id="example" class="table table-striped table-bordered" style="width:100%">
-				<thead>
-					<tr>
-						<th>s/n</th>
-						<th>Img</th>
-						<th>name</th>
-						<th>type</th>
-						<th>created at</th>
-						<th>status</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php $count = 1;
-					foreach ($products as $product) { ?>
-						<tr id="row_<?= $product['id'] ?>">
-							<td><?= $count++; ?></td>
-							<td><img class='rounded border' src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cdefs%3E%3Cstyle%3E.a%7Bfill:%23fff;%7D.b,.e,.g%7Bfill:none;%7D.b,.e%7Bstroke:%23e3e3e3;%7D.b%7Bstroke-dasharray:1 2;%7D.c%7Bfill:%23f7f7f7;%7D.d%7Bfill:%23e3e3e3;%7D.f%7Bstroke:none;%7D%3C/style%3E%3C/defs%3E%3Cg transform='translate(-886 -624)'%3E%3Crect class='a' width='120' height='120' transform='translate(886 624)'/%3E%3Cg transform='translate(23 123.33)'%3E%3Cg transform='translate(882 522)'%3E%3Cg class='b' transform='translate(0 16.67)'%3E%3Crect class='f' width='67' height='55'/%3E%3Crect class='g' x='0.5' y='0.5' width='66' height='54'/%3E%3C/g%3E%3Crect class='c' width='64' height='63' transform='translate(16 -0.33)'/%3E%3Cellipse class='d' cx='11' cy='10.5' rx='11' ry='10.5' transform='translate(21 9.67)'/%3E%3Crect class='a' width='25' height='23' transform='matrix(1, -0.017, 0.017, 1, 31.014, 23.2)'/%3E%3Cpath class='d' d='M11,0,22,16H0Z' transform='translate(48 30.67)'/%3E%3Cline class='e' x2='38.108' y2='0.212' transform='translate(21.5 50.17)'/%3E%3Cline class='e' x2='12' transform='translate(64.657 50.382)'/%3E%3Cline class='e' x2='27' transform='translate(21.5 54.17)'/%3E%3Cline class='e' x2='17' transform='translate(55.657 54.382)'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E" height="50"></td>
-							<td><?= $product['title']; ?></td>
-							<td><?= $product['product_type']; ?></td>
-							<td><?= date("d-m-Y, H:i:s", strtotime($product['created_at'])); ?></td>
-							<td class="text-center">
-								<div class="custom-control custom-switch">
-									<input type="checkbox" <?= $product['status'] == '1' ? 'checked' : '' ?> class="custom-control-input" id="custom<?= $product['id'] ?>">
-									<label class="custom-control-label" for="custom<?= $product['id']; ?>"></label>
-								</div>
-							</td>
-							<td class="text-center">
-								<div class="btn-group btn-group-sm">
-									<a class="btn btn-outline-primary" href="<?= base_url() . '/admin/products/' . $product['id'] . '/update/' ?>">
-										<ion-icon src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cpath d='M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z'/%3E%3C/svg%3E"></ion-icon>
-									</a>
-									<button data-toggle="modal" data-target="#delmodal" name='products' id='<?= $product['id']; ?>' class='btn btn-primary delete' data-toggle="modal" data-target="#exampleModal">
-										<ion-icon name="trash-bin"></ion-icon>
-									</button>
-								</div>
-							</td>
-						</tr>
-					<?php } ?>
-				</tbody>
-			</table>
+			<?php $count = 1;
+			$table = new \CodeIgniter\View\Table();
+			$table->setHeading(array('No.', 'Img', 'name', 'type', 'created at', 'status', 'Action'));
+			foreach ($products as $product) {
+				$table->addRow([
+					$count++, "<img height='35' class='rounded border' src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgMTIwIDEyMCI+PGRlZnM+PHN0eWxlPi5he2ZpbGw6I2ZmZjt9LmIsLmUsLmd7ZmlsbDpub25lO30uYiwuZXtzdHJva2U6I2UzZTNlMzt9LmJ7c3Ryb2tlLWRhc2hhcnJheToxIDI7fS5je2ZpbGw6I2Y3ZjdmNzt9LmR7ZmlsbDojZTNlM2UzO30uZntzdHJva2U6bm9uZTt9PC9zdHlsZT48L2RlZnM+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTg4NiAtNjI0KSI+PHJlY3QgY2xhc3M9ImEiIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4ODYgNjI0KSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIzIDEyMy4zMykiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDg4MiA1MjIpIj48ZyBjbGFzcz0iYiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAxNi42NykiPjxyZWN0IGNsYXNzPSJmIiB3aWR0aD0iNjciIGhlaWdodD0iNTUiLz48cmVjdCBjbGFzcz0iZyIgeD0iMC41IiB5PSIwLjUiIHdpZHRoPSI2NiIgaGVpZ2h0PSI1NCIvPjwvZz48cmVjdCBjbGFzcz0iYyIgd2lkdGg9IjY0IiBoZWlnaHQ9IjYzIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNiAtMC4zMykiLz48ZWxsaXBzZSBjbGFzcz0iZCIgY3g9IjExIiBjeT0iMTAuNSIgcng9IjExIiByeT0iMTAuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjEgOS42NykiLz48cmVjdCBjbGFzcz0iYSIgd2lkdGg9IjI1IiBoZWlnaHQ9IjIzIiB0cmFuc2Zvcm09Im1hdHJpeCgxLCAtMC4wMTcsIDAuMDE3LCAxLCAzMS4wMTQsIDIzLjIpIi8+PHBhdGggY2xhc3M9ImQiIGQ9Ik0xMSwwLDIyLDE2SDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0OCAzMC42NykiLz48bGluZSBjbGFzcz0iZSIgeDI9IjM4LjEwOCIgeTI9IjAuMjEyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMS41IDUwLjE3KSIvPjxsaW5lIGNsYXNzPSJlIiB4Mj0iMTIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY0LjY1NyA1MC4zODIpIi8+PGxpbmUgY2xhc3M9ImUiIHgyPSIyNyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjEuNSA1NC4xNykiLz48bGluZSBjbGFzcz0iZSIgeDI9IjE3IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1NS42NTcgNTQuMzgyKSIvPjwvZz48L2c+PC9nPjwvc3ZnPg=='>", $product['title'], $product['type'],
+					date("d-m-Y, H:i:s", strtotime($product['created_at'])),
+					get_status($product),
+					edit_delete('products', $product)
+				]);
+			}
+			$table->setTemplate(['table_open' => '<table id="example" class="table table-striped table-bordered" style="width:100%">', 'row_start' => '<tr id="row_' . $product['id'] . '">',]);
+			echo $table->generate(); ?>
 		</div>
 	</div>
 </div>

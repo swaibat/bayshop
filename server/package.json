@@ -15,7 +15,9 @@
     "lodash": "^4.17.15",
     "node-cron": "^2.0.3",
     "nodemon": "^2.0.3",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.2.0",
+    "user-agent": "^1.0.4",
+    "user-agent-parse": "^0.1.12"
   },
   "devDependencies": {},
   "description": ""
