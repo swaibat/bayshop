@@ -15,7 +15,7 @@
 					edit_delete('products', $product)
 				]);
 			}
-			$table->setTemplate(['table_open' => '<table id="example" class="table table-striped table-bordered" style="width:100%">', 'row_start' => '<tr id="row_' . $product['id'] . '">',]);
+			$table->setTemplate(['table_open' => '<table id="example" class="table table-striped" style="width:100%">', 'row_start' => '<tr id="row_' . $product['id'] . '">',]);
 			echo $table->generate(); ?>
 		</div>
 	</div>

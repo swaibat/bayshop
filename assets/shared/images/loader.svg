@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1038" height="1066" viewBox="0 0 1038 1066">
+    <defs>
+        <style>
+            .a {
+                fill: #fff;
+            }
+            
+            .a,
+            .b {
+                stroke: #707070;
+            }
+            
+            .b,
+            .d {
+                fill: none;
+            }
+            
+            .c {
+                stroke: none;
+            }
+        </style>
+    </defs>
+    <g transform="translate(-444 -7)">
+        <g class="a" transform="translate(444 7)">
+            <rect class="c" width="1038" height="1066" />
+            <rect class="d" x="0.5" y="0.5" width="1037" height="1065" />
+        </g>
+        <g class="a" transform="translate(550 328)">
+            <rect class="c" width="834" height="76" rx="3" />
+            <rect class="d" x="0.5" y="0.5" width="833" height="75" rx="2.5" />
+        </g>
+        <g class="a" transform="translate(543 200)">
+            <rect class="c" width="834" height="76" rx="3" />
+            <rect class="d" x="0.5" y="0.5" width="833" height="75" rx="2.5" />
+        </g>
+        <g class="a" transform="translate(444 59)">
+            <rect class="c" width="1004" height="64" rx="3" />
+            <rect class="d" x="0.5" y="0.5" width="1003" height="63" rx="2.5" />
+        </g>
+        <g class="a" transform="translate(540 470)">
+            <rect class="c" width="854" height="253" rx="5" />
+            <rect class="d" x="0.5" y="0.5" width="853" height="252" rx="4.5" />
+        </g>
+        <g class="a" transform="translate(543 786)">
+            <rect class="c" width="300" height="58" />
+            <rect class="d" x="0.5" y="0.5" width="299" height="57" />
+        </g>
+        <g class="a" transform="translate(861 785)">
+            <rect class="c" width="153" height="58" />
+            <rect class="d" x="0.5" y="0.5" width="152" height="57" />
+        </g>
+        <g class="a" transform="translate(1167 959)">
+            <rect class="c" width="114" height="63" rx="5" />
+            <rect class="d" x="0.5" y="0.5" width="113" height="62" rx="4.5" />
+        </g>
+        <g class="a" transform="translate(1298 959)">
+            <rect class="c" width="135" height="63" rx="5" />
+            <rect class="d" x="0.5" y="0.5" width="134" height="62" rx="4.5" />
+        </g>
+        <line class="b" y1="1" x2="996" transform="translate(465.5 924.5)" />
+    </g>
+</svg>

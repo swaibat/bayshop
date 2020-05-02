@@ -1,3 +1,4 @@
+
 <div class="card border-0 shadow-xs">
 	<div class="row">
 		<div class="col-sm-12">
@@ -31,7 +32,7 @@
 					</div>
 					<div class="col-md-12 pt-3">
 						<div class="form-group px-3">
-							<textarea class="wysihtml5 form-control rounded" name="description" id="description" rows="20"></textarea>
+							<textarea class="wysihtml5 form-control rounded" name="description" id="description"></textarea>
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -144,3 +145,25 @@
 		</div>
 	</div>
 </div>
+
+<!-- <script>
+	$('textarea#summernote').summernote({
+		placeholder: 'Hello bootstrap 4',
+		tabsize: 2,
+		height: 100,
+		toolbar: [
+			['style', ['style']],
+			['font', ['bold', 'italic', 'underline', 'clear']],
+			// ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+			//['fontname', ['fontname']],
+			// ['fontsize', ['fontsize']],
+			['color', ['color']],
+			['para', ['ul', 'ol', 'paragraph']],
+			['height', ['height']],
+			['table', ['table']],
+			['insert', ['link', 'picture', 'hr']],
+			//['view', ['fullscreen', 'codeview']],
+			['help', ['help']]
+		],
+	});
+</script> -->

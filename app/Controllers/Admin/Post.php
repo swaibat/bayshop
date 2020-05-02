@@ -45,7 +45,7 @@ class Post extends BaseController
             'page_name'         => 'create',
             'page_title'        => 'Create Post',
             'errors'            => $this->validation->getErrors(),
-            'users'             => $this->users->findAll(),
+            'users'             => $this->user->findAll(),
             'post_categories'   => $this->post_categories->orderBy('id', 'DESC')->findAll()
         ];
         return view('admin/index', $data);
@@ -78,7 +78,7 @@ class Post extends BaseController
             'page_title'        => 'Update Post',
             'errors'            => $this->validation->getErrors(),
             'post'              => $this->posts->find($id),
-            'users'             => $this->users->findAll(),
+            'users'             => $this->user->findAll(),
             'post_categories'   => $this->post_categories->orderBy('id', 'DESC')->findAll()
         ];
         return view('admin/index', $data);

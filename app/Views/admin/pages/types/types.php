@@ -15,7 +15,7 @@
           edit_delete('types', $type)
         ]);
       }
-      $table->setTemplate(['table_open' => '<table id="example" class="table table-striped table-bordered" style="width:100%">', 'row_start' => '<tr id="row_' . $category['id'] . '">',]);
+      $table->setTemplate(['table_open' => '<table id="example" class="table table-striped" style="width:100%">', 'row_start' => '<tr id="row_' . $category['id'] . '">',]);
       echo $table->generate(); ?>
     </div>
   </div>

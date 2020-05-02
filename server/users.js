@@ -2,11 +2,22 @@ let users = [];
 
 const user = {
   getUserById(data) {
-    return users.find((user) => user.id === data.id);
+    return users.find((user) => {
+      if(user.id === data.id){
+        user.socketId = data.socketId;
+        user.on = true;
+      }
+      return user
+    });
   },
 
   getUserBySocketId(socket) {
-    return users.find((user) => user.socketId === socket.id);
+    return users.find((user) => {
+      if(user.socketId === socket.id){
+        user.on = false;
+      }
+      return user;
+    });
   },
 
   add(data, socket, userAgent) {

@@ -15,7 +15,7 @@
 					edit_delete('posts', $post)
 				]);
 			}
-			$table->setTemplate(['table_open' => '<table id="example" class="table table-striped table-bordered" style="width:100%">', 'row_start' => '<tr id="row_' . $post['id'] . '">',]);
+			$table->setTemplate(['table_open' => '<table id="example" class="table table-striped" style="width:100%">', 'row_start' => '<tr id="row_' . $post['id'] . '">',]);
 			echo $table->generate(); ?>
 		</div>
 	</div>
