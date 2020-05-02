@@ -11,7 +11,7 @@ function custom_inputs($data, $style)
     </span>
   </div>" . form_input($data) .
     "<span class='bar'></span>
-    <label class='cv-label left text-capitalize'>Enter " . pascalize($data['name']) . "</label>
+    <label class='cv-label left text-capitalize'>Enter " . $data['label'] . "</label>
 </div>";
 }
 
@@ -58,4 +58,3 @@ function send_email()
   $email->setMessage('Testing the email class.');
   $email->send();
 }
-
