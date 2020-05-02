@@ -1,4 +1,4 @@
-var data = generateDayWiseTimeSeries(new Date("22 Apr 2017").getTime(), 115, {
+var data = generateDayWiseTimeSeries(new Date("22 Apr 2020").getTime(), 115, {
     min: 30,
     max: 90
   });
@@ -78,8 +78,8 @@ var data = generateDayWiseTimeSeries(new Date("22 Apr 2017").getTime(), 115, {
           opacity: 0.4
         },
         xaxis: {
-          min: new Date("27 Jul 2017 10:00:00").getTime(),
-          max: new Date("14 Aug 2017 10:00:00").getTime()
+          min: new Date("27 Jul 2020 10:00:00").getTime(),
+          max: new Date("14 Aug 2020 10:00:00").getTime()
         }
       }
     },
@@ -114,6 +114,7 @@ var data = generateDayWiseTimeSeries(new Date("22 Apr 2017").getTime(), 115, {
   function generateDayWiseTimeSeries(baseval, count, yrange) {
     var i = 0;
     var series = [];
+    console.log(series)
     while (i < count) {
       var x = baseval;
       var y =

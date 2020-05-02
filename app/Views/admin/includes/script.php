@@ -58,19 +58,60 @@
 		</div>
 	</div>
 </footer>
-
 <?= script_tag('assets/admin/js/watch.js'); ?>
-<?= script_tag('assets/shared/jquery/jquery-3.4.1.min.js'); ?>
 <?= script_tag('assets/plugins/toastify-js/toastify-js.js'); ?>
 <?= script_tag('assets/plugins/jquery-multifile/jquery-multifile.js'); ?>
-<?= script_tag('assets/shared/bootstrap-4.4.1/js/bootstrap.min.js'); ?>
+<?= script_tag('assets/shared/bootstrap-4.4.1/js/bootstrap.bundle.min.js'); ?>
 <?= script_tag('assets/plugins/select2/dist/js/select2.min.js'); ?>
 <?= script_tag('assets/plugins/dataTables/datatables.min.js'); ?>
 <?= script_tag('assets/plugins/summernote/summernote-bs4.min.js'); ?>
 <?= script_tag("assets/shared/jquery/jquery-ui.js"); ?>
 <?= script_tag('/assets/admin/js/script.js'); ?>
-<script>
+<?= model_loader() ?>
 
+
+<script>
+	$("#form").submit(function(event) {
+		event.preventDefault();
+		$('#modal-loader').addClass('show')
+		var post_url = $(this).attr("action");
+		var request_method = $(this).attr("method");
+		var form_data = $(this).serialize();
+		$.ajax({
+				url: post_url,
+				type: request_method,
+				data: form_data,
+			}).dispatchEvent(() => {
+				console.log('hello')
+			})
+			.done(function(response) {
+				Toastify({
+					text: response.message,
+					duration: 3000,
+					gravity: "top",
+					position: 'right',
+					backgroundColor: "#228B22",
+					stopOnFocus: true,
+				}).showToast();
+				$("#mymodal").modal("toggle");
+
+			}).fail(function(error) {
+				Toastify({
+					text: 'Error operation failed',
+					duration: 3000,
+					gravity: "top",
+					position: 'right',
+					backgroundColor: '#FFA500',
+					stopOnFocus: true,
+				}).showToast();
+			});
+		$("#status").on("change", (e) => {
+			const target = e.target;
+			target.checked ? $("#status").val("1") : $("#status").val("0");
+		});
+	});
+</script>
+<script>
 	$(document).ready(function() {
 		const user = <?= $_SESSION['user'] ?>;
 		socket.emit('online', {
@@ -95,6 +136,5 @@
 	})
 </script>
 <script>
-	
-</script>
 
+</script>

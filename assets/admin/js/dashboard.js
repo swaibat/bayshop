@@ -117,6 +117,7 @@ function getVisitorsByLocation(data) {
         horizontal: true,
       },
     },
+    
     dataLabels: {
       enabled: false,
     },

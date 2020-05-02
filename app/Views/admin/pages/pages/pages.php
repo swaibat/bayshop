@@ -4,7 +4,7 @@
 			<a href="<?= base_url() . '/admin/pages/create'; ?>" class="btn btn-sm btn-primary mb-n5">
 				Add Page
 			</a>
-			<table id="example" class="table table-striped table-bordered" style="width:100%">
+			<table id="example" class="table table-striped" style="width:100%">
 				<thead>
 					<tr>
 						<th>s/n</th>

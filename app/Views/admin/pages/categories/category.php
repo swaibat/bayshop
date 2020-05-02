@@ -4,7 +4,7 @@
 			<button data-toggle="modal" data-target="#mymodal" data-modal='' data-id="<?= base_url('admin/categories/create'); ?>" id="menu" class="btn btn-sm btn-primary mb-n5">
 				Add Category
 			</button>
-			<table id="example" class="table table-striped table-bordered" style="width:100%">
+			<table id="example" class="table table-striped" style="width:100%">
 				<thead>
 					<tr>
 						<th>S/n</th>
@@ -47,3 +47,4 @@
 		</div>
 	</div>
 </div>
+
