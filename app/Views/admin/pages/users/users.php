@@ -1,4 +1,3 @@
-
 <div class="card p-3">
 	<div class="row">
 		<div class="col-sm-12 mt-n3">
@@ -11,9 +10,9 @@
 			foreach ($users as $user) {
 				$table->addRow([
 					$count++, '<img height="30" src="' . base_url("assets/shared/images/user.svg") . '">', $user['username'],  $user['email'],
-					date("d-m-Y, H:i:s",strtotime($user['last_login'])),$user['role'],
+					date("d-m-Y, H:i:s", strtotime($user['last_login'])), $user['role'],
 					get_status($user),
-					edit_delete('users', $user)
+					edit_delete('users', $user, [])
 				]);
 			}
 			$table->setTemplate(['table_open' => '<table id="example" class="table table-striped users-table" style="width:100%">', 'row_start' => '<tr id="row_' . $post['id'] . '">',]);

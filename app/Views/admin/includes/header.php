@@ -11,7 +11,7 @@
 				</span>
 			</a>
 		</li>
-		<li class="nav-item mx-3">
+		<li class="nav-item ml-3 mr-4">
 			<a class="nav-link text-white" href="#" data-toggle="tooltip" data-placement="bottom" title="Notifications">
 				<span class="admin-nav-icons">
 					<ion-icon name="notifications"></ion-icon>
@@ -19,8 +19,8 @@
 				<span class="badge badge-light position-absolute notify-badge">5</span>
 			</a>
 		</li>
-		<li class='dropdown mx-2 d-flex flex-row align-items-center font-weight-light'>
-			<button class='btn mt-n1 py-0 nav-link dropdown-toggle text-white' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>
+		<li class='dropdown ml-2 d-flex flex-row align-items-center font-weight-light'>
+			<button class='btn mt-n1 p-0 nav-link dropdown-toggle text-white' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>
 				<span class="admin-nav-icons">
 				<img height="30" src="<?= base_url('assets/shared/images/user.svg'); ?>" alt="user">
 				</span>

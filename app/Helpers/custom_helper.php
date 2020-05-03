@@ -11,7 +11,7 @@ function custom_inputs($data, $style)
     </span>
   </div>" . form_input($data) .
     "<span class='bar'></span>
-    <label class='cv-label left text-capitalize'>Enter " . pascalize($data['name']) . "</label>
+    <label class='cv-label left text-capitalize'>Enter " . $data['label'] . "</label>
 </div>";
 }
 
@@ -59,3 +59,10 @@ function send_email()
   $email->send();
 }
 
+function get_name_by_id($id, $data){
+  foreach ($data as $dat) {
+    if ($id == $dat['id']) {
+      return $dat['name'];
+    }
+  }
+}

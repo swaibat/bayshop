@@ -1,4 +1,41 @@
+// create method
+function postForm() {
+  $(".js-select2").select2({
+    minimumResultsForSearch: -1,
+  });
+  $("#form").submit(function (event) {
+    event.preventDefault();
+    $(".helper-text-danger").remove();
+    var data = new FormData($("#form")[0]);
+    $.ajax({
+      type: "POST",
+      enctype: "multipart/form-data",
+      url: $(this).attr("action"),
+      data: data,
+      processData: false,
+      contentType: false,
+    }).done(function (res) {
+        res.errors
+          ? Object.entries(res.errors).map((error) => {
+              $(`#${error[0]}`).after(
+                `<small class="helper-text-danger">${error[1]}</small>`
+              );
+            })
+          : Toastify({
+              text: res.message,
+              backgroundColor: "#228B22",
+            }).showToast();
+      }).fail(function (err) {
+        Toastify({
+          text: "Error operation failed",
+          backgroundColor: "#FFA500",
+        }).showToast();
+      });
+  });
+}
+
 $(document).ready(() => {
+  $(".js-select2").select2();
   $("#reload").click(() => {
     location.reload();
   });
@@ -64,23 +101,24 @@ $(document).ready(() => {
     maxHeight: null, // set maximum height of editor
     focus: false, // set focus to editable area after initializing summernote
   });
-  $(".js-select2").select2();
 });
 
 /**
  * multifile
  * image upload Heleper
  */
-$(function() {
+$(function () {
   $(".MultiFile-list").sortable({
-    placeholder: "upload-btn"
+    placeholder: "upload-btn",
   });
   $(".MultiFile-list").disableSelection();
-  $('#photo-upload').change(() => {
-    $('#olden').removeClass('d-flex').addClass('d-none');
-    $('#img-holder').removeClass('d-flex justify-content-center align-items-center');
-    $('.upload-btn').addClass('mt-1').removeClass('d-none');
-    $(".MultiFile-preview").removeAttr("style")
-    $('.MultiFile-list').find(">").addClass("first");
-  })
+  $("#photo-upload").change(() => {
+    $("#olden").removeClass("d-flex").addClass("d-none");
+    $("#img-holder").removeClass(
+      "d-flex justify-content-center align-items-center"
+    );
+    $(".upload-btn").addClass("mt-1").removeClass("d-none");
+    $(".MultiFile-preview").removeAttr("style");
+    $(".MultiFile-list").find(">").addClass("first");
+  });
 });
