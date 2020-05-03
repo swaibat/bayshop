@@ -58,3 +58,11 @@ function send_email()
   $email->setMessage('Testing the email class.');
   $email->send();
 }
+
+function get_name_by_id($id, $data){
+  foreach ($data as $dat) {
+    if ($id == $dat['id']) {
+      return $dat['name'];
+    }
+  }
+}

@@ -12,7 +12,7 @@
 					$count++, $post['title'], $post['user_id'],  $post['category_id'],
 					date("d-m-Y, H:i:s", strtotime($post['created_at'])),
 					get_status($post),
-					edit_delete('posts', $post)
+					edit_delete('posts', $post, [])
 				]);
 			}
 			$table->setTemplate(['table_open' => '<table id="example" class="table table-striped" style="width:100%">', 'row_start' => '<tr id="row_' . $post['id'] . '">',]);

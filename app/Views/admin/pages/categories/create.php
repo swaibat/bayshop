@@ -13,8 +13,10 @@
 			'label'      	=> 'category name',
 			'class'       	=> 'form-control custom-input',
 		], ['group-class' 	=> 'mt-2 mx-3', 'icon-name' => 'person-outline']) ?>
-		<?= form_dropdown('shirts', get_pairs($types), 'large', 'class="form-control" id="type"'); ?>
-		<?= image_uploader(['name'=>'icon'])?>
+		<div class='cv-form-group input-group mb-3 mt-3 mx-3'>
+			<?= form_dropdown('type', get_pairs($types), '', 'class="form-control js-select2" id="type"'); ?>
+		</div>
+		<?= image_uploader(['name' => 'icon']) ?>
 		<?= custom_chekbox(['name' => 'status', 'id' => 'status', 'label' => 'Publish the product']) ?>
 	</div>
 	<div class="modal-footer">
@@ -22,3 +24,7 @@
 		<button type="submit" class="btn btn-primary btn-sm">submit</button>
 	</div>
 </form>
+<script>
+	postForm();
+</script>
+

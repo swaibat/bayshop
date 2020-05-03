@@ -69,48 +69,6 @@
 <?= script_tag('/assets/admin/js/script.js'); ?>
 <?= model_loader() ?>
 
-
-<script>
-	$("#form").submit(function(event) {
-		event.preventDefault();
-		$('#modal-loader').addClass('show')
-		var post_url = $(this).attr("action");
-		var request_method = $(this).attr("method");
-		var form_data = $(this).serialize();
-		$.ajax({
-				url: post_url,
-				type: request_method,
-				data: form_data,
-			}).dispatchEvent(() => {
-				console.log('hello')
-			})
-			.done(function(response) {
-				Toastify({
-					text: response.message,
-					duration: 3000,
-					gravity: "top",
-					position: 'right',
-					backgroundColor: "#228B22",
-					stopOnFocus: true,
-				}).showToast();
-				$("#mymodal").modal("toggle");
-
-			}).fail(function(error) {
-				Toastify({
-					text: 'Error operation failed',
-					duration: 3000,
-					gravity: "top",
-					position: 'right',
-					backgroundColor: '#FFA500',
-					stopOnFocus: true,
-				}).showToast();
-			});
-		$("#status").on("change", (e) => {
-			const target = e.target;
-			target.checked ? $("#status").val("1") : $("#status").val("0");
-		});
-	});
-</script>
 <script>
 	$(document).ready(function() {
 		const user = <?= $_SESSION['user'] ?>;
@@ -135,6 +93,6 @@
 		})
 	})
 </script>
-<script>
+
 
 </script>

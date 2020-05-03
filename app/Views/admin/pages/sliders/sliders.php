@@ -12,7 +12,7 @@
 					$count++, $slider['title'], $slider['description'],  $slider['product_link'],
 					date("d-m-Y, H:i:s", strtotime($slider['created_at'])),
 					get_status($slider),
-					edit_delete('sliders', $slider)
+					edit_delete('sliders', $slider, [])
 				]);
 			}
 			$table->setTemplate(['table_open' => '<table id="example" class="table table-striped" style="width:100%">', 'row_start' => '<tr id="row_' . $slider['id'] . '">',]);

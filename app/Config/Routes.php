@@ -54,7 +54,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
 	// CATEGORIES
 	$routes->add('categories', 'Category');
 	$routes->add('categories/create', 'Category::create');
-	$routes->add('categories/(:num)/update', 'Category::update/$1');
+	$routes->add('categories/(:num)/update', 'Category::update');
 	$routes->add('delete/(:segment)/(:num)', 'Delete');
 	// COUNRRIES
 	$routes->add('countries', 'Country');
