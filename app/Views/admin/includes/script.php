@@ -58,6 +58,7 @@
 		</div>
 	</div>
 </footer>
+<?= script_tag('assets/shared/jquery/jquery-3.4.1.min.js'); ?>
 <?= script_tag('assets/admin/js/watch.js'); ?>
 <?= script_tag('assets/plugins/toastify-js/toastify-js.js'); ?>
 <?= script_tag('assets/plugins/jquery-multifile/jquery-multifile.js'); ?>
@@ -92,7 +93,4 @@
 			$('#chat-text').val('')
 		})
 	})
-</script>
-
-
 </script>

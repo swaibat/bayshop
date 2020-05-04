@@ -20,7 +20,7 @@
 		"zendframework/zend-escaper": "^2.5",
 		"paragonie/sodium_compat": "^1.1",
 		"kint-php/kint": "3.3 as 2.2",
-		"stripe/stripe-php": "^7.29",
+		"stripe/stripe-php": "^7.31",
 		"paypal/rest-api-sdk-php": "*",
 		"hybridauth/hybridauth": "^3.3"
 	},
