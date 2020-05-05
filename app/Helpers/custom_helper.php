@@ -38,7 +38,7 @@ function user_session($user)
   ]);
 }
 
-function send_email()
+function send_email($data)
 {
   $email = \Config\Services::email();
   $config['protocol'] = 'smtp';
@@ -53,9 +53,9 @@ function send_email()
 
   $email->initialize($config);
   $email->setFrom('admin@gmail.com', 'Your Name');
-  $email->setTo('rswaib@gmail.com');
-  $email->setSubject('Email Test');
-  $email->setMessage('Testing the email class.');
+  $email->setTo($data['email']);
+  $email->setSubject('verification Email');
+  $email->setMessage('<a href="http:localhost/auth/verify/'.$data['auth_keys'].'  ">click here to vetify</a>');
   $email->send();
 }
 

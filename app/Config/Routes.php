@@ -91,7 +91,9 @@ $routes->group('auth', ['namespace' => 'App\Controllers\User'], function ($route
 	$routes->add('register', 'Auth::register');
 	$routes->add('login', 'Auth::login');
 	$routes->add('logout', 'Auth::logout');
-	$routes->add('verify', 'Auth::verify');
+	$routes->add('verify/(:segment)', 'Auth::verify');
+	$routes->add('password_reset', 'Auth::password_reset');
+	$routes->add('verify_reset/(:segment)', 'Auth::verify_reset');
 });
 
 /**
