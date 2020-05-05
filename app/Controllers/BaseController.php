@@ -70,7 +70,7 @@ class BaseController extends Controller
         $this->roles            = new RoleModel();
         $this->clientInfo       = new ClientinfoModel();
         $this->logs             = new LogModel();
-        $this->location         = location_info();
+        // $this->location         = location_info();
         $this->user_agent       = $this->request->getUserAgent();
         $this->session          = \Config\Services::session();
         $this->validation       = \Config\Services::validation();
