@@ -153,6 +153,8 @@ class Auth extends BaseController
         ];
         if ($this->validate($password_reset, $password_reset_errors)) { 
             $data = [
+                'subject'       => 'Password Reset',
+                'body'          => view('emails/password_reset',['username'=>'swaibu']),
                 'email'         => $this->request->getVar('email'),
                 'auth_keys'     => md5($this->request->getVar('email'))       
             ];

@@ -54,10 +54,10 @@ function send_email($data)
   $email->initialize($config);
   $email->setFrom('admin@gmail.com', 'Your Name');
   $email->setTo($data['email']);
-  $email->setSubject('verification Email');
-  $email->setMessage('<a href="http:localhost/auth/verify/'.$data['auth_keys'].'  ">click here to vetify</a>');
+  $email->setSubject($data['subject']);
+  $email->setMessage($data['body']);
   $email->send();
-}
+} 
 
 function get_name_by_id($id, $data){
   foreach ($data as $dat) {
