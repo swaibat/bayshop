@@ -3,7 +3,6 @@ if (!isset($_SESSION['user'])) {
 	header("Location:" . base_url() . "/auth/login");
 	exit();
 }
-$cache = \Config\Services::cache();
 ?>
 
 <head>

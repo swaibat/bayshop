@@ -8,7 +8,7 @@ namespace App\Controllers;
 
 require_once 'vendor/autoload.php';
 
-use CodeIgniter\Controller;
+use App\Controllers\BaseController;
 use Hybridauth\Exception\Exception;
 use Hybridauth\Hybridauth;
 use Hybridauth\HttpClient;
@@ -16,7 +16,8 @@ use Hybridauth\Storage\Session;
 
 
 
-class Hauth extends Controller
+class Hauth extends BaseController
+
 {
     public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
     {
@@ -25,63 +26,95 @@ class Hauth extends Controller
         helper(['form', 'url', 'html', 'inflector']);
         $this->hauth       = new \Config\Hauth();
     }
-    public function index()
-    {
-        $hybridauth = new Hybridauth($this->hauth->config);
-        $adapters  = $hybridauth->getConnectedAdapters();
-        $data = [
-            'hybridauth'    => $hybridauth,
-            'adapters'      => $adapters
-        ];
-        return view('content/login', $data);
-    }
 
     public function callback()
     {
         try {
-            /**
-             * Feed configuration array to Hybridauth.
-             */
+
             $hybridauth = new Hybridauth($this->hauth->config);
-
-            /**
-             * Initialize session storage.
-             */
             $storage = new Session();
-
-            /**
-             * Hold information about provider when user clicks on Sign In.
-             */
+            $error = false;
+        
+            //
+            // Event 1: User clicked SIGN-IN link
+            //
             if (isset($_GET['provider'])) {
-                $storage->set('provider', $_GET['provider']);
+                // Validate provider exists in the $config
+                if (in_array($_GET['provider'], $hybridauth->getProviders())) {
+                    // Store the provider for the callback event
+                    $storage->set('provider', $_GET['provider']);
+                } else {
+                    $error = $_GET['provider'];
+                }
             }
-
-            /**
-             * When provider exists in the storage, try to authenticate user and clear storage.
-             *
-             * When invoked, `authenticate()` will redirect users to provider login page where they
-             * will be asked to grant access to your application. If they do, provider will redirect
-             * the users back to Authorization callback URL (i.e., this script).
-             */
+        
+            //
+            // Event 2: User clicked LOGOUT link
+            //
+            if (isset($_GET['logout'])) {
+                if (in_array($_GET['logout'], $hybridauth->getProviders())) {
+                    // Disconnect the adapter
+                    $adapter = $hybridauth->getAdapter($_GET['logout']);
+                    $adapter->disconnect();
+                } else {
+                    $error = $_GET['logout'];
+                }
+            }
+        
+            //
+            // Handle invalid provider errors
+            //
+            if ($error) {
+                error_log('HybridAuth Error: Provider '. json_encode($error) .' not found or not enabled in $config');
+                // Close the pop-up window
+                echo "
+                    <script>
+                        window.opener.location.reload();
+                        window.close();
+                    </script>";
+                exit;
+            }
+        
+            //
+            // Event 3: Provider returns via CALLBACK
+            //
             if ($provider = $storage->get('provider')) {
+        
                 $hybridauth->authenticate($provider);
                 $storage->set('provider', null);
+        
+                // Retrieve the provider record
+                $adapter = $hybridauth->getAdapter($provider);
+                $userProfile = $adapter->getUserProfile();
+                $accessToken = $adapter->getAccessToken();
+        
+                // add your custom AUTH functions (if any) here
+                // ...
+                $data = [
+                    'auth_token'    => $accessToken,
+                    'username'      => $userProfile->displayName,
+                    'slug'          => url_title($userProfile->displayName),
+                    'identifier'    => $userProfile->identifier,
+                    'email'         => $userProfile->email,
+                    'first_name'    => $userProfile->firstName,
+                    'last_name'     => $userProfile->lastName,
+                    'avatar'        => strtok($userProfile->photoURL,'?'),
+                    'verified'      => 1
+                    ];
+                if ($user = $this->user->where('email', $data['email'])->first()) {
+                    $this->user->update($user['id'], $data);
+                } else {
+                    $this->user->save($data);
+                }
+                echo "<script> window.opener.location.reload(); window.close();</script>";
+                set_time_limit(200);
+                $_SESSION['user'] = user_session($data);
+                return redirect()->to(base_url('admin/dashboard'));
+        
             }
-
-            /**
-             * This will erase the current user authentication data from session, and any further
-             * attempt to communicate with provider.
-             */
-            if (isset($_GET['logout'])) {
-                $adapter = $hybridauth->getAdapter($_GET['logout']);
-                $adapter->disconnect();
-            }
-
-            /**
-             * Redirects user to home page (i.e., index.php in our case)
-             */
-            HttpClient\Util::redirect('http://localhost:8888/admin/dashboard');
+        
         } catch (Exception $e) {
+            error_log( $e->getMessage());
             echo $e->getMessage();
         }
     }

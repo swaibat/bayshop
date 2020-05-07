@@ -15,7 +15,7 @@ class Hauth extends BaseConfig {
 
 public $config = [
 		// set on "base_url" the relative url that point to HybridAuth Endpoint
-		'callback' => 'https://localhost:8888/hauth//callback',
+		'callback' => 'http://localhost/hauth/callback',
 
 		"providers" => array (
 			// openid providers

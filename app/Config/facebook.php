@@ -31,8 +31,8 @@ class Hauth extends BaseConfig {
 |  facebook_auth_on_load         boolean  Set to TRUE to check for valid access token on every page load.
 */
 public $config=[
-    'facebook_app_id'               => 'Insert_Facebook_App_ID',
-    'facebook_app_secret'           => 'Insert_Facebook_App_Secret',
+    'facebook_app_id'               => '2618632188182397',
+    'facebook_app_secret'           => 'f8a48d72223691ad05ca936fa20049e9',
     'facebook_login_redirect_url'   => 'user_authentication/',
     'facebook_logout_redirect_url'  => 'user_authentication/logout',
     'facebook_login_type'           => 'web',

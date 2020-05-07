@@ -17,7 +17,6 @@ class Dashboard extends BaseController
             'total_users'       => count($this->user->findAll()),
             'total_products'    => count($this->products->findAll()),
             'user_agents'       => $this->products->findAll(),
-            'visitors'          => json_encode($this->logs->get_countries_visitors())
         ];
         echo view('admin/index', $data);
     }

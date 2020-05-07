@@ -92,7 +92,9 @@ class Auth extends BaseController
         $data = [
             'page_name'         => 'register',
             'page_title'        => 'Register',
-            'roles'             => $this->roles->findAll()
+            'roles'             => $this->roles->findAll(),
+            'hybridauth'        => $this->hybridauth,
+            'adapters'          => $this->adapters,
         ];
         return (isset($_SESSION['user'])) ? redirect()->to(base_url('admin/dashboard')) : view('auth/index', $data);
     }
