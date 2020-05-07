@@ -22,7 +22,7 @@
 <script>
     $('.social').click((event) => {
         const provider = event.target.textContent.trim()
-        var authWindow = window.open('http://localhost:8888/hauth/callback?provider=' + provider, 'authWindow', 'width=600,height=400,scrollbars=yes');
+        var authWindow = window.open('http://localhost/hauth/callback?provider=' + provider, 'authWindow', 'width=600,height=400,scrollbars=yes');
         return false;
     })
     $('#form').submit(function(event) {

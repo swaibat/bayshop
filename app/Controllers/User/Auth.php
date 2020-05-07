@@ -92,7 +92,9 @@ class Auth extends BaseController
         $data = [
             'page_name'         => 'register',
             'page_title'        => 'Register',
-            'roles'             => $this->roles->findAll()
+            'roles'             => $this->roles->findAll(),
+            'hybridauth'        => $this->hybridauth,
+            'adapters'          => $this->adapters,
         ];
         return (isset($_SESSION['user'])) ? redirect()->to(base_url('admin/dashboard')) : view('auth/index', $data);
     }
@@ -153,6 +155,8 @@ class Auth extends BaseController
         ];
         if ($this->validate($password_reset, $password_reset_errors)) { 
             $data = [
+                'subject'       => 'Password Reset',
+                'body'          => view('emails/password_reset',['username'=>'swaibu']),
                 'email'         => $this->request->getVar('email'),
                 'auth_keys'     => md5($this->request->getVar('email'))       
             ];
