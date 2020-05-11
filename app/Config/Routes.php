@@ -96,6 +96,14 @@ $routes->group('auth', ['namespace' => 'App\Controllers\User'], function ($route
 	$routes->add('verify_reset/(:segment)', 'Auth::verify_reset');
 });
 
+$routes->group('/', ['namespace' => 'App\Controllers'], function ($routes) {
+	$routes->add('products', 'Home::products');
+	$routes->add('logout', 'Auth::logout');
+	$routes->add('verify/(:segment)', 'Auth::verify');
+	$routes->add('password_reset', 'Auth::password_reset');
+	$routes->add('verify_reset/(:segment)', 'Auth::verify_reset');
+});
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

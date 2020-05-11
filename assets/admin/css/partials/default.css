@@ -1,0 +1,55 @@
+.slide-container{
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    height: 22rem;
+    font-size: .75rem;
+}
+.category-nav .nav-second-level{
+    position: absolute;
+    background-color: gainsboro;
+    left: calc(16.666667/100*1050px);
+    top:0;
+    min-width: 62vw;
+    z-index: 1000;
+    height: 384px;
+}
+.slide-container ion-icon{
+    font-size: large;
+}
+.search-form{
+    /* min-width: 50%; */
+}
+
+@media (max-width: 767px) {
+    .category-column {
+      position: absolute;
+    }
+    .slide-container{
+        height: calc(100vw/2);
+    }
+    .slider{
+        /* height: ; */
+    }
+}
+
+.footer {
+	bottom: 0;
+	width: 100%;
+	
+}
+.cv-title {
+    color: #0f0f0f;
+    font-size: 1rem;
+    font-weight: 500 !important;
+}
+
+.offers-footer-icon {
+	font-size: 3rem;
+}
+
+.footer-social-icons ion-icon{	 
+		font-size: 1.8rem;
+}
+
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 1240px;
+}

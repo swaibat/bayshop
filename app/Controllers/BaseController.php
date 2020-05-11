@@ -78,5 +78,6 @@ class BaseController extends Controller
         $this->email            = \Config\Services::email();
         $this->res              = $this->response;
         $this->table            = new \CodeIgniter\View\Table();
+        $this->themePath        = 'themes/default/index';
     }
 }
