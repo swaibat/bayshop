@@ -70,7 +70,7 @@
 <?= script_tag('/assets/admin/js/script.js'); ?>
 <?= model_loader() ?>
 
-<script>
+<!-- <script>
 	$(document).ready(function() {
 		const user = <?= $_SESSION['user'] ?>;
 		socket.emit('online', {
@@ -93,4 +93,4 @@
 			$('#chat-text').val('')
 		})
 	})
-</script>
+</script> -->
