@@ -19,7 +19,8 @@ class Category extends BaseController
     ];
 
     // GET CATEGORIES
-    public function index(){
+    public function index()
+    {
         $data = [
             'folder_name'       => 'categories',
             'page_name'         => 'category',
@@ -32,7 +33,8 @@ class Category extends BaseController
 
 
     // CREATE A NEW CATEGORY
-    public function create(){
+    public function create()
+    {
         if ($this->validate($this->category, $this->category_errors)) {
             $data = [
                 'name'          => $this->request->getVar('name'),
@@ -59,7 +61,8 @@ class Category extends BaseController
     }
 
     // CREATE A NEW CATEGORY
-    public function update(){
+    public function update()
+    {
         $id = $this->request->uri->getSegment(3);
         if ($this->validate($this->category, $this->category_errors)) {
             $data = [
