@@ -22,6 +22,17 @@ class Home extends BaseController
 		return view($this->themePath, $data);
 	}
 
+	public function product()
+	{
+		$slug = $this->request->uri->getSegment(3);
+		$data = [
+            'page_name'     => 'product_details',
+            'page_title'    => 'product',
+            'products'      => $this->products->where('slug', $slug)->first()
+        ];
+		return view($this->themePath, $data);
+	}
+
 	//--------------------------------------------------------------------
 
 }
