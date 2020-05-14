@@ -4,9 +4,11 @@ class Home extends BaseController
 {
     public function index()
     {
+		// return print_r($this->categories->group_categories());
         $data = [
             'page_name'     => 'home',
-            'page_title'    => 'home',
+			'page_title'    => 'home',
+			'categories'    => $this->categories->group_categories(),
             'products'      => $this->products->orderBy('id', 'DESC')->findAll()
         ];
         return view($this->themePath, $data);
@@ -36,11 +38,10 @@ class Home extends BaseController
     public function category_products()
     {
 		$slug = $this->request->uri->getSegment(2);
-		print_r($slug);
         $data = [
             'page_name'         => 'products',
             'page_title'        => 'categories',
-            'categories'        => $this->categories->findAll(),
+            'categories'        => $this->categories->group_categories(),
             'products'          => $this->categories->get_products_by_category($slug),
         ];
         echo view($this->themePath, $data);

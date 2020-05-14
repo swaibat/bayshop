@@ -21,4 +21,29 @@ class CategoryModel extends Model
         $query = $builder->get();
         return $query->getResultArray();
     }
+    function group_categories()
+    {
+        $db      = \Config\Database::connect();
+        $query = $db->query("select root.name  as root_name
+        , down1.name as down1_name
+        , down2.name as down2_name
+        , down3.name as down3_name
+        from categories as root
+    left outer
+     join categories as down1
+       on down1.parentid = root.id
+   left outer
+     join categories as down2
+       on down2.parentid = down1.id
+   left outer
+     join categories as down3
+       on down3.parentid = down2.id
+    where root.parentid is null
+   order 
+       by root_name 
+        , down1_name 
+        , down2_name 
+        , down3_name");
+        return $query->getResultArray();
+    }
 }
