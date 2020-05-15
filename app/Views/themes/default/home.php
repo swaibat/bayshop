@@ -1,53 +1,28 @@
 <main role="main" class="container mt-5">
     <div class='row'>
         <div class='col-md-2 pb-3 category-column'>
-            <div class="bg-white shadow-xs rounded slide-container p-2">
+            <div class="bg-white shadow-xs rounded slide-container overflow-hidden p-2">
                 <ul class="navbar-nav mr-auto category-nav" id="navAccordion">
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-collapse" href="#" id="hasSubItems" data-toggle="collapse"
-                            data-target="#collapseSubItems2" aria-controls="collapseSubItems2"
-                            aria-expanded="false">Item 2</a>
-                        <ul class="nav-second-level collapse" id="collapseSubItems2" data-parent="#navAccordion">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span class="nav-link-text">Item 2.1</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span class="nav-link-text">Item 2.2</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Item 3</a>
-                    </li>
+                    <?php foreach ($categories as $category):?>
                     <li class="nav-item">
                         <a class="nav-link nav-link-collapse nav-link-show" href="#" id="hasSubItems"
                             data-toggle="collapse" data-target="#collapseSubItems4" aria-controls="collapseSubItems4"
                             aria-expanded="true">
                             <ion-icon name="car-sport-outline"></ion-icon>
-                            Item 4
+                            <?=$category['root_name']?>
                         </a>
                         <ul class="nav-second-level collapse" id="collapseSubItems4" data-parent="#navAccordion">
+
+                        <h6><?=$category['down1_name']?></h6>
+                        <hr>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
-                                    <span class="nav-link-text">Item 4.1</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span class="nav-link-text">Item 4.2</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span class="nav-link-text">Item 4.2</span>
+                                    <span class="nav-link-text"><?=$category['down2_name']?></span>
                                 </a>
                             </li>
                         </ul>
                     </li>
+                    <?php endforeach ?>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Item 5</a>
                     </li>

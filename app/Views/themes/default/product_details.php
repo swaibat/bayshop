@@ -3,7 +3,7 @@
         <img class="mr-3" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-outline.svg" alt="" width="48"
             height="48">
         <div class="lh-100">
-            <h6 class="mb-0 text-white lh-100">Bootstrap</h6>
+            <h6 class="mb-0 text-white lh-100"><?=$product->title ?></h6>
             <small>Since 2011</small>
         </div>
     </div>
@@ -11,13 +11,36 @@
         <div class='col-md-9'>
             <div class='row bg-white py-3 shadow-xs rounded'>
                 <div class='col-md-5 pt-2'>
-                    <div class='p-4'>
-                        <ImageGallery class='rounded border mt-n1' items={images} />
-                    </div>
+                    
+                    <div class="show w-100" href="1.jpg">
+       <img class='w-100' src="<?=$product->url ?>" id="show-img">
+     </div>
+
+     <!-- Secondary carousel image thumbnail gallery -->
+
+     <div class="small-img">
+      <span class="icon-left"    id="prev-img">
+<ion-icon  name="chevron-forward-outline"></ion-icon>
+</span>
+       <div class="small-container">
+        <div id="small-img-roll">
+          <img src="images/1.png" class="show-small-img" alt="">
+          <img src="images/2.png" class="show-small-img" alt="">
+          <img src="images/3.png" class="show-small-img" alt="">
+          <img src="images/4.png" class="show-small-img" alt="">
+          <img src="images/2.png" class="show-small-img" alt="">
+          <img src="images/3.png" class="show-small-img" alt="">
+          <img src="images/4.png" class="show-small-img" alt="">
+        </div>
+       </div>
+<span class="icon-right" id="next-img">
+<ion-icon  name="chevron-forward-outline"></ion-icon>
+</span>
+     </div>
+                    
                 </div>
                 <div class='col-md-7 rounded'>
                     <div class='d-flex'>
-                        <p class=''>{payload && payload.data.name}</p>
                         <div class='ml-auto'>
                             <button class='btn '>
                                 <FontAwesomeIcon icon={faShareSquare} />
@@ -133,7 +156,7 @@
             </div>
         </div>
         <div class='col-md-3 mr-0 pr-0'>
-            <div class='shadow-xs bg-white h-auto w-100 overflow-hidden mb-3 p-2'>
+            <div class='shadow-xs bg-white h-auto w-100 overflow-hidden mb-3 p-3 rounded'>
                 <h6>MEHASHA Store</h6>
                 <p>235 followers</p>
                 <div class='d-flex justify-content-between'>
@@ -141,7 +164,7 @@
                     <button class='btn btn-sm btn-primary'>visit store</button>
                 </div>
             </div>
-            <div class="bg-white p-2">
+            <div class="bg-white p-3 rounded shadow-xs">
             <h6 class='cv-title mb-4'>Related products</h6>
             <div class='card border-0 shadow-xs mb-3'>
                 <div class='card-body p-2'>
