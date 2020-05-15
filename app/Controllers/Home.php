@@ -4,12 +4,12 @@ class Home extends BaseController
 {
     public function index()
     {
-		// return print_r($this->categories->group_categories());
+        // return print_r($this->categories->group_categories());
         $data = [
             'page_name'     => 'home',
-			'page_title'    => 'home',
-			'categories'    => $this->categories->group_categories(),
-            'products'      => $this->products->orderBy('id', 'DESC')->findAll()
+            'page_title'    => 'home',
+            'categories'    => $this->categories->group_categories(),
+            'products'      => $this->products->get_products()
         ];
         return view($this->themePath, $data);
     }
@@ -19,25 +19,26 @@ class Home extends BaseController
         $data = [
             'page_name'     => 'products',
             'page_title'    => 'products',
-            'products'      => $this->products->orderBy('id', 'DESC')->findAll()
+            'products'      => $this->products->get_products()
         ];
         return view($this->themePath, $data);
     }
 
     public function product()
     {
-        $slug = $this->request->uri->getSegment(3);
+        $slug = $this->request->uri->getSegment(2);
+        // return print_r($this->products->get_product($slug));
         $data = [
             'page_name'     => 'product_details',
             'page_title'    => 'product',
-            'products'      => $this->products->where('slug', $slug)->first()
+            'product'      => $this->products->get_product($slug)
         ];
         return view($this->themePath, $data);
     }
 
     public function category_products()
     {
-		$slug = $this->request->uri->getSegment(2);
+        $slug = $this->request->uri->getSegment(2);
         $data = [
             'page_name'         => 'products',
             'page_title'        => 'categories',
