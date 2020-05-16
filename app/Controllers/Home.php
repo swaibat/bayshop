@@ -47,5 +47,31 @@ class Home extends BaseController
         ];
         echo view($this->themePath, $data);
     }
+
+    public function shopping_cart(){
+        $data = [
+            'page_name'     => 'cart',
+            'page_title'    => 'view cart',
+            'cart_products' => $_SESSION['cart']
+            // 'products'      => $this->products->get_products()
+        ];
+        return view($this->themePath, $data);
+    }
+
+    public function add_to_cart(){
+        // $data['quantity']              = $this->request->getVar('quantity');
+        // $data['cart_product']          = $this->products->get_product_by_id($this->request->getVar('id'));
+
+
+
+        if(!isset($_SESSION['cart'])){
+         $_SESSION['cart'] = [];
+        }
+        // $_SESSION['cart'] = [];
+        // if($_SESSION['cart'])
+        $this->session->push('cart', [$this->request->getVar('quantity'), $this->products->get_product_by_id($this->request->getVar('id'))]);
+        return print_r($_SESSION['cart']);
+    }
+
     //--------------------------------------------------------------------
 }

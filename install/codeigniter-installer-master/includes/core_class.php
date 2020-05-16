@@ -19,7 +19,7 @@ class Core {
 
 		// Config path
 		$template_path 	= 'config/database.php';
-		$output_path 	= '../app/config/database.php';
+		$output_path 	= '../application/config/database.php';
 
 		// Open the file
 		$database_file = file_get_contents($template_path);
