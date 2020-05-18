@@ -1,19 +1,19 @@
+
 <main role="main" class="container mt-6">
-    <div class="d-flex align-items-center p-3 mb-4 text-white-50 bg-purple rounded shadow-xs bg-primary">
-        <img class="mr-3" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-outline.svg" alt="" width="48"
-            height="48">
-        <div class="lh-100">
-            <h6 class="mb-0 text-white lh-100"><?=$product->title ?></h6>
-            <small>Since 2011</small>
-        </div>
-    </div>
+<nav aria-label="breadcrumb shadow-xs">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Library</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><?=$product['title'] ?></li>
+  </ol>
+</nav>
     <div class="d-flex flex-wrap">
         <div class='col-md-9'>
             <div class='row bg-white py-3 shadow-xs rounded'>
                 <div class='col-md-5 pt-2'>
 
                     <div class="show w-100" href="1.jpg">
-                        <img class='w-100' src="<?=$product->url ?>" id="show-img">
+                        <img class='w-100' src="<?=$product['url'] ?>" id="show-img">
                     </div>
 
                     <!-- Secondary carousel image thumbnail gallery -->
@@ -41,7 +41,7 @@
                 </div>
                 <div class='col-md-7 rounded'>
                     <div class='d-flex'>
-                        <p><?=$product->title ?></p>
+                        <p><?=$product['title'] ?></p>
                         <div class='ml-auto btn-group'>
                             <button class='btn '>
                                 <ion-icon name="share-outline"></ion-icon>
@@ -83,23 +83,23 @@
                             <p class="mb-1">Color</p>
                             <div class="d-flex">
                                 <div>
-                                    <input type="radio" name="radio" id="radio1" class="radio" checked="">
+                                    <input type="radio" value='green' name="radio" id="radio1" class="radio" checked=''>
                                     <label for="radio1">&nbsp;</label>
                                 </div>
                                 <div>
-                                    <input type="radio" name="radio" id="radio2" class="radio">
+                                    <input type="radio" value='green' name="radio" id="radio2" class="radio">
                                     <label for="radio2">&nbsp;</label>
                                 </div>
                                 <div>
-                                    <input type="radio" name="radio" id="radio3" class="radio">
+                                    <input type="radio"  value='blue' name="radio" id="radio3" class="radio">
                                     <label for="radio3">&nbsp;</label>
                                 </div>
                                 <div>
-                                    <input type="radio" name="radio" id="radio4" class="radio">
+                                    <input type="radio" value='black' name="radio" id="radio4" class="radio">
                                     <label for="radio4">&nbsp;</label>
                                 </div>
                                 <div>
-                                    <input type="radio" name="radio" id="radio5" class="radio">
+                                    <input type="radio"  value='gray' name="radio" id="radio5" class="radio">
                                     <label for="radio5">&nbsp;</label>
                                 </div>
                             </div>
@@ -134,28 +134,6 @@
                             </div>
                         </div>
                     </div>
-                    <script>
-                    $('.plus').click((e) => {
-                        const value = JSON.parse($('.quantity').val());
-                        $('.quantity').val(value + 1)
-                    })
-                    $('.minus').click((e) => {
-                        const value = JSON.parse($('.quantity').val());
-                        if ($('.quantity').val() < 1) {
-                            $('.quantity').val(1)
-                        }
-                        $('.quantity').val(value - 1)
-                    })
-                    $("#halfstarsReview").rating({
-                        "half": true,
-                        value: 3.5,
-                        stars: 5,
-                        "click": function(e) {
-                            console.log(e);
-                            $("#halfstarsInput").val(e.stars);
-                        }
-                    });
-                    </script>
                     <div class="d-flex my-3">
                         <span>
                             <p class='mb-1'>Estimated arrival date</p>
@@ -168,7 +146,7 @@
                     </div>
                     <div class=' d-flex'>
                         <button class='btn btn-primary btn-sm'>Buy now</button>
-                        <button id='cart-btn' class='btn btn-warning cart_btn ml-2 btn-sm'>Add to cart</button>
+                        <button  id='add-to-cart' class='add-to-cart btn btn-warning  ml-2 btn-sm'>Add to cart</button>
                     </div>
                 </div>
             </div>

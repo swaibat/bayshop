@@ -31,7 +31,7 @@ class ProductModel extends Model
         $builder->where('products.slug', $slug);
         $builder->orderBy('products.id', 'ASC');
         $query = $builder->get();
-        return $query->getFirstRow();
+        return reset($query->getResultArray());
     }
 
     function get_product_by_id($id)
@@ -43,7 +43,7 @@ class ProductModel extends Model
         $builder->join('product_files', 'products.id = product_files.product_id');
         $builder->where('products.id', $id);
         $builder->orderBy('products.id', 'ASC');
-        $query = $builder->get();
-        return $query->getFirstRow();
+        $query = $builder->getResultArray();
+        return $query;
     }
 }

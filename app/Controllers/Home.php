@@ -59,9 +59,16 @@ class Home extends BaseController
     }
 
     public function add_to_cart(){
-        // $data['quantity']              = $this->request->getVar('quantity');
-        // $data['cart_product']          = $this->products->get_product_by_id($this->request->getVar('id'));
+        $data = [
+            'title'        => $this->request->getVar('title'),
+            'qty'          => $this->request->getVar('quantity'),
+            'slug'         => $this->request->getVar('slug'),
+            'price'        => $this->request->getVar('price'),
+            'color'        => $this->request->getVar('color'),
+            'size'         => $this->request->getVar('size')
+        ];
 
+        // $this->session->destroy();
 
 
         if(!isset($_SESSION['cart'])){
@@ -69,7 +76,7 @@ class Home extends BaseController
         }
         // $_SESSION['cart'] = [];
         // if($_SESSION['cart'])
-        $this->session->push('cart', [$this->request->getVar('quantity'), $this->products->get_product_by_id($this->request->getVar('id'))]);
+        $this->session->push('cart', $data);
         return print_r($_SESSION['cart']);
     }
 

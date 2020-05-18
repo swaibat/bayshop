@@ -320,7 +320,7 @@ a.cv-nav {
 }
 
 .cv-nav {
-  width: 10rem;
+  max-width: 20rem;
   text-align: center;
   height: 2.5rem;
 }
@@ -473,5 +473,5 @@ div.dataTables_wrapper div.dataTables_info {
 }
 
 .mt-6{
-  margin-top: 4rem !important;
+  margin-top: 5.2rem !important;
 }
