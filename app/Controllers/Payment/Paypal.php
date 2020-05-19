@@ -92,8 +92,8 @@ class Paypal extends Controller
 
         $baseUrl = base_url();
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl("$baseUrl/ExecutePayment.php?success=true")
-            ->setCancelUrl("$baseUrl/ExecutePayment.php?success=false");
+        $redirectUrls->setReturnUrl("$baseUrl/payments/ExecutePayment.php?success=true")
+            ->setCancelUrl("$baseUrl/payments/ExecutePayment.php?success=false");
 
 
         $payment = new Payment();

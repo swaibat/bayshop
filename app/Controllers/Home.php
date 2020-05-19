@@ -60,24 +60,42 @@ class Home extends BaseController
 
     public function add_to_cart(){
         $data = [
+            'id'           => $this->request->getVar('id'),
             'title'        => $this->request->getVar('title'),
             'qty'          => $this->request->getVar('quantity'),
             'slug'         => $this->request->getVar('slug'),
             'price'        => $this->request->getVar('price'),
             'color'        => $this->request->getVar('color'),
-            'size'         => $this->request->getVar('size')
+            'size'         => $this->request->getVar('size'),
+            'image'         => $this->request->getVar('url')
         ];
-
-        // $this->session->destroy();
-
-
-        if(!isset($_SESSION['cart'])){
-         $_SESSION['cart'] = [];
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = array();
         }
-        // $_SESSION['cart'] = [];
-        // if($_SESSION['cart'])
-        $this->session->push('cart', $data);
+        array_push($_SESSION['cart'],$data);
+        return $this->res->setJSON($_SESSION['cart']);
+    }
+
+    public function remove_from_cart(){
+        $id  = $this->request->uri->getSegment(3);
+        unset($_SESSION['cart'][$id]);
         return print_r($_SESSION['cart']);
+    }
+
+    public function checkout(){
+        $data = [
+            'page_name'         => 'checkout',
+            'page_title'        => 'checkout',
+        ];
+        return view($this->themePath, $data);
+    }
+
+    public function order(){
+        $data = [
+            'page_name'         => 'order',
+            'page_title'        => 'order',
+        ];
+        return view($this->themePath, $data);
     }
 
     //--------------------------------------------------------------------

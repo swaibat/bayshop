@@ -252,63 +252,24 @@
     <?= script_tag('/assets/admin/js/script.js'); ?>
     <script>
     $(".js-select").select2();
-    // add item to cart
-    $('#cart-counter').text(JSON.parse(localStorage.getItem('shoppingCart')).length);
-    // $("#add-to-cart").click(function(e) {
-    //     const cart = JSON.parse( localStorage.getItem('shoppingCart')) || [];
-    //     const product = <?= $json; ?>;
-    //     const variables = {
-    //         quantity: $('#quantity').val(),
-    //         size: $('#size').val(),
-    //         color: $('.radio').is(':checked') ? $('.radio').data('name') : '',
-    //     };
-    //     if(!cart.find(e => e.id == product.id)){
-    //         cart.push({
-    //         ...product,
-    //         selection: variables
-    //         });
-    //         $('#cart-counter').text(cart.length)
-    //         localStorage.setItem('shoppingCart', JSON.stringify(cart));
-    //     }
-    // });
-
-    // display shopping cart
-
-
     $("#add-to-cart").click(function() {
-        // const cart = JSON.parse( localStorage.getItem('shoppingCart')) || [];
-        // if(!cart.find(e => e.id == product.id)){
-        // cart.push({
-        //     image: '< ? =$product['id']?>',
-        //     quantity: $('#quantity').val(),
-        //     size: $('#size').val(),
-        //     color: $(".radio:checked").val(),
-        //     title: '< ?=$product['title']?>',
-        //     slug: '< ?=$product['slug']?>',
-        //     price: '< ?=$product['price']?>',
-        //     image: '< ?=$product['url']?>',
-        // });
-        //     // $('#cart-counter').text(cart.length)
-        //     localStorage.setItem('shoppingCart', JSON.stringify(cart));
-        // }
-        // console.log({
-        //     quantity: $('#quantity').val(),
-        //     size: $('#size').val(),
-        //     color: $(".radio:checked").val(),
-        //     title: '< ?=$product['title']?>',
-        //     slug: '< ?=$product['slug']?>',
-        //     price: '< ?=$product['price']?>',
-        //     image: '< ?=$product['url']?>',
-        // })
-        console.log('hello')
-        $.post("/home/add_to_cart", {
+        const session = <?=json_encode($_SESSION['cart'])?> || [] ;
+        const body = {
+            id: '<?= $product['id']?>',
             quantity: $('#quantity').val(),
             size: $('#size').val(),
             color: $(".radio:checked").val(),
-        }, function(data, status) {
-            console.log(data)
+            title: '<?=$product['title']?>',
+            slug: '<?=$product['slug']?>',
+            price: '<?=$product['price']?>',
+            url: '<?=$product['url']?>',
+        }
+        if (!session.find(e => e.id == '<?= $product['id']?>') || session.length < 1 ) {
+            $.post("/home/add_to_cart", body, function(data, status) {
+            session.push(body)
             alert("Data: " + data + "\nStatus: " + status);
         });
+        }  
     });
     </script>
 </body>
