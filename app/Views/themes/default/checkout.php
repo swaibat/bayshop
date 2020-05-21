@@ -13,7 +13,7 @@
                     <h6 class="modal-title position-absolute bg-primary text-white" id="mymodalLabel">
                         <?= $page_title ?></h6>
                 </div>
-                <?= form_open('auth/register', ['class' => 'p-4', 'method' => 'post', 'id' => 'form', 'novalidate' => '',]); ?>
+                <?= form_open(base_url('shopping/order'), ['class' => 'p-4', 'method' => 'post', 'id' => 'form', 'novalidate' => '',]); ?>
                 <div class="form-row pt-2">
                     <?= custom_inputs([
                 'name'        => 'firstname',

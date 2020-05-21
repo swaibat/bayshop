@@ -66,3 +66,12 @@ function get_name_by_id($id, $data){
     }
   }
 }
+
+function menu($page_name, $value, $type)
+{
+	if ($type == 'child') {
+		echo (preg_match("/$value/i", $page_name)) ? 'on-outline' : 'off';
+	} else {
+		echo (preg_match("/$value/i", $page_name)) ? $type : '';
+	}
+}

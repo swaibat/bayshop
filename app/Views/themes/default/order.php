@@ -146,7 +146,7 @@
                     <h6 class="modal-title w-75 position-absolute bg-primary text-white" id="mymodalLabel">
                         Order Summary</h6>
                 </div>
-                        <?php if(isset($_SESSION['cart'])):?>
+            <?php if(isset($_SESSION['cart'])):?>
                 <ul class="list-group list-group-flush mt-4 p-2">
                     <?php foreach ($_SESSION['cart'] as $key => $value):?>
                     <li class="list-group-item d-flex">

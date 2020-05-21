@@ -159,3 +159,27 @@ function get_pairs($data)
   }
   return $dat;
 }
+
+function custom_navigation($page,$data){
+    $html ='<ul class="sidebar-menu">';
+      foreach($data as $key => $value){
+        if ($value['children']) {
+        $html .='<li class="nav-item dropdown"> <a href="#" class="nav-link has-dropdown">
+        <ion-icon class="ion" name="'.$value['icon'].'"></ion-icon>
+        <span>'.$key.'</span></a>
+      <ul class="dropdown-menu">';
+      foreach($value['children'] as $key => $value){
+        $html .= '<li><a class="nav-link" href="'.$value.'">'.$value.'</a></li>';
+      }
+      $html .= '</ul></li>';
+    } else {
+      $html .='<li class="nav-item ">
+      <a href="'.$key.'" class="nav-link">
+      <ion-icon class="ion" name="'.$value['icon'].'"></ion-icon>
+      <span>'.$key.'</span></a>
+    </li>';
+    }
+    }
+    $html .= '</ul>';
+    return $html;
+}
