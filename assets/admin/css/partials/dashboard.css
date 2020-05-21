@@ -32,6 +32,7 @@
 .form-control:focus {
   border-color: #0f0f0f;
 }
+
 #chart-bar {
   position: relative;
   margin-top: -38px;
@@ -57,8 +58,7 @@ table tr {
   padding: 0.35em;
 }
 
-table th,
-table td {
+table th, table td {
   padding: 0.625em;
   /* text-align: center; */
 }
@@ -66,18 +66,16 @@ table td {
 table th {
   font-size: 0.85em;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
+  /*! text-transform: uppercase; */
 }
 
 @media screen and (max-width: 600px) {
   table {
     border: 0;
   }
-
   table caption {
     font-size: 1.3em;
   }
-
   table thead {
     border: none;
     clip: rect(0 0 0 0);
@@ -88,20 +86,17 @@ table th {
     position: absolute;
     width: 1px;
   }
-
   table tr {
     border-bottom: 3px solid #ddd;
     display: block;
     margin-bottom: 0.625em;
   }
-
   table td {
     border-bottom: 1px solid #ddd;
     display: block;
     font-size: 0.8em;
     text-align: right;
   }
-
   table td::before {
     /*
     * aria-label has no advantage, it won't be read inside a table
@@ -112,7 +107,6 @@ table th {
     font-weight: bold;
     text-transform: uppercase;
   }
-
   table td:last-child {
     border-bottom: 0;
   }
@@ -271,6 +265,7 @@ table th {
 /* Now, customizations! */
 
 /* Customize: hour */
+
 .hour-style-text .hour-pill {
   opacity: 0;
 }
@@ -279,36 +274,20 @@ table th {
   opacity: 0;
 }
 
-.hour-style-text-quarters .hour-1.hour-text,
-.hour-style-text-quarters .hour-2.hour-text,
-.hour-style-text-quarters .hour-3.hour-pill,
-.hour-style-text-quarters .hour-4.hour-text,
-.hour-style-text-quarters .hour-5.hour-text,
-.hour-style-text-quarters .hour-6.hour-pill,
-.hour-style-text-quarters .hour-7.hour-text,
-.hour-style-text-quarters .hour-8.hour-text,
-.hour-style-text-quarters .hour-9.hour-pill,
-.hour-style-text-quarters .hour-10.hour-text,
-.hour-style-text-quarters .hour-11.hour-text,
-.hour-style-text-quarters .hour-12.hour-pill {
+.hour-style-text-quarters .hour-1.hour-text, .hour-style-text-quarters .hour-2.hour-text, .hour-style-text-quarters .hour-3.hour-pill, .hour-style-text-quarters .hour-4.hour-text, .hour-style-text-quarters .hour-5.hour-text, .hour-style-text-quarters .hour-6.hour-pill, .hour-style-text-quarters .hour-7.hour-text, .hour-style-text-quarters .hour-8.hour-text, .hour-style-text-quarters .hour-9.hour-pill, .hour-style-text-quarters .hour-10.hour-text, .hour-style-text-quarters .hour-11.hour-text, .hour-style-text-quarters .hour-12.hour-pill {
   opacity: 0;
 }
 
 /* Customize: hour-text */
+
 .hour-text-style-small .hour-text {
   font-size: 24px;
   top: -113px;
 }
 
 /* Customize: hour-display */
-.hour-display-style-quarters .hour-1,
-.hour-display-style-quarters .hour-2,
-.hour-display-style-quarters .hour-4,
-.hour-display-style-quarters .hour-5,
-.hour-display-style-quarters .hour-7,
-.hour-display-style-quarters .hour-8,
-.hour-display-style-quarters .hour-10,
-.hour-display-style-quarters .hour-11 {
+
+.hour-display-style-quarters .hour-1, .hour-display-style-quarters .hour-2, .hour-display-style-quarters .hour-4, .hour-display-style-quarters .hour-5, .hour-display-style-quarters .hour-7, .hour-display-style-quarters .hour-8, .hour-display-style-quarters .hour-10, .hour-display-style-quarters .hour-11 {
   opacity: 0;
 }
 
@@ -317,6 +296,7 @@ table th {
 }
 
 /* Customize: minute */
+
 .minute-style-dot .minute-line {
   width: 6px;
   height: 6px;
@@ -325,8 +305,7 @@ table th {
   opacity: 0.75;
 }
 
-.minute-style-dot .part.minute-line,
-.minute-style-dot.hour-style-pill .major.minute-line {
+.minute-style-dot .part.minute-line, .minute-style-dot.hour-style-pill .major.minute-line {
   opacity: 0;
 }
 
@@ -336,6 +315,7 @@ table th {
 }
 
 /* Customize: minute text */
+
 .minute-text-style-inside .major.minute-line {
   opacity: 0;
 }
@@ -350,8 +330,8 @@ table th {
 }
 
 /* Customize: Minute display */
-.minute-style-line.minute-display-style-fine-2 .whole.minute-line,
-.minute-style-line.minute-display-style-fine-2 .major.minute-line {
+
+.minute-style-line.minute-display-style-fine-2 .whole.minute-line, .minute-style-line.minute-display-style-fine-2 .major.minute-line {
   height: 13px;
   transform: translate(-50%, -100%) translateY(-127px);
 }
@@ -365,24 +345,23 @@ table th {
   opacity: 0;
 }
 
-.minute-display-style-major .part.minute-line,
-.minute-display-style-major .whole.minute-line {
+.minute-display-style-major .part.minute-line, .minute-display-style-major .whole.minute-line {
   opacity: 0;
 }
 
-.minute-display-style-none .part.minute-line,
-.minute-display-style-none .major.major.minute-line,
-.minute-display-style-none .whole.minute-line {
+.minute-display-style-none .part.minute-line, .minute-display-style-none .major.major.minute-line, .minute-display-style-none .whole.minute-line {
   opacity: 0;
 }
 
 /* Customize: hand */
+
 .hand-style-hollow .fat-hand {
   background: black;
   border: 2px solid #a5a7a9;
 }
 
 /* Customizer */
+
 #chooser {
   font: 10px Verdana, sans-serif;
   position: absolute;

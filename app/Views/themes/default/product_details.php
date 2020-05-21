@@ -1,120 +1,152 @@
-<main role="main" class="container mt-5">
-    <div class="d-flex align-items-center p-3 mb-4 text-white-50 bg-purple rounded shadow-xs bg-primary">
-        <img class="mr-3" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-outline.svg" alt="" width="48"
-            height="48">
-        <div class="lh-100">
-            <h6 class="mb-0 text-white lh-100"><?=$product->title ?></h6>
-            <small>Since 2011</small>
-        </div>
-    </div>
+
+<main role="main" class="container mt-6">
+<nav aria-label="breadcrumb shadow-xs">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Library</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><?=$product['title'] ?></li>
+  </ol>
+</nav>
     <div class="d-flex flex-wrap">
         <div class='col-md-9'>
             <div class='row bg-white py-3 shadow-xs rounded'>
                 <div class='col-md-5 pt-2'>
-                    
+
                     <div class="show w-100" href="1.jpg">
-       <img class='w-100' src="<?=$product->url ?>" id="show-img">
-     </div>
+                        <img class='w-100' src="<?=$product['url'] ?>" id="show-img">
+                    </div>
 
-     <!-- Secondary carousel image thumbnail gallery -->
+                    <!-- Secondary carousel image thumbnail gallery -->
 
-     <div class="small-img">
-      <span class="icon-left"    id="prev-img">
-<ion-icon  name="chevron-forward-outline"></ion-icon>
-</span>
-       <div class="small-container">
-        <div id="small-img-roll">
-          <img src="images/1.png" class="show-small-img" alt="">
-          <img src="images/2.png" class="show-small-img" alt="">
-          <img src="images/3.png" class="show-small-img" alt="">
-          <img src="images/4.png" class="show-small-img" alt="">
-          <img src="images/2.png" class="show-small-img" alt="">
-          <img src="images/3.png" class="show-small-img" alt="">
-          <img src="images/4.png" class="show-small-img" alt="">
-        </div>
-       </div>
-<span class="icon-right" id="next-img">
-<ion-icon  name="chevron-forward-outline"></ion-icon>
-</span>
-     </div>
-                    
+                    <div class="small-img">
+                        <span class="icon-left" id="prev-img">
+                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                        </span>
+                        <div class="small-container">
+                            <div id="small-img-roll">
+                                <img src="images/1.png" class="show-small-img" alt="">
+                                <img src="images/2.png" class="show-small-img" alt="">
+                                <img src="images/3.png" class="show-small-img" alt="">
+                                <img src="images/4.png" class="show-small-img" alt="">
+                                <img src="images/2.png" class="show-small-img" alt="">
+                                <img src="images/3.png" class="show-small-img" alt="">
+                                <img src="images/4.png" class="show-small-img" alt="">
+                            </div>
+                        </div>
+                        <span class="icon-right" id="next-img">
+                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                        </span>
+                    </div>
+
                 </div>
                 <div class='col-md-7 rounded'>
                     <div class='d-flex'>
-                        <div class='ml-auto'>
+                        <p><?=$product['title'] ?></p>
+                        <div class='ml-auto btn-group'>
                             <button class='btn '>
-                                <FontAwesomeIcon icon={faShareSquare} />
+                                <ion-icon name="share-outline"></ion-icon>
                             </button>
                             <button class='btn '>
-                                <FontAwesomeIcon icon={faHeart} />
+                                <ion-icon name="share-social-outline"></ion-icon>
                             </button>
                         </div>
                     </div>
-                    <div class='row align-items-center'>
+                    <div class="d-flex my-3">
+                        <ion-icon class='text-warning mx-1'
+                            src='data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJzdGFyIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtc3RhciBmYS13LTE4IiByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDU3NiA1MTIiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTI1OS4zIDE3LjhMMTk0IDE1MC4yIDQ3LjkgMTcxLjVjLTI2LjIgMy44LTM2LjcgMzYuMS0xNy43IDU0LjZsMTA1LjcgMTAzLTI1IDE0NS41Yy00LjUgMjYuMyAyMy4yIDQ2IDQ2LjQgMzMuN0wyODggNDM5LjZsMTMwLjcgNjguN2MyMy4yIDEyLjIgNTAuOS03LjQgNDYuNC0zMy43bC0yNS0xNDUuNSAxMDUuNy0xMDNjMTktMTguNSA4LjUtNTAuOC0xNy43LTU0LjZMMzgyIDE1MC4yIDMxNi43IDE3LjhjLTExLjctMjMuNi00NS42LTIzLjktNTcuNCAweiI+PC9wYXRoPjwvc3ZnPg=='>
+                        </ion-icon>
+                        <ion-icon class='text-warning mx-1'
+                            src='data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJzdGFyIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtc3RhciBmYS13LTE4IiByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDU3NiA1MTIiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTI1OS4zIDE3LjhMMTk0IDE1MC4yIDQ3LjkgMTcxLjVjLTI2LjIgMy44LTM2LjcgMzYuMS0xNy43IDU0LjZsMTA1LjcgMTAzLTI1IDE0NS41Yy00LjUgMjYuMyAyMy4yIDQ2IDQ2LjQgMzMuN0wyODggNDM5LjZsMTMwLjcgNjguN2MyMy4yIDEyLjIgNTAuOS03LjQgNDYuNC0zMy43bC0yNS0xNDUuNSAxMDUuNy0xMDNjMTktMTguNSA4LjUtNTAuOC0xNy43LTU0LjZMMzgyIDE1MC4yIDMxNi43IDE3LjhjLTExLjctMjMuNi00NS42LTIzLjktNTcuNCAweiI+PC9wYXRoPjwvc3ZnPg=='>
+                        </ion-icon>
+                        <ion-icon class='text-warning mx-2'
+                            src='data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJzdGFyIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtc3RhciBmYS13LTE4IiByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDU3NiA1MTIiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTI1OS4zIDE3LjhMMTk0IDE1MC4yIDQ3LjkgMTcxLjVjLTI2LjIgMy44LTM2LjcgMzYuMS0xNy43IDU0LjZsMTA1LjcgMTAzLTI1IDE0NS41Yy00LjUgMjYuMyAyMy4yIDQ2IDQ2LjQgMzMuN0wyODggNDM5LjZsMTMwLjcgNjguN2MyMy4yIDEyLjIgNTAuOS03LjQgNDYuNC0zMy43bC0yNS0xNDUuNSAxMDUuNy0xMDNjMTktMTguNSA4LjUtNTAuOC0xNy43LTU0LjZMMzgyIDE1MC4yIDMxNi43IDE3LjhjLTExLjctMjMuNi00NS42LTIzLjktNTcuNCAweiI+PC9wYXRoPjwvc3ZnPg=='>
+                        </ion-icon>
+                        <ion-icon class='text-warning mx-2'
+                            src='data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJzdGFyIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtc3RhciBmYS13LTE4IiByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDU3NiA1MTIiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTI1OS4zIDE3LjhMMTk0IDE1MC4yIDQ3LjkgMTcxLjVjLTI2LjIgMy44LTM2LjcgMzYuMS0xNy43IDU0LjZsMTA1LjcgMTAzLTI1IDE0NS41Yy00LjUgMjYuMyAyMy4yIDQ2IDQ2LjQgMzMuN0wyODggNDM5LjZsMTMwLjcgNjguN2MyMy4yIDEyLjIgNTAuOS03LjQgNDYuNC0zMy43bC0yNS0xNDUuNSAxMDUuNy0xMDNjMTktMTguNSA4LjUtNTAuOC0xNy43LTU0LjZMMzgyIDE1MC4yIDMxNi43IDE3LjhjLTExLjctMjMuNi00NS42LTIzLjktNTcuNCAweiI+PC9wYXRoPjwvc3ZnPg=='>
+                        </ion-icon>
+                        <ion-icon class='mx-1'
+                            src='data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJzdGFyIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtc3RhciBmYS13LTE4IiByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDU3NiA1MTIiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTI1OS4zIDE3LjhMMTk0IDE1MC4yIDQ3LjkgMTcxLjVjLTI2LjIgMy44LTM2LjcgMzYuMS0xNy43IDU0LjZsMTA1LjcgMTAzLTI1IDE0NS41Yy00LjUgMjYuMyAyMy4yIDQ2IDQ2LjQgMzMuN0wyODggNDM5LjZsMTMwLjcgNjguN2MyMy4yIDEyLjIgNTAuOS03LjQgNDYuNC0zMy43bC0yNS0xNDUuNSAxMDUuNy0xMDNjMTktMTguNSA4LjUtNTAuOC0xNy43LTU0LjZMMzgyIDE1MC4yIDMxNi43IDE3LjhjLTExLjctMjMuNi00NS42LTIzLjktNTcuNCAweiI+PC9wYXRoPjwvc3ZnPg=='>
+                        </ion-icon>
+
+                        <p class='mx-3'>4.9</p>
+                        <p class='mx-3'>123 reviewers</p>
+
+                    </div>
+                    <div class='d-flex align-items-center'>
                         <h5 class='mb-0'>US $6.19 - 12.26</h5>
                         <p class='mb-0 ml-3'>US $13.18 - 26.08</p>
                         <span class='badge text-primary bg-primary-light rounded-0 ml-3'>-53%</span>
                     </div>
 
-                    <div class='my-3'>
-                        <p class='mb-1'>avaible sizes</p>
-                        <div class='btn-group btn-group-sm'>
-                            <button class='btn btn-outline-secondary'>S</button>
-                            <button class='btn btn-outline-secondary'>M</button>
-                            <button class='btn btn-outline-secondary'>L</button>
-                            <button class='btn btn-outline-secondary'>XL</button>
-                            <button class='btn btn-outline-secondary'>XXL</button>
-                            <button class='btn btn-outline-secondary'>XXXL</button>
-                            <button class='btn btn-outline-secondary'>4XL</button>
-                            <button class='btn btn-outline-secondary'>5XL</button>
-                        </div>
-                    </div>
-                    <div class='my-3'>
-                        <p class='mb-1'>avaible sizes</p>
-                        <div class='btn-group color-selector mb-2'>
-                            <div class='custom-control custom-radio custom-control-inline'>
-                                <input type='radio' id='customRadioInline1' name='customRadioInline1'
-                                    class='custom-control-input' />
-                                <label class='custom-control-label Ared' for='customRadioInline1' />
-                            </div>
-                            <div class='custom-control custom-radio custom-control-inline ml-4'>
-                                <input type='radio' id='customRadioInline2' name='customRadioInline1'
-                                    class='custom-control-input' />
-                                <label class='custom-control-label orange' for='customRadioInline2' />
-                            </div>
-                            <div class='custom-control custom-radio custom-control-inline ml-4'>
-                                <input type='radio' id='customRadioInline3' name='customRadioInline1'
-                                    class='custom-control-input' />
-                                <label class='custom-control-label grey' for='customRadioInline3' />
+                    <div class="d-flex">
+                        <div id="color" class="wrapper my-3">
+                            <p class="mb-1">Color</p>
+                            <div class="d-flex">
+                                <div>
+                                    <input type="radio" value='green' name="radio" id="radio1" class="radio" checked=''>
+                                    <label for="radio1">&nbsp;</label>
+                                </div>
+                                <div>
+                                    <input type="radio" value='green' name="radio" id="radio2" class="radio">
+                                    <label for="radio2">&nbsp;</label>
+                                </div>
+                                <div>
+                                    <input type="radio"  value='blue' name="radio" id="radio3" class="radio">
+                                    <label for="radio3">&nbsp;</label>
+                                </div>
+                                <div>
+                                    <input type="radio" value='black' name="radio" id="radio4" class="radio">
+                                    <label for="radio4">&nbsp;</label>
+                                </div>
+                                <div>
+                                    <input type="radio"  value='gray' name="radio" id="radio5" class="radio">
+                                    <label for="radio5">&nbsp;</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <p class='mb-1'>Quantity</p>
+                        <div class='my-3 ml-5'>
+                            <p class='mb-1'>avaible sizes</p>
+                            <select id='size' class="form-control form-control-sm js-select2">
+                                <option value='S'>S</option>
+                                <option value='M'>M</option>
+                                <option value='L'>L</option>
+                                <option value='XL'>XL</option>
+                                <option value='XXL'>XXL</option>
+                                <option value='3XL'>3XL</option>
+                            </select>
+                        </div>
+                        <div class='ml-5 my-3'>
+                            <p class='mb-1'>avaible sizes</p>
 
-                    <div class='input-group mb-3 quantity-input'>
-                        <div class='input-group-prepend'>
-                            <button class='btn btn-outline-secondary' type='button'>
-                                -
-                            </button>
-                        </div>
-                        <input type='text' class='form-control' placeholder='' aria-label=''
-                            aria-describedby='basic-addon1' />
-                        <div class='input-group-append'>
-                            <button class='btn btn-outline-secondary' type='button'>
-                                +
-                            </button>
+                            <div class='input-group input-group-sm mb-3 quantity-input'>
+                                <div class='input-group-prepend'>
+                                    <button class='btn btn-outline-secondary minus' id='minus' type='button'>
+                                        -
+                                    </button>
+                                </div>
+                                <input id='quantity' type='text' min='1' value='1' class='form-control quantity'
+                                    placeholder='' aria-label='' aria-describedby='basic-addon1' />
+                                <div class='input-group-append'>
+                                    <button class='btn btn-outline-secondary plus' id='plus' type='button'>
+                                        +
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class='d-flex'>
+                    <div class="d-flex my-3">
+                        <span>
+                            <p class='mb-1'>Estimated arrival date</p>
+                            <p>20th july - 25th oct </p>
+                        </span>
+                        <span class='ml-auto'>
+                            <p class=' mb-1'>Shipping From</p>
+                            <p class=''>China</p>
+                        </span>
+                    </div>
+                    <div class=' d-flex'>
                         <button class='btn btn-primary btn-sm'>Buy now</button>
-                        <button class='btn btn-warning ml-2 btn-sm'>Add to cart</button>
-                        <button class='btn btn-secondary ml-2 btn-sm'>Add to Favourite</button>
-                    </div>
-                    <div class='d-flex justify-content-between'>
-                        <p>kampala,Ug</p>
-                        <small>
-                            <strong>published:</strong> 4 hours ago
-                        </small>
+                        <button  id='add-to-cart' class='add-to-cart btn btn-warning  ml-2 btn-sm'>Add to cart</button>
                     </div>
                 </div>
             </div>
@@ -165,31 +197,31 @@
                 </div>
             </div>
             <div class="bg-white p-3 rounded shadow-xs">
-            <h6 class='cv-title mb-4'>Related products</h6>
-            <div class='card border-0 shadow-xs mb-3'>
-                <div class='card-body p-2'>
-                    <img height='174' class='w-100' src={Img} alt='img' />
+                <h6 class='cv-title mb-4'>Related products</h6>
+                <div class='card border-0 shadow-xs mb-3'>
+                    <div class='card-body p-2'>
+                        <img height='174' class='w-100' src={Img} alt='img' />
+                    </div>
+                    <div class='card-body px-2 py-1'>
+                        <h6>USD 200</h6>
+                    </div>
                 </div>
-                <div class='card-body px-2 py-1'>
-                    <h6>USD 200</h6>
+                <div class='card border-0 shadow-xs mb-3'>
+                    <div class='card-body p-2'>
+                        <img height='174' class='w-100' src={Img} alt='img' />
+                    </div>
+                    <div class='card-body px-2 py-1'>
+                        <h6>USD 200</h6>
+                    </div>
                 </div>
-            </div>
-            <div class='card border-0 shadow-xs mb-3'>
-                <div class='card-body p-2'>
-                    <img height='174' class='w-100' src={Img} alt='img' />
+                <div class='card border-0 shadow-xs mb-3'>
+                    <div class='card-body p-2'>
+                        <img height='174' class='w-100' src={Img} alt='img' />
+                    </div>
+                    <div class='card-body px-2 py-1'>
+                        <h6>USD 200</h6>
+                    </div>
                 </div>
-                <div class='card-body px-2 py-1'>
-                    <h6>USD 200</h6>
-                </div>
-            </div>
-            <div class='card border-0 shadow-xs mb-3'>
-                <div class='card-body p-2'>
-                    <img height='174' class='w-100' src={Img} alt='img' />
-                </div>
-                <div class='card-body px-2 py-1'>
-                    <h6>USD 200</h6>
-                </div>
-            </div>
             </div>
         </div>
     </div>

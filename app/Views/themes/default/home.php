@@ -1,4 +1,4 @@
-<main role="main" class="container mt-5">
+<main role="main" class="container mt-6">
     <div class='row'>
         <div class='col-md-2 pb-3 category-column'>
             <div class="bg-white shadow-xs rounded slide-container overflow-hidden p-2">
@@ -13,8 +13,8 @@
                         </a>
                         <ul class="nav-second-level collapse" id="collapseSubItems4" data-parent="#navAccordion">
 
-                        <h6><?=$category['down1_name']?></h6>
-                        <hr>
+                            <h6><?=$category['down1_name']?></h6>
+                            <hr>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
                                     <span class="nav-link-text"><?=$category['down2_name']?></span>

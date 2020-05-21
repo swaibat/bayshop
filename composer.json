@@ -21,7 +21,7 @@
 		"paragonie/sodium_compat": "^1.1",
 		"kint-php/kint": "3.3 as 2.2",
 		"stripe/stripe-php": "^7.31",
-		"paypal/rest-api-sdk-php": "*",
+		"paypal/rest-api-sdk-php": "^1.14",
 		"hybridauth/hybridauth": "^3.3",
 		"vlucas/phpdotenv": "^4.1",
 		"facebook/graph-sdk": "^5.7"

@@ -1,4 +1,4 @@
-<main role="main" class="container mt-5">
+<main role="main" class="container mt-6">
     <div class="d-flex align-items-center p-3 mb-4 text-white-50 bg-purple rounded shadow-xs bg-primary">
         <img class="mr-3" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-outline.svg" alt="" width="48"
             height="48">

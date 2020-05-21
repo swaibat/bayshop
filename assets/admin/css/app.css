@@ -389,11 +389,12 @@ label.false {
 }
 
 .cv-form-group .custom-input:focus ~ label,
-.cv-form-group .custom-input:valid ~ label {
+.cv-form-group .custom-input:valid ~ label{
   top: -14px;
   font-size: 12px;
   color: #0f0f0f;
   margin-left: 0px;
+  width: 100%;
 }
 .cv-form-group .custom-input:focus ~ .bar:before {
   width: 100%;
@@ -443,10 +444,10 @@ label.false {
   -webkit-transition: 0.2s ease all;
 }
 .cv-form-group label.left {
-  top: 11px;
-  font-size: 12px;
-  color: #0f0f0f;
-  margin-left: 0px;
+  top: 13px;
+  color: #757575;
+  margin-left: 2.2rem;
+  width: 100%;
 }
 .cv-input-group-text {
   border-radius: 0px;
@@ -1096,3 +1097,13 @@ table.dataTable td:last-child,
 }
 
 .small-container .show-small-img:last-of-type { margin-right: 0; }
+.btn-xs{
+  padding: .15rem .25rem;
+  font-size: .575rem;
+  line-height: 1.1;
+  border-radius: .15rem;
+}
+
+.table-borderless tbody + tbody, .table-borderless td, .table-borderless th, .table-borderless thead th {
+  border: 0 !important;
+}

@@ -1,12 +1,10 @@
-<main role="main" class="container mt-5">
-    <div class="d-flex align-items-center p-3 mb-4 text-white-50 bg-purple rounded shadow-xs bg-primary">
-        <img class="mr-3" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-outline.svg" alt="" width="48"
-            height="48">
-        <div class="lh-100">
-            <h6 class="mb-0 text-white lh-100">Bootstrap</h6>
-            <small>Since 2011</small>
-        </div>
-    </div>
+<main role="main" class="container mt-6">
+<nav aria-label="breadcrumb shadow-xs">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Products</a></li>
+  </ol>
+</nav>
     <div class="Btc_container">
         <!--DealofDayOffers-->
         <div class="sectionX " id="onClickFilter_ScrollTo" style="margin-bottom: 0;">
@@ -20,9 +18,6 @@
                                     <!--width_ContstraX-->
                                     <ul class="offers_WrapperX99 relFontSize_util">
                                         <ul class="offers_WrapperX99 relFontSize_util">
-                                            <?= '<script>
-                                            console.log('.json_encode($products).')
-                                            </script>'?>
                                             <?php foreach ($products as $product):?>
                                               <li class="OfferUnitX99 OffersContentBoxLi">
                                               <div class="offerUnit_innerContWrap">

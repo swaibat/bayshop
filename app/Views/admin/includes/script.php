@@ -1,4 +1,22 @@
-<footer>
+<footer class="main-footer">
+        <div class="footer-left">
+          Copyright &copy; 2020 <div class="bullet"></div>
+        </div>
+        <div class="footer-right">
+          1.0.0
+        </div>
+      </footer>
+    </div>
+  </div>
+
+
+  <!-- General JS Scripts -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="../assets/admin/assets/js/stisla.js"></script>
 	<div class="accordion chat-modal d-none" id="chatModel">
 		<div class="card border-0 chat-card shadow-sm">
 			<div class="card-header cursor-pointer p-2 chat-modal-header" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
@@ -57,7 +75,6 @@
 			</div>
 		</div>
 	</div>
-</footer>
 <?= script_tag('assets/shared/jquery/jquery-3.4.1.min.js'); ?>
 <?= script_tag('assets/admin/js/watch.js'); ?>
 <?= script_tag('assets/plugins/toastify-js/toastify-js.js'); ?>
@@ -70,27 +87,13 @@
 <?= script_tag('/assets/admin/js/script.js'); ?>
 <?= model_loader() ?>
 
-<!-- <script>
-	$(document).ready(function() {
-		const user = <?= $_SESSION['user'] ?>;
-		socket.emit('online', {
-			...user,
-			pageTitle: document.title,
-			pageLink: location.href,
-		});
-		$('#chat-text').keyup((evt) => {
-			if (evt.target.value.length) {
-				socket.emit('typing', 'swaibu is typing')
-			} else {
-				socket.emit('typing', null)
-			};
-		})
-		$('#chat-input').submit((e) => {
-			e.preventDefault()
-			const msg = $('#chat-text').val()
-			socket.emit('sendMessage', msg)
-			$('#chat').append($('<p>').text(msg));
-			$('#chat-text').val('')
-		})
-	})
-</script> -->
+
+  <!-- JS Libraies -->
+
+  <!-- Template JS File -->
+  <script src="../assets/admin/assets/js/scripts.js"></script>
+  <script src="../asset/admin/assets/js/custom.js"></script>
+
+  <!-- Page Specific JS File -->
+</body>
+</html>
