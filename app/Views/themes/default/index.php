@@ -94,7 +94,7 @@
         <nav class='nav container nav-underline text-capitalize  cv-category-nav' id='navAccordion'>
             <li class='nav-item'>
                 <a href='/' class='nav-link cv-nav selected'>
-                    <ion-icon name='home'></ion-icon>
+                    <ion-icon name='list'></ion-icon>
                     categories
                 </a>
             </li>

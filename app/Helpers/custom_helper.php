@@ -75,3 +75,15 @@ function menu($page_name, $value, $type)
 		echo (preg_match("/$value/i", $page_name)) ? $type : '';
 	}
 }
+
+function get_config($name)
+{
+  $db      = \Config\Database::connect();
+  $builder = $db->table('settings');
+  $query   = $builder->get();
+  foreach ($query->getResultArray() as $config) {
+      if ($config['name'] == $name) {
+        return $config['value'];
+    }
+  }
+}

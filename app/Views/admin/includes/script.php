@@ -75,14 +75,14 @@
 			</div>
 		</div>
 	</div>
-<?= script_tag('assets/shared/jquery/jquery-3.4.1.min.js'); ?>
-<?= script_tag('assets/admin/js/watch.js'); ?>
+<?= script_tag('assets/shared/jquery/jquery-3.5.1.min.js'); ?>
 <?= script_tag('assets/plugins/toastify-js/toastify-js.js'); ?>
 <?= script_tag('assets/plugins/jquery-multifile/jquery-multifile.js'); ?>
 <?= script_tag('assets/shared/bootstrap-4.4.1/js/bootstrap.bundle.min.js'); ?>
 <?= script_tag('assets/plugins/select2/dist/js/select2.min.js'); ?>
 <?= script_tag('assets/plugins/dataTables/datatables.min.js'); ?>
 <?= script_tag('assets/plugins/summernote/summernote-bs4.min.js'); ?>
+<?= script_tag('/assets/plugins/toJson/formToJson.min.js'); ?>
 <?= script_tag("assets/shared/jquery/jquery-ui.js"); ?>
 <?= script_tag('/assets/admin/js/script.js'); ?>
 <?= model_loader() ?>

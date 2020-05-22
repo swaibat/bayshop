@@ -174,7 +174,7 @@ function custom_navigation($page,$data){
       $html .= '</ul></li>';
     } else {
       $html .='<li class="nav-item ">
-      <a href="'.$key.'" class="nav-link">
+      <a href="'.base_url('/admin/'.$key).'" class="nav-link">
       <ion-icon class="ion" name="'.$value['icon'].'"></ion-icon>
       <span>'.$key.'</span></a>
     </li>';

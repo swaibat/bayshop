@@ -2534,9 +2534,9 @@ h6 .badge {
     margin-top: 3px;
 }
 
-.navbar .nav-link.nav-link-lg i {
+.navbar .nav-link.nav-link-lg ion-icon {
     margin-left: 0 !important;
-    font-size: 18px;
+    font-size: 1.5rem;
     line-height: 32px;
 }
 
@@ -4367,4 +4367,218 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
 #example_wrapper .dataTables_info,
 #example_wrapper .dataTables_length {
     margin-top: 0.15rem !important;
+}
+
+.custom-switch .custom-control-label::after {
+    border-radius: 0.1rem;
+}
+
+.custom-switch .custom-control-label::before {
+    border-radius: 0.1rem;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    color: #fff;
+    border-color: #0f0f0f;
+    background-color: #0f0f0f;
+}
+
+.shadow-xs {
+    box-shadow: 0 1px 2px rgba(96, 125, 135, 0.15);
+}
+
+.cv-form-group .custom-input:focus~label,
+.cv-form-group .custom-input:valid~label {
+    top: -14px;
+    font-size: 12px;
+    color: #0f0f0f;
+    margin-left: 0px;
+    width: 100%;
+}
+
+.cv-form-group .custom-input:focus~.bar:before {
+    width: 100%;
+}
+
+.cv-form-group .bar {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.cv-form-group .bar:before {
+    content: "";
+    height: 1px;
+    width: 0;
+    bottom: 0px;
+    position: absolute;
+    background: #0f0f0f;
+    transition: 300ms ease all;
+    left: 0%;
+}
+
+.cv-form-group .cv-chev {
+    padding: 0px;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    color: gray;
+}
+
+.cv-form-group .cv-chev.right:before {
+    content: "";
+    border-top: 1px solid gray;
+    width: 1rem;
+    transform: rotate(90deg);
+}
+
+.cv-form-group .cv-chev.left:after {
+    content: "";
+    border-top: 1px solid gray;
+    width: 1rem;
+    transform: rotate(90deg);
+}
+
+.cv-form-group label {
+    color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    pointer-events: none;
+    left: 1;
+    top: 6px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.cv-form-group label.left {
+    top: 6px;
+    color: #757575;
+    margin-left: 2.2rem;
+    width: 100%;
+}
+
+.cv-input-group-text {
+    border-radius: 0px;
+    border: none;
+    border-bottom: solid 1px #ced4da;
+}
+
+.custom-input {
+    border-radius: 0px;
+    border: none;
+    background: transparent;
+    border-bottom: solid 1px #ced4da;
+    padding: 0 1.5rem;
+}
+
+.custom-input::placeholder {
+    font-weight: lighter;
+    color: #ccc !important;
+}
+
+*:focus {
+    outline: none;
+}
+
+.button-cover,
+.knobs,
+.layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.button {
+    position: relative;
+    top: 50%;
+    width: 74px;
+    height: 30px;
+    margin: -20px auto 0 auto;
+    overflow: hidden;
+}
+
+.button.r,
+.button.r .layer {
+    border-radius: 100px;
+}
+
+.button.b2 {
+    border-radius: 2px;
+}
+
+.checkbox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.knobs {
+    z-index: 2;
+}
+
+.layer {
+    width: 100%;
+    background-color: #fcebeb;
+    transition: 0.3s ease all;
+    z-index: 1;
+}
+
+#button-10 .knobs:before,
+#button-10 .knobs:after,
+#button-10 .knobs span {
+    position: absolute;
+    top: 4px;
+    width: 30px;
+    height: 23px;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1;
+    padding: 6px 4px;
+    border-radius: 2px;
+    transition: 0.3s ease all;
+}
+
+#button-10 .knobs:before {
+    content: "";
+    left: 4px;
+    background-color: #f44336;
+    ;
+}
+
+#button-10 .knobs:after {
+    content: "YES";
+    right: 4px;
+    color: #4e4e4e;
+}
+
+#button-10 .knobs span {
+    display: inline-block;
+    left: 4px;
+    color: #fff;
+    z-index: 1;
+}
+
+#button-10 .checkbox:checked+.knobs span {
+    color: #4e4e4e;
+}
+
+#button-10 .checkbox:checked+.knobs:before {
+    left: 42px;
+    background-color: #0f0f0f;
+}
+
+#button-10 .checkbox:checked+.knobs:after {
+    color: #fff;
+}
+
+#button-10 .checkbox:checked~.layer {
+    background-color: gainsboro;
 }
