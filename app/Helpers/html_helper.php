@@ -16,15 +16,6 @@ function stat_card($data)
           <h6>' . $data['name'] . '</h6>
         </span>
       </span>
-      <div class="mt-2">
-        <small class="">Last 7 days</small>
-        <small class="d-flex ml-3">
-          <span class="text-success">
-            <ion-icon name="arrow-up"></ion-icon>
-          </span>
-          ' . $data['last_7'] . '
-        </small>
-      </div>
     </div>
     <div class="btn-group mt-2">
       <span>

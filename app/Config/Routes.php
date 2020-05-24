@@ -64,6 +64,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     $routes->add('users/cache', 'User::save_cache');
     $routes->add('users/getcache', 'User::get_cache');
     $routes->add('users/(:num)/update', 'User::update/$1');
+    // USERS
+    $routes->add('vendors', 'Vendor');
     // UNIVERSAL DELETE
     $routes->add('dashboard', 'Dashboard');
     $routes->add('delete/(:segment)/(:num)', 'Delete');
