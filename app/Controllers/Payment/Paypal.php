@@ -54,44 +54,42 @@ class Paypal extends Controller
         // A resource representing a Payer that funds a payment
         // For direct credit card payments, set payment method
         // to 'credit_card' and add an array of funding instruments.
-        if(isset($_SESSION['cart'])){
-            foreach ($_SESSION['cart'] as $key => $value) {
-                $item1 = new Item();
-                $item1->setName($value['title'])
-                ->setCurrency('USD')
-                ->setQuantity($value['qty'])
-                ->setSku("123123") // Similar to `item_number` in Classic API
-                ->setPrice($value[]);
-            }
-        }
+        // if(isset($_SESSION['cart'])){
+        //     foreach ($_SESSION['cart'] as $key => $value) {
+        //         $item = new Item();
+        //         $item->setName($value['title'])
+        //         ->setCurrency('USD')
+        //         ->setQuantity($value['qty'])
+        //         ->setSku($value['id']) // Similar to `item_number` in Classic API
+        //         ->setPrice($value['price']);
+        //         $items[]=$item;
+        //     }
+        // }
+        
         $payer = new Payer();
         $payer->setPaymentMethod("paypal");
-
-        $item1 = new Item();
-        
-        $item1->setName('Ground Coffee 40 oz')
-            ->setCurrency('USD')
-            ->setQuantity(1)
-            ->setSku("123123") // Similar to `item_number` in Classic API
-            ->setPrice(7.5);
-        $item2 = new Item();
-        $item2->setName('Granola bars')
-            ->setCurrency('USD')
-            ->setQuantity(5)
-            ->setSku("321321") // Similar to `item_number` in Classic API
-            ->setPrice(2);
+        $item = new Item();
+        if(isset($_SESSION['cart'])){
+            foreach ($_SESSION['cart'] as $key => $value) {
+                $item->setName($value['title'])
+                ->setCurrency('USD')
+                ->setQuantity($value['qty'])
+                ->setSku($value['id']) // Similar to `item_number` in Classic API
+                ->setPrice($value['price']);
+                $items[]=$item;
+            }
+        }
         $itemList = new ItemList();
-        $itemList->setItems(array($item1, $item2));
-
+        $itemList->setItems($items);
 
         $details = new Details();
-        $details->setShipping(1.2)
-            ->setTax(1.3)
-            ->setSubtotal(17.50);
+        $details->setShipping(0.0)
+            ->setTax(0.0)
+            ->setSubtotal(6490.0);
 
         $amount = new Amount();
         $amount->setCurrency("USD")
-            ->setTotal(20)
+            ->setTotal(6490.0)
             ->setDetails($details);
 
         $transaction = new Transaction();
@@ -194,22 +192,17 @@ class Paypal extends Controller
                 'payment_status'    =>$State
             ];
             $this->paypal->save($data);
-            redirect()->to('payments/paypal/success');
+            return redirect()->to('success');
         }
-        redirect()->to('payments/paypal/cancel');
+        return redirect()->to('cancel');
     }
     function success()
     {
-        $this->load->view("content/success");
+        return view("content/success");
     }
     function cancel()
     {
         $this->paypal->create_payment();
-        $this->load->view("content/cancel");
-    }
-    function complete(Type $var = null)
-    {
-
-        
+        return view("content/cancel");
     }
 }

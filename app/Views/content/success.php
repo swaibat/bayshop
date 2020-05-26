@@ -2,7 +2,6 @@
 
 
 
-<?php $this->load->view('theme/header') ?>
 <div class="container">
 
     <div class="starter-template">
@@ -17,5 +16,3 @@
         </div>
     </div>
 </div><!-- /.container -->
-
-<?php $this->load->view('theme/footer') ?>
