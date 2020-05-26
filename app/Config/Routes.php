@@ -87,6 +87,8 @@ $routes->group('payments', ['namespace' => 'App\Controllers\Payment'], function 
     $routes->add('paypal', 'Paypal');
     $routes->add('paypal/create', 'Paypal::create');
     $routes->add('paypal/status', 'Paypal::status');
+    $routes->add('paypal/success', 'Paypal::success');
+    $routes->add('paypal/cancel', 'Paypal::cancel');
 });
 
 $routes->group('auth', ['namespace' => 'App\Controllers\User'], function ($routes) {
@@ -104,6 +106,7 @@ $routes->group('/', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->add('shopping/cart', 'Home::shopping_cart');
     $routes->add('shopping/checkout', 'Home::checkout');
     $routes->add('shopping/order', 'Home::order');
+    $routes->add('shopping/payments', 'Home::payment_method');
     $routes->add('category/(:segment)', 'Home::category_products');
 });
 

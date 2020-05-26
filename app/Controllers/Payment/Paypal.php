@@ -54,11 +54,21 @@ class Paypal extends Controller
         // A resource representing a Payer that funds a payment
         // For direct credit card payments, set payment method
         // to 'credit_card' and add an array of funding instruments.
-
+        if(isset($_SESSION['cart'])){
+            foreach ($_SESSION['cart'] as $key => $value) {
+                $item1 = new Item();
+                $item1->setName($value['title'])
+                ->setCurrency('USD')
+                ->setQuantity($value['qty'])
+                ->setSku("123123") // Similar to `item_number` in Classic API
+                ->setPrice($value[]);
+            }
+        }
         $payer = new Payer();
         $payer->setPaymentMethod("paypal");
 
         $item1 = new Item();
+        
         $item1->setName('Ground Coffee 40 oz')
             ->setCurrency('USD')
             ->setQuantity(1)
@@ -90,10 +100,9 @@ class Paypal extends Controller
             ->setDescription("Payment description")
             ->setInvoiceNumber(uniqid());
 
-        $baseUrl = base_url();
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl("$baseUrl/payments/ExecutePayment.php?success=true")
-            ->setCancelUrl("$baseUrl/payments/ExecutePayment.php?success=false");
+        $redirectUrls->setReturnUrl(base_url('payments/paypal/status?success=true'))
+            ->setCancelUrl(base_url('payments/paypal/status?success=false'));
 
 
         $payment = new Payment();
@@ -112,10 +121,8 @@ class Paypal extends Controller
         }
 
         $approvalUrl = $payment->getApprovalLink();
-
-        print_r("<a href='$approvalUrl' >$approvalUrl</a>");
-
-        return $payment;
+        // return print_r($itemList);
+        return redirect()->to($approvalUrl);
     }
 
 
@@ -174,12 +181,22 @@ class Paypal extends Controller
             $Total = $sale->getAmount()->getTotal();
             /** it's all right **/
             /** Here Write your database logic like that insert record or value in database if you want **/
-            $this->paypal->create($Total, $Subtotal, $Tax, $PaymentMethod, $PayerStatus, $PayerMail, $saleId, $CreateTime, $UpdateTime, $State);
-            $this->session->set_flashdata('success_msg', 'Payment success');
-            redirect('paypal/success');
+            $data = [
+                'total'             =>$Total,
+                'sub_total'         =>$Subtotal,
+                'tax'               =>$Tax,
+                'payment_method'    => $PaymentMethod,
+                'payer_status'      =>$PayerStatus,
+                'payer_email'       => $PayerMail,
+                'sale_id'           =>$saleId, 
+                'created_at'        =>$CreateTime,
+                'updated_at'        => $UpdateTime, 
+                'payment_status'    =>$State
+            ];
+            $this->paypal->save($data);
+            redirect()->to('payments/paypal/success');
         }
-        $this->session->set_flashdata('success_msg', 'Payment failed');
-        redirect('paypal/cancel');
+        redirect()->to('payments/paypal/cancel');
     }
     function success()
     {
@@ -189,5 +206,10 @@ class Paypal extends Controller
     {
         $this->paypal->create_payment();
         $this->load->view("content/cancel");
+    }
+    function complete(Type $var = null)
+    {
+
+        
     }
 }

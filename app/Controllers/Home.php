@@ -59,10 +59,11 @@ class Home extends BaseController
     }
 
     public function add_to_cart(){
+        $cart = $this->request->getVar('cart_items');
         $data = [
             'id'           => $this->request->getVar('id'),
             'title'        => $this->request->getVar('title'),
-            'qty'          => $this->request->getVar('quantity'),
+            'qty'          => $this->request->getVar('qty'),
             'slug'         => $this->request->getVar('slug'),
             'price'        => $this->request->getVar('price'),
             'color'        => $this->request->getVar('color'),
@@ -71,6 +72,10 @@ class Home extends BaseController
         ];
         if (!isset($_SESSION['cart'])) {
             $_SESSION['cart'] = array();
+        }
+        if ($cart) {
+            $this->session->remove('cart');
+            $_SESSION['cart'] = json_decode($cart, true);
         }
         array_push($_SESSION['cart'],$data);
         return $this->res->setJSON($_SESSION['cart']);
@@ -90,10 +95,19 @@ class Home extends BaseController
         return view($this->themePath, $data);
     }
 
-    public function order(){
+    public function payment_method(){
+        if ($this->validate(['method' => 'required'])) {
+            $this->session->push('payment_method', ['method' => $this->request->getVar('method')]);
+            if ($this->request->getVar('method')=='paypal') {
+                return redirect()->to(base_url('/payments/paypal'));
+            } else {
+                return redirect()->to(base_url('/payments/stripe'));
+            }
+            
+        }
         $data = [
-            'page_name'         => 'order',
-            'page_title'        => 'order',
+            'page_name'         => 'payment_methods',
+            'page_title'        => 'payment method',
         ];
         return view($this->themePath, $data);
     }

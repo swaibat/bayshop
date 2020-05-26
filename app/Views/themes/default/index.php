@@ -257,7 +257,7 @@
         const session = <?=json_encode($_SESSION['cart'])?> || [] ;
         const body = {
             id: '<?= $product['id']?>',
-            quantity: $('#quantity').val(),
+            qty: $('#quantity').val(),
             size: $('#size').val(),
             color: $(".radio:checked").val(),
             title: '<?=$product['title']?>',

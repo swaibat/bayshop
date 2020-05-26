@@ -32,6 +32,7 @@ use App\Models\SliderModel;
 use App\Models\RoleModel;
 use App\Models\ClientinfoModel;
 use App\Models\SettingModel;
+use App\Models\PaypalModel;
 
 
 
@@ -71,6 +72,7 @@ class BaseController extends Controller
         $this->settings         = new SettingModel();
         $this->roles            = new RoleModel();
         $this->clientInfo       = new ClientinfoModel();
+        $this->paypal           = new PaypalModel();
         $this->logs             = new LogModel();
         // $this->location         = location_info();
         $this->user_agent       = $this->request->getUserAgent();
