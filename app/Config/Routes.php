@@ -64,6 +64,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     $routes->add('users/cache', 'User::save_cache');
     $routes->add('users/getcache', 'User::get_cache');
     $routes->add('users/(:num)/update', 'User::update/$1');
+    // USERS
+    $routes->add('vendors', 'Vendor');
     // UNIVERSAL DELETE
     $routes->add('dashboard', 'Dashboard');
     $routes->add('delete/(:segment)/(:num)', 'Delete');
@@ -85,6 +87,8 @@ $routes->group('payments', ['namespace' => 'App\Controllers\Payment'], function 
     $routes->add('paypal', 'Paypal');
     $routes->add('paypal/create', 'Paypal::create');
     $routes->add('paypal/status', 'Paypal::status');
+    $routes->add('paypal/success', 'Paypal::success');
+    $routes->add('paypal/cancel', 'Paypal::cancel');
 });
 
 $routes->group('auth', ['namespace' => 'App\Controllers\User'], function ($routes) {
@@ -102,6 +106,7 @@ $routes->group('/', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->add('shopping/cart', 'Home::shopping_cart');
     $routes->add('shopping/checkout', 'Home::checkout');
     $routes->add('shopping/order', 'Home::order');
+    $routes->add('shopping/payments', 'Home::payment_method');
     $routes->add('category/(:segment)', 'Home::category_products');
 });
 

@@ -24,14 +24,13 @@
                         <th width="10%" >Item Total</th>
                 </tr>
                 <?php foreach ($cart_products as $key => $value):?>
-                <tr name="line_items">
+                <tr id='<?= $value['id']?>' class='item-row' name="line_items">
                     <td>
                         <span class='d-flex'>
-                            
                         <img height='50' width='50' class='rounded shadow-xs mr-3' src="<?= $value['image']?>" alt="">
                         <span class='d-flex flex-column w-100'>
                         <small class='mb-2'><?= $value['title']?></small>
-                        <div class="d-flex">
+                        <div id='specs'class="d-flex">
                             <span class='ml-2'>Color : <?= $value['color']?></span>
                             <span class='ml-2'>Size : <?= $value['size']?></span>
                             <button name='remove' id='<?=$key?>' type="button" class="btn btn-xs btn-outline-danger ml-auto">remove</button>
@@ -48,7 +47,7 @@
                 <tr>
                     <td colspan="2">&nbsp;</td>
                     <td>Subtotal</td>
-                    <td><input type="text" class='form-control' name="sub_total" value="" jAutoCalc="SUM({item_total})"></td>
+                    <td><input type="text" class='form-control' id='sub_total' name="sub_total" value="" jAutoCalc="SUM({item_total})"></td>
                 </tr>
                 <tr>
                     <td colspan="2">&nbsp;</td>
@@ -64,13 +63,13 @@
                 <tr>
                     <td colspan="2">&nbsp;</td>
                     <td>Total</td>
-                    <td><input type="text" class='form-control' name="grand_total" value="" jAutoCalc="{sub_total} + {tax_total}"></td>
+                    <td><input type="text" class='form-control' id='total' name="grand_total" value="" jAutoCalc="{sub_total} + {tax_total}"></td>
                 </tr>
             </table>
             <div class="w-100 d-flex justify-content-end">
             <div class='btn-group btn-group-sm ml-auto'>
                     <td colspan="99"><button  class="btn btn-primary btn-sm">Continue Shopping</button></td>
-                    <td colspan="99"><a href='<?= base_url('shopping/checkout')?>'  class="btn btn-success btn-sm">Process Order</a></td>
+                    <td colspan="99"><button type='submit' class="btn btn-success btn-sm">Process Order</a></td>
 
                 </div>
                 </div>
@@ -85,7 +84,29 @@
 </main>
 
 <script>
+console.log(<?= json_encode($_SESSION) ?>)
+$('form').submit((e) => {
+    e.preventDefault();
+    const cartItems = <?= json_encode($_SESSION['cart']) ?>;
+    $('.item-row').each(function(index, tr) {
+        // console.log($(this).attr('id'))
+        cartItems.find(e=>{
+            if (e.id == $(this).attr('id')) {
+                e.qty = $(this).find('[name=qty]').val()
+            }
+        });
+        $.post("/home/add_to_cart", {
+            cart_items:JSON.stringify(cartItems),
+            sub_total:$(this).find('[name=sub_total]'.val(),
+            tax:$(this).find('[name=tax]'.val(),
+            sub_total:$(this).find('[name=grand_total]'.val(),
+        }, function(data, status) {
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+        console.log(cartItems);
+});
 
+})
 </script>
 <script type="text/javascript">
             $(document).ready(function() {

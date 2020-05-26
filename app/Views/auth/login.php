@@ -20,7 +20,7 @@
             <?= custom_inputs([
                 'name'        => 'username',
                 'id'          => 'username',
-                'label'       =>'username',
+                'label'       => 'username',
                 'type'        => 'text',
                 'required'    => true,
                 'class'       => 'form-control custom-input',
@@ -31,7 +31,6 @@
                 'label'       => 'password',
                 'type'        => 'password',
                 'required'    => true,
-                'pattern'     => ".{3,}",
                 'class'       => 'form-control custom-input',
             ], ['group-class' => 'mt-5', 'icon-name' => 'lock-closed-outline']) ?>
             <?= form_submit([

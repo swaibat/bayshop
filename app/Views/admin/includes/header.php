@@ -9,6 +9,7 @@
   <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <?= script_tag('assets/shared/jquery/jquery-3.5.1.min.js'); ?>
 
   <!-- CSS Libraries -->
 
@@ -91,7 +92,9 @@
           </div>
         </form>
         <ul class="navbar-nav navbar-right">
-          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep">
+          <ion-icon name="mail"></ion-icon>
+          </a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
               <div class="dropdown-header">Messages
                 <div class="float-right">
@@ -143,7 +146,7 @@
                 </a>
                 <a href="#" class="dropdown-item">
                   <div class="dropdown-item-avatar">
-                    <img alt="image" src="../assets/img/avatar/avatar-5.png" class="rounded-circle">
+                    <img alt="image" src="<?=base_url('assets/shared/images/user.svg')?>" class="rounded-circle">
                   </div>
                   <div class="dropdown-item-desc">
                     <b>Alfa Zulkarnain</b>
@@ -157,7 +160,9 @@
               </div>
             </div>
           </li>
-          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep">
+          <ion-icon name="notifications"></ion-icon>
+          </a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
               <div class="dropdown-header">Notifications
                 <div class="float-right">
@@ -217,8 +222,8 @@
             </div>
           </li>
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-            <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-            <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div></a>
+            <img alt="image" src="<?=base_url('assets/shared/images/user.svg')?>" class="rounded-circle mr-1">
+            <div class="d-sm-none d-lg-inline-block">Hi, Admin</div></a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Logged in 5 min ago</div>
               <a href="features-profile.html" class="dropdown-item has-icon">
@@ -243,25 +248,31 @@
       <div class="main-sidebar">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand shadow-sm">
-            <a href="index.html">Stisla</a>
+            <a href="index.html">Doolbay</a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm shadow-sm">
-            <a href="index.html">St</a>
+            <a href="index.html">Do</a>
 		  </div>
 		  <!-- Side Navigation -->
 			  <?= custom_navigation(
 				  ['name'=>$page_name,'folder'=>$folder_name],
 				  [
-				  'dashboard'	=>['icon'=>'home'],
-          'products'	=>['icon'=>'basket', 'children'=>['products', 'categories']],
-          'posts'	    =>['icon'=>'document-text','children'=>['posts', 'categories']],
-          'messages'	=>['icon'=>'chatbox-ellipses'],
-          'pages'	    =>['icon'=>'documents'],
-          'users'	    =>['icon'=>'person'],
-          'countries'	=>['icon'=>'golf'],
+          'dashboard'	    =>['icon'=>'home'],
+          'monitoring'	  =>['icon'=>'cellular'],
+          'products'	    =>['icon'=>'basket', 'children'=>['products', 'categories']],
+          'posts'	        =>['icon'=>'document-text','children'=>['posts', 'categories']],
+          'messages'	    =>['icon'=>'chatbox-ellipses'],
+          'Notifications'	=>['icon'=>'chatbox','children'=>['emails', 'intergrations']],
+          'pages'	        =>['icon'=>'documents'],
+          'users'	        =>['icon'=>'person'],
+          'vendors'	      =>['icon'=>'person','children'=>['vendors', 'shops']],
+          'countries'	    =>['icon'=>'golf'],
+          'types'	        =>['icon'=>'copy'],
+          'payments'	    =>['icon'=>'copy'],
+          'settings'	    =>['icon'=>'card'],
 				])?>
             <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-              <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
+              <a href="#" class="btn btn-primary btn-lg btn-block btn-icon-split">
                 <i class="fas fa-rocket"></i> Documentation
               </a>
             </div>

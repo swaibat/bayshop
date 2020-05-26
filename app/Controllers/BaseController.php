@@ -31,6 +31,8 @@ use App\Models\ProductfileModel;
 use App\Models\SliderModel;
 use App\Models\RoleModel;
 use App\Models\ClientinfoModel;
+use App\Models\SettingModel;
+use App\Models\PaypalModel;
 
 
 
@@ -67,8 +69,10 @@ class BaseController extends Controller
         $this->post_categories  = new PostcategoryModel();
         $this->product_files    = new ProductfileModel();
         $this->slider           = new SliderModel();
+        $this->settings         = new SettingModel();
         $this->roles            = new RoleModel();
         $this->clientInfo       = new ClientinfoModel();
+        $this->paypal           = new PaypalModel();
         $this->logs             = new LogModel();
         // $this->location         = location_info();
         $this->user_agent       = $this->request->getUserAgent();

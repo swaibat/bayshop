@@ -12,35 +12,23 @@ class Setting extends BaseController
     {
         helper(['form', 'url']);
         if ($this->validate([
-            'title' => 'required|min_length[3]|max_length[255]',
+            'data' => 'required',
         ])) {
-            $data = [
-                'title'                 => $this->request->getVar('title'),
-                'slug'                  => url_title($this->request->getVar('title')),
-                'price'                 => $this->request->getVar('price'),
-                'compare_price'         => $this->request->getVar('compare_price'),
-                'available_quantity'    => $this->request->getVar('available_quantity'),
-                'product_type'          => $this->request->getVar('product_type'),
-                'description'           => $this->request->getVar('description'),
-                'vendor'                => $this->request->getVar('vendor'),
-                'country'               => $this->request->getVar('country'),
-                'category'              => $this->request->getVar('category'),
-                'status'                => $this->request->getVar('status'),
-                'focus_keyword'         => $this->request->getVar('focus_keyword'),
-                'meta_description'      => $this->request->getVar('meta_description'),
-                'message'               => 'product created successfully'
-            ];
-            $this->products->save($data);
-            return $this->response->setJSON($data);
+            foreach (json_decode($this->request->getVar('data'), true) as $key => $value) {
+                if($this->settings->where(['name'=>$value['name']])->first()){
+                    $this->settings->where(['name'=>$value['name']])->set($value)->update();
+                }else {
+                    $this->settings->save($value);
+                }
+             }
+            return print_r($this->settings->findAll());
+            // return $this->res->setJSON(['status' => 201, 'message' => 'settings updated Successfully']);
         }
         $data = [
             'folder_name'       => 'settings',
             'page_name'         => 'settings',
-            'page_title'        => 'Create Product',
-            'types'             => $this->types->findAll(),
-            'categories'        => $this->categories->findAll(),
-            'countries'         => $this->countries->findAll(),
-            'errors'            => $this->validation->getErrors()
+            'page_title'        => 'settings',
+            'settings'          => $this->settings->findAll(),
         ];
         return view('admin/index', $data);
     }

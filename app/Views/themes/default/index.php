@@ -12,6 +12,7 @@
     <?= link_tag('assets/admin/css/style.css'); ?>
     <?= script_tag(['src' => 'https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js', 'type'  => 'module']); ?>
     <?= script_tag('assets/shared/jquery/jquery-3.5.1.min.js'); ?>
+    <?= script_tag("/assets/plugins/bgswitcher/jquery.bgswitcher.js"); ?>
     <?= script_tag('assets/plugins/toastify-js/toastify-js.js'); ?>
     <?= script_tag('assets/plugins/caliculator/jautocalc.min.js'); ?>
 </head>
@@ -36,7 +37,7 @@
                     </div>
                     <button class="btn btn-primary shadow-sm m-2 my-sm-0" type="submit">Search</button>
                 </form>
-                <ul class="navbar-nav">
+                <ul id='left-nav' class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link d-flex flex-column" href="<?=base_url('shopping/cart')?>">
                             <ion-icon class='header-icon mx-auto' name="cart-outline"></ion-icon>
@@ -91,10 +92,10 @@
                 </ul>
             </div>
         </nav>
-        <nav class='nav container nav-underline text-capitalize  cv-category-nav' id='navAccordion'>
+        <nav id='nav' class='nav container nav-underline text-capitalize  cv-category-nav' id='navAccordion'>
             <li class='nav-item'>
                 <a href='/' class='nav-link cv-nav selected'>
-                    <ion-icon name='home'></ion-icon>
+                    <ion-icon name='list'></ion-icon>
                     categories
                 </a>
             </li>
@@ -256,7 +257,7 @@
         const session = <?=json_encode($_SESSION['cart'])?> || [] ;
         const body = {
             id: '<?= $product['id']?>',
-            quantity: $('#quantity').val(),
+            qty: $('#quantity').val(),
             size: $('#size').val(),
             color: $(".radio:checked").val(),
             title: '<?=$product['title']?>',
@@ -272,6 +273,27 @@
         }  
     });
     </script>
+    <script>
+    window.onscroll = function() {myFunction()};
+
+// Get the navbar
+var navbar = document.getElementById("nav");
+var leftNavbar = document.getElementById("left-nav");
+
+// Get the offset position of the navbar
+var sticky = navbar.offsetTop;
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("d-none");
+    leftNavbar.classList.add("d-none");
+  } else {
+    navbar.classList.remove("d-none");
+    leftNavbar.classList.remove("d-none");
+  }
+}
+</script>
 </body>
 
 </html>
