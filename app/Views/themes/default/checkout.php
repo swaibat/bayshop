@@ -108,7 +108,7 @@
                 <ul class="list-group list-group-flush mt-4 p-2">
                 <?php foreach ($_SESSION['cart'] as $key => $value):?>
                     <li class="list-group-item d-flex">
-                            <img height='50' width='50' class='rounded shadow-xs mr-2' src="<?= $value['image']?>" alt="">
+                            <img height='50' width='50' class='rounded shadow-xs mr-2' src="<?= $value['url']?>" alt="">
                             <span class='d-flex flex-column w-75'>
                             <small class='mb-2 text-truncate'><?= $value['title']?></small>
                             <div class="d-flex">

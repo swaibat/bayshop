@@ -68,9 +68,11 @@ class Paypal extends Controller
         
         $payer = new Payer();
         $payer->setPaymentMethod("paypal");
+        $Subtotal = 0;
         $item = new Item();
         if(isset($_SESSION['cart'])){
             foreach ($_SESSION['cart'] as $key => $value) {
+                $Subtotal += (float)($value['price']) * (int)($value['qty']);
                 $item->setName($value['title'])
                 ->setCurrency('USD')
                 ->setQuantity($value['qty'])
@@ -79,17 +81,18 @@ class Paypal extends Controller
                 $items[]=$item;
             }
         }
+        // return print_r($Subtotal);
         $itemList = new ItemList();
         $itemList->setItems($items);
 
         $details = new Details();
         $details->setShipping(0.0)
             ->setTax(0.0)
-            ->setSubtotal(6490.0);
+            ->setSubtotal(2169.0);
 
         $amount = new Amount();
         $amount->setCurrency("USD")
-            ->setTotal(6490.0)
+            ->setTotal(2169.0)
             ->setDetails($details);
 
         $transaction = new Transaction();

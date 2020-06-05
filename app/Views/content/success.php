@@ -1,9 +1,4 @@
-
-
-
-
 <div class="container">
-
     <div class="starter-template">
         <h1>PayPal Payment</h1>
         <p class="lead">Success</p>
@@ -15,4 +10,5 @@
             <span style="color: #646464;">Your payment was successful, thank you for purchase.</span><br/>
         </div>
     </div>
-</div><!-- /.container -->
+</div>
+<!-- /.container -->
