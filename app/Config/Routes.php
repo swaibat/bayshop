@@ -71,6 +71,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     $routes->add('delete/(:segment)/(:num)', 'Delete');
     // SETTINGS
     $routes->add('settings', 'Setting');
+    // PAYMENTS
+    $routes->add('payments', 'Payment');
     // USERS
     $routes->add('sliders', 'Slider');
     $routes->add('sliders/create', 'Slider::create');
