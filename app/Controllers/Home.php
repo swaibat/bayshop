@@ -61,23 +61,21 @@ class Home extends BaseController
     public function add_to_cart(){
         $cart = $this->request->getVar('cart_items');
         $data = [
-            'id'           => $this->request->getVar('id'),
-            'title'        => $this->request->getVar('title'),
             'qty'          => $this->request->getVar('qty'),
-            'slug'         => $this->request->getVar('slug'),
-            'price'        => $this->request->getVar('price'),
             'color'        => $this->request->getVar('color'),
             'size'         => $this->request->getVar('size'),
-            'image'         => $this->request->getVar('url')
         ];
+        $item = $this->products->get_product($this->request->getVar('slug'));
         if (!isset($_SESSION['cart'])) {
             $_SESSION['cart'] = array();
         }
         if ($cart) {
             $this->session->remove('cart');
             $_SESSION['cart'] = json_decode($cart, true);
+        }else {
+            $_SESSION['cart'][] = array_merge($item,$data);
         }
-        array_push($_SESSION['cart'],$data);
+        // return print_r($_SESSION['cart']);
         return $this->res->setJSON($_SESSION['cart']);
     }
 
@@ -99,7 +97,7 @@ class Home extends BaseController
         if ($this->validate(['method' => 'required'])) {
             $this->session->push('payment_method', ['method' => $this->request->getVar('method')]);
             if ($this->request->getVar('method')=='paypal') {
-                return redirect()->to(base_url('/payments/paypal'));
+                redirect()->to(base_url('/payments/paypal'));
             } else {
                 return redirect()->to(base_url('/payments/stripe'));
             }

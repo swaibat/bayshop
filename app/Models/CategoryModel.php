@@ -29,17 +29,17 @@ class CategoryModel extends Model
         , down2.name as down2_name
         , down3.name as down3_name
         from categories as root
-    left outer
-     join categories as down1
-       on down1.parentid = root.id
-   left outer
-     join categories as down2
-       on down2.parentid = down1.id
-   left outer
-     join categories as down3
-       on down3.parentid = down2.id
-    where root.parentid is null
-   order 
+          left outer
+          join categories as down1
+            on down1.parent_id = root.id
+        left outer
+          join categories as down2
+            on down2.parent_id = down1.id
+        left outer
+          join categories as down3
+            on down3.parent_id = down2.id
+          where root.parent_id is null
+        order 
        by root_name 
         , down1_name 
         , down2_name 

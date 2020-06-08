@@ -260,10 +260,7 @@
             qty: $('#quantity').val(),
             size: $('#size').val(),
             color: $(".radio:checked").val(),
-            title: '<?=$product['title']?>',
-            slug: '<?=$product['slug']?>',
-            price: '<?=$product['price']?>',
-            url: '<?=$product['url']?>',
+            slug: '<?=$product['slug']?>'
         }
         if (!session.find(e => e.id == '<?= $product['id']?>') || session.length < 1 ) {
             $.post("/home/add_to_cart", body, function(data, status) {

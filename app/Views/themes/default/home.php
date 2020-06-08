@@ -43,7 +43,7 @@
     <script>
     $(".slide-container").children().css("background-size", "cover");
     $(".box").bgswitcher({
-        images: ["<?=base_url('assets/824.jpg')?>"]
+        images: ['<?=base_url('assets/824.jpg')?>','<?=base_url('assets/tv.png')?>']
     });
     </script>
     <div class="row align-items-center mb-4">
