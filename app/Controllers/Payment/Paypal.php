@@ -84,34 +84,53 @@ class Paypal extends Controller
         // return print_r($Subtotal);
         $itemList = new ItemList();
         $itemList->setItems($items);
-        // return print_r($itemList);
 
+        // ### Additional payment details
+        // Use this optional field to set additional
+        // payment information such as tax, shipping
+        // charges etc.
         $details = new Details();
-        $details->setSubtotal($Subtotal);
+        $details->setSubtotal(4);
 
+        // ### Amount
+        // Lets you specify a payment amount.
+        // You can also specify additional details
+        // such as shipping, tax.
         $amount = new Amount();
         $amount->setCurrency("USD")
-            ->setTotal($Subtotal)
+            ->setTotal(4)
             ->setDetails($details);
-        print_r($amount);
 
+            // return print_r($amount);
+        // ### Transaction
+        // A transaction defines the contract of a
+        // payment - what is the payment for and who
+        // is fulfilling it. 
         $transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($itemList)
             ->setDescription("Payment description")
             ->setInvoiceNumber(uniqid());
 
+        // ### Redirect urls
+        // Set the urls that the buyer must be redirected to after 
+        // payment approval/ cancellation.
+
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl(base_url('payments/paypal/status?success=true'))
-            ->setCancelUrl(base_url('payments/paypal/status?success=false'));
+                $redirectUrls->setReturnUrl(base_url('payments/paypal/status?success=true'))
+                    ->setCancelUrl(base_url('payments/paypal/status?success=false'));
 
-
+        // ### Payment
+        // A Payment Resource; create one using
+        // the above types and intent set to 'sale'
         $payment = new Payment();
         $payment->setIntent("sale")
             ->setPayer($payer)
             ->setRedirectUrls($redirectUrls)
             ->setTransactions(array($transaction));
 
+
+        // For Sample Purposes Only.
         $request = clone $payment;
 
         try {

@@ -4,7 +4,6 @@ class Home extends BaseController
 {
     public function index()
     {
-        // return print_r($this->categories->group_categories());
         $data = [
             'page_name'     => 'home',
             'page_title'    => 'home',
@@ -27,7 +26,6 @@ class Home extends BaseController
     public function product()
     {
         $slug = $this->request->uri->getSegment(2);
-        // return print_r($this->products->get_product($slug));
         $data = [
             'page_name'     => 'product_details',
             'page_title'    => 'product',
@@ -86,6 +84,9 @@ class Home extends BaseController
     }
 
     public function checkout(){
+        if (!isset($_SESSION['cart'])) {
+           return redirect()->to(base_url('/shopping/cart'));
+        }
         $data = [
             'page_name'         => 'checkout',
             'page_title'        => 'checkout',
@@ -94,15 +95,9 @@ class Home extends BaseController
     }
 
     public function payment_method(){
-        if ($this->validate(['method' => 'required'])) {
-            $this->session->push('payment_method', ['method' => $this->request->getVar('method')]);
-            if ($this->request->getVar('method')=='paypal') {
-                redirect()->to(base_url('/payments/paypal'));
-            } else {
-                return redirect()->to(base_url('/payments/stripe'));
-            }
-            
-        }
+        if (!isset($_SESSION['cart'])) {
+            return redirect()->to(base_url('/shopping/cart'));
+         }
         $data = [
             'page_name'         => 'payment_methods',
             'page_title'        => 'payment method',
