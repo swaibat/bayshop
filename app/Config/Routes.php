@@ -106,6 +106,8 @@ $routes->group('/', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->add('products', 'Home::products');
     $routes->add('products/(:segment)', 'Home::product');
     $routes->add('shopping/cart', 'Home::shopping_cart');
+    $routes->add('shopping/login', 'Home::buyer_login');
+    $routes->add('shipping/address', 'Home::shipping_address');
     $routes->add('shopping/checkout', 'Home::checkout');
     $routes->add('shopping/order', 'Home::order');
     $routes->add('shopping/payments', 'Home::payment_method');

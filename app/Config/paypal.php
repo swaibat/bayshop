@@ -6,6 +6,7 @@ class Paypal extends BaseConfig
 {
     public $client_id = 'AWQM5WsKf2J-PnXV8GryERCiqu36isa1xY4b2kQcG0LYLbM29DmH2Ql4MuWnuV21cNsaGiy5z7jp3tWN';
     public $secret = 'EIifiXlWpI4muVzzk_IOYEOP-VxKl-RTv8ZSj-H9s8NnPGp1QEPFjRfzMipISf7logtDKdqHhquTUrw3';
+    
     public $settings  = array(
 
         'mode' => 'sandbox',

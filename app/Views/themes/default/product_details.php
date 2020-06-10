@@ -1,17 +1,9 @@
 
-<main role="main" class="container mt-6">
-<nav aria-label="breadcrumb shadow-xs">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item"><a href="#">Library</a></li>
-    <li class="breadcrumb-item active" aria-current="page"><?=$product['title'] ?></li>
-  </ol>
-</nav>
+<main role="main" class="container">
     <div class="d-flex flex-wrap">
         <div class='col-md-9'>
             <div class='row bg-white py-3 shadow-xs rounded'>
                 <div class='col-md-5 pt-2'>
-
                     <div class="show w-100" href="1.jpg">
                         <img class='w-100' src="<?=$product['url'] ?>" id="show-img">
                     </div>
@@ -41,7 +33,7 @@
                 </div>
                 <div class='col-md-7 rounded'>
                     <div class='d-flex'>
-                        <p><?=$product['title'] ?></p>
+                        <h5><?=$product['title'] ?></h5>
                         <div class='ml-auto btn-group'>
                             <button class='btn '>
                                 <ion-icon name="share-outline"></ion-icon>
@@ -104,8 +96,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class='my-3 ml-5'>
-                            <p class='mb-1'>avaible sizes</p>
+                    </div>
+                    <div class="d-flex">
+                    <div class='my-3'>
+                            <label for='size' class='mb-1'>avaible sizes</label>
                             <select id='size' class="form-control form-control-sm js-select2">
                                 <option value='S'>S</option>
                                 <option value='M'>M</option>
@@ -124,7 +118,7 @@
                                         -
                                     </button>
                                 </div>
-                                <input id='quantity' type='text' min='1' value='1' class='form-control quantity'
+                                <input id='quantity' type='text' min='1' value='1' class='form-control quantity-input'
                                     placeholder='' aria-label='' aria-describedby='basic-addon1' />
                                 <div class='input-group-append'>
                                     <button class='btn btn-outline-secondary plus' id='plus' type='button'>

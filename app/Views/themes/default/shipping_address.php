@@ -1,48 +1,19 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 pl-0">
-            <div class="bg-white shadow-xs rounded">
-                <div class="modal-header border-0">
-                    <h6 class="modal-title position-absolute bg-primary text-white" id="mymodalLabel">
+            <div class="card bg-white shadow-xs">
+                <div class="card-header bg-white">
+                    <h6 class="card-title pb-0 mb-0">
                         <?= $page_title ?></h6>
                 </div>
-                <?= form_open(base_url('shopping/payments'), ['class' => 'p-4', 'method' => 'post', 'id' => 'form', 'novalidate' => '',]); ?>
+                <?= form_open(base_url('shopping/payments'), ['class' => 'px-5 pb-4', 'method' => 'post', 'id' => 'form', 'novalidate' => '',]); ?>
                 <div class="form-row pt-2">
-                    <?= custom_inputs([
-                'name'        => 'firstname',
-                'label'       => 'firstname',
-                'type'        => 'text',
-                'class'       => 'form-control custom-input',
-            ], ['group-class' => 'mt-5 px-2 col-md-6', 'icon-name' => 'person-outline']) ?>
-                    <?= custom_inputs([
-                'name'        => 'lastname',
-                'label'       => 'lastname',
-                'type'        => 'text',
-                'class'       => 'form-control custom-input',
-            ], ['group-class' => 'mt-5 col-md-6', 'icon-name' => 'mail-outline']) ?>
-                    <?= custom_inputs([
-                'name'        => 'email',
-                'label'       =>'email address',
-                'type'        => 'email',
-                'class'       => 'form-control custom-input',
-            ], ['group-class' => 'mt-5 col-md-6', 'icon-name' => 'lock-closed-outline']) ?>
-                    <?= custom_inputs([
-                'name'        => 'telepnone',
-                'label'       => 'telephone',
-                'type'        => 'text',
-                'class'       => 'form-control custom-input',
-            ], ['group-class' => 'mt-5 col-md-6', 'icon-name' => 'lock-closed-outline']) ?>
-
-                    <div class="modal-header border-0 mb-3">
-                        <h6 class="modal-title position-absolute bg-primary text-white" id="mymodalLabel">
-                            <?= $page_title ?></h6>
-                    </div>
             <?= custom_inputs([
                 'name'        => 'address',
                 'label'       => 'full address',
                 'type'        => 'text',
                 'class'       => 'form-control custom-input',
-            ], ['group-class' => 'mt-5 pt-3 px-2 col-md-12', 'icon-name' => 'person-outline']) ?>
+            ], ['group-class' => 'mt-5 px-2 col-md-12', 'icon-name' => 'person-outline']) ?>
                     <?= custom_inputs([
                 'name'        => 'address_1',
                 'label'       => 'address 1',
@@ -79,6 +50,13 @@
                 'type'        => 'text',
                 'class'       => 'form-control custom-input',
             ], ['group-class' => 'mt-5 col-md-12', 'icon-name' => 'lock-closed-outline']) ?>
+            <div class="form-group mt-4  w-100">
+				<select name="role" class="form-control js-select2 w-100">
+					<option value="1">admin</option>
+					<option value="2">user</option>
+				</select>
+				<span class="bar"></span><label class="cv-label left text-capitalize">Please choose your shipping method</label>
+			</div>
 
                     <div class="d-flex justify-content-between mt-3 text-center w-100">
                         <a class='btn btn-sm btn-outline-primary' href="/auth/password_reset">back to cart</a>
@@ -92,13 +70,14 @@
             </div>
         </div>
         <div class="col-md-4 p-0">
-            <div class="bg-white shadow-xs p-2 ">
-                <div class="modal-header border-0">
-                    <h6 class="modal-title w-75 position-absolute bg-primary text-white" id="mymodalLabel">
-                        Order Summary</h6>
+            <div class="card bg-white shadow-xs">
+                <div class="card-header bg-white">
+                    <h6 class="card-title pb-0 mb-0">
+                    Order Summary
+                        </h6>
                 </div>
                 <?php if(isset($_SESSION['cart'])):?>
-                <ul class="list-group list-group-flush mt-4 p-2">
+                <ul class="list-group list-group-flush mt-2 p-2">
                 <?php foreach ($_SESSION['cart'] as $key => $value):?>
                     <li class="list-group-item d-flex">
                             <img height='50' width='50' class='rounded shadow-xs mr-2' src="<?= $value['url']?>" alt="">
@@ -115,6 +94,5 @@
                 <?php endif ?>
             </div>
         </div>
-
     </div>
 </div>

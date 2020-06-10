@@ -16,7 +16,9 @@ html {
     margin-left: -1.7rem;
     margin-top: 0.5rem;
 }
-
+.quantity-input input{
+    max-width: 2.2rem;
+}
 .cv-form-group .select2.select2-container {
     width: 100% !important;
     margin-bottom: -1.2rem;
@@ -41,6 +43,7 @@ a:hover {
 
 body {
     height: 100vh;
+    padding-top: 4.5rem;
     background: #eef2f4;
     font-size: 0.9rem;
     color: #222222 !important;

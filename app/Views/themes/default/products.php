@@ -1,10 +1,4 @@
-<main role="main" class="container mt-6">
-<nav aria-label="breadcrumb shadow-xs">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item"><a href="#">Products</a></li>
-  </ol>
-</nav>
+<main role="main" class="container">
     <div class="Btc_container">
         <!--DealofDayOffers-->
         <div class="sectionX " id="onClickFilter_ScrollTo" style="margin-bottom: 0;">

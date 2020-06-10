@@ -1,21 +1,9 @@
-<main role="main" class="container mt-6">
-<nav aria-label="breadcrumb shadow-xs bg-transparent">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item"><a href="/products">Products</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Cart</li>
-  </ol>
-</nav>
-<style>
-    .cart-table{
-
-    }
-</style>
+<main role="main" class="container">
     <div class="rounded bg-white p-3 shadow-xs w-100">
         <h6>Shopping Cart</h6>
         <?php 
          if(isset($_SESSION['cart'])):?>
-    <form name="cart" action='<?=base_url('shopping/checkout')?>' method='POST'>
+    <form name="cart" action='<?=base_url('shopping/login')?>' method='POST'>
             <table name="cart" class="cart-table table table-striped table-bordered rounded">
                 <tr>
                         <th width="50%">Item</th>

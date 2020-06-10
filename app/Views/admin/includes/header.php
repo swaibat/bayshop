@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="../assets/admin/assets/css/components.css">
 </head>
 
-<body>
+<body class='pt-0'>
   <div id="app">
     <div class="main-wrapper">
       <div class="navbar-bg"></div>

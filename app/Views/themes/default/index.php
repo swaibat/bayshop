@@ -17,7 +17,7 @@
     <?= script_tag('assets/plugins/caliculator/jautocalc.min.js'); ?>
 </head>
 
-<body class='pt-5 d-flex flex-column'>
+<body class='d-flex flex-column'>
     <header class='w-100 fixed-top bg-white shadow-xs'>
         <nav class="navbar navbar-expand-md navbar-light align-items-center container border-bottom">
             <a class="navbar-brand" href="/">bayshop</a>
@@ -128,6 +128,14 @@
             </li>
         </nav>
     </header>
+    <nav aria-label="breadcrumb" class='container mt-5 d-flex py-0 justify-content-between align-items-center'>
+    <h5 class='pb-0'><?=$page_title?></h5>
+  <ol class="breadcrumb bg-transparent pt-3 pb-1">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="/products">Products</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><?=$page_title?></li>
+  </ol>
+</nav>
     <?php include $page_name . '.php'; ?>
     <footer class="mt-4 bg-white">
         <div class='mx-auto container py-3'>
@@ -253,6 +261,12 @@
     <?= script_tag('/assets/admin/js/script.js'); ?>
     <script>
     $(".js-select").select2();
+    $('#minus').click(()=>{
+        JSON.parse($('#quantity').val() > 0)?$('#quantity').val(JSON.parse($('#quantity').val())-1):'';
+    });
+    $('#plus').click(()=>{
+        return $('#quantity').val(JSON.parse($('#quantity').val()) + 1)
+    });
     $("#add-to-cart").click(function() {
         const session = <?=json_encode($_SESSION['cart'])?> || [] ;
         const body = {

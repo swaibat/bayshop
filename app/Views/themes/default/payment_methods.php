@@ -1,11 +1,4 @@
-<div class="container mt-6">
-    <nav aria-label="breadcrumb shadow-xs bg-transparent">
-        <ol class="breadcrumb bg-transparent">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="/products">Products</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Cart</li>
-        </ol>
-    </nav>
+<div class="container">
     <div class="row">
         <div class="col-md-8 pl-0">
             <ul class="list-group list-group-flush">
@@ -43,7 +36,7 @@
                                     alt="">
                                 <input type="radio" name="options" id="option2" value='stripe' autocomplete="off">
                             </label>
-                            <input type="submit" class='btn btn-block btn-primary' value="sumbit" id="">
+                            <input type="submit" class='btn btn-block btn-primary' value="Pay Now" id="">
                         </form>
                     </div>
 

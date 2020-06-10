@@ -1,5 +1,9 @@
 <?php
 
+/*
+	* Config for PayPal specific values
+*/
+
 // Urls
 if(isset($_SERVER['SERVER_NAME'])) {
     $url = @($_SERVER["HTTPS"] != 'on') ? 'http://' . $_SERVER["SERVER_NAME"] : 'https://' . $_SERVER["SERVER_NAME"];
@@ -11,32 +15,19 @@ else {
 }
 
 define("URL", array(
+
     "current" => $url,
+
     "services" => array(
-        "onBoarding" => array(
-            "createReferral" => "api/onBoarding/createReferral.php"
-        ),
-        "orders" => array(
-            "create" => "api/orders/create.php",
-            "get" => "api/orders/get.php",
-            "capture" => "api/orders/capture.php"
-        ),
-        "disburse" => array(
-            "disburse" => "api/disburse/disburse.php"
-        ),
-        "refunds" => array(
-            "refund" => "api/refunds/refund.php"
-        )
+        "orderCreate" => 'api/createOrder.php',
+        "orderGet" => 'api/getOrderDetails.php',
+		"orderPatch" => 'api/patchOrder.php',
+		"orderCapture" => 'api/captureOrder.php'
     ),
-    "redirect" => array(
-        "onBoarding" => array(
-            "return_url" => "pages/onBoarding/complete.php",
-            "action_renewal_url" => ""
-        ),
-        "orders" => array(
-            "return_url" => "pages/orders/capture.php",
-            "cancel_url" => "pages/orders/error.php?type=cancel"
-        )
+
+	"redirectUrls" => array(
+        "returnUrl" => 'pages/success.php',
+		"cancelUrl" => 'pages/cancel.php',
     )
 ));
 
@@ -52,8 +43,8 @@ define("PAYPAL_ENDPOINTS", array(
 // PayPal REST App credentials
 define("PAYPAL_CREDENTIALS", array(
 	"sandbox" => [
-		"client_id" => "",
-		"client_secret" => ""
+		"client_id" => "Aa2IfcoEvHnfJRnVQLSFrSs3SmTTkv5N1weMEL66ysqYIeHfAqXpDVkjOv3vLhkhbP4eKB6MpRlQIcJw",
+		"client_secret" => "EF6l6PDQJEZbdKTeg35pbBSft6WRdALQC3Xrl5vvG0VNgBUehQyTCQ09QdIauxoccvJOf5Aoy-OGsH5G"
 	],
 	"production" => [
 		"client_id" => "",
@@ -61,15 +52,8 @@ define("PAYPAL_CREDENTIALS", array(
 	]
 ));
 
-// PayPal Marketplace Config
-define("MARKETPLACE", array(
-    "partner_id" => "",
-    "seller" => array(
-        "email" => "",
-        "id" => "",
-        "template" => "mp_seller@demoportal.com"
-    )
-));
+// PayPal REST API version
+define("PAYPAL_REST_VERSION", "v2");
 
 // ButtonSource Tracker Code
-define("SBN_CODE", "DemoPortalNM6_MP");
+define("SBN_CODE", "PP-DemoPortal-EC-Psdk-ORDv2-php");

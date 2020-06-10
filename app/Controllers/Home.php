@@ -83,6 +83,31 @@ class Home extends BaseController
         return print_r($_SESSION['cart']);
     }
 
+    public function buyer_login(){
+        if (!isset($_SESSION['cart'])) {
+           return redirect()->to(base_url('/shopping/cart'));
+        }
+        if(!isset($_SESSION['user'])){
+            return redirect()->to(base_url('/shipping/address'));
+        }
+        $data = [
+            'page_name'         => 'buyer_login',
+            'page_title'        => 'Buyer Login',
+        ];
+        return view($this->themePath, $data);
+    }
+
+    public function shipping_address(){
+        if (!isset($_SESSION['cart'])) {
+           return redirect()->to(base_url('/shopping/cart'));
+        }
+        $data = [
+            'page_name'         => 'shipping_address',
+            'page_title'        => 'Shipping Address',
+        ];
+        return view($this->themePath, $data);
+    }
+
     public function checkout(){
         if (!isset($_SESSION['cart'])) {
            return redirect()->to(base_url('/shopping/cart'));
