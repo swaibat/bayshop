@@ -5,6 +5,8 @@ namespace App\Controllers\payment;
 require_once 'vendor/autoload.php';
 
 use CodeIgniter\Controller;
+use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
+use App\Libraries\Paypal\PayPalClient;
 
 
 class Paypal extends Controller
@@ -15,7 +17,6 @@ class Paypal extends Controller
         parent::initController($request, $response, $logger);
         helper(['form', 'url', 'html', 'inflector']);
         $this->session          = \Config\Services::session();
-        $this->paypal       = new PaypalModel();
         $this->config       = new \Config\Paypal();
         $this->_api_context = new \PayPal\Rest\ApiContext(
             new \PayPal\Auth\OAuthTokenCredential(
@@ -26,92 +27,197 @@ class Paypal extends Controller
     }
     public $_api_context;
 
-    public function create()
+    private static function buildRequestBody()
     {
-
-     
+        return array(
+            'intent' => 'AUTHORIZE',
+            'application_context' =>
+                array(
+                    'return_url' => 'https://example.com/return',
+                    'cancel_url' => 'https://example.com/cancel',
+                    'brand_name' => 'EXAMPLE INC',
+                    'locale' => 'en-US',
+                    'landing_page' => 'BILLING',
+                    'shipping_preference' => 'SET_PROVIDED_ADDRESS',
+                    'user_action' => 'PAY_NOW',
+                ),
+            'purchase_units' =>
+                array(
+                    0 =>
+                        array(
+                            'reference_id' => 'PUHF',
+                            'description' => 'Sporting Goods',
+                            'custom_id' => 'CUST-HighFashions',
+                            'soft_descriptor' => 'HighFashions',
+                            'amount' =>
+                                array(
+                                    'currency_code' => 'USD',
+                                    'value' => '220.00',
+                                    'breakdown' =>
+                                        array(
+                                            'item_total' =>
+                                                array(
+                                                    'currency_code' => 'USD',
+                                                    'value' => '180.00',
+                                                ),
+                                            'shipping' =>
+                                                array(
+                                                    'currency_code' => 'USD',
+                                                    'value' => '20.00',
+                                                ),
+                                            'handling' =>
+                                                array(
+                                                    'currency_code' => 'USD',
+                                                    'value' => '10.00',
+                                                ),
+                                            'tax_total' =>
+                                                array(
+                                                    'currency_code' => 'USD',
+                                                    'value' => '20.00',
+                                                ),
+                                            'shipping_discount' =>
+                                                array(
+                                                    'currency_code' => 'USD',
+                                                    'value' => '10.00',
+                                                ),
+                                        ),
+                                ),
+                            'items' =>
+                                array(
+                                    0 =>
+                                        array(
+                                            'name' => 'T-Shirt',
+                                            'description' => 'Green XL',
+                                            'sku' => 'sku01',
+                                            'unit_amount' =>
+                                                array(
+                                                    'currency_code' => 'USD',
+                                                    'value' => '90.00',
+                                                ),
+                                            'tax' =>
+                                                array(
+                                                    'currency_code' => 'USD',
+                                                    'value' => '10.00',
+                                                ),
+                                            'quantity' => '1',
+                                            'category' => 'PHYSICAL_GOODS',
+                                        ),
+                                    1 =>
+                                        array(
+                                            'name' => 'Shoes',
+                                            'description' => 'Running, Size 10.5',
+                                            'sku' => 'sku02',
+                                            'unit_amount' =>
+                                                array(
+                                                    'currency_code' => 'USD',
+                                                    'value' => '45.00',
+                                                ),
+                                            'tax' =>
+                                                array(
+                                                    'currency_code' => 'USD',
+                                                    'value' => '5.00',
+                                                ),
+                                            'quantity' => '2',
+                                            'category' => 'PHYSICAL_GOODS',
+                                        ),
+                                ),
+                            'shipping' =>
+                                array(
+                                    'method' => 'United States Postal Service',
+                                    'name' =>
+                                        array(
+                                            'full_name' => 'John Doe',
+                                        ),
+                                    'address' =>
+                                        array(
+                                            'address_line_1' => '123 Townsend St',
+                                            'address_line_2' => 'Floor 6',
+                                            'admin_area_2' => 'San Francisco',
+                                            'admin_area_1' => 'CA',
+                                            'postal_code' => '94107',
+                                            'country_code' => 'US',
+                                        ),
+                                ),
+                        ),
+                ),
+        );
     }
 
-
-    public function status()
+    /**
+     * Setting up the JSON request body for creating the Order with minimum request body. The Intent in the
+     * request body should be set as "AUTHORIZE" for authorize intent flow.
+     * 
+     */
+    private static function buildMinimumRequestBody()
     {
+        return array(
+            'intent' => 'AUTHORIZE',
+            'application_context' =>
+                array(
+                    'return_url' => 'https://example.com/return',
+                    'cancel_url' => 'https://example.com/cancel'
+                ),
+            'purchase_units' =>
+                array(
+                    0 =>
+                        array(
+                            'amount' =>
+                                array(
+                                    'currency_code' => 'USD',
+                                    'value' => '220.00'
+                                )
+                        )
+                )
+        );
+    }
 
-        // paypal credentials
+    /**
+     * This is the sample function which can be used to create an order. It uses the
+     * JSON body returned by buildRequestBody() to create an new Order.
+     */
+    public function CreateOrder($debug=false)
+    {
+        $request = new OrdersCreateRequest();
+        $request->headers["prefer"] = "return=representation";
+        $request->body = Paypal::buildRequestBody();
 
-        /** Get the payment ID before session clear **/
-        $payment_id = $this->request->getVar("paymentId");
-        $PayerID = $this->request->getVar("PayerID");
-        $token = $this->request->getVar("token");
-        /** clear the session payment ID **/
+        $client = PayPalClient::client();
+        $response = $client->execute($request);
+        return json_encode($response->result);
+    }
 
-        if (empty($PayerID) || empty($token)) {
-            $this->session->set('success_msg', 'Payment failed');
-            redirect('paypal/index');
+    /**
+     * This is the sample function which can be used to create an order. It uses the
+     * JSON body returned by buildMinimumRequestBody() to create an new Order.
+     */
+    public static function createOrderWithMinimumBody($debug=false)
+    {
+        $request = new OrdersCreateRequest();
+        $request->headers["prefer"] = "return=representation";
+        $request->body = CreateOrder::buildMinimumRequestBody();
+
+        $client = PayPalClient::client();
+        $response = $client->execute($request);
+        if ($debug)
+        {
+            print "Order With Minimum Body\n";
+            print "Status Code: {$response->statusCode}\n";
+            print "Status: {$response->result->status}\n";
+            print "Order ID: {$response->result->id}\n";
+            print "Intent: {$response->result->intent}\n";
+            print "Links:\n";
+            foreach($response->result->links as $link)
+            {
+                print "\t{$link->rel}: {$link->href}\tCall Type: {$link->method}\n";
+            }
+
+            print "Gross Amount: {$response->result->purchase_units[0]->amount->currency_code} {$response->result->purchase_units[0]->amount->value}\n";
+
+            // To toggle printing the whole response body comment/uncomment below line
+            echo json_encode($response->result, JSON_PRETTY_PRINT), "\n";
         }
 
-        $payment = Payment::get($payment_id, $this->_api_context);
 
-
-        /** PaymentExecution object includes information necessary **/
-        /** to execute a PayPal account payment. **/
-        /** The payer_id is added to the request query parameters **/
-        /** when the user is redirected from paypal back to your site **/
-        $execution = new PaymentExecution();
-        $execution->setPayerId($this->request->getVar('PayerID'));
-
-        /**Execute the payment **/
-        $result = $payment->execute($execution, $this->_api_context);
-
-
-
-        //  DEBUG RESULT, remove it later **/
-        if ($result->getState() == 'approved') {
-            $trans = $result->getTransactions();
-
-            // item info
-            $Subtotal = $trans[0]->getAmount()->getDetails()->getSubtotal();
-            $Tax = $trans[0]->getAmount()->getDetails()->getTax();
-
-            $payer = $result->getPayer();
-            // payer info //
-            $PaymentMethod = $payer->getPaymentMethod();
-            $PayerStatus = $payer->getStatus();
-            $PayerMail = $payer->getPayerInfo()->getEmail();
-
-            $relatedResources = $trans[0]->getRelatedResources();
-            $sale = $relatedResources[0]->getSale();
-            // sale info //
-            $saleId = $sale->getId();
-            $CreateTime = $sale->getCreateTime();
-            $UpdateTime = $sale->getUpdateTime();
-            $State = $sale->getState();
-            $Total = $sale->getAmount()->getTotal();
-            /** it's all right **/
-            /** Here Write your database logic like that insert record or value in database if you want **/
-            $data = [
-                'total'             =>$Total,
-                'sub_total'         =>$Subtotal,
-                'tax'               =>$Tax,
-                'payment_method'    => $PaymentMethod,
-                'payer_status'      =>$PayerStatus,
-                'payer_email'       => $PayerMail,
-                'sale_id'           =>$saleId, 
-                'created_at'        =>$CreateTime,
-                'updated_at'        => $UpdateTime, 
-                'payment_status'    =>$State
-            ];
-            $this->paypal->save($data);
-            return redirect()->to('success');
-        }
-        return redirect()->to('cancel');
-    }
-    function success()
-    {
-        return view("content/success");
-    }
-    function cancel()
-    {
-        $this->paypal->create_payment();
-        return view("content/cancel");
+        return $response;
     }
 }
