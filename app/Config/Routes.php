@@ -88,7 +88,7 @@ $routes->group('payments', ['namespace' => 'App\Controllers\Payment'], function 
     $routes->add('stripe/pay', 'Stripe::payment');
     $routes->add('paypal', 'Paypal');
     $routes->add('paypal/create', 'Paypal::CreateOrder');
-    $routes->add('paypal/status', 'Paypal::status');
+    $routes->add('paypal/capture', 'Paypal::captureOrder');
     $routes->add('paypal/success', 'Paypal::success');
     $routes->add('paypal/cancel', 'Paypal::cancel');
 });

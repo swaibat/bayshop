@@ -5,9 +5,9 @@ namespace App\Controllers\payment;
 require_once 'vendor/autoload.php';
 
 use CodeIgniter\Controller;
-use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
-use App\Libraries\Paypal\PayPalClient;
-
+use App\Libraries\Paypal\Helpers\PayPalHelper;
+use App\Models\PaypalModel;
+use App\Models\AddressModel;
 
 class Paypal extends Controller
 {
@@ -16,21 +16,18 @@ class Paypal extends Controller
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
         helper(['form', 'url', 'html', 'inflector']);
-        $this->session          = \Config\Services::session();
-        $this->config       = new \Config\Paypal();
-        $this->_api_context = new \PayPal\Rest\ApiContext(
-            new \PayPal\Auth\OAuthTokenCredential(
-                $this->config->client_id,
-                $this->config->secret
-            )
-        );
+        $this->payments         = new PaypalModel();
+        $this->payments         = new AddressModel();
+        $this->config           = new \Config\Paypal();
+        $this->paypalHelper     = new PayPalHelper();
     }
     public $_api_context;
 
-    private static function buildRequestBody()
+    public function createOrder()
     {
-        return array(
-            'intent' => 'AUTHORIZE',
+        $randNo= (string)rand(10000,20000);
+        $orderData = array(
+            'intent' => 'CAPTURE',
             'application_context' =>
                 array(
                     'return_url' => 'https://example.com/return',
@@ -141,83 +138,38 @@ class Paypal extends Controller
                         ),
                 ),
         );
+
+        header('Content-Type: application/json');
+        echo json_encode($this->paypalHelper->orderCreate($orderData));
     }
 
-    /**
-     * Setting up the JSON request body for creating the Order with minimum request body. The Intent in the
-     * request body should be set as "AUTHORIZE" for authorize intent flow.
-     * 
-     */
-    private static function buildMinimumRequestBody()
-    {
-        return array(
-            'intent' => 'AUTHORIZE',
-            'application_context' =>
-                array(
-                    'return_url' => 'https://example.com/return',
-                    'cancel_url' => 'https://example.com/cancel'
-                ),
-            'purchase_units' =>
-                array(
-                    0 =>
-                        array(
-                            'amount' =>
-                                array(
-                                    'currency_code' => 'USD',
-                                    'value' => '220.00'
-                                )
-                        )
-                )
-        );
-    }
-
-    /**
-     * This is the sample function which can be used to create an order. It uses the
-     * JSON body returned by buildRequestBody() to create an new Order.
-     */
-    public function CreateOrder($debug=false)
-    {
-        $request = new OrdersCreateRequest();
-        $request->headers["prefer"] = "return=representation";
-        $request->body = Paypal::buildRequestBody();
-
-        $client = PayPalClient::client();
-        $response = $client->execute($request);
-        return json_encode($response->result);
-    }
-
-    /**
-     * This is the sample function which can be used to create an order. It uses the
-     * JSON body returned by buildMinimumRequestBody() to create an new Order.
-     */
-    public static function createOrderWithMinimumBody($debug=false)
-    {
-        $request = new OrdersCreateRequest();
-        $request->headers["prefer"] = "return=representation";
-        $request->body = CreateOrder::buildMinimumRequestBody();
-
-        $client = PayPalClient::client();
-        $response = $client->execute($request);
-        if ($debug)
-        {
-            print "Order With Minimum Body\n";
-            print "Status Code: {$response->statusCode}\n";
-            print "Status: {$response->result->status}\n";
-            print "Order ID: {$response->result->id}\n";
-            print "Intent: {$response->result->intent}\n";
-            print "Links:\n";
-            foreach($response->result->links as $link)
-            {
-                print "\t{$link->rel}: {$link->href}\tCall Type: {$link->method}\n";
-            }
-
-            print "Gross Amount: {$response->result->purchase_units[0]->amount->currency_code} {$response->result->purchase_units[0]->amount->value}\n";
-
-            // To toggle printing the whole response body comment/uncomment below line
-            echo json_encode($response->result, JSON_PRETTY_PRINT), "\n";
-        }
-
-
-        return $response;
+    public function captureOrder(){
+        $order = $this->paypalHelper->orderCapture()['data'];
+            $address = [
+                'user_id'           =>isset($_SESSION['user'])?:$_SESSION['user']['id'],
+                'contact_names'     => $order['purchase_units'][0]['shipping']['name']['full_name'],
+                'address_line_1'    => $order['purchase_units'][0]['shipping']['address']['address_line_1'],
+                'address_line_2'    => $order['purchase_units'][0]['shipping']['address']['address_line_2'],
+                'admin_area_2'      => $order['purchase_units'][0]['shipping']['address']['admin_area_2'],
+                'admin_area_1'      => $order['purchase_units'][0]['shipping']['address']['admin_area_1'],
+                'postal_code'       => $order['purchase_units'][0]['shipping']['address']['postal_code'],
+                'country_code'      => $order['purchase_units'][0]['shipping']['address']['country_code'],
+            ];
+            // $this->address->save($address);
+            $data = [
+                'txn_id'            =>$order['id'],
+                'user_id'           =>isset($_SESSION['user'])?:$_SESSION['user']['id'],
+                'payment_method'    =>'paypal',
+                'payer_email'       =>$order['payer']['email'],
+                'amount'            =>$order['purchase_units'][0]['payments']['captures'][0]['amount']['value'],
+                'currency_code'     =>$order['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'],
+                'created_at'        =>$order['purchase_units'][0]['payments']['captures'][0]['create_time'],
+                'updated_at'        =>$order['purchase_units'][0]['payments']['captures'][0]['update_time'],
+                'payment_status'    =>$order['status'],
+                // 'address_id'        =>$this->address->insertID()
+            ];
+            // $this->payments->save($data);
+        return print_r($address);
+        echo json_encode($this->paypalHelper->orderCapture());
     }
 }

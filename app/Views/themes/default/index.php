@@ -259,6 +259,7 @@
     <?= script_tag('assets/plugins/summernote/summernote-bs4.min.js'); ?>
     <?= script_tag("assets/shared/jquery/jquery-ui.js"); ?>
     <?= script_tag('/assets/admin/js/script.js'); ?>
+    <?= script_tag('/assets/plugins/toJson/formToJson.min.js'); ?>
     <script>
     $(".js-select").select2();
     $('#minus').click(()=>{

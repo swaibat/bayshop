@@ -98,6 +98,11 @@ class Home extends BaseController
     }
 
     public function shipping_address(){
+        if (isset($_POST) && !empty($_POST)) {
+            $adress = $this->request->getVar('shipping_address');
+            $_SESSION['shipping_address'] = json_decode($adress, true);
+            return  $adress;
+        }
         if (!isset($_SESSION['cart'])) {
            return redirect()->to(base_url('/shopping/cart'));
         }

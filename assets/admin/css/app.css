@@ -1265,3 +1265,11 @@ table.dataTable td:last-child,
 .table-borderless thead th {
     border: 0 !important;
 }
+
+.cart-table tr {
+    border: 0;
+    padding: 0.35em;
+}
+.cart-table .head {
+    background: rgb(175, 175, 175);
+}
