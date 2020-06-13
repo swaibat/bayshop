@@ -17,9 +17,10 @@ class Paypal extends Controller
         parent::initController($request, $response, $logger);
         helper(['form', 'url', 'html', 'inflector']);
         $this->payments         = new PaypalModel();
-        $this->payments         = new AddressModel();
+        $this->address          = new AddressModel();
         $this->config           = new \Config\Paypal();
         $this->paypalHelper     = new PayPalHelper();
+        $this->themePath        = 'themes/default/index';
     }
     public $_api_context;
 
@@ -145,31 +146,39 @@ class Paypal extends Controller
 
     public function captureOrder(){
         $order = $this->paypalHelper->orderCapture()['data'];
-            $address = [
-                'user_id'           =>isset($_SESSION['user'])?:$_SESSION['user']['id'],
-                'contact_names'     => $order['purchase_units'][0]['shipping']['name']['full_name'],
-                'address_line_1'    => $order['purchase_units'][0]['shipping']['address']['address_line_1'],
-                'address_line_2'    => $order['purchase_units'][0]['shipping']['address']['address_line_2'],
-                'admin_area_2'      => $order['purchase_units'][0]['shipping']['address']['admin_area_2'],
-                'admin_area_1'      => $order['purchase_units'][0]['shipping']['address']['admin_area_1'],
-                'postal_code'       => $order['purchase_units'][0]['shipping']['address']['postal_code'],
-                'country_code'      => $order['purchase_units'][0]['shipping']['address']['country_code'],
-            ];
-            // $this->address->save($address);
-            $data = [
-                'txn_id'            =>$order['id'],
-                'user_id'           =>isset($_SESSION['user'])?:$_SESSION['user']['id'],
-                'payment_method'    =>'paypal',
-                'payer_email'       =>$order['payer']['email'],
-                'amount'            =>$order['purchase_units'][0]['payments']['captures'][0]['amount']['value'],
-                'currency_code'     =>$order['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'],
-                'created_at'        =>$order['purchase_units'][0]['payments']['captures'][0]['create_time'],
-                'updated_at'        =>$order['purchase_units'][0]['payments']['captures'][0]['update_time'],
-                'payment_status'    =>$order['status'],
-                // 'address_id'        =>$this->address->insertID()
-            ];
-            // $this->payments->save($data);
-        return print_r($address);
-        echo json_encode($this->paypalHelper->orderCapture());
+        $address = [
+            'user_id'           =>'1',
+            'contact_names'     => $order['purchase_units'][0]['shipping']['name']['full_name'],
+            'address_line_1'    => $order['purchase_units'][0]['shipping']['address']['address_line_1'],
+            'address_line_2'    => $order['purchase_units'][0]['shipping']['address']['address_line_2'],
+            'admin_area_2'      => $order['purchase_units'][0]['shipping']['address']['admin_area_2'],
+            'admin_area_1'      => $order['purchase_units'][0]['shipping']['address']['admin_area_1'],
+            'postal_code'       => $order['purchase_units'][0]['shipping']['address']['postal_code'],
+            'country_code'      => $order['purchase_units'][0]['shipping']['address']['country_code'],
+        ];
+        $this->address->save($address);
+        $payment = [
+            'txn_id'            =>$order['id'],
+            'user_id'           =>'1',
+            'payment_method'    =>'paypal',
+            'payer_email'       =>$order['payer']['email_address'],
+            'amount'            =>$order['purchase_units'][0]['payments']['captures'][0]['amount']['value'],
+            'currency_code'     =>$order['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'],
+            'payment_status'    =>$order['status'],
+            'address_id'        =>$this->address->insertID(),
+            'created_at'        =>$order['purchase_units'][0]['payments']['captures'][0]['create_time'],
+            'updated_at'        =>$order['purchase_units'][0]['payments']['captures'][0]['update_time']
+        ];
+        $this->payments->save($payment);
+        $_SESSION['order']=[$address,$payment];
+        return $this->response->setJSON(['status' => 201, 'message' => 'Order created successfully']);
+    }
+
+    public function success(){
+        $data =[
+            'page_name' => 'payment_success',
+            'page_title' => 'payment success'
+        ];
+        return view($this->themePath, $data);
     }
 }

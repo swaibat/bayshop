@@ -3,5 +3,5 @@
 
 class PaypalModel extends Model {
 	protected $table = 'payments';
-    protected $allowedFields = ['txn_id','user_id','payment_method','country_code','payer_email','amount','address_id','created_at','updated_at', 'payment_status'];
+    protected $allowedFields = ['txn_id','user_id','payment_method','payer_email','amount','currency_code','payment_status','address_id','created_at','updated_at'];
 }

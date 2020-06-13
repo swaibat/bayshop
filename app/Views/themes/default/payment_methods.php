@@ -16,35 +16,20 @@
                     <div class="m-auto sadow-xs px-3 pb-4 w-100">
                         <h5 class='text-center'>Select payment Method</h5>
                         <hr>
-                        <form class="d-flex btn-group-toggle m-auto" action='/payments/paypal/create'
-                            data-toggle="buttons">
-                            <div class="form-group">
-                                <div class="col-sm-offset-5 col-sm-7">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="paymentMethod" id="paypalRadio" value="paypal"
-                                                checked>
-                                            <img src="https://fpdbs.paypal.com/dynamicimageweb?cmd=_dynamic-image&amp;buttontype=ecmark&amp;locale=en_US"
-                                                alt="Acceptance Mark" class="v-middle">
-                                            <a href="https://www.paypal.com/us/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside"
-                                                onclick="javascript:window.open('https://www.paypal.com/us/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, ,left=0, top=0, width=400, height=350'); return false;">What
-                                                is PayPal?</a>
-                                        </label>
-                                    </div>
-                                    <div class="radio disabled">
-                                        <label>
-                                            <input type="radio" name="paymentMethod" id="cardRadio" value="card"
-                                                disabled>
-                                            Card
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-5 col-sm-7">
-                                    <!-- Container for PayPal Mark Checkout -->
-                                    <div id="paypalCheckoutContainer"></div>
-                                </div>
+                        <form class="d-flex btn-group-toggle m-auto">
+                            <div class="col-md-8 m-auto">
+                                <label>
+                                    <input type="radio" name="payment-option" value="paypal" checked>
+                                    <img src="/demo/checkout/static/img/paypal-mark.jpg" alt="Pay with PayPal">
+                                </label>
+
+                                <label>
+                                    <input type="radio" name="payment-option" value="card">
+                                    <img src="/demo/checkout/static/img/card-mark.png"
+                                        alt="Accepting Visa, Mastercard, Discover and American Express">
+                                </label>
+                                <div id="paypal-button-container"></div>
+                                <div id="card-button-container" class="hidden"><button>Continue</button></div>
                             </div>
                         </form>
                     </div>
@@ -79,81 +64,46 @@
 
     </div>
 </div>
-<script>
-$('input').change(function(e) {
-    e.preventDefault()
-    console.log($('input:checked').val())
-    $('form').attr('action', `/payments/${$('input:checked').val()}/create`);
-});
-// $('form').submit((e) => {
-//     e.preventDefault()
-//     $.post('/shopping/payments', {
-//         method: $('input:checked').val()
-//     }, function(data, status){
-//     alert("Data: " + data + "\nStatus: " + status);
-//   });
-//     console.log($('input:checked').val())
-// })
-</script>
-<script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
-<script>
-function showDom(id) {
-    let arr;
-    if (!Array.isArray(id)) {
-        arr = [id];
-    } else {
-        arr = id;
-    }
-    arr.forEach(function(domId) {
-        document.getElementById(domId).style.display = 'block';
-    });
-}
-
-function hideDom(id) {
-    let arr;
-    if (!Array.isArray(id)) {
-        arr = [id];
-    } else {
-        arr = id;
-    }
-    arr.forEach(function(domId) {
-        document.getElementById(domId).style.display = 'none';
-    });
-}
-
-function getUrlParams(prop) {
-    let params = {},
-        search = decodeURIComponent(window.location.href.slice(window.location.href.indexOf('?') + 1)),
-        definitions = search.split('&');
-
-    definitions.forEach(function(val) {
-        let parts = val.split('=', 2);
-        params[parts[0]] = parts[1];
-    });
-
-    return (prop && prop in params) ? params[prop] : params;
-}
-</script>
-
 <!-- PayPal In-Context Checkout script -->
-<script type="text/javascript">
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+
+<script>
+// Helper functions
+
+function getElements(el) {
+    return Array.prototype.slice.call(document.querySelectorAll(el));
+}
+
+function hideElement(el) {
+    document.body.querySelector(el).style.display = 'none';
+}
+
+function showElement(el) {
+    document.body.querySelector(el).style.display = 'block';
+}
+
+// Listen for changes to the radio fields
+getElements('input[name=payment-option]').forEach(function(el) {
+    el.addEventListener('change', function(event) {
+        // If PayPal is selected, show the PayPal button
+        if (event.target.value === 'paypal') {
+            hideElement('#card-button-container');
+            showElement('#paypal-button-container');
+        }
+
+        // If Card is selected, show the standard continue button
+        if (event.target.value === 'card') {
+            showElement('#card-button-container');
+            hideElement('#paypal-button-container');
+        }
+    });
+});
+
+// Hide non-PayPal button by default
+hideElement('#card-button-container');
 paypal.Buttons({
-
-    // Set your environment
     env: 'sandbox',
-
-    // Set style of button
-    style: {
-        layout: 'horizontal', // horizontal | vertical
-        size: 'responsive', // medium | large | responsive
-        shape: 'rect', // pill | rect
-        color: 'blue' // gold | blue | silver | black
-    },
-
-    // Execute payment on authorize
-    commit: true,
-
-    // Wait for the PayPal button to be clicked
+    // Set up the transaction
     createOrder: function() {
         let postData = new FormData();
         return fetch(
@@ -169,16 +119,17 @@ paypal.Buttons({
         });
     },
 
-    // Wait for the payment to be authorized by the customer
+    // Finalize the transaction
     onApprove: function(data, actions) {
         // Capture Order
         let postData = new FormData();
         $.post('/payments/paypal/capture', {
             name: ''
         }, function(res) {
-            console.log(res);
+            location.replace('/payments/success');
         })
     }
 
-}).render('#paypalCheckoutContainer');
+
+}).render('#paypal-button-container');
 </script>
