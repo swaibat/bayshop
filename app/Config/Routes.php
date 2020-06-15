@@ -104,6 +104,7 @@ $routes->group('auth', ['namespace' => 'App\Controllers\User'], function ($route
 
 $routes->group('/', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->add('products', 'Home::products');
+    $routes->add('vendors', 'Home::vendors');
     $routes->add('products/(:segment)', 'Home::product');
     $routes->add('shopping/cart', 'Home::shopping_cart');
     $routes->add('shopping/login', 'Home::buyer_login');

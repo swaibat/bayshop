@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Offcanvas template for Bootstrap</title>
+    <title><?= $page_title ?></title>
     <?= link_tag('assets/admin/css/style.css'); ?>
     <?= script_tag(['src' => 'https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js', 'type'  => 'module']); ?>
     <?= script_tag('assets/shared/jquery/jquery-3.5.1.min.js'); ?>
@@ -26,26 +26,23 @@
             </button>
             <div class="navbar-collapse offcanvas-collapse d-none" id="navbarsExampleDefault">
                 <form class="d-flex flex-fill align-items-center mx-md-5 my-2 my-lg-0">
-                    <div class="input-group">
+                    <div class="input-group input-group-sm nav-search">
                         <div class="input-group-prepend">
-                            <select class='form-control js-select'>
-                                <option>products</option>
-                                <option>Suppliers</option>
-                            </select>
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Products</a>
+                                <a class="dropdown-item" href="#">Vendors</a>
+                            </div>
                         </div>
                         <input type="text" class="form-control">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="button">Button</button>
+                        </div>
                     </div>
-                    <button class="btn btn-primary shadow-sm m-2 my-sm-0" type="submit">Search</button>
                 </form>
                 <ul id='left-nav' class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link d-flex flex-column" href="<?=base_url('shopping/cart')?>">
-                            <ion-icon class='header-icon mx-auto' name="cart-outline"></ion-icon>
-                            <!-- <span id='cart-counter' class='badge total-count badge-primary'></span> -->
-                            <small>Cart</small>
-                        </a>
-                    </li>
-                    <li class="nav-item ml-3">
+                    <!-- <li class="nav-item ml-3">
                         <a class="nav-link d-flex flex-column text-center" href="#">
                             <ion-icon class='header-icon mx-auto' name="mail-outline"></ion-icon>
                             <small>messages</small>
@@ -56,12 +53,12 @@
                             <ion-icon class='header-icon mx-auto' name="archive-outline"></ion-icon>
                             <small>Orders</small>
                         </a>
-                    </li>
-                    <li class='dropdown ml-2 d-flex flex-row align-items-center font-weight-light'>
-                        <a class="nav-link dropdown-toggle d-flex flex-column" href="http://example.com" id="dropdown01"
+                    </li> -->
+                    <li class='dropdown mr-3 d-flex flex-row align-items-center '>
+                        <a class="nav-link d-flex align-items-center" href="http://example.com" id="dropdown01"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <ion-icon class='header-icon mx-auto' name="person-outline"></ion-icon>
-                            <small>Account</small>
+                            <span class='pl-2'>Account</span>
                         </a>
                         <ul class='dropdown-menu shadow notification-pane font-weight-light'
                             aria-labelledby='dropdownMenuButton'>
@@ -89,6 +86,13 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="<?=base_url('shopping/cart')?>">
+                            <ion-icon class='header-icon mx-auto' name="cart-outline"></ion-icon>
+                            <!-- <span id='cart-counter' class='badge total-count badge-primary'></span> -->
+                            <span class='pl-2'>Cart</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -106,11 +110,11 @@
                 </a>
             </li>
             <li class='nav-item'>
-                <a href='/contact' activeClass='selected' class='nav-link nav-link-collapse cv-nav'>
+                <a href='/vendors' class='nav-link nav-link-collapse cv-nav'>
                     <ion-icon
                         src="data:image/svg+xml,%3Csvg height='512pt' viewBox='0 0 512 512' width='512pt' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m162.296875 505.039062c-33.746094-35.136718-37.246094-82.339843-37.390625-98.476562l-90.582031 38.539062c-20.847657 8.871094-34.32031275 29.242188-34.324219 51.898438v14.992188l169.601562.003906c-2.523437-2.207032-4.964843-4.519532-7.304687-6.957032zm0 0'/%3E%3Cpath d='m477.675781 445.101562-90.582031-38.539062c-.144531 16.140625-3.636719 63.332031-37.390625 98.472656-2.339844 2.441406-4.78125 4.757813-7.308594 6.960938l169.605469.003906v-15.003906c-.003906-22.652344-13.476562-43.023438-34.324219-51.894532zm0 0'/%3E%3Cpath d='m357.070312 384.25c-26.355468 25.527344-62.230468 39.582031-101.070312 39.582031s-74.714844-14.054687-101.070312-39.582031v19.222656c-.136719 4.878906-.550782 50.011719 29.003906 80.78125 17.679687 18.410156 41.929687 27.742188 72.066406 27.742188 30.140625 0 54.386719-9.332032 72.066406-27.742188 29.554688-30.769531 29.144532-75.902344 29.003906-80.78125zm0 0'/%3E%3Cpath d='m113.953125 286.832031v-107.09375c0-10.589843 1.023437-20.984375 3.03125-31.085937h-13.03125c-24.8125 0-45 20.1875-45 45v64.507812c0 24.816406 20.1875 45.003906 45 45.003906h10.957031c-.628906-5.375-.957031-10.824218-.957031-16.332031zm0 0'/%3E%3Cpath d='m408.046875 148.652344h-13.429687c2.273437 10.738281 3.429687 21.804687 3.429687 33.128906v105.050781c0 5.507813-.328125 10.957031-.957031 16.328125h10.957031c24.8125 0 45-20.183594 45-45v-64.507812c0-24.8125-20.1875-45-45-45zm0 0'/%3E%3Cpath d='m256 0c-89.503906 0-142.570312 40.855469-155.402344 118.734375 1.113282-.046875 2.230469-.082031 3.355469-.082031h22.285156c6.488281-15.324219 14.554688-27.023438 24.515625-35.570313 12.164063-10.4375 26.570313-15.726562 42.820313-15.726562 17.351562 0 33.328125 6.203125 46.164062 11.1875 5.300781 2.0625 13.265625 5.152343 16.253907 5.441406 2.914062-.292969 10.640624-3.363281 15.78125-5.40625 12.589843-5 28.257812-11.226563 45.503906-11.226563 37 0 57.167968 27.59375 67.664062 51.296876h23.105469c1.125 0 2.242187.039062 3.355469.085937-12.832032-77.878906-65.898438-118.734375-155.402344-118.734375zm0 0'/%3E%3Cpath d='m341.15625 324.121094c-14.007812 9.34375-30.316406 14.28125-47.15625 14.28125h-23c-8.28125 0-15-6.714844-15-15s6.71875-15 15-15h23c10.894531 0 21.449219-3.195313 30.511719-9.238282l43.535156-29.03125v-88.351562c0-17.171875-3.296875-34.226562-10.097656-49.996094-28.109375-65.1875-73.5625-17.789062-101.949219-17.789062-29.25 0-79.058594-50.335938-105.121094 24.074218-4.6875 13.378907-6.925781 27.492188-6.925781 41.667969v107.089844c0 59.097656 46.988281 107.003906 112.046875 107.003906 57.269531 0 100.527344-37.125 110.066406-86.324219zm0 0'/%3E%3C/svg%3E">
                     </ion-icon>
-                    Suppliers
+                    Vendors
                 </a>
             </li>
             <li class='nav-item ml-auto'>
@@ -128,14 +132,15 @@
             </li>
         </nav>
     </header>
-    <nav aria-label="breadcrumb" class='container mt-5 d-flex py-0 justify-content-between align-items-center'>
-    <h5 class='pb-0'><?=$page_title?></h5>
-  <ol class="breadcrumb bg-transparent pt-3 pb-1">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item"><a href="/products">Products</a></li>
-    <li class="breadcrumb-item active" aria-current="page"><?=$page_title?></li>
-  </ol>
-</nav>
+    <?= $page_name =='home'?'<div class="mt-5 pt-2"></div>':'
+    <nav aria-label="breadcrumb" class="container mt-5 d-flex py-0 justify-content-between align-items-center">
+        <h5 class="pb-0">'.$page_title.'</h5>
+        <ol class="breadcrumb bg-transparent pt-3 pb-1">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="/products">Products</a></li>
+            <li class="breadcrumb-item active" aria-current="page">'.$page_title.'</li>
+        </ol>
+    </nav>'?>
     <?php include $page_name . '.php'; ?>
     <footer class="mt-4 bg-white">
         <div class='mx-auto container py-3'>
@@ -250,7 +255,7 @@
         </div>
     </footer>
 
-    <?= script_tag('assets/admin/js/watch.js'); ?>
+    <?= script_tag('assets/plugins/nicescroll/jquery.nicescroll.min.js'); ?>
     <?= script_tag('assets/plugins/toastify-js/toastify-js.js'); ?>
     <?= script_tag('assets/plugins/jquery-multifile/jquery-multifile.js'); ?>
     <?= script_tag('assets/shared/bootstrap-4.4.1/js/bootstrap.bundle.min.js'); ?>
@@ -262,50 +267,55 @@
     <?= script_tag('/assets/plugins/toJson/formToJson.min.js'); ?>
     <script>
     $(".js-select").select2();
-    $('#minus').click(()=>{
-        JSON.parse($('#quantity').val() > 0)?$('#quantity').val(JSON.parse($('#quantity').val())-1):'';
+    $('#minus').click(() => {
+        JSON.parse($('#quantity').val() > 0) ? $('#quantity').val(JSON.parse($('#quantity').val()) - 1) : '';
     });
-    $('#plus').click(()=>{
+    $('#plus').click(() => {
         return $('#quantity').val(JSON.parse($('#quantity').val()) + 1)
     });
     $("#add-to-cart").click(function() {
-        const session = <?=json_encode($_SESSION['cart'])?> || [] ;
+        const session = <?= json_encode($_SESSION['cart']) ?> || [];
         const body = {
-            id: '<?= $product['id']?>',
+            id: '<?= $product['
+            id ']?>',
             qty: $('#quantity').val(),
             size: $('#size').val(),
             color: $(".radio:checked").val(),
-            slug: '<?=$product['slug']?>'
+            slug: '<?=$product['
+            slug ']?>'
         }
-        if (!session.find(e => e.id == '<?= $product['id']?>') || session.length < 1 ) {
+        if (!session.find(e => e.id == '<?= $product['
+                id ']?>') || session.length < 1) {
             $.post("/home/add_to_cart", body, function(data, status) {
-            session.push(body)
-            alert("Data: " + data + "\nStatus: " + status);
-        });
-        }  
+                session.push(body)
+                alert("Data: " + data + "\nStatus: " + status);
+            });
+        }
     });
     </script>
     <script>
-    window.onscroll = function() {myFunction()};
+    window.onscroll = function() {
+        myFunction()
+    };
 
-// Get the navbar
-var navbar = document.getElementById("nav");
-var leftNavbar = document.getElementById("left-nav");
+    // Get the navbar
+    var navbar = document.getElementById("nav");
+    var leftNavbar = document.getElementById("left-nav");
 
-// Get the offset position of the navbar
-var sticky = navbar.offsetTop;
+    // Get the offset position of the navbar
+    var sticky = navbar.offsetTop;
 
-// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    navbar.classList.add("d-none");
-    leftNavbar.classList.add("d-none");
-  } else {
-    navbar.classList.remove("d-none");
-    leftNavbar.classList.remove("d-none");
-  }
-}
-</script>
+    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("d-none");
+            leftNavbar.classList.add("d-none");
+        } else {
+            navbar.classList.remove("d-none");
+            leftNavbar.classList.remove("d-none");
+        }
+    }
+    </script>
 </body>
 
 </html>

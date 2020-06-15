@@ -2,7 +2,7 @@
     <div class="rounded bg-white p-3 shadow-xs w-100">
         <h6>Shopping Cart</h6>
         <?php 
-         if(isset($_SESSION['cart'])):?>
+         if(isset($_SESSION['cart']) && count($_SESSION['cart'])>0):?>
         <form name="cart" action='<?=base_url('shopping/login')?>' method='POST'>
             <table name="cart" class="cart-table table border-0  table-borderless rounded">
                 <tr class='head'>

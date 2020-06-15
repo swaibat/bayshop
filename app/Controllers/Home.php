@@ -23,6 +23,16 @@ class Home extends BaseController
         return view($this->themePath, $data);
     }
 
+    public function vendors()
+    {
+        $data = [
+            'page_name'     => 'vendors',
+            'page_title'    => 'vendors',
+            'vendors'      => $this->user->where('role', 0)->findAll()
+        ];
+        return view($this->themePath, $data);
+    }
+
     public function product()
     {
         $slug = $this->request->uri->getSegment(2);

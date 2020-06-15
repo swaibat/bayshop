@@ -11,7 +11,6 @@
     <?= script_tag('assets/shared/jquery/jquery-3.5.1.min.js'); ?>
     <?= script_tag('assets/plugins/toastify-js/toastify-js.js'); ?>
     <?= script_tag('server/node_modules/socket.io-client/dist/socket.io.dev.js'); ?>
-  <?= script_tag('assets/shared/jquery/jquery-3.5.1.min.js'); ?>
 
   <!-- CSS Libraries -->
 

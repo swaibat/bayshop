@@ -126,10 +126,62 @@ paypal.Buttons({
         $.post('/payments/paypal/capture', {
             name: ''
         }, function(res) {
-            location.replace('/payments/success');
+            $("#myModal").modal();
         })
     }
 
 
 }).render('#paypal-button-container');
 </script>
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="m-auto text-center">
+                    <form id="orderView" class="form-horizontal">
+                        <svg class="bi bi-check-circle-fill text-success p-4" width="5rem" height="5rem"
+                            viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                        </svg>
+                        <h5 class='text-success'>Your payment is complete</h3>
+                            <h6>
+                                <span id="viewFirstName">rumbiiha</span>
+                                <span id="viewLastName">swaibu</span>,
+                                Thank you for your Order
+                            </h6>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6 text-center">
+                                    <h6 class="">Shipping Details</h6>
+                                    <div class="">
+                                        <p id="viewRecipientName">rumbiiha swaibu</p>
+                                        <p id="viewAddressLine1">55 East 52nd Street</p>
+                                        <p id="viewAddressLine2">21st Floor</p>
+                                        <p>
+                                            <span id="viewCity">New York</span>,
+                                            <span id="viewState">NY</span> - <span id="viewPostalCode">10022</span>
+                                        </p>
+                                        <p id="confirmCountry"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <h6 class="">Transaction Details</h6>
+                                    <div class="">
+                                        <p>Transaction ID: <span id="viewTransactionID">6P7842166E1069148</span></p>
+                                        <p>Payment Total Amount: <span id="viewFinalAmount">320.00</span> </p>
+                                        <p>Currency Code: <span id="viewCurrency">USD</span></p>
+                                        <p>Payment Status: <span id="viewPaymentState">APPROVED</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

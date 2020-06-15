@@ -147,7 +147,7 @@ class Paypal extends Controller
     public function captureOrder(){
         $order = $this->paypalHelper->orderCapture()['data'];
         $address = [
-            'user_id'           =>'1',
+            'user_id'           =>isset($_SESSION['user'])?:$_SESSION['user']['id'],
             'contact_names'     => $order['purchase_units'][0]['shipping']['name']['full_name'],
             'address_line_1'    => $order['purchase_units'][0]['shipping']['address']['address_line_1'],
             'address_line_2'    => $order['purchase_units'][0]['shipping']['address']['address_line_2'],
@@ -159,7 +159,7 @@ class Paypal extends Controller
         $this->address->save($address);
         $payment = [
             'txn_id'            =>$order['id'],
-            'user_id'           =>'1',
+            'user_id'           =>isset($_SESSION['user'])?:$_SESSION['user']['id'],
             'payment_method'    =>'paypal',
             'payer_email'       =>$order['payer']['email_address'],
             'amount'            =>$order['purchase_units'][0]['payments']['captures'][0]['amount']['value'],
