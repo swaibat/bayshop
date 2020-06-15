@@ -6,10 +6,11 @@
   <title><?=$page_title?> &mdash; Doolbay</title>
 
   <!-- General CSS Files -->
-  <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <?= script_tag('assets/shared/jquery/jquery-3.5.1.min.js'); ?>
+  <?= link_tag('assets/admin/css/style.css'); ?>
+    <?= script_tag(['src' => 'https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js', 'type'  => 'module']); ?>
+    <?= script_tag('assets/shared/jquery/jquery-3.5.1.min.js'); ?>
+    <?= script_tag('assets/plugins/toastify-js/toastify-js.js'); ?>
+    <?= script_tag('server/node_modules/socket.io-client/dist/socket.io.dev.js'); ?>
 
   <!-- CSS Libraries -->
 
@@ -18,7 +19,7 @@
   <link rel="stylesheet" href="../assets/admin/assets/css/components.css">
 </head>
 
-<body>
+<body class='pt-0'>
   <div id="app">
     <div class="main-wrapper">
       <div class="navbar-bg"></div>
@@ -248,10 +249,10 @@
       <div class="main-sidebar">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand shadow-sm">
-            <a href="index.html">Doolbay</a>
+            <a href="/">Doolbay</a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm shadow-sm">
-            <a href="index.html">Do</a>
+            <a href="/">Do</a>
 		  </div>
 		  <!-- Side Navigation -->
 			  <?= custom_navigation(

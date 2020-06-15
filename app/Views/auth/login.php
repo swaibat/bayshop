@@ -45,6 +45,3 @@
     </div>
     <?= form_close() ?>
 </div>
-<script>
-    $('input').addClass()
-</script>

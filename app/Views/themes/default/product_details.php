@@ -1,17 +1,8 @@
-
-<main role="main" class="container mt-6">
-<nav aria-label="breadcrumb shadow-xs">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item"><a href="#">Library</a></li>
-    <li class="breadcrumb-item active" aria-current="page"><?=$product['title'] ?></li>
-  </ol>
-</nav>
+<main role="main" class="container">
     <div class="d-flex flex-wrap">
         <div class='col-md-9'>
             <div class='row bg-white py-3 shadow-xs rounded'>
                 <div class='col-md-5 pt-2'>
-
                     <div class="show w-100" href="1.jpg">
                         <img class='w-100' src="<?=$product['url'] ?>" id="show-img">
                     </div>
@@ -41,7 +32,7 @@
                 </div>
                 <div class='col-md-7 rounded'>
                     <div class='d-flex'>
-                        <p><?=$product['title'] ?></p>
+                        <h5><?=$product['title'] ?></h5>
                         <div class='ml-auto btn-group'>
                             <button class='btn '>
                                 <ion-icon name="share-outline"></ion-icon>
@@ -91,7 +82,7 @@
                                     <label for="radio2">&nbsp;</label>
                                 </div>
                                 <div>
-                                    <input type="radio"  value='blue' name="radio" id="radio3" class="radio">
+                                    <input type="radio" value='blue' name="radio" id="radio3" class="radio">
                                     <label for="radio3">&nbsp;</label>
                                 </div>
                                 <div>
@@ -99,13 +90,15 @@
                                     <label for="radio4">&nbsp;</label>
                                 </div>
                                 <div>
-                                    <input type="radio"  value='gray' name="radio" id="radio5" class="radio">
+                                    <input type="radio" value='gray' name="radio" id="radio5" class="radio">
                                     <label for="radio5">&nbsp;</label>
                                 </div>
                             </div>
                         </div>
-                        <div class='my-3 ml-5'>
-                            <p class='mb-1'>avaible sizes</p>
+                    </div>
+                    <div class="d-flex">
+                        <div class='my-3'>
+                            <label for='size' class='mb-1'>avaible sizes</label>
                             <select id='size' class="form-control form-control-sm js-select2">
                                 <option value='S'>S</option>
                                 <option value='M'>M</option>
@@ -124,7 +117,7 @@
                                         -
                                     </button>
                                 </div>
-                                <input id='quantity' type='text' min='1' value='1' class='form-control quantity'
+                                <input id='quantity' type='text' min='1' value='1' class='form-control quantity-input'
                                     placeholder='' aria-label='' aria-describedby='basic-addon1' />
                                 <div class='input-group-append'>
                                     <button class='btn btn-outline-secondary plus' id='plus' type='button'>
@@ -146,44 +139,33 @@
                     </div>
                     <div class=' d-flex'>
                         <button class='btn btn-primary btn-sm'>Buy now</button>
-                        <button  id='add-to-cart' class='add-to-cart btn btn-warning  ml-2 btn-sm'>Add to cart</button>
+                        <button id='add-to-cart' class='add-to-cart btn btn-warning  ml-2 btn-sm'>Add to cart</button>
                     </div>
                 </div>
             </div>
             <div class='row bg-white p-3 rounded mt-4'>
-                <ul class='nav nav-pills mb-3 bg-white border-bottom w-100' id='pills-tab' role='tablist'>
-                    <li class='nav-item'>
-                        <a class='nav-link cv-prdct-nav active pb-0' id='pills-home-tab' data-toggle='pill'
-                            href='#pills-home' role='tab' aria-controls='pills-home' aria-selected='true'>
-                            <ion-icon name='reader' />
-                            Details
-                        </a>
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                            aria-controls="pills-home" aria-selected="true">Description</a>
                     </li>
-                    <li class='nav-item'>
-                        <a class='nav-link pb-0 cv-prdct-nav' id='pills-profile-tab' data-toggle='pill'
-                            href='#pills-profile' role='tab' aria-controls='pills-profile' aria-selected='false'>
-                            <ion-icon name='reader' />
-                            Reviews
-                        </a>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                            aria-controls="pills-profile" aria-selected="false">Product Reviews</a>
                     </li>
-                    <li class='nav-item'>
-                        <a class='nav-link pb-0 cv-prdct-nav' id='pills-contact-tab' data-toggle='pill'
-                            href='#pills-contact' role='tab' aria-controls='pills-contact' aria-selected='false'>
-                            Specifications
-                        </a>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
+                            aria-controls="pills-contact" aria-selected="false">Product Q&A</a>
                     </li>
                 </ul>
-                <div class='tab-content' id='pills-tabContent'>
-                    <div class='tab-pane fade show active' id='pills-home' role='tabpanel'
-                        aria-labelledby='pills-home-tab'>
-                        ...
+                <div class="tab-content scroll-container" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <p>Est quis nulla laborum officia ad nisi ex nostrud culpa Lorem excepteur aliquip dolor aliqua irure ex. Nulla ut duis ipsum nisi elit fugiat commodo sunt reprehenderit laborum veniam eu veniam. Eiusmod minim exercitation fugiat irure ex labore incididunt do fugiat commodo aliquip sit id deserunt reprehenderit aliquip nostrud. Amet ex cupidatat excepteur aute veniam incididunt mollit cupidatat esse irure officia elit do ipsum ullamco Lorem. Ullamco ut ad minim do mollit labore ipsum laboris ipsum commodo sunt tempor enim incididunt. Commodo quis sunt dolore aliquip aute tempor irure magna enim minim reprehenderit. Ullamco consectetur culpa veniam sint cillum aliqua incididunt velit ullamco sunt ullamco quis quis commodo voluptate. Mollit nulla nostrud adipisicing aliqua cupidatat aliqua pariatur mollit voluptate voluptate consequat non.</p>
                     </div>
-                    <div class='tab-pane fade' id='pills-profile' role='tabpanel' aria-labelledby='pills-profile-tab'>
-                        ...
-                    </div>
-                    <div class='tab-pane fade' id='pills-contact' role='tabpanel' aria-labelledby='pills-contact-tab'>
-                        ...
-                    </div>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        ...</div>
+                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                        ...</div>
                 </div>
             </div>
         </div>
@@ -226,3 +208,6 @@
         </div>
     </div>
 </main>
+<script>
+    $(".scroll-container").niceScroll();
+</script>

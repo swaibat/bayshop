@@ -33,7 +33,7 @@ use App\Models\RoleModel;
 use App\Models\ClientinfoModel;
 use App\Models\SettingModel;
 use App\Models\PaypalModel;
-
+use App\Models\PaymentModel;
 
 
 class BaseController extends Controller
@@ -74,7 +74,8 @@ class BaseController extends Controller
         $this->clientInfo       = new ClientinfoModel();
         $this->paypal           = new PaypalModel();
         $this->logs             = new LogModel();
-        // $this->location         = location_info();
+        $this->payments         = new PaymentModel();
+        // $this->location      = location_info();
         $this->user_agent       = $this->request->getUserAgent();
         $this->session          = \Config\Services::session();
         $this->validation       = \Config\Services::validation();

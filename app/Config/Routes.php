@@ -71,6 +71,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     $routes->add('delete/(:segment)/(:num)', 'Delete');
     // SETTINGS
     $routes->add('settings', 'Setting');
+    // PAYMENTS
+    $routes->add('payments', 'Payment');
     // USERS
     $routes->add('sliders', 'Slider');
     $routes->add('sliders/create', 'Slider::create');
@@ -85,9 +87,9 @@ $routes->group('payments', ['namespace' => 'App\Controllers\Payment'], function 
     $routes->add('stripe', 'Stripe');
     $routes->add('stripe/pay', 'Stripe::payment');
     $routes->add('paypal', 'Paypal');
-    $routes->add('paypal/create', 'Paypal::create');
-    $routes->add('paypal/status', 'Paypal::status');
-    $routes->add('paypal/success', 'Paypal::success');
+    $routes->add('paypal/create', 'Paypal::CreateOrder');
+    $routes->add('paypal/capture', 'Paypal::captureOrder');
+    $routes->add('success', 'Paypal::success');
     $routes->add('paypal/cancel', 'Paypal::cancel');
 });
 
@@ -102,8 +104,11 @@ $routes->group('auth', ['namespace' => 'App\Controllers\User'], function ($route
 
 $routes->group('/', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->add('products', 'Home::products');
+    $routes->add('vendors', 'Home::vendors');
     $routes->add('products/(:segment)', 'Home::product');
     $routes->add('shopping/cart', 'Home::shopping_cart');
+    $routes->add('shopping/login', 'Home::buyer_login');
+    $routes->add('shipping/address', 'Home::shipping_address');
     $routes->add('shopping/checkout', 'Home::checkout');
     $routes->add('shopping/order', 'Home::order');
     $routes->add('shopping/payments', 'Home::payment_method');
