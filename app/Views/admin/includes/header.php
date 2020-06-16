@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -256,7 +257,7 @@
 		  </div>
 		  <!-- Side Navigation -->
 			  <?= custom_navigation(
-				  ['name'=>$page_name,'folder'=>$folder_name],
+				  ['name'=>$page_name,'folder'=>$folder_name, 'nav'=>'admin'],
 				  [
           'dashboard'	    =>['icon'=>'home'],
           'monitoring'	  =>['icon'=>'cellular'],

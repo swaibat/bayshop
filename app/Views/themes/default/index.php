@@ -55,13 +55,22 @@
                         </a>
                     </li> -->
                     <li class='dropdown mr-3 d-flex flex-row align-items-center '>
-                        <a class="nav-link d-flex align-items-center" href="http://example.com" id="dropdown01"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <ion-icon class='header-icon mx-auto' name="person-outline"></ion-icon>
-                            <span class='pl-2'>Account</span>
+                        <?php if(isset($_SESSION['user'])):?>
+                        <a class="nav-link d-flex align-items-center" href="#" id="dropdown01" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <ion-icon class="header-icon mx-auto" name="person-outline"></ion-icon>
+                            <span class="pl-2">Account</span>
                         </a>
+                        <?php else: ?>
+                        <a class="nav-link d-flex align-items-center" href="#" id="dropdown01" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <ion-icon class="header-icon mx-auto" name="person-outline"></ion-icon>
+                            <span class="pl-2">Signin</span>
+                        </a>
+                        <?php endif ?>
                         <ul class='dropdown-menu shadow notification-pane font-weight-light'
                             aria-labelledby='dropdownMenuButton'>
+                            <?php if(isset($_SESSION['user'])):?>
                             <li class='dropdown-item rounded'>
                                 <a class='py-3 d-flex' href="<?= base_url('admin/profile') ?>">
                                     <span class='dropdown-icon'>
@@ -74,7 +83,7 @@
                                 </a>
                             </li>
                             <li class='dropdown-item rounded'>
-                                <a class='py-3 d-flex' href="<?= base_url('auth/logout') ?>" onClick={this.logout}>
+                                <a class='py-3 d-flex' href="<?= base_url('auth/logout') ?>">
                                     <span class='dropdown-icon'>
                                         <ion-icon name="settings-outline"></ion-icon>
                                     </span>
@@ -84,6 +93,18 @@
                                     </span>
                                 </a>
                             </li>
+                            <?php else: ?>
+                            <li class='dropdown-item'>
+                                <a class='btn btn-outline-primary btn-block' href="<?= base_url('auth/login') ?>">
+                                    Login
+                                </a>
+                            </li>
+                            <li class='dropdown-item'>
+                                <a class='btn btn-primary btn-block' href="<?= base_url('auth/register') ?>">
+                                    Register
+                                </a>
+                            </li>
+                            <?php endif ?>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -274,7 +295,7 @@
         return $('#quantity').val(JSON.parse($('#quantity').val()) + 1)
     });
     $("#add-to-cart").click(function() {
-        const session = <?= json_encode($_SESSION['cart']) ?> || [];
+        const session = < ? = json_encode($_SESSION['cart']) ? > || [];
         const body = {
             id: '<?= $product['
             id ']?>',

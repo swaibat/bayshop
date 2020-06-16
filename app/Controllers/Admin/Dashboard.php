@@ -7,17 +7,26 @@ use PHPUnit\Util\Json;
 
 class Dashboard extends BaseController
 {
+    
     // Dashboard
     public function index()
     {
+        return check_access_permissions($this->request);
+        // if()
         $data = [
             'folder_name'       => 'dashboard',
             'page_name'         => 'dashboard',
             'page_title'        => 'Dashboard',
-            'total_users'       => count($this->user->findAll()),
-            'total_products'    => count($this->products->findAll()),
-            'user_agents'       => $this->products->findAll(),
         ];
-        echo view('admin/index', $data);
+        if($this->admin_user){
+            $data['total_categories']   = count($this->categories->findAll());
+            $data['total_products']     = count($this->products->findAll());
+            $data['total_users']        = count($this->user->findAll());
+        }else{
+            $data['total_categories']   = count($this->categories->where('vendor_id', $this->user_data['id'])->findAll());
+            $data['total_products']     = count($this->products->where('vendor_id', $this->user_data['id'])->findAll());
+            $data['total_pages']        = count($this->pages->where('vendor_id', $this->user_data['id'])->findAll());
+        } 
+        return view($this->backpath.'/index', $data);
     }
 }
