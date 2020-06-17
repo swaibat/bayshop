@@ -19,7 +19,7 @@ class Page extends BaseController
         }else{
             $data['pages'] = $this->pages->orderBy('id', 'DESC')->where('vendor_id', $this->user_data['id'])->findAll();
         } 
-        return view('admin/index', $data);
+        return view($this->backpath.'/index', $data);
     }
 
 
@@ -51,7 +51,7 @@ class Page extends BaseController
             'page_title'        => 'Create Page',
             'errors'            => $this->validation->getErrors()
         ];
-        return view('admin/index', $data);
+        return view($this->backpath.'/index', $data);
     }
 
     // UPDATE PAGE
@@ -82,6 +82,6 @@ class Page extends BaseController
             'page'              => $this->pages->find($id),
             'errors'            => $this->validation->getErrors()
         ];
-        return view('admin/index', $data);
+        return view($this->backpath.'/index', $data);
     }
 }

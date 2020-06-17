@@ -16,7 +16,7 @@ class Slider extends BaseController
             'page_title'    => 'sliders',
             'sliders'      => $this->slider->orderBy('id', 'DESC')->findAll()
         ];
-        echo view('admin/index', $data);
+        return view($this->backpath.'/index', $data);
     }
 
 
@@ -46,7 +46,7 @@ class Slider extends BaseController
             'page_title'        => 'Create slide',
             'errors'            => $this->validation->getErrors(),
         ];
-        return view('admin/index', $data);
+        return view($this->backpath.'/index', $data);
     }
 
 }

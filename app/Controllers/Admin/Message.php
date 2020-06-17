@@ -18,7 +18,7 @@ class Message extends BaseController
             'page_title'    => 'chat messages',
             'users'         => $this->messages->get_users_by_messages($session_user),
         ];
-        echo view('admin/index', $data);
+        echo view($this->backpath.'/index', $data);
     }
 
     // CREATE A NEW MESSAGE
@@ -43,7 +43,7 @@ class Message extends BaseController
             'page_title'    => 'chat messages',
             'errors'        => $this->validation->getErrors()
         ];
-        return view('admin/view', $data);
+        return view($this->backpath.'/view', $data);
     }
 
     // CREATE A NEW MESSAGE

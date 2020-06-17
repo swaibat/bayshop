@@ -11,8 +11,9 @@ class Dashboard extends BaseController
     // Dashboard
     public function index()
     {
-        return check_access_permissions($this->request);
-        // if()
+        if(!isset($_SESSION['user']) || $this->backpath != $this->request->uri->getSegment(1)){ 
+            return redirect()->to('/');
+        }
         $data = [
             'folder_name'       => 'dashboard',
             'page_name'         => 'dashboard',

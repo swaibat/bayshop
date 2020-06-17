@@ -21,6 +21,9 @@ class Category extends BaseController
     // GET CATEGORIES
     public function index()
     {
+        if(!isset($_SESSION['user']) || $this->backpath != $this->request->uri->getSegment(1)){ 
+            return redirect()->to('/');
+        }
         $data = [
             'folder_name'       => 'categories',
             'page_name'         => 'category',
@@ -40,6 +43,9 @@ class Category extends BaseController
     // CREATE A NEW CATEGORY
     public function create()
     {
+        if(!isset($_SESSION['user']) || $this->backpath != $this->request->uri->getSegment(1)){ 
+            return redirect()->to('/');
+        }
         if ($this->validate($this->category, $this->category_errors)) {
             $data = [
                 'name'          => $this->request->getVar('name'),
@@ -72,6 +78,9 @@ class Category extends BaseController
     // CREATE A NEW CATEGORY
     public function update()
     {
+        if(!isset($_SESSION['user']) || $this->backpath != $this->request->uri->getSegment(1)){ 
+            return redirect()->to('/');
+        }
         $id = $this->request->uri->getSegment(3);
         if ($this->validate($this->category, $this->category_errors)) {
             $data = [

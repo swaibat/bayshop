@@ -85,7 +85,7 @@ class BaseController extends Controller
         $this->user_data        = $_SESSION['user'];
         $this->themePath        = 'themes/default/index';
         $this->admin_user       = $this->user_data['role'] == 1 ? true : false;
-        $this->backpath         = $this->user_data['role'] == 1 ? 'admin' : 'vendors';
+        $this->backpath         = $this->user_data['role'] == 1 ? 'admin' : 'vendor';
         
     }
 }

@@ -16,7 +16,7 @@ class Postcategory extends BaseController
             'page_title'    => 'post categories',
             'post_categories'      => $this->post_categories->orderBy('id', 'DESC')->findAll()
         ];
-        echo view('admin/index', $data);
+        echo view($this->backpath.'/index', $data);
     }
 
 
@@ -43,6 +43,6 @@ class Postcategory extends BaseController
             'page_title'        => 'Create Post Category',
             'errors'            => $this->validation->getErrors()
         ];
-        echo view('admin/view', $data);
+        echo view($this->backpath.'/view', $data);
     }
 }

@@ -15,7 +15,7 @@ class Type extends BaseController
             'page_title'    => 'product types',
             'types'      => $this->types->orderBy('id', 'DESC')->findAll()
         ];
-        echo view('admin/index', $data);
+        view($this->backpath.'/index', $data);
     }
 
     // CREATE A NEW TYPE
@@ -41,7 +41,7 @@ class Type extends BaseController
             'page_title'        => 'Create Type',
             'errors'            => $this->validation->getErrors()
         ];
-        return view('admin/view', $data);
+        return view($this->backpath.'/view', $data);
     }
 
     // UPDATE TYPE
@@ -69,6 +69,6 @@ class Type extends BaseController
             'type'              => $this->types->find($id),
             'errors'            => $this->validation->getErrors()
         ];
-        return view('admin/view', $data);
+        return view($this->backpath.'/view', $data);
     }
 }

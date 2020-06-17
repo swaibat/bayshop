@@ -99,17 +99,3 @@ function get_config($name)
   }
 }
 
-function check_access_permissions($request)
-{
-  $user = $request->uri->getSegment(1);
-  if(!isset($_SESSION['user'])){ 
-    return redirect()->to(site_url());
-  }elseif ($_SESSION['user']['role'] != 1 || $_SESSION['user']['role'] != 2) {
-    return redirect()->to(site_url());
-  }elseif ($_SESSION['user']['role']==2 && $user=='admin') {
-    return redirect()->to(site_url());
-  }elseif ($_SESSION['user']['role'] == 1 && $user=='vendor') {
-    return redirect()->to(site_url());
-  }
-}
-

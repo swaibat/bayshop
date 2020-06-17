@@ -16,7 +16,7 @@ class Post extends BaseController
             'page_title'    => 'posts',
             'posts'      => $this->posts->orderBy('id', 'DESC')->findAll()
         ];
-        echo view('admin/index', $data);
+        return view($this->backpath.'/index', $data);
     }
 
 
@@ -48,7 +48,7 @@ class Post extends BaseController
             'users'             => $this->user->findAll(),
             'post_categories'   => $this->post_categories->orderBy('id', 'DESC')->findAll()
         ];
-        return view('admin/index', $data);
+        return view($this->backpath.'/index', $data);
     }
 
     // CREATE A NEW POST
@@ -81,7 +81,7 @@ class Post extends BaseController
             'users'             => $this->user->findAll(),
             'post_categories'   => $this->post_categories->orderBy('id', 'DESC')->findAll()
         ];
-        return view('admin/index', $data);
+        return view($this->backpath.'/index', $data);
     }
 
 }

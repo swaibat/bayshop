@@ -34,7 +34,7 @@ class Product extends BaseController
             'products'      => $this->products->orderBy('id', 'DESC')->findAll(),
             'types'         => $this->types->findAll(),
         ];
-        echo view('admin/index', $data);
+        return view($this->backpath.'/index', $data);
     }
 
     // CREATE A NEW PRODUCT
@@ -89,7 +89,7 @@ class Product extends BaseController
             'countries'         => $this->countries->findAll(),
             'errors'            => $this->validation->getErrors()
         ];
-        return view('admin/index', $data);
+        return view($this->backpath.'/index', $data);
     }
 
     // UPDATE PRODUCT
@@ -146,6 +146,6 @@ class Product extends BaseController
             'categories'        => $this->categories->findAll(),
             'countries'         => $this->countries->findAll(),
         ];
-        echo view('admin/index', $data);
+        echo view($this->backpath.'/index', $data);
     }
 }
