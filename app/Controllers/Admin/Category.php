@@ -31,10 +31,8 @@ class Category extends BaseController
         ];
         if($this->admin_user){
             $data['categories'] = $this->categories->findAll();
-            $data['types'] = $this->categories->findAll();
         }else{
             $data['categories'] = $this->categories->where('vendor_id', $this->user_data['id'])->findAll();
-            $data['types'] = $this->categories->where('vendor_id', $this->user_data['id'])->findAll();
         } 
         return view($this->backpath.'/index', $data);
     }
@@ -51,7 +49,6 @@ class Category extends BaseController
                 'name'          => $this->request->getVar('name'),
                 'slug'          => url_title($this->request->getVar('name')),
                 'status'        => $this->request->getVar('status'),
-                'type'          => $this->request->getVar('type'),
                 'vendor_id'     => $this->user_data['id'],
             ];
             $this->categories->save($data);
@@ -61,10 +58,10 @@ class Category extends BaseController
         }
         if($this->admin_user){
             $data['categories'] = $this->categories->findAll();
-            $data['types'] = $this->categories->findAll();
+            $data['collection'] = $this->categories->findAll();
         }else{
             $data['categories'] = $this->categories->where('vendor_id', $this->user_data['id'])->findAll();
-            $data['types'] = $this->categories->where('vendor_id', $this->user_data['id'])->findAll();
+            $data['collection'] = $this->categories->where('vendor_id', $this->user_data['id'])->findAll();
         } 
         $data = [
             'folder_name'       => 'categories',
@@ -87,7 +84,6 @@ class Category extends BaseController
                 'name'          => $this->request->getVar('name'),
                 'slug'          => url_title($this->request->getVar('name')),
                 'status'        => $this->request->getVar('status'),
-                'type'          => $this->request->getVar('type'),
                 'message'       => 'Category updated successfully'
             ];
             $this->categories->update($id, $data);

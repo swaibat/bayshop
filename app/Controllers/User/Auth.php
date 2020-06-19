@@ -35,7 +35,7 @@ class Auth extends BaseController
             ];
             if ($user = $this->user->where($data)->first()) {
                 $_SESSION['user'] = user_session($user);
-                return redirect()->to(base_url('admin/dashboard'));
+                echo redirect()->to(base_url('admin/dashboard'));
             } else {
                 return $this->res->setJSON(['status' => 400, 'message' => 'Invalid Username or Password']);
             }

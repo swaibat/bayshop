@@ -37,16 +37,10 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     $routes->add('products', 'Product', );
     $routes->add('products/create', 'Product::create');
     $routes->add('products/(:num)/update', 'Product::update/$1');
-    // TYPES
-    $routes->add('types', 'Type', );
-    $routes->add('types/create', 'Type::create');
-    $routes->add('types/(:num)/update', 'Type::update/$1');
-    // POSTS
-    $routes->add('posts', 'Post', );
-    $routes->add('posts/create', 'Post::create');
-    $routes->add('posts/(:num)/update', 'Post::update/$1');
-    $routes->add('posts/categories', 'Postcategory', );
-    $routes->add('posts/categories/create', 'Postcategory::create');
+    // Collection
+    $routes->add('collection', 'Collection', );
+    $routes->add('collection/create', 'Collection::create');
+    $routes->add('collection/(:num)/update', 'Collection::update/$1');
     // PAGES
     $routes->add('pages', 'Page');
     $routes->add('pages/create', 'Page::create');
@@ -72,7 +66,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     // SETTINGS
     $routes->add('settings', 'Setting');
     // PAYMENTS
-    $routes->add('payments', 'Payment');
+    $routes->add('Orders', 'Payment');
     // USERS
     $routes->add('sliders', 'Slider');
     $routes->add('sliders/create', 'Slider::create');
