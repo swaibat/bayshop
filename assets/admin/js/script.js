@@ -557,8 +557,10 @@ $(function() {
       toolbar: [
         ['style', ['bold', 'italic', 'underline', 'clear']],
         ['font', ['strikethrough']],
-        ['para', ['paragraph']]
-      ]
+        ['para', ['paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ]
     });
   }
 

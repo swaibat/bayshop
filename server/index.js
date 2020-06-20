@@ -3,7 +3,6 @@ const express = require("express");
 const socketio = require("socket.io");
 const cors = require("cors");
 const _ = require("lodash");
-var cron = require("node-cron");
 const userAgent = require("user-agent-parse");
 const { user, users } = require("./users");
 
@@ -19,62 +18,15 @@ app.use(cors());
 app.use(router);
 
 let connection = [];
-let last_48_users = [
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-  { timeLabel: "14:00-15:00", users: 0 },
-];
+let last_48_users = [];
 const hour = new Date().getHours();
 io.on("connection", (socket) => {
+  console.log('hshshsd');
   connection = [];
   connection.push({ live: true });
   socket.on("online", (data) => {
-    /**
+    console.log(data);
+    /**;
      * Online users and activity
      */
     data.socketId = socket.id;
@@ -98,22 +50,6 @@ io.on("connection", (socket) => {
         .to(user.socketId)
         .emit("new message", data.response.message);
   });
-
-  cron.schedule(
-    "00 00 */1 * * * *",
-    () => {
-      last_48_users.push({
-        timeLabel: `${hour - 1}:00-${hour}:00`,
-        users: users.length,
-      });
-      last_48_users.splice(0, 1);
-      io.emit("test", last_48_users);
-      console.log(last_48_users);
-    },
-    {
-      scheduled: true,
-    }
-  );
 
   // Last 48 hours statistics
 

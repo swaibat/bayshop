@@ -13,9 +13,13 @@ class Page extends BaseController
             'folder_name'   => 'pages',
             'page_name'     => 'pages',
             'page_title'    => 'pages',
-            'pages'         => $this->pages->orderBy('id', 'DESC')->findAll()
         ];
-        echo view('admin/index', $data);
+        if($this->admin_user){
+            $data['pages'] = $this->pages->orderBy('id', 'DESC')->findAll();
+        }else{
+            $data['pages'] = $this->pages->orderBy('id', 'DESC')->where('vendor_id', $this->user_data['id'])->findAll();
+        } 
+        return view($this->backpath.'/index', $data);
     }
 
 
@@ -34,8 +38,10 @@ class Page extends BaseController
                 'status'                => $this->request->getVar('status'),
                 'focus_keyword'         => $this->request->getVar('focus_keyword'),
                 'meta_description'      => $this->request->getVar('meta_description'),
+                'vendor_id'             => $this->user_data['id'],
                 'message'               => 'page created successfully'
             ];
+            
             $this->pages->save($data);
             return $this->response->setJSON($data);
         }
@@ -45,7 +51,7 @@ class Page extends BaseController
             'page_title'        => 'Create Page',
             'errors'            => $this->validation->getErrors()
         ];
-        return view('admin/index', $data);
+        return view($this->backpath.'/index', $data);
     }
 
     // UPDATE PAGE
@@ -62,6 +68,7 @@ class Page extends BaseController
                 'status'                => $this->request->getVar('status'),
                 'focus_keyword'         => $this->request->getVar('focus_keyword'),
                 'meta_description'      => $this->request->getVar('meta_description'),
+                'vendor_id'             => $this->user_data['id'],
                 'message'               => 'page Updated successfully'
             ];
             $this->pages->update($id, $data);
@@ -75,6 +82,6 @@ class Page extends BaseController
             'page'              => $this->pages->find($id),
             'errors'            => $this->validation->getErrors()
         ];
-        return view('admin/index', $data);
+        return view($this->backpath.'/index', $data);
     }
 }

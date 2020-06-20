@@ -26,16 +26,27 @@ function location_info()
 
 function user_session($user)
 {
-  $req_url = 'https://get.client-ip.com/lookup';
-  $result = file_get_contents($req_url);
-  $data = json_decode($result);
-  return json_encode([
-    'id'        => $user['id'],
-    'username'  => $user['username'],
-    'role'      => $user['role'],
-    'ip'        => $data->clientIP,
-    'country'   => $data->countryCode,
-  ]);
+  if ( @fopen("https://get.client-ip.com/lookup", "r") ) 
+    {
+      $req_url = 'https://get.client-ip.com/lookup';
+      $result = file_get_contents($req_url);
+      $data = json_decode($result);
+      return [
+        'id'        => $user['id'],
+        'username'  => $user['username'],
+        'role'      => $user['role'],
+        'ip'        => $data->clientIP,
+        'country'   => $data->countryCode,
+      ];
+    } else{
+      return [
+        'id'        => $user['id'],
+        'username'  => $user['username'],
+        'role'      => $user['role'],
+        'message'   => 'features disabled',
+      ];
+    }
+  
 }
 
 function send_email($data)
@@ -87,3 +98,4 @@ function get_config($name)
     }
   }
 }
+

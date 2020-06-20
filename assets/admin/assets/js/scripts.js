@@ -373,11 +373,12 @@ $(function() {
     });
     $(".summernote-simple").summernote({
        dialogsInBody: true,
-      minHeight: 150,
+      minHeight: 100,
       toolbar: [
         ['style', ['bold', 'italic', 'underline', 'clear']],
         ['font', ['strikethrough']],
-        ['para', ['paragraph']]
+        ['para', ['paragraph']],
+        ['view', ['fullscreen', 'codeview', 'help']],
       ]
     });
   }

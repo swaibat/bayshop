@@ -20,13 +20,11 @@ use App\Models\CategoryModel;
 use App\Models\CountryModel;
 use App\Models\MessageModel;
 use App\Models\ProductModel;
-use App\Models\TypeModel;
+use App\Models\CollectionModel;
 use App\Models\CurrencyModel;
 use App\Models\PageModel;
 use App\Models\UserModel;
-use App\Models\PostModel;
 use App\Models\LogModel;
-use App\Models\PostcategoryModel;
 use App\Models\ProductfileModel;
 use App\Models\SliderModel;
 use App\Models\RoleModel;
@@ -62,11 +60,9 @@ class BaseController extends Controller
         $this->user             = new UserModel();
         $this->messages         = new MessageModel();
         $this->products         = new ProductModel();
-        $this->types            = new TypeModel();
+        $this->collection       = new CollectionModel();
         $this->currencies       = new CurrencyModel();
         $this->pages            = new PageModel();
-        $this->posts            = new PostModel();
-        $this->post_categories  = new PostcategoryModel();
         $this->product_files    = new ProductfileModel();
         $this->slider           = new SliderModel();
         $this->settings         = new SettingModel();
@@ -82,7 +78,10 @@ class BaseController extends Controller
         $this->validation       = \Config\Services::validation();
         $this->email            = \Config\Services::email();
         $this->res              = $this->response;
-        $this->table            = new \CodeIgniter\View\Table();
+        $this->user_data        = $_SESSION['user'];
         $this->themePath        = 'themes/default/index';
+        $this->admin_user       = $this->user_data['role'] == 1 ? true : false;
+        $this->backpath         = $this->user_data['role'] == 1 ? 'admin' : 'vendor';
+        
     }
 }

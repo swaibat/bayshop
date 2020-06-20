@@ -1,150 +1,163 @@
+<div class="">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    media upload
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <a class='btn bg-light d-flex justify-content-around'
+                                href="<?= base_url('admin/products/create'); ?>">
+                                <span class="mr-2">
+                                    <svg class="bi bi-image" width="4em" height="4em" viewBox="0 0 16 16"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M14.002 2h-12a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zm-12-1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12z" />
+                                        <path
+                                            d="M10.648 7.646a.5.5 0 0 1 .577-.093L15.002 9.5V14h-14v-2l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z" />
+                                        <path fill-rule="evenodd" d="M4.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                                    </svg>
+                                    <h4 class="font-weight-light">Add Images</h4>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a class='btn bg-light d-flex justify-content-around'
+                                href="<?= base_url('admin/products/create'); ?>">
+                                <span class="mr-2">
+                                    <svg class="bi bi-camera-video" width="4em" height="4em" viewBox="0 0 16 16"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M2.667 3.5c-.645 0-1.167.522-1.167 1.167v6.666c0 .645.522 1.167 1.167 1.167h6.666c.645 0 1.167-.522 1.167-1.167V4.667c0-.645-.522-1.167-1.167-1.167H2.667zM.5 4.667C.5 3.47 1.47 2.5 2.667 2.5h6.666c1.197 0 2.167.97 2.167 2.167v6.666c0 1.197-.97 2.167-2.167 2.167H2.667A2.167 2.167 0 0 1 .5 11.333V4.667z" />
+                                        <path fill-rule="evenodd"
+                                            d="M11.25 5.65l2.768-1.605a.318.318 0 0 1 .482.263v7.384c0 .228-.26.393-.482.264l-2.767-1.605-.502.865 2.767 1.605c.859.498 1.984-.095 1.984-1.129V4.308c0-1.033-1.125-1.626-1.984-1.128L10.75 4.785l.502.865z" />
+                                    </svg>
+                                    <h4 class="font-weight-light">Add Video</h4>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Basic info -->
+            <div class="card">
+                <div class="card-header">
+                    Basic Info
+                </div>
+                <div class="card-body">
+                    <form action="">
+                        <div class="form-row">
+                            <div class="form-group col-md-8">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" name="name" id="name"
+                                    placeholder="add product name">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="ribbon">Ribbon</label>
+                                <input type="text" class="form-control" name="ribbon" id="ribbon"
+                                    placeholder="eg. new arrival">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputPassword4">Price</label>
+                                <input type="text" class="form-control" id="inputPassword4" placeholder="$100">
+                            </div>
+                            <div class="form-group col-12">
+                                <textarea class="summernote-simple form-control rounded" name="description"></textarea>
+                            </div>
+                        </div>
+                    </form>
 
-<div class="card border-0 shadow-xs">
-	<div class="row">
-		<div class="col-sm-12">
-			<form id='form' action="<?= base_url('admin/products/create/') ?>" method="post" enctype="multipart/form-data" accept-charset="utf-8" novalidate="">
-				<div class="form-row p-4">
-					<div class="col-md-9">
-						<div id='form-title' class="cv-form-group input-group mb-3 mt-4 px-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text bg-white rounded-0 cv-chev left">
-									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span>
-							</div>
-							<?= form_input([
-								'name'      => 'title',
-								'id'        => 'title',
-								'type'     	=> 'text',
-								'class' 	=> 'form-control custom-input',
-							]); ?>
-							<span class="bar"></span><label class="cv-label left text-capitalize">title</label>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="cv-form-group form-group mt-4 px-3">
-							<select name='type_id' class="form-control js-select2">
-								<?php foreach ($types as $type) { ?>
-									<option value='<?= $type['id']; ?>'><?= $type['name']; ?></option>
-								<?php } ?>
-							</select>
-							<span class="bar"></span><label class="cv-label left text-capitalize">Select product type</label>
-						</div>
-					</div>
-					<div class="col-md-12 pt-3">
-						<div class="form-group px-3">
-							<textarea class="wysihtml5 form-control rounded" name="description" id="description"></textarea>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="cv-form-group input-group mb-3 mt-4 px-3">
-							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input id="price" name="price" type="number" class="form-control custom-input"><span class="bar"></span><label class="cv-label left text-capitalize">Price</label>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="cv-form-group input-group mb-3 mt-4 px-3">
-							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input name="compare_price" type="number" class="form-control custom-input"><span class="bar"></span><label class="cv-label left text-capitalize">Compare to price</label>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="cv-form-group input-group mb-3 mt-4 px-3">
-							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input name="available_quantity" type="number" class="form-control custom-input"><span class="bar"></span><label class="cv-label left text-capitalize">available quantity</label>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="cv-form-group input-group mb-3 mt-4 px-3">
-							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-									<ion-icon name="trail-sign-outline"></ion-icon>
-								</span></div><input name="sku" type="text" class="form-control custom-input"><span class="bar"></span><label class="cv-label left text-capitalize">SKU (Stock Keeping Unit)</label>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="cv-form-group form-group mt-4 px-3">
-							<select name='category_id' class="form-control js-select2">
-								<?php foreach ($categories as $category) { ?>
-									<option value='<?= $category['id']; ?>'><?= $category['name']; ?></option>
-								<?php } ?>
-							</select>
-							<span class="bar"></span><label class="cv-label left text-capitalize">Select product Category</label>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="cv-form-group form-group mt-4 px-3">
-							<select id='country' name='country' class="form-control js-select2">
-								<?php foreach ($countries as $country) { ?>
-									<option value='<?= $country['name']; ?>' <?= ($product['country'] === $country['name']) ? 'selected' : '' ?>><?= $country['name']; ?></option>
-								<?php } ?>
-							</select>
-							<span class="bar"></span><label class="cv-label left text-capitalize">Select product Location</label>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="cv-form-group form-group mt-4 px-3">
-							<select name='vendor_id' class="form-control js-select2">
-								<?php foreach ($types as $type) { ?>
-									<option value='<?= $type['id']; ?>'><?= $type['name']; ?></option>
-								<?php } ?>
-							</select>
-							<span class="bar"></span><label class="cv-label left text-capitalize">Select seller/vendor</label>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="input-group mb-3 mt-4 px-3 d-flex align-items-center">
-							<span class="mt-2">Publish the product :</span>
-							<span class="button b2 mt-0 ml-3 mt-2" id="button-10"><input id='status' checked type="checkbox" name="status" class="checkbox">
-								<div class="knobs"><span>NO</span></div>
-								<div class="layer"></div>
-							</span>
-						</div>
-					</div>
-					<div class="col-md-12 px-3">
-						<div id='img-holder' class="input-group mb-3 mt-4  align-items-center border-dashed d-flex justify-content-center">
-							<div id='olden' for="upload_imgs" class="p-2 d-flex flex-column text">
-								<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='126.875' height='84.875' viewBox='0 0 126.875 84.875'%3E%3Cg id='Group_8' data-name='Group 8' transform='translate(-882 -522)'%3E%3Cg id='Group_7' data-name='Group 7'%3E%3Cg id='Group_6' data-name='Group 6'%3E%3Cg id='Group_5' data-name='Group 5'%3E%3Cg id='Group_4' data-name='Group 4'%3E%3Cg id='Rectangle_3' data-name='Rectangle 3' transform='translate(882 537)' fill='none' stroke='%23e3e3e3' stroke-width='1' stroke-dasharray='1 2'%3E%3Crect width='86' height='60' stroke='none'/%3E%3Crect x='0.5' y='0.5' width='85' height='59' fill='none'/%3E%3C/g%3E%3Crect id='Rectangle_1' data-name='Rectangle 1' width='97' height='62' transform='translate(894 522)' fill='%23f7f7f7'/%3E%3Cellipse id='Ellipse_1' data-name='Ellipse 1' cx='12.5' cy='12' rx='12.5' ry='12' transform='translate(918 527)' fill='%23e3e3e3'/%3E%3Crect id='Rectangle_2' data-name='Rectangle 2' width='25' height='29' transform='matrix(1, -0.017, 0.017, 1, 929.749, 540.229)' fill='%23fff'/%3E%3Cpath id='Polygon_1' data-name='Polygon 1' d='M11,0,22,16H0Z' transform='translate(946 553)' fill='%23e3e3e3'/%3E%3Cpath id='Icon_awesome-arrow-circle-up' data-name='Icon awesome-arrow-circle-up' d='M.563,18A17.438,17.438,0,1,1,18,35.438,17.434,17.434,0,0,1,.563,18Zm10.1,2.032,5.091-5.309V27.563a1.683,1.683,0,0,0,1.688,1.688h1.125a1.683,1.683,0,0,0,1.688-1.687V14.723l5.091,5.309a1.689,1.689,0,0,0,2.412.028l.766-.773a1.681,1.681,0,0,0,0-2.384L19.2,7.573a1.681,1.681,0,0,0-2.384,0L7.474,16.9a1.681,1.681,0,0,0,0,2.384l.766.773A1.7,1.7,0,0,0,10.659,20.032Z' transform='translate(973.438 571.438)' fill='%23e3e3e3'/%3E%3Cg id='Group_3' data-name='Group 3' transform='translate(-0.009)'%3E%3Cg id='Group_2' data-name='Group 2' transform='translate(905.5 574.5)'%3E%3Cg id='Group_1' data-name='Group 1'%3E%3Cline id='Line_1' data-name='Line 1' x2='55' fill='none' stroke='%23e3e3e3' stroke-width='1'/%3E%3Cline id='Line_3' data-name='Line 3' x2='12' transform='translate(58.009)' fill='none' stroke='%23e3e3e3' stroke-width='1'/%3E%3Cline id='Line_4' data-name='Line 4' x2='44' transform='translate(0 3)' fill='none' stroke='%23e3e3e3' stroke-width='1'/%3E%3Cline id='Line_5' data-name='Line 5' x2='17' transform='translate(49.009 4)' fill='none' stroke='%23e3e3e3' stroke-width='1'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A" alt="" srcset="">
-								<span>
-									<label for='photo-upload' className='btn btn-sm btn-outline-primary'>
-										Upload Images
-									</label>
-								</span>
-							</div>
-							<input id="photo-upload" type="file" name="images[]" class="multi with-preview" multiple />
-							<div class="btn upload-btn d-none">
-								<img height="45" class="mt-3" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='126.875' height='84.875' viewBox='0 0 126.875 84.875'%3E%3Cg id='Group_8' data-name='Group 8' transform='translate(-882 -522)'%3E%3Cg id='Group_7' data-name='Group 7'%3E%3Cg id='Group_6' data-name='Group 6'%3E%3Cg id='Group_5' data-name='Group 5'%3E%3Cg id='Group_4' data-name='Group 4'%3E%3Cg id='Rectangle_3' data-name='Rectangle 3' transform='translate(882 537)' fill='none' stroke='%23e3e3e3' stroke-width='1' stroke-dasharray='1 2'%3E%3Crect width='86' height='60' stroke='none'/%3E%3Crect x='0.5' y='0.5' width='85' height='59' fill='none'/%3E%3C/g%3E%3Crect id='Rectangle_1' data-name='Rectangle 1' width='97' height='62' transform='translate(894 522)' fill='%23f7f7f7'/%3E%3Cellipse id='Ellipse_1' data-name='Ellipse 1' cx='12.5' cy='12' rx='12.5' ry='12' transform='translate(918 527)' fill='%23e3e3e3'/%3E%3Crect id='Rectangle_2' data-name='Rectangle 2' width='25' height='29' transform='matrix(1, -0.017, 0.017, 1, 929.749, 540.229)' fill='%23fff'/%3E%3Cpath id='Polygon_1' data-name='Polygon 1' d='M11,0,22,16H0Z' transform='translate(946 553)' fill='%23e3e3e3'/%3E%3Cpath id='Icon_awesome-arrow-circle-up' data-name='Icon awesome-arrow-circle-up' d='M.563,18A17.438,17.438,0,1,1,18,35.438,17.434,17.434,0,0,1,.563,18Zm10.1,2.032,5.091-5.309V27.563a1.683,1.683,0,0,0,1.688,1.688h1.125a1.683,1.683,0,0,0,1.688-1.687V14.723l5.091,5.309a1.689,1.689,0,0,0,2.412.028l.766-.773a1.681,1.681,0,0,0,0-2.384L19.2,7.573a1.681,1.681,0,0,0-2.384,0L7.474,16.9a1.681,1.681,0,0,0,0,2.384l.766.773A1.7,1.7,0,0,0,10.659,20.032Z' transform='translate(973.438 571.438)' fill='%23e3e3e3'/%3E%3Cg id='Group_3' data-name='Group 3' transform='translate(-0.009)'%3E%3Cg id='Group_2' data-name='Group 2' transform='translate(905.5 574.5)'%3E%3Cg id='Group_1' data-name='Group 1'%3E%3Cline id='Line_1' data-name='Line 1' x2='55' fill='none' stroke='%23e3e3e3' stroke-width='1'/%3E%3Cline id='Line_3' data-name='Line 3' x2='12' transform='translate(58.009)' fill='none' stroke='%23e3e3e3' stroke-width='1'/%3E%3Cline id='Line_4' data-name='Line 4' x2='44' transform='translate(0 3)' fill='none' stroke='%23e3e3e3' stroke-width='1'/%3E%3Cline id='Line_5' data-name='Line 5' x2='17' transform='translate(49.009 4)' fill='none' stroke='%23e3e3e3' stroke-width='1'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A" alt="" srcset="">
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12 px-3 mt-4">
-						<h6>search engine listing preview</h6>
-						<hr>
-					</div>
-					<div class="col-md-12">
-						<div class="cv-form-group input-group mb-3 mt-4 px-3">
-							<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-									<ion-icon name="briefcase-outline"></ion-icon>
-								</span></div><input name="focus_keyword" type="text" class="form-control custom-input"><span class="bar"></span><label class="cv-label left text-capitalize">focus keywords separated by commas</label>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="input-group mb-3 mt-4 px-3">
-							<textarea name="meta_description" class="form-control custom-input px-0"></textarea>
-							<span class="bar"></span>
-							<label class="cv-label left text-capitalize position-absolute mt-n4">description</label>
-						</div>
-					</div>
-				</div>
-				<div class="card-footer bg-white d-flex justify-content-between">
-					<button type="button" class="btn btn-secondary btn-sm">back</button>
-					<button id="btnSubmit" type="submit" class="btn btn-primary btn-sm">submit</button>
-				</div>
-			</form>
-		</div>
-	</div>
+                </div>
+            </div>
+            <!-- product variables -->
+            <div class="card d-flex p-3">
+                <span class='col-8'>
+                    <h5>Product options</h5>
+                    <p> if product has variables like different colors,sizes or materials <p>
+                            <div class="btn btn-primary">
+                                add options
+                            </div>
+                </span>
+            </div>
+            <div class="card p-3 shadow-xs">
+				<h6>Inventory & Shipping</h6>
+				<p>Track Inventory</p>
+                <div class="form-row">
+				<div class="form-group col-md-4">
+                        <label for="name">Status</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="0.0">
+                        </div>
+                    </div>
+				<div class="form-group col-md-4">
+                        <label for="name">SKU</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="0.0">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="name">Weight</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="0.0" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">kg</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card ">
+                <div class="card-header">
+                    Others
+                </div>
+                <div class="card-body">
+                    <p>Collection</p>
+                    <span class='text-primary'>Add new Collection</span>
+                </div>
+			</div>
+			
+			<div class="card mt-3 p-3 ">
+                <h6>
+                    Others
+                </h6>
+                <ul class="list-group">
+                    <li class="list-group-item border-0">
+                    <span class="icon-lg mr-2"><ion-icon name="gift-outline"></ion-icon></span>
+                        Create Coupon
+                    </li>
+                    
+                    <li class="list-group-item border-0">
+                    <svg class="bi bi-collection-play mr-2" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M14.5 13.5h-13A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5zm-13 1A1.5 1.5 0 0 1 0 13V6a1.5 1.5 0 0 1 1.5-1.5h13A1.5 1.5 0 0 1 16 6v7a1.5 1.5 0 0 1-1.5 1.5h-13zM2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1z"/>
+                        <path fill-rule="evenodd" d="M6.258 6.563a.5.5 0 0 1 .507.013l4 2.5a.5.5 0 0 1 0 .848l-4 2.5A.5.5 0 0 1 6 12V7a.5.5 0 0 1 .258-.437z"/>
+                    </svg>
+                        Create Promo Video
+                    </li>
+                    <li class="list-group-item border-0">
+                    <svg class="bi bi-reply-all mr-2" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8.002 5.013a.144.144 0 0 0-.202.134V6.3a.5.5 0 0 1-.5.5c-.667 0-2.013.005-3.3.822-.984.624-1.99 1.76-2.595 3.876C2.425 10.515 3.59 9.982 4.61 9.7a8.741 8.741 0 0 1 1.921-.306 7.403 7.403 0 0 1 .798.008h.013l.005.001h.001L7.3 9.9l.05-.498a.5.5 0 0 1 .45.498v1.153c0 .108.11.176.202.134l3.984-2.933a.494.494 0 0 1 .042-.028.147.147 0 0 0 0-.252.494.494 0 0 1-.042-.028L8.002 5.013zM6.8 10.386a7.745 7.745 0 0 0-1.923.277c-1.326.368-2.896 1.201-3.94 3.08a.5.5 0 0 1-.933-.305c.464-3.71 1.886-5.662 3.46-6.66 1.245-.79 2.527-.942 3.336-.971v-.66a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.667z"/>
+                        <path fill-rule="evenodd" d="M10.868 4.293a.5.5 0 0 1 .7-.106l3.993 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a.5.5 0 0 1-.593-.805l4.012-2.954a.493.493 0 0 1 .042-.028.147.147 0 0 0 0-.252.496.496 0 0 1-.042-.028l-4.012-2.954a.5.5 0 0 1-.106-.699z"/>
+                    </svg>
+                        Share Product
+                    </li>
+                    <li class="list-group-item border-0">
+                    <svg class="bi bi-graph-up mr-2" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
+                        <path fill-rule="evenodd" d="M14.39 4.312L10.041 9.75 7 6.707l-3.646 3.647-.708-.708L7 5.293 9.959 8.25l3.65-4.563.781.624z"/>
+                        <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4h-3.5a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                        Edit SEO Setting
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
 </div>
 <script>
-	postForm();
+postForm();
 </script>

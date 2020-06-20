@@ -32,9 +32,9 @@ class Product extends BaseController
             'page_name'     => 'products',
             'page_title'    => 'products',
             'products'      => $this->products->orderBy('id', 'DESC')->findAll(),
-            'types'         => $this->types->findAll(),
+            'collection'         => $this->collection->findAll(),
         ];
-        echo view('admin/index', $data);
+        return view($this->backpath.'/index', $data);
     }
 
     // CREATE A NEW PRODUCT
@@ -49,7 +49,7 @@ class Product extends BaseController
                 'compare_price'         => $this->request->getVar('compare_price'),
                 'available_quantity'    => $this->request->getVar('available_quantity'),
                 'sku'                   => $this->request->getVar('sku'),
-                'type_id'               => $this->request->getVar('type_id'),
+                'collection_id'         => $this->request->getVar('collection_id'),
                 'vendor_id'             => $this->request->getVar('vendor_id'),
                 'available_quantity'    => $this->request->getVar('available_quantity'),
                 'description'           => $this->request->getVar('description'),
@@ -84,12 +84,12 @@ class Product extends BaseController
             'folder_name'       => 'products',
             'page_name'         => 'create',
             'page_title'        => 'Create Product',
-            'types'             => $this->types->findAll(),
+            'collection'             => $this->collection->findAll(),
             'categories'        => $this->categories->findAll(),
             'countries'         => $this->countries->findAll(),
             'errors'            => $this->validation->getErrors()
         ];
-        return view('admin/index', $data);
+        return view($this->backpath.'/index', $data);
     }
 
     // UPDATE PRODUCT
@@ -142,10 +142,10 @@ class Product extends BaseController
             'page_name'         => 'update',
             'page_title'        => 'Update Product',
             'product'           => $this->products->find($id),
-            'types'             => $this->types->findAll(),
+            'collection'        => $this->collection->findAll(),
             'categories'        => $this->categories->findAll(),
             'countries'         => $this->countries->findAll(),
         ];
-        echo view('admin/index', $data);
+        echo view($this->backpath.'/index', $data);
     }
 }

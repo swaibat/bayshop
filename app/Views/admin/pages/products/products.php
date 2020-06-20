@@ -1,10 +1,39 @@
 <div class="card p-3">
-	<div class="row">
-		<div class="col-sm-12 mt-n3">
-			<a href="<?= base_url('admin/products/create'); ?>" class="btn btn-sm btn-primary mb-n5"><span class="btn-label"><i class="fa fa-plus"></i></span>
-				Add Product
-			</a>
-			<?php $count = 1;
+    <div class="row">
+        <div class="col-sm-12 mt-n3">
+            <button class="btn btn-sm btn-primary mb-n5 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <span class="btn-label"><i class="fa fa-plus"></i></span>
+                Add Product
+            </button>
+            <div class="dropdown-menu dropdown-product p-4" aria-labelledby="dropdownMenuButton">
+                    <div class="row">
+						<div class="col-md-6">
+                        <a class='btn bg-light d-flex flex-column' href="">
+							<span>
+								<svg class="bi bi-cloud-download" width="4em" height="4em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path d="M4.887 5.2l-.964-.165A2.5 2.5 0 1 0 3.5 10H6v1H3.5a3.5 3.5 0 1 1 .59-6.95 5.002 5.002 0 1 1 9.804 1.98A2.501 2.501 0 0 1 13.5 11H10v-1h3.5a1.5 1.5 0 0 0 .237-2.981L12.7 6.854l.216-1.028a4 4 0 1 0-7.843-1.587l-.185.96z"/>
+									<path fill-rule="evenodd" d="M5 12.5a.5.5 0 0 1 .707 0L8 14.793l2.293-2.293a.5.5 0 1 1 .707.707l-2.646 2.646a.5.5 0 0 1-.708 0L5 13.207a.5.5 0 0 1 0-.707z"/>
+									<path fill-rule="evenodd" d="M8 6a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 6z"/>
+								</svg>
+							</span>
+							Digital
+						</a>
+						</div>
+						<div class="col-md-6">
+						<a class='btn bg-light d-flex flex-column' href="<?= base_url('admin/products/create'); ?>">
+							<span>
+								<svg class="bi bi-archive" width="4em" height="4em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" d="M2 5v7.5c0 .864.642 1.5 1.357 1.5h9.286c.715 0 1.357-.636 1.357-1.5V5h1v7.5c0 1.345-1.021 2.5-2.357 2.5H3.357C2.021 15 1 13.845 1 12.5V5h1z"/>
+									<path fill-rule="evenodd" d="M5.5 7.5A.5.5 0 0 1 6 7h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5zM15 2H1v2h14V2zM1 1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H1z"/>
+								</svg>
+							</span>
+							Physical
+						</a>
+						</div>
+                    </div>
+            </div>
+            <?php $count = 1;
 			$table = new \CodeIgniter\View\Table();
 			$table->setHeading(array('No.', 'Img', 'name', 'type', 'created at', 'status', 'Action'));
 			foreach ($products as $product) {
@@ -17,6 +46,6 @@
 			}
 			$table->setTemplate(['table_open' => '<table id="example" class="table table-striped" style="width:100%">', 'row_start' => '<tr id="row_' . $product['id'] . '">',]);
 			echo $table->generate(); ?>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>

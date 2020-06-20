@@ -45,7 +45,7 @@
         </div>
 
         <!-- main stats Chart -->
-        <div class="col-md-8 mt-4 bg-white shadow-xs rounded border">
+        <div class="col-12 mt-4 bg-white shadow-xs rounded border">
           <div class="btn-group btn-group-sm mt-2 mb-n2 btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-primary active" style="background:#0f0f0f;">
               <input type="radio" name="options" id="option1" autocomplete="off" checked> Users
@@ -61,16 +61,6 @@
             </div>
           </div>
         </div>
-
-        <!-- real time chats -->
-        <div class="col-md-4 mt-4 pr-0">
-          <div class="bg-white shadow-xs rounded border p-2">
-            <h6 class="mb-0">Users by devices</h6>
-            <div id="radialBarBottom"></div>
-          </div>
-        </div>
-
-
       <!-- online users table -->
       <div class="col-md-12 mt-4 bg-white p-3 shadow-xs rounded">
         <h6>Online Users</h6>

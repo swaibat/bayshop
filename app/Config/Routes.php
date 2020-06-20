@@ -37,6 +37,53 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     $routes->add('products', 'Product', );
     $routes->add('products/create', 'Product::create');
     $routes->add('products/(:num)/update', 'Product::update/$1');
+    // Collection
+    $routes->add('collection', 'Collection', );
+    $routes->add('collection/create', 'Collection::create');
+    $routes->add('collection/(:num)/update', 'Collection::update/$1');
+    // PAGES
+    $routes->add('pages', 'Page');
+    $routes->add('pages/create', 'Page::create');
+    $routes->add('pages/(:num)/update', 'Page::update/$1');
+    // CATEGORIES
+    $routes->add('categories', 'Category');
+    $routes->add('categories/create', 'Category::create');
+    $routes->add('categories/(:num)/update', 'Category::update');
+    $routes->add('delete/(:segment)/(:num)', 'Delete');
+    // COUNRRIES
+    $routes->add('countries', 'Country');
+    // COUNRRIES
+    $routes->add('mornitoring', 'Monitor');
+    // USERS
+    $routes->add('users', 'User');
+    $routes->add('users/create', 'User::create');
+    $routes->add('users/cache', 'User::save_cache');
+    $routes->add('users/getcache', 'User::get_cache');
+    $routes->add('users/(:num)/update', 'User::update/$1');
+    // USERS
+    $routes->add('vendors', 'Vendor');
+    // UNIVERSAL DELETE
+    $routes->add('dashboard', 'Dashboard');
+    $routes->add('delete/(:segment)/(:num)', 'Delete');
+    // SETTINGS
+    $routes->add('settings', 'Setting');
+    // PAYMENTS
+    $routes->add('Orders', 'Payment');
+    // USERS
+    $routes->add('sliders', 'Slider');
+    $routes->add('sliders/create', 'Slider::create');
+    $routes->add('users/(:num)/update', 'User::update/$1');
+    // CHAT
+    $routes->add('messages', 'Message');
+    $routes->add('messages/create', 'Message::create');
+    $routes->add('messages/user/(:num)', 'Message::user/$1');
+});
+
+// vendor pages
+$routes->group('vendor', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
+    $routes->add('products', 'Product', );
+    $routes->add('products/create', 'Product::create');
+    $routes->add('products/(:num)/update', 'Product::update/$1');
     // TYPES
     $routes->add('types', 'Type', );
     $routes->add('types/create', 'Type::create');
@@ -56,23 +103,11 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     $routes->add('categories/create', 'Category::create');
     $routes->add('categories/(:num)/update', 'Category::update');
     $routes->add('delete/(:segment)/(:num)', 'Delete');
-    // COUNRRIES
-    $routes->add('countries', 'Country');
-    // USERS
-    $routes->add('users', 'User');
-    $routes->add('users/create', 'User::create');
-    $routes->add('users/cache', 'User::save_cache');
-    $routes->add('users/getcache', 'User::get_cache');
-    $routes->add('users/(:num)/update', 'User::update/$1');
-    // USERS
-    $routes->add('vendors', 'Vendor');
     // UNIVERSAL DELETE
     $routes->add('dashboard', 'Dashboard');
     $routes->add('delete/(:segment)/(:num)', 'Delete');
     // SETTINGS
     $routes->add('settings', 'Setting');
-    // PAYMENTS
-    $routes->add('payments', 'Payment');
     // USERS
     $routes->add('sliders', 'Slider');
     $routes->add('sliders/create', 'Slider::create');
