@@ -39,7 +39,16 @@ body {
     /* color: #222222 !important; */
     /* font-family: "Poppins", sans-serif; */
 }
-
+#action-nav.action-nav{
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    right: 0;
+    background-color: #eef2f4bd;
+    display: block;
+    top: 60px;
+    transition: all .5s;
+}
 .nav-link:hover {
     transition: all 0.4s;
 }

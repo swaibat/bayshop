@@ -21,8 +21,7 @@
             </div>
         </div>
     </div>
-    <form class='col-md-10 rounded' id="form" action="<?= base_url('admin/settings') ?>" enctype="multipart/form-data"
-        method="post" accept-charset="utf-8" novalidate="">
+    <div class='col-md-10 rounded' id="form" novalidate="">
         <div class="tab-content" id="v-pills-tabContent">
             <!-- settings Checklist -->
             <div class="tab-pane show active py-0 fade py-0" id="v-pills-checklist" role="tabpanel" aria-labelledby="v-pills-checklist-tab">
@@ -57,7 +56,7 @@
                 <?php include 'slider.php' ?>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 <?= script_tag('assets/shared/jquery/jquery-3.5.1.min.js'); ?>
 <script>

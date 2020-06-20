@@ -1,4 +1,74 @@
-socket.on("online", function (users) {
+<div class="card p-3 shadow-xs">
+    <div class="card-header d-flex justify-content-between align-items-center p-0">
+        <div class="btn-group">
+            <button class="btn bg-success mb-n4" style="width:1rem; height:1rem;"></button>
+            <button class="btn">Active Visitors 1/1</button>
+        </div>
+        <span>
+            <ion-icon name="chevron-down-outline"></ion-icon>
+        </span>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+        <table id="table" class="table"></table>
+        </div>
+    </div>
+</div>
+
+<div class="card p-3 shadow-xs">
+    <div class="card-header d-flex justify-content-between align-items-center p-0">
+        <div class="btn-group">
+            <button class="btn bg-warning mb-n4" style="width:1rem; height:1rem;"></button>
+            <button class="btn">Idle Visitors 1/1</button>
+        </div>
+        <span>
+            <ion-icon name="chevron-down-outline"></ion-icon>
+        </span>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table " style="width:100%">
+                <tbody>
+                    <tr>
+                        <td>Michael Silva</td>
+                        <td>Marketing Designer</td>
+                        <td>London</td>
+                        <td>66</td>
+                        <td>2012/11/27</td>
+                        <td>$198,500</td>
+                    </tr>
+                    <tr>
+                        <td>Paul Byrd</td>
+                        <td>Chief Financial Officer (CFO)</td>
+                        <td>New York</td>
+                        <td>64</td>
+                        <td>2010/06/09</td>
+                        <td>$725,000</td>
+                    </tr>
+                    <tr>
+                        <td>Gloria Little</td>
+                        <td>Systems Administrator</td>
+                        <td>New York</td>
+                        <td>59</td>
+                        <td>2009/04/10</td>
+                        <td>$237,500</td>
+                    </tr>
+                    <tr>
+                        <td>Bradley Greer</td>
+                        <td>Software Engineer</td>
+                        <td>London</td>
+                        <td>41</td>
+                        <td>2012/10/13</td>
+                        <td>$132,000</td>
+                    </tr>
+            </table>
+
+        </div>
+    </div>
+</div>
+<script>
+console.log("hello world")
+    socket.on("online", function (users) {
   // $("#online-users").text(users.length);
   // $("#ofline-users").text(JSON.parse($("#users").text()) - users.length);
   console.log(users);
@@ -68,64 +138,4 @@ socket.on("online", function (users) {
       </tbody>`).appendTo($("#table"));
 });
 
-// socket.on('test', function(data) {
-//   chart7.updateSeries([{
-//     data: data.map((e) => e.users)
-//   }])
-//   chart7.updateOptions({
-//     labels: data.map((e) => e.timeLabel),
-//   })
-// })
-
-/**
- * Displaying visitors by country
- * @param {log} obj - pass in user logs data to display visitors by country
- * @return {chart,map} renders the map and chart to display users
- */
-
-function getVisitorsByLocation(data) {
-  $("#world-map").vectorMap({
-    map: "world_mill_en",
-    backgroundColor: "#a5a7a9",
-    series: {
-      regions: [
-        {
-          values: data,
-          scale: ["#e3e3e3", "#0f0f0f"],
-          normalizeFunction: "polynomial",
-        },
-      ],
-    },
-    onRegionTipShow: function (e, el, code) {
-      el.html(el.html() + " (Visitors - " + data[code] + ")");
-    },
-  });
-
-  var options = {
-    series: [
-      {
-        data: Object.values(data),
-      },
-    ],
-    chart: {
-      width: "100%",
-      type: "bar",
-      height: 400,
-    },
-    plotOptions: {
-      bar: {
-        horizontal: true,
-      },
-    },
-    
-    dataLabels: {
-      enabled: false,
-    },
-    xaxis: {
-      categories: Object.keys(data),
-    },
-  };
-
-  var chart = new ApexCharts(document.querySelector("#chart"), options);
-  chart.render();
-}
+</script>

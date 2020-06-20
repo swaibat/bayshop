@@ -12,6 +12,9 @@
     <?= script_tag('assets/shared/jquery/jquery-3.5.1.min.js'); ?>
     <?= script_tag('assets/plugins/toastify-js/toastify-js.js'); ?>
     <?= script_tag('server/node_modules/socket.io-client/dist/socket.io.dev.js'); ?>
+    <script>
+    const socket = io('http://localhost/admin/monitoring');
+    </script>
 
     <!-- CSS Libraries -->
 
@@ -24,7 +27,7 @@
     <div id="app">
         <div class="main-wrapper">
             <div class="navbar-bg"></div>
-            <nav class="navbar navbar-expand-lg main-navbar">
+            <nav class="navbar navbar-expand-lg main-navbar position-fixed shadow-sm bg-primary">
                 <form class="form-inline mr-auto">
                     <ul class="navbar-nav mr-3">
                         <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i

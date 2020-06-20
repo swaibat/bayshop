@@ -52,6 +52,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     $routes->add('delete/(:segment)/(:num)', 'Delete');
     // COUNRRIES
     $routes->add('countries', 'Country');
+    // COUNRRIES
+    $routes->add('mornitoring', 'Monitor');
     // USERS
     $routes->add('users', 'User');
     $routes->add('users/create', 'User::create');
