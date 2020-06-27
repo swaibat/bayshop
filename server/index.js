@@ -25,21 +25,20 @@ io.on("connection", (socket) => {
   connection = [];
   connection.push({ live: true });
   socket.on("online", (data) => {
-    console.log(data);
+    console.log(socket.handshake.headers.referer);
     /**;
      * Online users and activity
      */
-    data.socketId = socket.id;
-    const get = user.getUserById(data);
-    get ? (get.socketId = data.socketId) : user.add(data, socket, userAgent);
-    io.emit("online", users);
-
-    last_48_users.pop();
-    last_48_users.push({
-      timeLabel: `${hour - 1}:00-${hour}:00`,
-      users: users.length,
-    });
-    io.emit("test", last_48_users);
+    if (data){
+      data.socketId = socket.id;
+      data.referer = socket.handshake.headers.referer
+      const get = user.getUserById(data);
+      get ? (get.socketId = data.socketId) : user.add(data, socket, userAgent);
+      console.log(users);
+      io.emit("online", users);
+    }else{
+      
+    }
   });
   // check message sending
   socket.on("new message", (data) => {

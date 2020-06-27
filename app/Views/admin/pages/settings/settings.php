@@ -1,3 +1,15 @@
+<form id="form" class="" method="post" action="<?= base_url('admin/settings'); ?>">
+    <nav id='action-nav' class="d-flex justify-content-between align-items-center  p-0 m-0 ">
+        <h5 class='text-white my-3'><?= $page_title ?></h5>
+        <div class="d-flex ml-4">
+            <button class="btn btn-light">
+                Cancel
+            </button>
+            <button type="submit" class="btn btn-light ml-3 px-4">
+                save
+            </button>
+        </div>
+    </nav>
 <div class="row">
     <div class="col-md-2">
         <div class="bg-white p-3 shadow-xs rounded">
@@ -58,8 +70,25 @@
         </div>
     </div>
 </div>
+</form>
 <?= script_tag('assets/shared/jquery/jquery-3.5.1.min.js'); ?>
 <script>
+// logo upload
+$('#logo').change(function (){
+    const file = $(this)[0].files[0];
+    const reader = new FileReader();
+    reader.onloadend = ()=>$('#logo-img').css( "background-image", "url(" + reader.result + ")" );
+    file ? reader.readAsDataURL(file):'';
+});
+
+// logo upload
+$('#favicon').change(function (){
+    const file = $(this)[0].files[0];
+    const reader = new FileReader();
+    reader.onloadend = ()=>  $('#favicon-img').css( "background-image", "url(" + reader.result + ")" );
+    file ? reader.readAsDataURL(file):'';
+});
+
 $("form").submit(function(e) {
     e.preventDefault();
     const all = [];

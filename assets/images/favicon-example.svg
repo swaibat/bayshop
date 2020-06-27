@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1639" height="290" viewBox="0 0 1639 290">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2, .cls-9 {
+        fill: #707070;
+      }
+
+      .cls-2 {
+        font-size: 37px;
+        font-family: SegoeUI-Italic, Segoe UI;
+        font-style: italic;
+      }
+
+      .cls-3 {
+        fill: #f3f3f3;
+      }
+
+      .cls-4 {
+        fill: #e4e4e4;
+      }
+
+      .cls-5 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-6 {
+        fill: #cccdd1;
+      }
+
+      .cls-7 {
+        fill: #fff;
+        stroke: #707070;
+      }
+
+      .cls-8 {
+        fill: #818284;
+      }
+
+      .cls-9 {
+        font-size: 50px;
+        font-family: SegoeUI, Segoe UI;
+      }
+
+      .cls-10 {
+        fill: #cdcdd1;
+        opacity: 0.45;
+      }
+
+      .cls-11 {
+        fill: #9a9a9a;
+      }
+
+      .cls-12 {
+        stroke: none;
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect class="cls-1" width="229" height="50"/>
+    </clipPath>
+  </defs>
+  <g id="Group_42" data-name="Group 42" transform="translate(-96 -101)">
+    <g id="Group_41" data-name="Group 41">
+      <g id="Group_40" data-name="Group 40">
+        <g id="Group_39" data-name="Group 39">
+          <g id="Group_38" data-name="Group 38">
+            <g id="Group_37" data-name="Group 37">
+              <g id="Group_36" data-name="Group 36">
+                <g id="Group_35" data-name="Group 35">
+                  <g id="Group_34" data-name="Group 34">
+                    <g id="Group_33" data-name="Group 33">
+                      <text id="Favicon" class="cls-2" transform="translate(563 382)"><tspan x="0" y="0">Favicon</tspan></text>
+                      <g id="Group_32" data-name="Group 32">
+                        <g id="Group_31" data-name="Group 31">
+                          <g id="Group_30" data-name="Group 30">
+                            <g id="Group_29" data-name="Group 29">
+                              <g id="Group_28" data-name="Group 28">
+                                <g id="Group_27" data-name="Group 27">
+                                  <g id="Group_13" data-name="Group 13" transform="translate(-23)">
+                                    <path id="Path_1" data-name="Path 1" class="cls-3" d="M0,0H1639V235H0Z" transform="translate(119 101)"/>
+                                    <rect id="Rectangle_1" data-name="Rectangle 1" class="cls-4" width="1639" height="154" transform="translate(119 101)"/>
+                                  </g>
+                                  <path id="Intersection_1" data-name="Intersection 1" class="cls-3" d="M1068.665,154H376L441.578,48.964a26,26,0,0,1,5.541-8.876L452.168,32l1.821,2.916A25.887,25.887,0,0,1,465.964,32h665.914a25.891,25.891,0,0,1,11.335,2.595l1.62-2.595,3.841,6.152a26,26,0,0,1,8.421,13.488L1221,154Z" transform="translate(-20 101)"/>
+                                  <g id="Repeat_Grid_1" data-name="Repeat Grid 1" class="cls-5" transform="translate(138 161)">
+                                    <g transform="translate(-151 -161)">
+                                      <circle id="Ellipse_1" data-name="Ellipse 1" class="cls-6" cx="25" cy="25" r="25" transform="translate(151 161)"/>
+                                    </g>
+                                    <g transform="translate(-69 -161)">
+                                      <circle id="Ellipse_1-2" data-name="Ellipse 1" class="cls-6" cx="25" cy="25" r="25" transform="translate(151 161)"/>
+                                    </g>
+                                    <g transform="translate(13 -161)">
+                                      <circle id="Ellipse_1-3" data-name="Ellipse 1" class="cls-6" cx="25" cy="25" r="25" transform="translate(151 161)"/>
+                                    </g>
+                                  </g>
+                                  <g id="Rectangle_5" data-name="Rectangle 5" class="cls-7" transform="translate(461 158)">
+                                    <rect class="cls-12" width="90" height="90" rx="20"/>
+                                    <rect class="cls-1" x="0.5" y="0.5" width="89" height="89" rx="19.5"/>
+                                  </g>
+                                  <path id="Icon_open-arrow-left" data-name="Icon open-arrow-left" class="cls-8" d="M49.212,0,0,20.107l49.212,19.63V23.842h82.021V15.895H49.212Z" transform="matrix(0.469, 0.883, -0.883, 0.469, 515.55, 232.164)"/>
+                                  <text id="Your_Webite_title" data-name="Your Webite title" class="cls-9" transform="translate(596 218)"><tspan x="0" y="0">Your Webite title</tspan></text>
+                                  <path id="Icon_metro-image" data-name="Icon metro-image" class="cls-10" d="M132.685,96.759v0ZM112.339,41.968c0,4.778-4.555,8.651-10.173,8.651s-10.173-3.873-10.173-8.651,4.555-8.651,10.173-8.651,10.173,3.873,10.173,8.651Zm6.782,49.024H37.737V79.456L61.474,44.851,88.6,73.689h6.782l23.737-17.3Z" transform="translate(428.315 154.548)"/>
+                                </g>
+                              </g>
+                            </g>
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+      <path id="Icon_awesome-times" data-name="Icon awesome-times" class="cls-11" d="M27.582,25.625,38.953,14.253a3.575,3.575,0,0,0,0-5.055L36.426,6.672a3.575,3.575,0,0,0-5.055,0L20,18.043,8.628,6.672a3.575,3.575,0,0,0-5.055,0L1.047,9.2a3.575,3.575,0,0,0,0,5.055L12.418,25.625,1.047,37a3.575,3.575,0,0,0,0,5.055l2.527,2.527a3.575,3.575,0,0,0,5.055,0L20,33.207,31.372,44.578a3.575,3.575,0,0,0,5.055,0l2.527-2.527a3.575,3.575,0,0,0,0-5.055Z" transform="translate(1067.485 177.163)"/>
+    </g>
+  </g>
+</svg>
