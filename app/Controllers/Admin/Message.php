@@ -10,13 +10,11 @@ class Message extends BaseController
     // GET CHAT MESSAGES
     public function index()
     {
-
-        $session_user = json_decode($_SESSION['user'])->id;
         $data = [
             'folder_name'   => 'messages',
             'page_name'     => 'messages',
             'page_title'    => 'chat messages',
-            'users'         => $this->messages->get_users_by_messages($session_user),
+            'users'         => $this->messages->get_users_by_messages($_SESSION['user']['id']),
         ];
         echo view($this->backpath.'/index', $data);
     }

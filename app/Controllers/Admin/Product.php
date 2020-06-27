@@ -7,20 +7,17 @@ use App\Controllers\BaseController;
 class Product extends BaseController
 {
     public $product = [
-        'title'                 => 'required|min_length[3]',
-        'price'                 => 'required|integer',
-        'compare_price'         => 'required|integer|less_than_equal_to[price]',
-        'available_quantity'    => 'required|integer',
-        'sku'                   => 'string',
-        'type_id'               => 'integer',
-        'vendor_id'             => 'integer',
-        'available_quantity'    => 'integer',
-        'description'           => 'string',
-        'country'               => 'string',
-        'category_id'           => 'integer',
-        'status'                => 'integer',
-        'focus_keyword'         => 'string',
-        'meta_description'      => 'string',
+        // 'title'                 => 'required|min_length[3]',
+        // 'price'                 => 'required|integer',
+        // 'discount'              => 'integer',
+        // 'sku'                   => 'string',
+        // 'collection_id'         => 'integer',
+        // 'vendor_id'             => 'integer',
+        // 'description'           => 'string',
+        // 'category_id'           => 'integer',
+        // 'status'                => 'string',
+        // 'focus_keyword'         => 'string',
+        // 'meta_description'      => 'string',
     ];
 
     // GET PRODUCTS
@@ -40,39 +37,39 @@ class Product extends BaseController
     // CREATE A NEW PRODUCT
     public function create()
     {
+        // return $this->res->setJSON($this->categories->group_categories());
         helper(['form', 'url']);
-        if ($this->validate($this->product)) {
-            $data = [
-                'title'                 => $this->request->getVar('title'),
-                'slug'                  => url_title($this->request->getVar('title')),
-                'price'                 => $this->request->getVar('price'),
-                'compare_price'         => $this->request->getVar('compare_price'),
-                'available_quantity'    => $this->request->getVar('available_quantity'),
-                'sku'                   => $this->request->getVar('sku'),
-                'collection_id'         => $this->request->getVar('collection_id'),
-                'vendor_id'             => $this->request->getVar('vendor_id'),
-                'available_quantity'    => $this->request->getVar('available_quantity'),
-                'description'           => $this->request->getVar('description'),
-                'country'               => $this->request->getVar('country'),
-                'category_id'           => $this->request->getVar('category_id'),
-                'status'                => $this->request->getVar('status'),
-                'focus_keyword'         => $this->request->getVar('focus_keyword'),
-                'meta_description'      => $this->request->getVar('meta_description'),
-                'message'               => 'product created successfully'
-            ];
-            $this->products->save($data);
-            $inserId    = $this->products->insertID();
+        if (isset($_POST) && !empty($_POST)) {
+            // $data = [
+            //     'title'                 => $this->request->getVar('title'),
+            //     'slug'                  => url_title($this->request->getVar('title')),
+            //     // 'price'                 => '200',
+            //     // 'discount'              => '30',
+            //     // 'sku'                   => '400',
+            //     // 'collection_id'         => "1",
+            //     // 'vendor_id'             => "2",
+            //     'description'           => 'hello',
+            //     // 'category_id'           => "1",
+            //     // 'status'                => $this->request->getVar('status'),
+            //     // 'focus_keyword'         => $this->request->getVar('focus_keyword'),
+            //     // 'meta_description'      => $this->request->getVar('meta_description'),
+            // ];
+            // $this->products->save($data);
+            // $inserId    = $this->products->insertID();
+            // return $this->request->getFiles();
             $order      = 1;
             if ($imagefile = $this->request->getFiles()) {
                 foreach ($imagefile['images'] as $img) {
+                    return $this->res->setJSON(['status' => 201, 'message' => $img->isValid()]);
                     if ($img->isValid() && !$img->hasMoved()) {
                         $file_name = $img->getRandomName();
-                        $this->product_files->save([
-                            'products_id' => $inserId,
-                            'file_url' => base_url(WRITEPATH . 'uploads/' . $file_name),
-                            'order' => $order++,
-                        ]);
-                        $img->move(WRITEPATH . 'uploads', $file_name);
+                        // $this->product_files->save([
+                        //     'products_id' => 11,
+                        //     'file_url' => base_url(WRITEPATH . 'uploads' . $file_name),
+                        //     'order' => $order++,
+                        // ]);
+                        
+                        $img->move(WRITEPATH . 'uploads/', $file_name);
                     }
                 }
             }
@@ -85,7 +82,7 @@ class Product extends BaseController
             'page_name'         => 'create',
             'page_title'        => 'Create Product',
             'collection'             => $this->collection->findAll(),
-            'categories'        => $this->categories->findAll(),
+            'categories'        => $this->categories->group_categories(),
             'countries'         => $this->countries->findAll(),
             'errors'            => $this->validation->getErrors()
         ];
@@ -101,7 +98,7 @@ class Product extends BaseController
                 'title'                 => $this->request->getVar('title'),
                 'slug'                  => url_title($this->request->getVar('title')),
                 'price'                 => $this->request->getVar('price'),
-                'compare_price'         => $this->request->getVar('compare_price'),
+                'discount'         => $this->request->getVar('discount'),
                 'available_quantity'    => $this->request->getVar('available_quantity'),
                 'product_type'          => $this->request->getVar('product_type'),
                 'sku'                   => $this->request->getVar('sku'),
@@ -143,7 +140,7 @@ class Product extends BaseController
             'page_title'        => 'Update Product',
             'product'           => $this->products->find($id),
             'collection'        => $this->collection->findAll(),
-            'categories'        => $this->categories->findAll(),
+            'categories'        => $this->categories->group_categories(),
             'countries'         => $this->countries->findAll(),
         ];
         echo view($this->backpath.'/index', $data);

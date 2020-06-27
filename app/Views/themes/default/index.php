@@ -82,6 +82,19 @@
                                     </span>
                                 </a>
                             </li>
+                            <?php if(isset($_SESSION['user']) && $_SESSION['user']['role'] == 1 || 2 ): ?>
+                            <li class='dropdown-item rounded'>
+                                <a class='py-3 d-flex' href="<?= $_SESSION['user']['role'] == 1 ? base_url('admin/dashboard') : base_url('vendor/dashboard') ?>">
+                                    <span class='dropdown-icon'>
+                                        <ion-icon name="person-outline"></ion-icon>
+                                    </span>
+                                    <span class='d-flex flex-column ml-2'>
+                                        <h6 class='text-primary-dark-30'>Dasboard</h6>
+                                        <small class=''>visit your control panel</small>
+                                    </span>
+                                </a>
+                            </li>
+                            <?php endif ?>
                             <li class='dropdown-item rounded'>
                                 <a class='py-3 d-flex' href="<?= base_url('auth/logout') ?>">
                                     <span class='dropdown-icon'>
@@ -295,7 +308,7 @@
         return $('#quantity').val(JSON.parse($('#quantity').val()) + 1)
     });
     $("#add-to-cart").click(function() {
-        const session = < ? = json_encode($_SESSION['cart']) ? > || [];
+        const session = <?= json_encode($_SESSION['cart']) ?> || [];
         const body = {
             id: '<?= $product['
             id ']?>',

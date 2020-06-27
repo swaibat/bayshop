@@ -10,76 +10,27 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-        <table id="table" class="table"></table>
-        </div>
-    </div>
-</div>
-
-<div class="card p-3 shadow-xs">
-    <div class="card-header d-flex justify-content-between align-items-center p-0">
-        <div class="btn-group">
-            <button class="btn bg-warning mb-n4" style="width:1rem; height:1rem;"></button>
-            <button class="btn">Idle Visitors 1/1</button>
-        </div>
-        <span>
-            <ion-icon name="chevron-down-outline"></ion-icon>
-        </span>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <table class="table " style="width:100%">
-                <tbody>
-                    <tr>
-                        <td>Michael Silva</td>
-                        <td>Marketing Designer</td>
-                        <td>London</td>
-                        <td>66</td>
-                        <td>2012/11/27</td>
-                        <td>$198,500</td>
-                    </tr>
-                    <tr>
-                        <td>Paul Byrd</td>
-                        <td>Chief Financial Officer (CFO)</td>
-                        <td>New York</td>
-                        <td>64</td>
-                        <td>2010/06/09</td>
-                        <td>$725,000</td>
-                    </tr>
-                    <tr>
-                        <td>Gloria Little</td>
-                        <td>Systems Administrator</td>
-                        <td>New York</td>
-                        <td>59</td>
-                        <td>2009/04/10</td>
-                        <td>$237,500</td>
-                    </tr>
-                    <tr>
-                        <td>Bradley Greer</td>
-                        <td>Software Engineer</td>
-                        <td>London</td>
-                        <td>41</td>
-                        <td>2012/10/13</td>
-                        <td>$132,000</td>
-                    </tr>
+            <table id="table" class="table">
             </table>
-
         </div>
     </div>
 </div>
+
 <script>
-console.log("hello world")
-    socket.on("online", function (users) {
-  // $("#online-users").text(users.length);
-  // $("#ofline-users").text(JSON.parse($("#users").text()) - users.length);
-  console.log(users);
-  $("#table").empty();
-  $(`<tbody>
+socket.on("online", function(users) {
+    // $("#online-users").text(users.length);
+    // $("#ofline-users").text(JSON.parse($("#users").text()) - users.length);
+    $("#table").empty();
+    $(`<tbody>
               ${users.map(
                 (user) => `<tr>
-              <td data-label="Account">
-                <img height="25" width="35" class="rounded" src="http://localhost:8888/assets/shared/images/user.svg" alt="user">
-                <img height="25" width="35" class="rounded border" src="https://restcountries.eu/data/uga.svg" alt="" srcset="">
+              <td class="d-flex align-items-center" data-label="Account">
+                <span class="avatar-letter text-capitalize" style="background:${'#'+Math.floor(Math.random()*16777215).toString(16)}">${user.username.substr(0, 1)}</span>
+                <img height="25" width="35" class="rounded border ml-3" src="https://restcountries.eu/data/uga.svg" alt="" srcset="">
                 <span class="ml-2">${user.username}</span>
+              </td>
+              <td>
+                ${user.ip}
               </td>
               <td data-label="Amount" class="text-center" style="font-size: large;">
                 <ion-icon data-toggle="tooltip" data-placement="top" title="Tooltip on top" name="logo-${user.name
@@ -95,9 +46,12 @@ console.log("hello world")
                 }"></ion-icon>
               </td>
               <td>
-                <ion-icon name="document-text"></ion-icon> <a href="${
+                <a href="${
                   user.referer
-                }">${user.pageTitle}</a>
+                }">
+                <marquee behavior="scroll" direction="left">${user.referer}</marquee>
+                </a>
+                
               </td>
               <td class='time'>
                 <h6 id="time-${user.id}"></h6>
@@ -137,5 +91,4 @@ console.log("hello world")
               )}
       </tbody>`).appendTo($("#table"));
 });
-
 </script>

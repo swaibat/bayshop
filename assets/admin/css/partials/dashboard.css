@@ -23,9 +23,9 @@
   overflow: auto;
 }
 
-.form-control:focus {
+/* .form-control:focus {
   border-color: #0f0f0f;
-}
+} */
 
 #chart-bar {
   position: relative;

@@ -1,50 +1,11 @@
-// create method
-function postForm() {
-  $(".js-select2").select2({
-    minimumResultsForSearch: -1,
-  });
-  $("#form").submit(function (event) {
-    event.preventDefault();
-    $(".helper-text-danger").remove();
-    var data = new FormData($("#form")[0]);
-    $.ajax({
-      type: "POST",
-      enctype: "multipart/form-data",
-      url: $(this).attr("action"),
-      data: data,
-      processData: false,
-      contentType: false,
-    }).done(function (res) {
-        res.errors
-          ? Object.entries(res.errors).map((error) => {
-              $(`#${error[0]}`).after(
-                `<small class="helper-text-danger">${error[1]}</small>`
-              );
-            })
-          : Toastify({
-              text: res.message,
-              backgroundColor: "#228B22",
-            }).showToast();
-      }).fail(function (err) {
-        Toastify({
-          text: "Error operation failed",
-          backgroundColor: "#FFA500",
-        }).showToast();
-      });
-  });
-}
+// discount display
 
+// create method
+$(document).ready(function() {
+            $('.input-phone').intlInputPhone();
+        })
 $(document).ready(() => {
   $(".js-select2").select2();
-  $("#reload").click(() => {
-    location.reload();
-  });
-  $("#back").click(() => {
-    history.back();
-  });
-  $("#foward").click(() => {
-    history.forward();
-  });
   $(".delete").click((e) => {
     e.preventDefault();
     $("#del-confirm").click(() => {
