@@ -48,7 +48,6 @@ class User extends BaseController
             'folder_name'       => 'users',
             'page_name'         => 'create',
             'page_title'        => 'Create User',
-            'roles'             => $this->roles->findAll(),
             'errors'            => $this->validation->getErrors()
         ];
         echo view('admin/view', $data);

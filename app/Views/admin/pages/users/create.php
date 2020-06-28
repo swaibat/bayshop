@@ -27,16 +27,6 @@
 					</span></div><input name="email" type="email" class="form-control custom-input" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">email address</label>
 			</div>
 		</div>
-		<div class="col-md-3">
-			<div class="cv-form-group form-group mt-4 px-3">
-				<select name='role' class="form-control js-select2">
-					<?php foreach ($roles as $role) { ?>
-						<option value='<?= $role['id']; ?>'><?= $role['name']; ?></option>
-					<?php } ?>
-				</select>
-				<span class="bar"></span><label class="cv-label left text-capitalize">Select user role</label>
-			</div>
-		</div>
 		<div class="col-md-7">
 			<div class="cv-form-group input-group mb-3 mt-4 px-3">
 				<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">

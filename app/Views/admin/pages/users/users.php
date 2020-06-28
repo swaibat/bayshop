@@ -1,10 +1,11 @@
 <div class="card p-3">
-	<div class="row">
-		<div class="col-sm-12 mt-n3">
-			<button data-toggle="modal" data-target="#mymodal" data-modal="modal-lg" data-id="<?php echo base_url('admin/users/create'); ?>" id="menu" class="btn btn-sm btn-primary mb-n5">
-				Add User
-			</button>
-			<?php $count = 1;
+    <div class="row">
+        <div class="col-sm-12 mt-n3">
+            <button data-toggle="modal" data-target="#mymodal" data-modal="modal-lg"
+                data-id="<?= base_url('admin/users/create'); ?>" id="menu" class="btn btn-sm btn-primary mb-n5">
+                Add User
+            </button>
+            <?php $count = 1;
 			$table = new \CodeIgniter\View\Table();
 			$table->setHeading(array('No.', 'img', 'username', 'email', 'last_access', 'role', 'status', 'Action'));
 			foreach ($users as $user) {
@@ -17,6 +18,28 @@
 			}
 			$table->setTemplate(['table_open' => '<table id="example" class="table table-striped users-table" style="width:100%">', 'row_start' => '<tr id="row_' . $post['id'] . '">',]);
 			echo $table->generate(); ?>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
+<script>
+$(document).on("click", "#menu", function(e) {
+    e.preventDefault();
+    $(".modal-dialog").addClass($(this).data("modal"));
+    var url = $(this).data("id"); // it will get action url
+    $("#dynamic-content").html(""); // leave it blank before ajax call
+    $("#modal-loader").show(); // load ajax loader
+    $.ajax({
+            url: url,
+            type: "POST",
+            dataType: "html",
+        })
+        .done(function(data) {
+            $("#dynamic-content").html("");
+            $("#dynamic-content").html(data); // load response
+            $("#modal-loader").hide(); // hide ajax loader
+        })
+        .fail(function() {
+            $("#modal-loader").hide();
+        });
+});
+</script>
