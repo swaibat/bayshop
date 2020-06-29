@@ -9,7 +9,7 @@ class ProductModel extends Model
 {
     protected $table = 'products';
 
-    protected $allowedFields = ['title', 'slug', 'description'];
+    protected $allowedFields = ['title', 'slug','price','discount','sku','collection_id','vendor_id', 'description','category_id','status','forcus_keywords','meta_description'];
     function get_products()
     {
         $db      = \Config\Database::connect();

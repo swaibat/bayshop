@@ -14,21 +14,32 @@ class Setting extends BaseController
         if ($this->validate([
             'data' => 'required',
         ])) {
-            foreach (json_decode($this->request->getVar('data'), true) as $key => $value) {
-                if($this->settings->where(['name'=>$value['name']])->first()){
-                    $this->settings->where(['name'=>$value['name']])->set($value)->update();
-                }else {
+            $data = json_decode($this->request->getVar('data'), true);
+            $logo = $this->request->getFile('logo');
+            $favicon = $this->request->getFile('favicon');
+            $path='assets/uploads/settings/';
+            if ($logo->isValid() && !$logo->hasMoved()) {
+                $logo->move($path);
+                $data[] = ['name'=>'logo','value'=>$path.$logo->getName()];
+            }
+            if ($favicon->isValid() && !$favicon->hasMoved()) {
+                $favicon->move($path);
+                $data[] = ['name'=>'favicon','value'=>$path.$favicon->getName()];
+            }
+            foreach ($data as $key => $value) {
+                if ($this->settings->where(['name' => $value['name']])->first()) {
+                    $this->settings->where(['name' => $value['name']])->set('value',$value['value'])->update();
+                } else {
                     $this->settings->save($value);
                 }
-             }
-            return print_r($this->settings->findAll());
-            // return $this->res->setJSON(['status' => 201, 'message' => 'settings updated Successfully']);
+            }
+            return $this->res->setJSON(['status' => 201, 'message' => 'settings updated Successfully']);
         }
         $data = [
-            'folder_name'       => 'settings',
-            'page_name'         => 'settings',
-            'page_title'        => 'settings',
-            'settings'          => $this->settings->findAll(),
+            'folder_name' => 'settings',
+            'page_name' => 'settings',
+            'page_title' => 'settings',
+            'settings' => $this->settings->findAll(),
         ];
         return view('admin/index', $data);
     }

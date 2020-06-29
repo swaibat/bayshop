@@ -137,6 +137,10 @@ $routes->group('auth', ['namespace' => 'App\Controllers\User'], function ($route
     $routes->add('verify_reset/(:segment)', 'Auth::verify_reset');
 });
 
+
+$routes->add('email/(:segment)', 'Email',['namespace' => 'App\Controllers\Admin']);
+
+
 $routes->group('/', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->add('products', 'Home::products');
     $routes->add('vendors', 'Home::vendors');

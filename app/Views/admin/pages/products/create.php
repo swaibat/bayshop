@@ -20,8 +20,7 @@
                 <div class="card-body">
                     <div id="display-btns" class="row">
                         <div class="col-6">
-                            <a class='btn bg-light d-flex justify-content-around' onclick="$('#pro-image').click()"
-                                href="javascript:void(0)">
+                            <label class='btn bg-light d-flex justify-content-around' for="pro-image">
                                 <span class="mr-2">
                                     <svg class="bi bi-image" width="4em" height="4em" viewBox="0 0 16 16"
                                         fill="rgb(174, 174, 248)" xmlns="http://www.w3.org/2000/svg">
@@ -33,12 +32,12 @@
                                     </svg>
                                     <h4 class="font-weight-light">Add Images</h4>
                                 </span>
-                            </a>
+                            </label>
                             <input type="file" maxlength="10" id="pro-image" name="images[]" style="display: none;"
                                 multiple>
                         </div>
                         <div class="col-6">
-                            <a class='btn bg-light d-flex justify-content-around' onclick="$('#pro-image').click()">
+                            <label class='btn bg-light d-flex justify-content-around' for="pro-image">
                                 <span class="mr-2">
                                     <svg class="bi bi-camera-video" width="4em" height="4em" viewBox="0 0 16 16"
                                         fill="rgb(174, 174, 248)" xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +48,7 @@
                                     </svg>
                                     <h4 class="font-weight-light">Add Video</h4>
                                 </span>
-                            </a>
+                            </label>
                         </div>
                     </div>
                     <div id="img-preview" class="preview-images-zone col-12 d-none rounded">
@@ -238,17 +237,6 @@
                         </span>
                         Create Coupon
                     </li>
-
-                    <li class="list-group-item border-0">
-                        <svg class="bi bi-collection-play mr-2" width="1.5em" height="1.5em" viewBox="0 0 16 16"
-                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M14.5 13.5h-13A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5zm-13 1A1.5 1.5 0 0 1 0 13V6a1.5 1.5 0 0 1 1.5-1.5h13A1.5 1.5 0 0 1 16 6v7a1.5 1.5 0 0 1-1.5 1.5h-13zM2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1z" />
-                            <path fill-rule="evenodd"
-                                d="M6.258 6.563a.5.5 0 0 1 .507.013l4 2.5a.5.5 0 0 1 0 .848l-4 2.5A.5.5 0 0 1 6 12V7a.5.5 0 0 1 .258-.437z" />
-                        </svg>
-                        Create Promo Video
-                    </li>
                     <li class="list-group-item border-0">
                         <svg class="bi bi-reply-all mr-2" width="1.5em" height="1.5em" viewBox="0 0 16 16"
                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -278,6 +266,7 @@
 </form>
 <script>
 $(document).ready(function() {
+    // add dynamic fields
     $("#add-btn").click((e) => e.preventDefault())
     var buttonAdd = $("#add-button");
     var buttonRemove = $("#remove-button");
@@ -350,10 +339,10 @@ $('#discount-check').change(function(e) {
     // console.log('hello');
     e.target.checked ? $('#discount').addClass('d-none') : $('#discount').removeClass('d-none');
 })
-
+var num = 0;
+var productFiles = [];
 
 $(document).ready(function(event) {
-    document.getElementById('pro-image').addEventListener('change', readImage, false);
 
     $(".preview-images-zone").sortable();
 
@@ -361,24 +350,22 @@ $(document).ready(function(event) {
         let no = $(this).data('no');
         if ($('div.preview-image').length == 1) {
             $('#display-btns').removeClass("d-none");
-            $('#img-preview').addClass("d-none")
+            $('#img-preview').addClass("d-none");
+
         }
         $(".preview-image.preview-show-" + no).remove();
+        productFiles = productFiles.filter(e=>{
+            console.log(e.name , $(this).data('name'));
+            return e.name != $(this).data('name')
+        })
     });
-});
 
-
-
-var num = 0;
-var productFiles = [];
-
-function readImage() {
-    if ($('div.preview-image').length == 0) {
-        $('#display-btns').addClass("d-none");
-        $('#img-preview').removeClass("d-none");
-    }
-
-    if (window.File && window.FileList && window.FileReader) {
+    $('#pro-image').change((event) => {
+        if ($('div.preview-image').length == 0) {
+            $('#display-btns').addClass("d-none");
+            $('#img-preview').removeClass("d-none");
+        }
+        console.log(event.target.files);
         var files = event.target.files; //FileList object
         var output = $(".preview-images-zone");
         for (let i = 0; i < files.length; i++) {
@@ -396,11 +383,11 @@ function readImage() {
                 picReader.addEventListener('load', function(event) {
                     // console.log($("#pro-image").val())
                     var picFile = event.target;
-                    // console.log(picFile);
+                    console.log(file);
 
                     var html = `<div class="preview-image border rounded preview-show-${num}">
-                        <div class="image-cancel text-danger" data-no="${num}
-                        "><ion-icon name="close-circle-outline"></ion-icon></div>
+                        <span class="image-cancel text-danger" data-name="${file.name}" data-no="${num}
+                        "><ion-icon name="close-circle-outline"></ion-icon></span>
                         <div class="image-zone">
                         ${ file.type.match('image')
                         ?`<img class="rounded" id="pro-img-${num}" src="${picFile.result}">`
@@ -416,31 +403,22 @@ function readImage() {
             }
             picReader.readAsDataURL(file);
         }
-        $("#pro-image").val('');
-    } else {
-        console.log('Browser not support');
-    }
-}
+    })
+
+});
 
 
-var data = new FormData($("#form")[0]);
-// $("#pro-image").change((evt) => {
-//     data.append('images[]', evt.target.files)
-//     // console.log(data.values());
-// data.append('key2', 'value2');
-//     for (var value of data.values()) {
-//         console.log(value);
-//     }
-// })
+var formData = new FormData($("#form")[0]);
+
 $("#form").submit(function(event) {
     event.preventDefault();
     $(".helper-text-danger").remove();
-    productFiles.map((img) => data.append('images', img))
+    productFiles.map(e => formData.append('image[]', e))
     $.ajax({
         type: "POST",
         enctype: "multipart/form-data",
         url: $(this).attr("action"),
-        data: data,
+        data: formData,
         processData: false,
         contentType: false,
     }).done(function(res) {

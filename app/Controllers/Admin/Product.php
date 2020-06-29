@@ -7,17 +7,17 @@ use App\Controllers\BaseController;
 class Product extends BaseController
 {
     public $product = [
-        // 'title'                 => 'required|min_length[3]',
-        // 'price'                 => 'required|integer',
-        // 'discount'              => 'integer',
-        // 'sku'                   => 'string',
-        // 'collection_id'         => 'integer',
-        // 'vendor_id'             => 'integer',
-        // 'description'           => 'string',
-        // 'category_id'           => 'integer',
-        // 'status'                => 'string',
-        // 'focus_keyword'         => 'string',
-        // 'meta_description'      => 'string',
+        'title'                 => 'required|min_length[3]',
+        'price'                 => 'required|integer',
+        'discount'              => 'integer',
+        'sku'                   => 'string',
+        'collection_id'         => 'integer',
+        'vendor_id'             => 'integer',
+        'description'           => 'string',
+        'category_id'           => 'integer',
+        'status'                => 'string',
+        'focus_keyword'         => 'string',
+        'meta_description'      => 'string',
     ];
 
     // GET PRODUCTS
@@ -37,39 +37,36 @@ class Product extends BaseController
     // CREATE A NEW PRODUCT
     public function create()
     {
-        // return $this->res->setJSON($this->categories->group_categories());
-        helper(['form', 'url']);
         if (isset($_POST) && !empty($_POST)) {
-            // $data = [
-            //     'title'                 => $this->request->getVar('title'),
-            //     'slug'                  => url_title($this->request->getVar('title')),
-            //     // 'price'                 => '200',
-            //     // 'discount'              => '30',
-            //     // 'sku'                   => '400',
-            //     // 'collection_id'         => "1",
-            //     // 'vendor_id'             => "2",
-            //     'description'           => 'hello',
-            //     // 'category_id'           => "1",
-            //     // 'status'                => $this->request->getVar('status'),
-            //     // 'focus_keyword'         => $this->request->getVar('focus_keyword'),
-            //     // 'meta_description'      => $this->request->getVar('meta_description'),
-            // ];
-            // $this->products->save($data);
-            // $inserId    = $this->products->insertID();
-            // return $this->request->getFiles();
+            $data = [
+                'title'                 => $this->request->getVar('title'),
+                'slug'                  => url_title($this->request->getVar('title')),
+                'price'                 => $this->request->getVar('price'),
+                'discount'              => $this->request->getVar('discount'),
+                'sku'                   => $this->request->getVar('sku'),
+                'collection_id'         => $this->request->getVar('collection_id'),
+                'vendor_id'             => $this->request->getVar('vendor_id'),
+                'description'           => $this->request->getVar('description'),
+                'category_id'           => $this->request->getVar('category_id'),
+                'status'                => $this->request->getVar('status'),
+                'focus_keyword'         => $this->request->getVar('focus_keyword'),
+                'meta_description'      => $this->request->getVar('meta_description'),
+            ];
+            $this->products->save($data);
+            $insert_id    = $this->products->insertID();
+            return $this->request->getFiles();
             $order      = 1;
             if ($imagefile = $this->request->getFiles()) {
-                foreach ($imagefile['images'] as $img) {
-                    return $this->res->setJSON(['status' => 201, 'message' => $img->isValid()]);
+                foreach ($imagefile['image'] as $img) {
                     if ($img->isValid() && !$img->hasMoved()) {
                         $file_name = $img->getRandomName();
-                        // $this->product_files->save([
-                        //     'products_id' => 11,
-                        //     'file_url' => base_url(WRITEPATH . 'uploads' . $file_name),
-                        //     'order' => $order++,
-                        // ]);
+                        $this->product_files->save([
+                            'products_id' => $insert_id,
+                            'file_url' => 'assets/uploads/products/' . $file_name,
+                            'order' => $order++,
+                        ]);
                         
-                        $img->move(WRITEPATH . 'uploads/', $file_name);
+                        $img->move('assets/uploads/products/', $file_name);
                     }
                 }
             }
@@ -81,7 +78,7 @@ class Product extends BaseController
             'folder_name'       => 'products',
             'page_name'         => 'create',
             'page_title'        => 'Create Product',
-            'collection'             => $this->collection->findAll(),
+            'collection'        => $this->collection->findAll(),
             'categories'        => $this->categories->group_categories(),
             'countries'         => $this->countries->findAll(),
             'errors'            => $this->validation->getErrors()
@@ -98,7 +95,7 @@ class Product extends BaseController
                 'title'                 => $this->request->getVar('title'),
                 'slug'                  => url_title($this->request->getVar('title')),
                 'price'                 => $this->request->getVar('price'),
-                'discount'         => $this->request->getVar('discount'),
+                'discount'              => $this->request->getVar('discount'),
                 'available_quantity'    => $this->request->getVar('available_quantity'),
                 'product_type'          => $this->request->getVar('product_type'),
                 'sku'                   => $this->request->getVar('sku'),
