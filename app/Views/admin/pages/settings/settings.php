@@ -80,9 +80,11 @@
 </form>
 <?= script_tag('assets/shared/jquery/jquery-3.5.1.min.js'); ?>
 <script>
+var formData = new FormData($('#form')[0]);
 // logo upload
 $('#logo').change(function() {
     const file = $(this)[0].files[0];
+    formData.append('logo', file);
     const reader = new FileReader();
     reader.onloadend = () => $('#logo-img').css("background-image", "url(" + reader.result + ")");
     file ? reader.readAsDataURL(file) : '';
@@ -91,17 +93,14 @@ $('#logo').change(function() {
 // logo upload
 $('#favicon').change(function() {
     const file = $(this)[0].files[0];
+    formData.set('favicon', file);
     const reader = new FileReader();
     reader.onloadend = () => $('#favicon-img').css("background-image", "url(" + reader.result + ")");
     file ? reader.readAsDataURL(file) : '';
 });
-
-var formData = new FormData($('#form')[0]);
 $("form").submit(function(e) {
     e.preventDefault();
-    formData.set('data', JSON.stringify($(this).serializeArray()));
-    formData.set('logo', $('#logo')[0].files[0]);
-    formData.set('favicon', $('#favicon')[0].files[0]);
+    formData.append('data', JSON.stringify($(this).serializeArray()));
     $.ajax({
         url: '/admin/settings',
         type: "POST",

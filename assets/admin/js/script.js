@@ -1,9 +1,6 @@
 // discount display
 
 // create method
-$(document).ready(function() {
-            $('.input-phone').intlInputPhone();
-        })
 $(document).ready(() => {
   $(".js-select2").select2();
   $(".delete").click((e) => {
@@ -64,25 +61,6 @@ $(document).ready(() => {
   });
 });
 
-/**
- * multifile
- * image upload Heleper
- */
-$(function () {
-  $(".MultiFile-list").sortable({
-    placeholder: "upload-btn",
-  });
-  $(".MultiFile-list").disableSelection();
-  $("#photo-upload").change(() => {
-    $("#olden").removeClass("d-flex").addClass("d-none");
-    $("#img-holder").removeClass(
-      "d-flex justify-content-center align-items-center"
-    );
-    $(".upload-btn").addClass("mt-1").removeClass("d-none");
-    $(".MultiFile-preview").removeAttr("style");
-    $(".MultiFile-list").find(">").addClass("first");
-  });
-});
 
 
 $('.show-small-img:first-of-type').css({'border': 'solid 1px #951b25', 'padding': '2px'})

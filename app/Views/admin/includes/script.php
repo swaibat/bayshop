@@ -84,27 +84,27 @@
 <?= script_tag('/assets/plugins/toJson/formToJson.min.js'); ?>
 <?= script_tag("assets/shared/jquery/jquery-ui.js"); ?>
 <?= script_tag('/assets/admin/js/script.js'); ?>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcAP0GrIyhCe_kJfKY1Cb4OYOeP5vmhsQ&callback=initMap">
-</script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcAP0GrIyhCe_kJfKY1Cb4OYOeP5vmhsQ&callback=initMap"> -->
+<!-- </script> -->
 <script>
-var latLang = new google.maps.LatLng(51.4957751, 6.532127700000046);
+// var latLang = new google.maps.LatLng(51.4957751, 6.532127700000046);
 
-function initMap() {
-    var mapProp = {
-        center: latLang,
-        zoom: 13,
-    };
+// function initMap() {
+//     var mapProp = {
+//         center: latLang,
+//         zoom: 13,
+//     };
 
-    var map = new google.maps.Map(document.getElementById('map'), mapProp);
+//     var map = new google.maps.Map(document.getElementById('map'), mapProp);
 
-    var marker = new google.maps.Marker({
-        position: latLang,
-        map: map,
-        title: ''
-    });
-}
+//     var marker = new google.maps.Marker({
+//         position: latLang,
+//         map: map,
+//         title: ''
+//     });
+// }
 
-initMap();
+// initMap();
 </script>
 <?= model_loader() ?>
 
