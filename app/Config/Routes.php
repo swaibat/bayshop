@@ -77,6 +77,10 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     $routes->add('messages', 'Message');
     $routes->add('messages/create', 'Message::create');
     $routes->add('messages/user/(:num)', 'Message::user/$1');
+    // COUPONS
+    $routes->add('coupons', 'Coupon');
+    $routes->add('coupons/create', 'Coupon::create');
+    $routes->add('coupons/(:num)/edit', 'Coupon::edit');
 });
 
 // vendor pages

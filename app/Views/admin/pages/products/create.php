@@ -5,7 +5,7 @@
             <button class="btn btn-light">
                 Cancel
             </button>
-            <button type="submit" class="btn btn-light ml-3 px-4">
+            <button id="submit" type="submit" class="btn btn-light ml-3 px-4">
                 save
             </button>
         </div>
@@ -207,9 +207,9 @@
                 <div class="card-header">
                     <h6>Collection</h6>
                 </div>
-                <ul class="list-group card-body">
+                <ul class="card-body" id="collection">
                     <?php foreach ($collection as $collection):?>
-                    <li class="list-group-item border-0">
+                    <li class="py-2">
                         <div class="custom-control custom-checkbox d-flex align-items-center">
                             <input name="collection_id" type="checkbox" class="custom-control-input"
                                 id="<?=$collection['id']?>">
@@ -220,7 +220,7 @@
                     <?php endforeach ?>
                 </ul>
                 <div class="card-footer">
-                    <span class=' btn btn-sm btn-outline-primary mt-2'>Add new Collection</span>
+                    <span class=' btn btn-sm btn-outline-primary' id='add-collection'>Add new Collection</span>
                 </div>
             </div>
 
@@ -231,13 +231,17 @@
                     </h6>
                 </div>
                 <ul class="card-body list-group">
-                    <li class="list-group-item border-0">
+                    <li class="list-group-item border-0 cursor-pointer">
                         <span class="icon-lg mr-2">
                             <ion-icon name="gift-outline"></ion-icon>
                         </span>
-                        Create Coupon
+
+                        <span data-toggle="modal" data-target="#mymodal" data-modal='modal-lg' class='cursor-pointer'
+                            data-id="<?= base_url('admin/coupon/create'); ?>" id="menu">
+                            Create Coupon
+                        </span>
                     </li>
-                    <li class="list-group-item border-0">
+                    <li class="list-group-item border-0 cursor-pointer">
                         <svg class="bi bi-reply-all mr-2" width="1.5em" height="1.5em" viewBox="0 0 16 16"
                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -247,7 +251,7 @@
                         </svg>
                         Share Product
                     </li>
-                    <li class="list-group-item border-0">
+                    <li class="list-group-item border-0 cursor-pointer" id="edit-seo">
                         <svg class="bi bi-graph-up mr-2" width="1.5em" height="1.5em" viewBox="0 0 16 16"
                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z" />
@@ -263,8 +267,66 @@
 
         </div>
     </div>
+    <?php include 'SEO.php'; ?>
 </form>
+
+
 <script>
+const saveCollection = () => {
+    // e.preventDefault();
+    // console.log($('#collection_name').val());
+    $.post("<?=base_url('/admin/collection/create')?>", {
+                name: $('#collection_name').val()
+            },
+
+            function() {
+                alert("success");
+            })
+        .done(function() {
+            alert("second success");
+        })
+        .fail(function() {
+            alert("error");
+        })
+        .always(function() {
+            alert("finished");
+        });
+}
+
+const discardCollection = () => {
+    // e.preventDefault();
+    console.log($("#add-collection-field").length);
+
+}
+
+$(document).ready(function() {
+
+    $("#add-collection").click(() => {
+        addNewFields()
+        // console.log('hello')
+    });
+    // $('#discard-collection').click(()=>{
+    //     e.preventDefault();
+    //     $.post('/collection/'{data:name},()=>'hello')
+    // })
+
+    function addNewFields() {
+        $(`
+        <li class="pt-3 add-collection-field">
+            <div id="discount" class="input-group ">
+                <input type="text" id="collection_name" class="form-control rounded" placeholder="enter collection name">
+                <div class="input-group-append">
+                    <div class="input-group-text d-fex justify-content-between bg-white border-0 p-0">
+                        <span class="btn btn-sm btn-primary mx-3"  onclick="saveCollection()"> X </span>
+                        <span class="btn btn-sm btn-outline-primary" onclick="saveCollection()"> X </span>
+                    </div>
+                </div>
+            </div>
+        </li>
+        `).appendTo('#collection');
+    }
+
+});
 $(document).ready(function() {
     // add dynamic fields
     $("#add-btn").click((e) => e.preventDefault())
@@ -354,8 +416,8 @@ $(document).ready(function(event) {
 
         }
         $(".preview-image.preview-show-" + no).remove();
-        productFiles = productFiles.filter(e=>{
-            console.log(e.name , $(this).data('name'));
+        productFiles = productFiles.filter(e => {
+            console.log(e.name, $(this).data('name'));
             return e.name != $(this).data('name')
         })
     });
@@ -408,41 +470,36 @@ $(document).ready(function(event) {
 });
 
 
-var formData = new FormData($("#form")[0]);
+// var formData = new FormData($("#form")[0]);
 
 $("#form").submit(function(event) {
-    event.preventDefault();
-    $(".helper-text-danger").remove();
-    productFiles.map(e => formData.append('image[]', e))
-    $.ajax({
-        type: "POST",
-        enctype: "multipart/form-data",
-        url: $(this).attr("action"),
-        data: formData,
-        processData: false,
-        contentType: false,
-    }).done(function(res) {
-        console.log(res);
-        res.errors ?
-            Object.entries(res.errors).map((error) => {
-                $(`#${error[0]}`).after(
-                    `<small class="helper-text-danger">${error[1]}</small>`
-                );
-            }) :
-            Toastify({
-                text: res.message,
-                backgroundColor: "#228B22",
-            }).showToast();
-    }).fail(function(err) {
-        Toastify({
-            text: "Error operation failed",
-            backgroundColor: "#FFA500",
-        }).showToast();
-    });
+    // event.preventDefault();
+    // $(".helper-text-danger").remove();
+    // productFiles.map(e => formData.append('image[]', e))
+    // $.ajax({
+    //     type: "POST",
+    //     enctype: "multipart/form-data",
+    //     url: $(this).attr("action"),
+    //     data: formData,
+    //     processData: false,
+    //     contentType: false,
+    // }).done(function(res) {
+    //     console.log(res);
+    //     res.errors ?
+    //         Object.entries(res.errors).map((error) => {
+    //             $(`#${error[0]}`).after(
+    //                 `<small class="helper-text-danger">${error[1]}</small>`
+    //             );
+    //         }) :
+    //         Toastify({
+    //             text: res.message,
+    //             backgroundColor: "#228B22",
+    //         }).showToast();
+    // }).fail(function(err) {
+    //     Toastify({
+    //         text: "Error operation failed",
+    //         backgroundColor: "#FFA500",
+    //     }).showToast();
+    // });
 });
-</script>
-
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-
 </script>

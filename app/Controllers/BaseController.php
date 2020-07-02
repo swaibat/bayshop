@@ -32,7 +32,7 @@ use App\Models\ClientinfoModel;
 use App\Models\SettingModel;
 use App\Models\PaypalModel;
 use App\Models\PaymentModel;
-
+use App\Models\CouponModel;
 
 class BaseController extends Controller
 {
@@ -71,6 +71,7 @@ class BaseController extends Controller
         $this->paypal           = new PaypalModel();
         $this->logs             = new LogModel();
         $this->payments         = new PaymentModel();
+        $this->coupons        = new CouponModel();
         // $this->location      = location_info();
         $this->user_agent       = $this->request->getUserAgent();
         $this->session          = \Config\Services::session();

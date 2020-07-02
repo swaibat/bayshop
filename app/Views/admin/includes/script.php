@@ -82,8 +82,13 @@
 <?= script_tag('assets/plugins/dataTables/datatables.min.js'); ?>
 <?= script_tag('assets/plugins/summernote/summernote-bs4.min.js'); ?>
 <?= script_tag('/assets/plugins/toJson/formToJson.min.js'); ?>
-<?= script_tag("assets/shared/jquery/jquery-ui.js"); ?>
+<?= script_tag("assets/shared/jquery/jquery-ui.min.js"); ?>
 <?= script_tag('/assets/admin/js/script.js'); ?>
+<script>
+$(function() {
+    $("#datepicker").datepicker();
+});
+</script>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcAP0GrIyhCe_kJfKY1Cb4OYOeP5vmhsQ&callback=initMap"> -->
 <!-- </script> -->
 <script>

@@ -29,7 +29,7 @@ class Product extends BaseController
             'page_name'     => 'products',
             'page_title'    => 'products',
             'products'      => $this->products->orderBy('id', 'DESC')->findAll(),
-            'collection'         => $this->collection->findAll(),
+            'collection'    => $this->collection->findAll(),
         ];
         return view($this->backpath.'/index', $data);
     }

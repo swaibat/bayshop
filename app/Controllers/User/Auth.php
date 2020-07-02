@@ -92,7 +92,7 @@ class Auth extends BaseController
         $data = [
             'page_name'         => 'register',
             'page_title'        => 'Register',
-            'roles'             => $this->roles->findAll(),
+            // 'roles'             => $this->roles->findAll(),
             'hybridauth'        => $this->hybridauth,
             'adapters'          => $this->adapters,
         ];
@@ -112,7 +112,7 @@ class Auth extends BaseController
         $data = [
             'page_name'         => 'verification',
             'page_title'        => 'Email Verification',
-            'roles'             => $this->roles->findAll()
+            // 'roles'             => $this->roles->findAll()
         ];
         return view('auth', $data);
         return redirect()->to(base_url('auth/login'));

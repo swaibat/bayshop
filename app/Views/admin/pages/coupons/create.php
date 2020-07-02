@@ -1,4 +1,4 @@
-<form id="form" action="<?= base_url('admin/collection/create') ?>" enctype="multipart/form-data" novalidate="">
+<form id="form" action="<?= base_url('admin/users/create') ?>" enctype="multipart/form-data" novalidate="">
     <div class="modal-header border-0">
         <h6 class="modal-title position-absolute bg-primary text-white" id="mymodalLabel"><?= $page_title ?></h6>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
