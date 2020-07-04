@@ -289,6 +289,7 @@
 				  [
                     'dashboard'	        =>['icon'=>'home'],
                     'monitoring'	    =>['icon'=>'cellular'],
+                    'analytics'	        =>['icon'=>'cellular'],
                     'products'	        =>['icon'=>'basket', 'children'=>['products', 'categories', 'collection']],
                     'Orders'	        =>['icon'=>'copy'],
                     'coupons'	        =>['icon'=>'golf'],

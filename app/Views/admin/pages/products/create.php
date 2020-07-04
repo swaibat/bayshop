@@ -192,14 +192,22 @@
                     </h6>
                 </div>
                 <div class=" card-body form-group">
-                    <label for="category_id">Select Categories</label>
-                    <select name="category_id" id="category_id" class="form-control select2">
-                        <?php foreach ($categories as $category):?>
-                        <optgroup label="<?=$category['root_name']?>">
-                            <option value="1"><?=$category['down1_name']?></option>
-                        </optgroup>
-                        <?php endforeach ?>
-                    </select>
+                    <div class="form-group">
+                        <label for="category_id">Select Categories</label>
+                        <select name="category_id" id="category_id" class="custom-select">
+                            <?php foreach ($categories as $category):?>
+                            <?php if ($category['sub']):?>
+                            <optgroup label="<?=$category['name']?>">
+                                <?php foreach ($category['sub'] as $key => $value):?>
+                                <option value="<?=$value['id']?>"><?=$value['name']?></option>
+                                <?php endforeach; ?>
+                            </optgroup>
+                            <?php else: ?>
+                            <option value="hello">hello</option>
+                            <?php endif; ?>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -269,7 +277,21 @@
     </div>
     <?php include 'SEO.php'; ?>
 </form>
-
+<script>
+const categorys = < ? = json_encode($categories); ? > ;
+// const categories = [];
+//   const subCategories = [];
+//   categorys.map(cat => {
+//     if (cat.parentid) return subCategories.push(cat);
+//   });
+//   categorys.map(cat => {
+//     if (!cat.parentid) {
+//       cat.sub = subCategories.filter(e => e.parentid === cat.id);
+//       categories.push(cat);
+//     }
+//   });
+console.log(categorys);
+</script>
 
 <script>
 const saveCollection = () => {

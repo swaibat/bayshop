@@ -1,5 +1,6 @@
 <div class="container">
     <div class="form-signin">
+        <div class="alert alert-warning w-100 d-none text-center"></div>
         <div class="w-100 btn-group">
             <?php foreach ($hybridauth->getProviders() as $name) : ?>
             <?php if (!isset($adapters[$name])) : ?>
@@ -22,40 +23,23 @@
             <label for="password">Password</label>
             <input type="password" class="form-control" name="password" id="password" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+        <button type="submit" id="submit" class="btn btn-sm btn-primary btn-block">Login</button>
         <?= form_close() ?>
         <div class="d-flex justify-content-between mt-3 text-center w-100">
             <a href="/auth/password_reset">Fogort password</a>
             <a href="/auth/register">Have no account Register</a>
         </div>
-        <button id="showToast" class="btn btn-primary btn-lg w-25 mx-auto">Show Toast</button>
     </div>
 </div>
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000"
-    style="position: absolute; top: 1rem; right: 1rem;">
-    <div class="toast-header">
 
-        <strong class="mr-auto">Bootstrap</strong>
-        <small>11 mins ago</small>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="toast-body">
-        Hello, world! This is a toast message.
-    </div>
-</div>
 <script>
 $('#form').submit(function(event) {
     event.preventDefault();
+    $('#submit').text('loging in . . .');
     $(".helper-text-danger").remove();
     $.post($(this).attr("action"), $('form').serialize(), function(res) {
-        if (res.errors) {
-            Object.entries(res.errors).map(error => {
-                $(`#${error[0]}`).after(
-                    `<small class="helper-text-danger">${error[1]}</small>`);
-            })
-        }
+        res?$('#submit').text('Login'):'';
+        res.status === 400 ? $('.alert').removeClass('d-none').text(res.message):location.reload();;
     })
 });
 </script>

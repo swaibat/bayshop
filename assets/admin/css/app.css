@@ -10,7 +10,7 @@ html {
     border-color: #6777ef;
 }
 
-.form-control{
+.form-control, .custom-select{
     border: 1px solid #c1e4fe !important;
     color: #1b3141;
     line-height: 19px;
@@ -18,11 +18,31 @@ html {
     width: 100%;
     padding: 8px 10px;
     margin: 0;
-    border-radius: 6px;
+    border-radius: .25rem;
     background: transparent;
     outline: none;
     font-size: 16px;
     height: 36px;
+}
+.input-group-text {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: .3rem .75rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #eaf7ff;
+    border: 1px solid #c1e4fe;
+    border-radius: .25rem;
+}
+.bg-light {
+    background-color: #dae8f2 !important;
 }
 .form-control:focus{
     box-shadow:none;

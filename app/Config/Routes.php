@@ -69,6 +69,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     $routes->add('settings', 'Setting');
     // PAYMENTS
     $routes->add('Orders', 'Payment');
+    // PAYMENTS
+    $routes->add('analytics', 'Analytic');
     // USERS
     $routes->add('sliders', 'Slider');
     $routes->add('sliders/create', 'Slider::create');

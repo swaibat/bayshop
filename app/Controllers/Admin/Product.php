@@ -16,8 +16,10 @@ class Product extends BaseController
         'description'           => 'string',
         'category_id'           => 'integer',
         'status'                => 'string',
-        'focus_keyword'         => 'string',
-        'meta_description'      => 'string',
+        'seo_title'             => 'string',
+        'seo_description'       => 'string',
+        'social_title'          => 'string',
+        'social_description'    => 'string',
     ];
 
     // GET PRODUCTS
@@ -49,8 +51,10 @@ class Product extends BaseController
                 'description'           => $this->request->getVar('description'),
                 'category_id'           => $this->request->getVar('category_id'),
                 'status'                => $this->request->getVar('status'),
-                'focus_keyword'         => $this->request->getVar('focus_keyword'),
-                'meta_description'      => $this->request->getVar('meta_description'),
+                'seo_title'             => $this->request->getVar('seo_title'),
+                'seo_description'       => $this->request->getVar('seo_description'),
+                'social_title'          => $this->request->getVar('social_title'),
+                'social_description'    => $this->request->getVar('social_description'),
             ];
             $this->products->save($data);
             $insert_id    = $this->products->insertID();
@@ -79,10 +83,11 @@ class Product extends BaseController
             'page_name'         => 'create',
             'page_title'        => 'Create Product',
             'collection'        => $this->collection->findAll(),
-            'categories'        => $this->categories->group_categories(),
+            'categories'        => group_categories($this->categories->findAll()),
             'countries'         => $this->countries->findAll(),
             'errors'            => $this->validation->getErrors()
         ];
+        // return print_r(group_categories($this->categories->findAll()));
         return view($this->backpath.'/index', $data);
     }
 

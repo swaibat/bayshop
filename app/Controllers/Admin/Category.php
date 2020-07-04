@@ -29,11 +29,7 @@ class Category extends BaseController
             'page_name'         => 'category',
             'page_title'        => 'categories',
         ];
-        if($this->admin_user){
-            $data['categories'] = $this->categories->findAll();
-        }else{
-            $data['categories'] = $this->categories->where('vendor_id', $this->user_data['id'])->findAll();
-        } 
+        $data['categories'] = $this->categories->where('parent_id', 0)->findAll();
         return view($this->backpath.'/index', $data);
     }
 

@@ -99,3 +99,25 @@ function get_config($name)
   }
 }
 
+function group_categories($data)
+    {
+    $categories = [];
+    $subCategories = [];
+    foreach ($data as $category) {
+      if ($category['parentid']) {
+        $subCategories[] = $category;
+      }
+    }
+    foreach ($data as $category) {
+      if (!$category['parentid']) {
+        foreach ($subCategories as $sub) {
+          if($sub['parentid']==$category['id']){
+            $category['sub'][]=$sub;
+          }
+        }
+        $categories[] = $category;
+      }
+    }
+    return $categories;
+    }
+
