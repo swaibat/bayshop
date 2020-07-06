@@ -26,20 +26,20 @@ $('.social').click((event) => {
         'width=600,height=400,scrollbars=yes');
     return false;
 })
-$('#form').submit(function(event) {
-    event.preventDefault();
-    $(".helper-text-danger").remove();
-    // var data = new FormData($('form'));
-    $.post($(this).attr("action"), $('form').serialize(), function(res) {
-        console.log(res);
-        if (res.errors) {
-            Object.entries(res.errors).map(error => {
-                $(`#${error[0]}`).after(
-                `<small class="helper-text-danger">${error[1]}</small>`);
-            })
-        }
-    })
-});
+// $('#form').submit(function(event) {
+//     event.preventDefault();
+//     $(".helper-text-danger").remove();
+//     // var data = new FormData($('form'));
+//     $.post($(this).attr("action"), $('form').serialize(), function(res) {
+//         console.log(res);
+//         if (res.errors) {
+//             Object.entries(res.errors).map(error => {
+//                 $(`#${error[0]}`).after(
+//                 `<small class="helper-text-danger">${error[1]}</small>`);
+//             })
+//         }
+//     })
+// });
 </script>
 
 </html>

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-12">
             <button data-toggle="modal" data-target="#mymodal"
-                data-id="<?php echo base_url('admin/products/colection/create'); ?>" id="menu"
+                data-id="<?= base_url('admin/collection/create'); ?>" id="menu"
                 class="btn btn-sm btn-primary">
                 Add Collection
             </button>

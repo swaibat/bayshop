@@ -287,16 +287,18 @@
                     <?= custom_navigation(
 				  ['name'=>$page_name,'folder'=>$folder_name, 'nav'=>'admin'],
 				  [
-                    'dashboard'	    =>['icon'=>'home'],
-                    'monitoring'	  =>['icon'=>'cellular'],
-                    'products'	    =>['icon'=>'basket', 'children'=>['products', 'categories', 'collection']],
-                    'Orders'	    =>['icon'=>'copy'],
-                    'messages'	    =>['icon'=>'chatbox-ellipses'],
-                    'Notifications'	=>['icon'=>'chatbox','children'=>['emails', 'intergrations']],
-                    'users'	        =>['icon'=>'person'],
-                    'vendors'	      =>['icon'=>'person','children'=>['vendors', 'shops']],
-                    'countries'	    =>['icon'=>'golf'],
-                    'settings'	    =>['icon'=>'card'],
+                    'dashboard'	        =>['icon'=>'home'],
+                    'monitoring'	    =>['icon'=>'cellular'],
+                    'analytics'	        =>['icon'=>'cellular'],
+                    'products'	        =>['icon'=>'basket', 'children'=>['products', 'categories', 'collection']],
+                    'Orders'	        =>['icon'=>'copy'],
+                    'coupons'	        =>['icon'=>'golf'],
+                    'messages'	        =>['icon'=>'chatbox-ellipses'],
+                    'Notifications'	    =>['icon'=>'chatbox','children'=>['emails', 'intergrations']],
+                    'users'	            =>['icon'=>'person'],
+                    'vendors'	        =>['icon'=>'person','children'=>['vendors', 'shops']],
+                    'countries'	        =>['icon'=>'golf'],
+                    'settings'	        =>['icon'=>'card'],
 				])?>
                     <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
                         <a href="#" class="btn btn-sm btn-primary btn-block d-flex align-items-center">

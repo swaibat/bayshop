@@ -16,8 +16,10 @@ class Product extends BaseController
         'description'           => 'string',
         'category_id'           => 'integer',
         'status'                => 'string',
-        'focus_keyword'         => 'string',
-        'meta_description'      => 'string',
+        'seo_title'             => 'string',
+        'seo_description'       => 'string',
+        'social_title'          => 'string',
+        'social_description'    => 'string',
     ];
 
     // GET PRODUCTS
@@ -29,7 +31,7 @@ class Product extends BaseController
             'page_name'     => 'products',
             'page_title'    => 'products',
             'products'      => $this->products->orderBy('id', 'DESC')->findAll(),
-            'collection'         => $this->collection->findAll(),
+            'collection'    => $this->collection->findAll(),
         ];
         return view($this->backpath.'/index', $data);
     }
@@ -37,36 +39,44 @@ class Product extends BaseController
     // CREATE A NEW PRODUCT
     public function create()
     {
+        
         if (isset($_POST) && !empty($_POST)) {
+            // return print_r($this->request->getFiles());
             $data = [
                 'title'                 => $this->request->getVar('title'),
                 'slug'                  => url_title($this->request->getVar('title')),
                 'price'                 => $this->request->getVar('price'),
                 'discount'              => $this->request->getVar('discount'),
+                'discount_type'         => $this->request->getVar('discount_type'),
                 'sku'                   => $this->request->getVar('sku'),
-                'collection_id'         => $this->request->getVar('collection_id'),
+                'collection_id'         => implode(",",$this->request->getVar('collection_id')),
                 'vendor_id'             => $this->request->getVar('vendor_id'),
                 'description'           => $this->request->getVar('description'),
                 'category_id'           => $this->request->getVar('category_id'),
                 'status'                => $this->request->getVar('status'),
-                'focus_keyword'         => $this->request->getVar('focus_keyword'),
-                'meta_description'      => $this->request->getVar('meta_description'),
+                'seo_title'             => $this->request->getVar('seo_title'),
+                'seo_description'       => $this->request->getVar('seo_description'),
+                'social_title'          => $this->request->getVar('social_title'),
+                'social_description'    => $this->request->getVar('social_description'),
+                'sizes'                 => implode(",",$this->request->getVar('sizes')),
+                'materials'             => implode(",",$this->request->getVar('materials')),
+                'colors'                => implode(",",$this->request->getVar('colors')),
             ];
             $this->products->save($data);
             $insert_id    = $this->products->insertID();
-            return $this->request->getFiles();
+            $path = 'assets/uploads/products/';
             $order      = 1;
             if ($imagefile = $this->request->getFiles()) {
                 foreach ($imagefile['image'] as $img) {
                     if ($img->isValid() && !$img->hasMoved()) {
                         $file_name = $img->getRandomName();
                         $this->product_files->save([
-                            'products_id' => $insert_id,
-                            'file_url' => 'assets/uploads/products/' . $file_name,
-                            'order' => $order++,
+                            'product_id'    => $insert_id,
+                            'file_path'     => $path.$file_name,
+                            'img_order'     => $order++,
                         ]);
                         
-                        $img->move('assets/uploads/products/', $file_name);
+                        $img->move($path, $file_name);
                     }
                 }
             }
@@ -79,10 +89,11 @@ class Product extends BaseController
             'page_name'         => 'create',
             'page_title'        => 'Create Product',
             'collection'        => $this->collection->findAll(),
-            'categories'        => $this->categories->group_categories(),
+            'categories'        => group_categories($this->categories->findAll()),
             'countries'         => $this->countries->findAll(),
             'errors'            => $this->validation->getErrors()
         ];
+        // return print_r(group_categories($this->categories->findAll()));
         return view($this->backpath.'/index', $data);
     }
 

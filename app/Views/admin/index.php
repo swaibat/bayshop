@@ -7,6 +7,22 @@
     </section>
 </div>
 <script>
+    // $('.custom-control-input').change((e) => {
+    //     e.target.checked ? $('.custom-control-input').val('1') : $('.custom-control-input').val('0');
+    // })
+    const policies = () => {
+        const {
+            id,
+            checked
+        } = this.event.target;
+        if (checked) {
+            $(`.${id}`).addClass("show");
+        } else {
+            $(`.${id}`).removeClass("show");
+        }
+    }
+</script>
+<script>
 $(window).scroll(function() {
     var scroll = $(window).scrollTop();
     scroll >= 60 ?
@@ -15,8 +31,16 @@ $(window).scroll(function() {
 });
 </script>
 <?php include 'includes/script.php'; ?>
+<script>
+$(document).ready(function() {
+    $("#showToast").click(function() {
+        $('.toast').toast('show');
+    });
+});
+</script>
+
 <!--Start of Tawk.to Script-->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 var Tawk_API = Tawk_API || {},
     Tawk_LoadStart = new Date();
 (function() {
@@ -28,5 +52,5 @@ var Tawk_API = Tawk_API || {},
     s1.setAttribute('crossorigin', '*');
     s0.parentNode.insertBefore(s1, s0);
 })();
-</script>
+</script> -->
 <!--End of Tawk.to Script-->
