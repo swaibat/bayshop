@@ -71,7 +71,7 @@ class BaseController extends Controller
         $this->paypal           = new PaypalModel();
         $this->logs             = new LogModel();
         $this->payments         = new PaymentModel();
-        $this->coupons        = new CouponModel();
+        $this->coupons          = new CouponModel();
         // $this->location      = location_info();
         $this->user_agent       = $this->request->getUserAgent();
         $this->session          = \Config\Services::session();

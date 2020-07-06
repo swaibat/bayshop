@@ -162,25 +162,25 @@
         </div>
         <div class="form-group col-md-6 d-flex flex-column ">
             <label for="regional_settings">Regional settings</label>
-            <select class="form-control select2 mb-3" name="regional_settings" id="regional_settings">
+            <select class="custom-select mb-3" name="regional_settings" id="regional_settings">
                 <option value="">English-USA</option>
             </select>
         </div>
         <div class="form-group col-md-6 d-flex flex-column">
             <label for="site_language">Language</label>
-            <select class="form-control select2 mb-3" name="site_language" id="site_language">
+            <select class="custom-select mb-3" name="site_language" id="site_language">
                 <option value="">English-USA</option>
             </select>
         </div>
         <div class="form-group col-md-6 d-flex flex-column">
             <label for="site_currency">Currency</label>
-            <select class="form-control select2 mb-3" name="site_currency" id="site_currency">
+            <select class="custom-select mb-3" name="site_currency" id="site_currency">
                 <option value="">English-USA</option>
             </select>
         </div>
         <div class="form-group col-md-6 d-flex flex-column">
             <label for="site_timezone">Time Zone</label>
-            <select class="form-control select2 mb-3" name="site_timezone" id="site_timezone">
+            <select class="custom-select mb-3" name="site_timezone" id="site_timezone">
                 <option value="">English-USA</option>
             </select>
         </div>

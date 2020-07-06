@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2020 at 05:15 PM
+-- Generation Time: Jul 06, 2020 at 04:14 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -90,23 +90,43 @@ CREATE TABLE `cart` (
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
-  `name` varchar(22) NOT NULL,
-  `slug` varchar(23) NOT NULL,
-  `parent_id` int(11) DEFAULT NULL,
-  `vendor_id` int(11) DEFAULT 1
+  `name` varchar(37) NOT NULL,
+  `parentid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `slug`, `parent_id`, `vendor_id`) VALUES
-(1, 'Electronics', 'electronics', NULL, 1),
-(2, 'Supermarket', 'Supermarket', NULL, 2),
-(21, 'Television & Video', 'television-&-video', 1, 1),
-(22, 'Electronics', 'electronics', 1, 1),
-(25, 'Home Audio', 'home-audio', 1, 1),
-(135, 'vehicles', 'vehicles', NULL, NULL);
+INSERT INTO `categories` (`id`, `name`, `parentid`) VALUES
+(1, 'electronics', NULL),
+(2, 'vehicles', NULL),
+(3, 'tv', 1),
+(4, 'phones', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `collection`
+--
+
+CREATE TABLE `collection` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `slug` varchar(250) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `image` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
+--
+-- Dumping data for table `collection`
+--
+
+INSERT INTO `collection` (`id`, `name`, `slug`, `image`) VALUES
+(18, 'premium', 'premium', ''),
+(24, 'featured', 'featured', ''),
+(25, 'hello', 'hello', NULL),
+(26, 'helo', 'helo', NULL),
+(27, 'hopeless', 'hopeless', NULL);
 
 -- --------------------------------------------------------
 
@@ -413,6 +433,24 @@ INSERT INTO `countries` (`name`, `topLevelDomain`, `alpha2Code`, `alpha3Code`, `
 ('Yemen', '.ye', 'YE', 'YEM', '967', 'Sana\'a', 'اليَمَن', 'YER', 'Yemeni rial', '﷼', 'yem.svg'),
 ('Zambia', '.zm', 'ZM', 'ZMB', '260', 'Lusaka', 'Zambia', 'ZMW', 'Zambian kwacha', 'ZK', 'zmb.svg'),
 ('Zimbabwe', '.zw', 'ZW', 'ZWE', '263', 'Harare', 'Zimbabwe', 'BWP', 'Botswana pula', 'P', 'zwe.svg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `coupons`
+--
+
+CREATE TABLE `coupons` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `code` varchar(50) NOT NULL,
+  `offer` varchar(50) NOT NULL,
+  `expiry_date` varchar(25) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `collection_id` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -921,138 +959,184 @@ CREATE TABLE `products` (
   `title` varchar(140) DEFAULT NULL,
   `slug` varchar(140) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
-  `sale_price` int(11) DEFAULT NULL,
+  `description` varchar(1000) NOT NULL,
   `discount` int(11) DEFAULT NULL,
+  `discount_type` varchar(50) NOT NULL,
   `views` int(11) DEFAULT NULL,
   `ratings` decimal(3,1) DEFAULT NULL,
-  `category_id` bit(1) NOT NULL,
-  `available_quantity` int(11) DEFAULT NULL,
-  `vendor_id` int(11) DEFAULT NULL
+  `vendor_id` int(11) DEFAULT NULL,
+  `collection_id` longtext DEFAULT NULL,
+  `category_id` int(11) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `seo_description` varchar(200) DEFAULT NULL,
+  `seo_title` varchar(50) DEFAULT NULL,
+  `social_title` varchar(50) DEFAULT NULL,
+  `social_description` varchar(255) DEFAULT NULL,
+  `colors` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `materials` longtext DEFAULT NULL,
+  `sizes` longtext DEFAULT NULL,
+  `weight` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `sku`, `title`, `slug`, `price`, `sale_price`, `discount`, `views`, `ratings`, `category_id`, `available_quantity`, `vendor_id`) VALUES
-(1, 'SDL730883102', 'Intex LED-3216 80 cm (32) HD Ready (HDR) LED Television', 'intex-led-3216-80-cm-(32)-hd-ready-(hdr)-led-television', 23999, 12490, 48, 6, '3.9', b'1', 23999, 2),
-(2, 'SDL638477211', 'Campus Sutra Black Cotton Quilted & Bomber Jacket', 'campus-sutra-black-cotton-quilted-&-bomber-jacket', 1999, 680, 66, 2, '3.8', b'1', 1999, 3),
-(3, 'SDL921382269', 'OPEN-BOX YU Yureka Plus Cyanogen - 16 GB Grey', 'open-box-yu-yureka-plus-cyanogen---16-gb-grey', 6490, 6399, 1, 12, '3.3', b'1', 6490, 2),
-(4, 'SDL092510367', 'Lenovo M0520 2.0 Computer Speaker - Red', 'lenovo-m0520-2.0-computer-speaker---red', 899, 679, 24, 13, '3.8', b'1', 899, 2),
-(5, 'SDL837914446', 'Titan Leather Black Men Regular Wallet', 'titan-leather-black-men-regular-wallet', 1099, 994, 10, 62, '4.3', b'1', 1099, 3),
-(6, 'SDL466773337', 'Veet Full Body Waxing Kit for Dry Skin -Pack of 1', 'veet-full-body-waxing-kit-for-dry-skin--pack-of-1', 170, 152, 11, 8, '4.0', b'1', 170, 2),
-(7, '1220794', 'Lakme Perfect Radiance Intense Whitening Golden Medium 03 Compact, 8 g', 'lakme-perfect-radiance-intense-whitening-golden-medium-03-compact,-8-g', 180, 153, 15, 93, '3.9', b'1', 180, 3),
-(8, 'SDL815452992', 'Tokyo Talkies Polyester Dresses', 'tokyo-talkies-polyester-dresses', 1449, 544, 62, 1, '2.6', b'1', 1449, 2),
-(9, 'SDL646366940', 'Open box InFocus M370i (8GB-White)', 'open-box-infocus-m370i-(8gb-white)', 5199, 5099, 2, 0, '3.8', b'1', 5199, 3),
-(10, 'SDL999145129', 'Marc 3 Ltr Solitaire Instant Geyser - Ivory', 'marc-3-ltr-solitaire-instant-geyser---ivory', 3610, 1849, 49, 13, '3.5', b'1', 0, 2),
-(11, '1721342', 'Orient Fabri Joy Dry Iron White (1000 Watts)', 'orient-fabri-joy-dry-iron-white-(1000-watts)', 699, 499, 29, 0, '4.2', b'1', 0, 2),
-(12, 'SDL049294041', 'Dolphin XL Leatherette Bean Bag Cover Black & Royal Blue', 'dolphin-xl-leatherette-bean-bag-cover-black-&-royal-blue', 1199, 595, 50, 0, '5.0', b'1', 1199, NULL),
-(13, 'SDL711730510', 'Wajbee Blue Slim Faded', 'wajbee-blue-slim-faded', 1499, 360, 76, 153, '3.4', b'1', 1499, NULL),
-(14, 'SDL282352124', 'HP Black Laptop Bags', 'hp-black-laptop-bags', 1108, 535, 52, 273, '3.7', b'1', 1108, NULL),
-(15, 'SDL753269052', 'Butterflies Red Shoulder Bag', 'butterflies-red-shoulder-bag', 2199, 999, 55, 176, '3.9', b'1', 2199, NULL),
-(16, 'SDL814331436', 'Status Red Rug Polyester Printed', 'status-red-rug-polyester-printed', 4999, 999, 80, 24, '4.0', b'1', 4999, NULL),
-(17, 'SDL235888477', 'The Power of Your Subconscious Mind', 'the-power-of-your-subconscious-mind', 199, 92, 54, 3, '4.2', b'1', 199, NULL),
-(18, 'SDL553144961', 'Goldmedal i-Strip LED Spike Guard with Surge Protector and 6-outlet International Sockets', 'goldmedal-i-strip-led-spike-guard-with-surge-protector-and-6-outlet-international-sockets', 649, 555, 14, 21, '4.4', b'1', 649, NULL),
-(19, 'SDL509689093', 'Refurbished Xiaomi Mi4i (16 GB) (White)', 'refurbished-xiaomi-mi4i-(16-gb)-(white)', 9499, 9499, 0, 1, '3.0', b'1', 9499, NULL),
-(20, 'SDL401111367', 'Bayer Contour TS Blood Glucose- 50 Test Strips', 'bayer-contour-ts-blood-glucose--50-test-strips', 1400, 899, 36, 140, '4.4', b'1', 1400, NULL),
-(21, 'SDL022011360', 'Intex 301 N FMU 4.1 Speaker System', 'intex-301-n-fmu-4.1-speaker-system', 3499, 1699, 51, 80, '3.7', b'1', 3499, NULL),
-(22, 'SDL678685750', 'Sony Usb 2.1 Amp Ac Adaptor Cp-ad2 With Micro Usb Cable', 'sony-usb-2.1-amp-ac-adaptor-cp-ad2-with-micro-usb-cable', 990, 609, 38, 150, '4.3', b'1', 990, NULL),
-(23, 'SDL185074905', 'Everything Imported Plastic Toothpaste Dispensers', 'everything-imported-plastic-toothpaste-dispensers', 499, 207, 59, 488, '3.1', b'1', 499, NULL),
-(24, 'SDL774739577', 'Fogg Brown Leather Analog Watch for Men', 'fogg-brown-leather-analog-watch-for-men', 1199, 349, 71, 8, '3.8', b'1', 1199, NULL),
-(25, 'SDL396245637', 'Forever Living Aloe Vera Gel 1 Pc', 'forever-living-aloe-vera-gel-1-pc', 1203, 845, 30, 86, '4.1', b'1', 1203, NULL),
-(26, 'SDL854292628', 'Blaupunkt Car Mobile Chargers - Black', 'blaupunkt-car-mobile-chargers---black', 799, 429, 46, 5, '4.4', b'1', 799, NULL),
-(27, 'SDL945923589', 'Autofy O2 Desert Storm - Open Face Helmet Brown M', 'autofy-o2-desert-storm---open-face-helmet-brown-m', 999, 629, 37, 0, '0.0', b'1', 999, NULL),
-(28, 'SDL646205677', 'Aurion 18 Kg Dumbbell Set With Accessories', 'aurion-18-kg-dumbbell-set-with-accessories', 3499, 1195, 66, 36, '3.6', b'1', 3499, NULL),
-(29, 'SDL134366646', 'Dukes Truffel Gift Pack 360gm', 'dukes-truffel-gift-pack-360gm-', 599, 459, 23, 0, '5.0', b'1', 599, NULL),
-(30, 'SDL152517745', 'JBN Creation Cream Silk Angrakha Style Indo Western with Maroon Jodhpuri Breeches', 'jbn-creation-cream-silk-angrakha-style-indo-western-with-maroon-jodhpuri-breeches', 1199, 389, 68, 46, '3.7', b'1', 1199, NULL),
-(31, '1236773', 'Prestige Popular 3 Ltr Aluminium  Outer Lid Pressure Cooker', 'prestige-popular-3-ltr-aluminium--outer-lid-pressure-cooker', 1140, 839, 26, 158, '4.1', b'1', 1140, NULL),
-(32, 'SDL861113363', 'I Kall K12 (64 MB) Blue', 'i-kall-k12-(64-mb)-blue', 599, 569, 5, 5, '3.2', b'1', 599, NULL),
-(33, 'SDL536597006', 'Abaco Pomace Olive Oil 1Ltr- Buy 1 Get 1 free', 'abaco-pomace-olive-oil-1ltr--buy-1-get-1-free', 1900, 899, 53, 13, '4.1', b'1', 1900, NULL),
-(34, 'SDL594316169', 'CVT 3200 80 cm (32) HD Ready LED TV', 'cvt-3200-80-cm-(32)-hd-ready-led-tv', 12000, 11490, 4, 1, '3.9', b'1', 12000, NULL),
-(35, 'SDL424143561', 'Belkin 1m High Speed Hdmi Cable With Ethernet', 'belkin-1m-high-speed-hdmi-cable-with-ethernet', 799, 649, 19, 16, '4.6', b'1', 799, NULL),
-(36, 'SDL586637112', 'Fastrack P223BU2 Sunglasses', 'fastrack-p223bu2-sunglasses', 850, 670, 21, 58, '4.1', b'1', 850, NULL),
-(37, 'SDL542834865', 'Philips BG1025-15 Body Groomer Black', 'philips-bg1025-15-body-groomer-black', 1495, 1070, 28, 269, '4.0', b'1', 1495, NULL),
-(38, 'SDL446190652', 'Highlander Navy Casuals Slim Fit Shirt', 'highlander-navy-casuals-slim-fit-shirt', 999, 549, 45, 8, '4.0', b'1', 999, NULL),
-(39, 'SDL077346192', 'Verdioz White Embroidery Poly Cotton Mosquito Net with free 3 saviours', 'verdioz-white-embroidery-poly-cotton-mosquito-net-with-free-3-saviours', 2199, 999, 55, 25, '3.8', b'1', 2199, NULL),
-(40, 'SDL188105812', 'Zakk VR Virtual Reality 3D Glass for All Android & iOS Smartphones with Bluetooth Remote', 'zakk-vr-virtual-reality-3d-glass-for-all-android-&-ios-smartphones-with-bluetooth-remote', 4999, 808, 84, 8, '3.3', b'1', 4999, NULL),
-(41, 'SDL691291518', 'Digisol 300 Mbps Wireless Router (DG-HR3400)Wireless Routers Without Modem', 'digisol-300-mbps-wireless-router-(dg-hr3400)wireless-routers-without-modem', 1499, 842, 44, 790, '4.3', b'1', 1499, NULL),
-(42, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, b'1', NULL, NULL),
-(43, 'SDL193075434', 'Sandisk Cruzer Blade SDCZ50-016G-I35 16GB USB 2.0 Utility Pendrive - Pack of 2', 'sandisk-cruzer-blade-sdcz50-016g-i35-16gb-usb-2.0-utility-pendrive---pack-of-2', 778, 689, 11, 825, '4.2', b'1', 778, NULL),
-(44, 'SDL087767982', 'Relish Multicolour Leather Round Analog Watch', 'relish-multicolour-leather-round-analog-watch', 699, 289, 59, 8, '4.0', b'1', 699, NULL),
-(45, 'SDL709309011', 'Envent Musique-4.1 Speaker System with 20W RMS', 'envent-musique-4.1-speaker-system-with-20w-rms', 3999, 1699, 58, 10, '3.4', b'1', 3999, NULL),
-(46, 'SDL907014199', 'Eco Alpine Jumbo Bucket and Heavy Rod Mop with 1 Free Refill Inside (Blue)', 'eco-alpine-jumbo-bucket-and-heavy-rod-mop-with-1-free-refill-inside-(blue)', 2599, 915, 65, 4, '4.0', b'1', 2599, NULL),
-(47, 'SDL947785518', 'Rock Hard Multi Color Cotton T-Shirt', 'rock-hard-multi-color-cotton-t-shirt', 799, 299, 63, 3, '3.8', b'1', 799, NULL),
-(48, 'SDL243047695', 'Maybelline Colossal 12H Black Kajal 0.35 gm Pack Of 2', 'maybelline-colossal-12h-black-kajal-0.35-gm-pack-of-2', 400, 269, 33, 105, '3.8', b'1', 400, NULL),
-(49, 'SDL033507246', 'Brilliant 6 Pcs Non Stick Cookware Set Metallic Red', 'brilliant-6-pcs-non-stick-cookware-set-metallic-red', 2999, 1149, 62, 1, '3.4', b'1', 2999, NULL),
-(50, 'SDL134959386', 'Magikware Pink Fruit & Vegetable Juicer', 'magikware-pink-fruit-&-vegetable-juicer', 999, 295, 70, 46, '3.6', b'1', 999, NULL),
-(51, 'SDL409109426', 'Skullcandy JIB In-Ear W/Pill Mic S2DUL-J846 Blue Black', 'skullcandy-jib-in-ear-w/pill-mic-s2dul-j846-blue-black', 999, 599, 40, 6, '3.9', b'1', 999, NULL),
-(52, '1094817', 'Yonex GR 303 Badminton Racket- Assorted', 'yonex-gr-303-badminton-racket--assorted', 570, 399, 30, 58, '4.0', b'1', 570, NULL),
-(53, 'SDL253900881', 'Cello Elegant Casserole Set 3 Pcs', 'cello-elegant-casserole-set-3-pcs-', 999, 560, 44, 49, '4.0', b'1', 999, NULL),
-(54, 'SDL631656512', 'boAt Bassheads 600 White & Blue On Ear Wired Headphones With Mic White', 'boat-bassheads-600-white-&-blue-on-ear-wired-headphones-with-mic-white', 1999, 639, 68, 12, '4.1', b'1', 1999, NULL),
-(55, 'SDL020254813', 'THE LEGEND OF LAKSHMI PRASAD', 'the-legend-of-lakshmi-prasad', 299, 155, 48, 4, '4.2', b'1', 299, NULL),
-(56, 'SDL546985085', 'POND\'S Men Energy Charge Face Wash 100 g', 'pond\'s-men-energy-charge-face-wash-100-g', 170, 153, 10, 13, '4.2', b'1', 170, NULL),
-(57, 'SDL250739576', 'F&D F313U 2.1 Desktop Speakers (USB powered) - Black', 'f&d-f313u-2.1-desktop-speakers-(usb-powered)---black', 1990, 999, 50, 316, '3.8', b'1', 1990, NULL),
-(58, 'SDL456870757', 'StickersKart flowers & trees PVC Wall Stickers', 'stickerskart-flowers-&-trees-pvc-wall-stickers', 449, 149, 67, 21, '4.1', b'1', 449, NULL),
-(59, 'SDL016303853', 'Buildskill 13 mm 650W Impact Drill Machine Kit with Reversible Function + 105 Accessories', 'buildskill-13-mm-650w-impact-drill-machine-kit-with-reversible-function-+-105-accessories', 2999, 1190, 60, 4, '3.4', b'1', 2999, NULL),
-(60, 'SDL422349377', 'John Players Grey Sweatshirt', 'john-players-grey-sweatshirt', 1799, 1530, 15, 0, '2.0', b'1', 1799, NULL),
-(61, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, b'1', NULL, NULL),
-(62, 'SDL216804529', 'Dabur Shilajit Gold Pack Of 2 X 20 Capsules', 'dabur-shilajit-gold-pack-of-2-x-20-capsules', 780, 587, 25, 28, '3.9', b'1', 780, NULL),
-(63, 'SDL461624527', 'VLCC Henna 100gm (Buy 1 Get 1)', 'vlcc-henna-100gm-(buy-1-get-1)', 99, 64, 35, 436, '4.0', b'1', 99, NULL),
-(64, 'SDL194305755', 'Nike Gray Daily Slippers', 'nike-gray-daily-slippers', 1395, 1255, 10, 1, '3.8', b'1', 1395, NULL),
-(65, '1207811', 'Omron Nebulizer (NE - C801)', 'omron-nebulizer-(ne---c801)', 2950, 1691, 43, 7, '3.9', b'1', 2950, NULL),
-(66, 'SDL070282037', 'Lakme Youth Infinity Skin Firming Day Creme 50 G', 'lakme-youth-infinity-skin-firming-day-creme-50-g', 725, 652, 10, 35, '4.1', b'1', 725, NULL),
-(67, 'SDL267473865', 'Parker Silver Roller Ball Pen', 'parker-silver-roller-ball-pen', 575, 499, 13, 0, '4.5', b'1', 575, NULL),
-(68, 'SDL902025613', 'Brown Boots for Kids', 'brown-boots-for-kids', 1596, 299, 81, 26, '3.7', b'1', 1596, NULL),
-(69, 'SDL188135754', 'Muscle Pharm Mass gainer 6 lb Chocolate', 'muscle-pharm-mass-gainer-6-lb-chocolate', 3750, 2499, 33, 0, '0.0', b'1', 3750, NULL),
-(70, 'SDL790564753', 'Eternal Multi Color Georgette Dresses', 'eternal-multi-color-georgette-dresses', 2299, 949, 59, 0, '0.0', b'1', 2299, NULL),
-(71, 'SDL973947022', 'Crazeis Analog Wrist Watch', 'crazeis-analog-wrist-watch', 1499, 169, 89, 7, '3.3', b'1', 1499, NULL),
-(72, 'SDL784711342', 'Lavie Brown Faux Leather Box Clutch', 'lavie-brown-faux-leather-box-clutch', 2460, 1129, 54, 0, '3.7', b'1', 2460, NULL),
-(73, 'SDL235888477', 'The Power of Your Subconscious Mind', 'the-power-of-your-subconscious-mind', 199, 92, 54, 3, '4.2', b'1', 199, NULL),
-(74, 'SDL367579058', 'Kataria Jewellers The Trinetta BIS Hallmarked Gold and Real Certified Diamonds Designer Ring', 'kataria-jewellers-the-trinetta-bis-hallmarked-gold-and-real-certified-diamonds-designer-ring', 9374, 4999, 47, 0, '4.5', b'1', 9374, NULL),
-(75, 'SDL235521667', 'Sukkhi Alloy Gold Plated Kundan Necklace Set', 'sukkhi-alloy-gold-plated-kundan-necklace-set', 1845, 299, 84, 267, '3.2', b'1', 1845, NULL),
-(76, 'SDL207509046', 'Rock Micro Usb Flat Data Cable', 'rock-micro-usb-flat-data-cable', 299, 249, 17, 3, '4.0', b'1', 299, NULL),
-(77, 'SDL588108570', 'Philips AT 610 Shaver - Black', 'philips-at-610-shaver---black', 2295, 1470, 36, 299, '3.9', b'1', 2295, NULL),
-(78, 'SDL206831663', 'Orpat 1200 air flora CeilingFan brown', 'orpat-1200-air-flora-ceilingfan-brown', 1210, 1049, 13, 83, '4.0', b'1', 1210, NULL),
-(79, 'SDL158378278', 'Kesar Sarees Grey Saree', 'kesar-sarees-grey-saree', 2150, 499, 77, 149, '3.3', b'1', 2150, NULL),
-(80, 'SDL900571578', 'Allen A-909 Wireless Mouse Black', 'allen-a-909-wireless-mouse-black', 550, 249, 55, 98, '3.6', b'1', 550, NULL),
-(81, 'SDL624459869', 'Generic Assorted Colors Selfie Stick with Auxillary Cable', 'generic-assorted-colors-selfie-stick-with-auxillary-cable', 999, 119, 88, 36, '3.8', b'1', 999, NULL),
-(82, 'SDL328637599', 'House Of Marley SMILE JAMICA EM-JE041 SB In Ear Wired Earphones With Mic Signature Black', 'house-of-marley-smile-jamica-em-je041-sb-in-ear-wired-earphones-with-mic-signature-black', 1990, 975, 51, 0, '4.0', b'1', 1990, NULL),
-(83, 'SDL953285268', 'Micromax Bolt S301 (4GB, Black)-(Without Charger&Earphone)', 'micromax-bolt-s301-(4gb,-black)-(without-charger&earphone)', 2999, 2051, 32, 167, '3.0', b'1', 2999, NULL),
-(84, 'SDL491332242', 'Karbonn K41 32 MB White Silver', 'karbonn-k41-32-mb-white-silver', 1590, 1004, 37, 0, '0.0', b'1', 1590, NULL),
-(85, 'SDL438177093', 'DishTV HD Connection with Recorder-TamilPack (1 Month Family-Sport and Full-on HD with 300 Movie Points) with Lifetime Warranty (worth 1000)', 'dishtv-hd-connection-with-recorder-tamilpack-(1-month-family-sport-and-full-on-hd-with-300-movie-points)-with-lifetime-warranty-(worth-1000)', 2490, 1289, 48, 2, '4.2', b'1', 2490, NULL),
-(86, 'SDL499803305', 'Plaza Quartz Motion-Anchor And Steering Design Pendulum Wall Clock', 'plaza-quartz-motion-anchor-and-steering-design-pendulum-wall-clock', 999, 499, 50, 59, '3.3', b'1', 999, NULL),
-(87, 'SDL883746761', 'Maharaja Whiteline 25 Litres Classico Super Water Heater White & Blue', 'maharaja-whiteline-25-litres-classico-super-water-heater-white-&-blue', 8299, 5046, 39, 6, '3.9', b'1', 8299, NULL),
-(88, 'SDL095277916', 'Quick Heal Antivirus Latest Version ( 2 / 1 ) DVD', 'quick-heal-antivirus-latest-version-(-2-/-1-)-dvd', 1099, 458, 58, 96, '4.2', b'1', 1099, NULL),
-(89, 'SDL584818331', 'Himalaya Baby Shampoo 400 Ml', 'himalaya-baby-shampoo-400-ml', 280, 199, 29, 24, '4.2', b'1', 280, NULL),
-(90, 'SDL947282266', 'U.S. Polo Assn. Multi Color Casual High Ankle Length - 3 Pair Socks', 'u.s.-polo-assn.-multi-color-casual-high-ankle-length---3-pair-socks', 429, 290, 32, 0, '3.7', b'1', 429, NULL),
-(91, 'SDL082660618', 'Red Tape RTR0652 Brown Formal Shoes', 'red-tape-rtr0652-brown-formal-shoes', 3795, 1708, 55, 0, '3.4', b'1', 3795, NULL),
-(92, 'SDL634877183', 'Campus Sutra Blue Hooded Sweatshirt', 'campus-sutra-blue-hooded-sweatshirt', 1999, 799, 60, 0, '0.0', b'1', 1999, NULL),
-(93, 'SDL695208966', 'Dabur Shilajit 30 Capsules', 'dabur-shilajit-30-capsules', 195, 117, 40, 27, '3.6', b'1', 195, NULL),
-(94, 'SDL062304542', 'Nova NHT 1045 W Beard Trimmer White', 'nova-nht-1045-w-beard-trimmer-white', 995, 299, 70, 1568, '3.7', b'1', 995, NULL),
-(95, 'SDL291880390', 'KC Silver Stainless Steel Dustbin', 'kc-silver-stainless-steel-dustbin', 599, 299, 50, 40, '3.6', b'1', 599, NULL),
-(96, 'SDL916344332', 'Motorola FW200L Fixed Wireless GSM Landline Phone - Black', 'motorola-fw200l-fixed-wireless-gsm-landline-phone---black', 2490, 1949, 22, 48, '4.0', b'1', 2490, NULL),
-(97, 'SDL088819455', 'Omron HEM-7113 BP Monitor', 'omron-hem-7113-bp-monitor', 2500, 1170, 53, 28, '4.1', b'1', 2500, NULL),
-(98, 'SDL119643053', 'STRIKE ORDEM 5', 'strike-ordem-5', 1999, 399, 80, 0, '3.6', b'1', 1999, NULL),
-(99, 'SDL618928289', 'Domex Original Toilet Cleaner Expert 1 l', 'domex-original-toilet-cleaner-expert-1-l', 129, 116, 10, 50, '4.2', b'1', 129, NULL),
-(100, 'SDL131535487', 'One Touch Select Glucose Monitor with 50 Test Strips Combo', 'one-touch-select-glucose-monitor-with-50-test-strips-combo', 2385, 1299, 46, 72, '4.3', b'1', 2385, NULL),
-(101, 'SDL754807928', 'Scrazy Frozen Sister Anna Elsa Doll - Set of 2', 'scrazy-frozen-sister-anna-elsa-doll---set-of-2', 899, 280, 69, 13, '3.5', b'1', 899, NULL),
-(102, 'SDL827782677', 'ZAAP AQUA Waterproof/Shockproof Bluetooth Wireless Speaker with Built-In Microphone | IP67 Rugged Design for Shower/Outdoor', 'zaap-aqua-waterproof/shockproof-bluetooth-wireless-speaker-with-built-in-microphone-|-ip67-rugged-design-for-shower/outdoor', 2000, 1449, 28, 26, '4.7', b'1', 2000, NULL),
-(103, 'SDL864907076', 'Smiles Creation Lighting Drum Keyboard  Musical Toy', 'smiles-creation-lighting-drum-keyboard--musical-toy', 799, 333, 58, 5, '4.4', b'1', 799, NULL),
-(104, 'SDL205597603', 'Altedo Silver Analog Watch', 'altedo-silver-analog-watch', 2099, 449, 79, 8, '4.0', b'1', 2099, NULL),
-(105, 'SDL494396796', 'Miss Chase Maroon Cotton Mini Skater Dresses For Women Sleeveless Round Neck Casual Wear', 'miss-chase-maroon-cotton-mini-skater-dresses-for-women-sleeveless-round-neck-casual-wear', 999, 499, 50, 3, '3.8', b'1', 999, NULL),
-(106, 'SDL136363943', 'Puma Black Leather Wallet', 'puma-black-leather-wallet', 1299, 399, 69, 669, '3.8', b'1', 1299, NULL),
-(107, 'SDL947666908', 'GMI cream Pure Crepe Round Neck Printed Kurti', 'gmi-cream-pure-crepe-round-neck-printed-kurti', 1299, 310, 76, 32, '3.4', b'1', 1299, NULL),
-(108, 'SDL246016332', 'Radheshyam Enterprise Blue Net Circular Semi Stitched Lehenga', 'radheshyam-enterprise-blue-net-circular-semi-stitched-lehenga', 999, 498, 50, 2, '3.9', b'1', 999, NULL),
-(109, 'SDL131910219', 'Routeen Black Slim Solid', 'routeen-black-slim-solid', 1299, 338, 74, 1, '3.1', b'1', 1299, NULL),
-(110, 'SDL992124230', 'Nike Dart 11 Msl Navy Sport Shoes', 'nike-dart-11-msl-navy-sport-shoes', 4195, 3689, 12, 0, '4.7', b'1', 4195, NULL),
-(111, 'SDL076095465', 'Skmei Black Trendy Casual Quartz Watch', 'skmei-black-trendy-casual-quartz-watch', 2999, 535, 82, 89, '4.0', b'1', 2999, NULL),
-(112, 'SDL523124510', 'Lucent\'s  General Knowledge Paperback (English) 6th Edition', 'lucent\'s--general-knowledge-paperback-(english)-6th-edition', 180, 132, 27, 131, '4.2', b'1', 180, NULL),
-(113, 'SDL770225076', 'IRIS 12 KG Dumbell', 'iris-12-kg-dumbell', 2400, 829, 65, 13, '3.1', b'1', 2400, NULL),
-(114, '1803120', 'Roger & Moris White Board (2 x 1.5 feet)', 'roger-&-moris-white-board-(2-x-1.5-feet)', 899, 326, 64, 117, '3.7', b'1', 899, NULL),
-(115, 'SDL535327662', 'Shilpihandicrafts Off White Necklace Set of 2', 'shilpihandicrafts-off-white-necklace-set-of-2', 1200, 245, 80, 4, '3.6', b'1', 1200, NULL),
-(116, 'SDL438213936', 'Shree Ganesh Red Cotton Dress Material', 'shree-ganesh-red-cotton-dress-material', 1299, 499, 62, 20, '3.8', b'1', 1299, NULL),
-(117, 'SDL182448723', 'Double Down (Diary of a Wimpy Kid book 11)', 'double-down-(diary-of-a-wimpy-kid-book-11)-', 399, 222, 44, 3, '4.3', b'1', 399, NULL),
-(118, 'SDL779721993', 'ADS Compact Powder A8030-2', 'ads-compact-powder-a8030-2', 593, 219, 63, 10, '3.5', b'1', 593, NULL);
+INSERT INTO `products` (`id`, `sku`, `title`, `slug`, `price`, `description`, `discount`, `discount_type`, `views`, `ratings`, `vendor_id`, `collection_id`, `category_id`, `status`, `seo_description`, `seo_title`, `social_title`, `social_description`, `colors`, `materials`, `sizes`, `weight`) VALUES
+(1, 'SDL730883102', 'Intex LED-3216 80 cm (32) HD Ready (HDR) LED Television', 'intex-led-3216-80-cm-(32)-hd-ready-(hdr)-led-television', 23999, '', 48, '', 6, '3.9', 2, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(2, 'SDL638477211', 'Campus Sutra Black Cotton Quilted & Bomber Jacket', 'campus-sutra-black-cotton-quilted-&-bomber-jacket', 1999, '', 66, '', 2, '3.8', 3, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(3, 'SDL921382269', 'OPEN-BOX YU Yureka Plus Cyanogen - 16 GB Grey', 'open-box-yu-yureka-plus-cyanogen---16-gb-grey', 6490, '', 1, '', 12, '3.3', 2, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(4, 'SDL092510367', 'Lenovo M0520 2.0 Computer Speaker - Red', 'lenovo-m0520-2.0-computer-speaker---red', 899, '', 24, '', 13, '3.8', 2, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(5, 'SDL837914446', 'Titan Leather Black Men Regular Wallet', 'titan-leather-black-men-regular-wallet', 1099, '', 10, '', 62, '4.3', 3, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(6, 'SDL466773337', 'Veet Full Body Waxing Kit for Dry Skin -Pack of 1', 'veet-full-body-waxing-kit-for-dry-skin--pack-of-1', 170, '', 11, '', 8, '4.0', 2, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(7, '1220794', 'Lakme Perfect Radiance Intense Whitening Golden Medium 03 Compact, 8 g', 'lakme-perfect-radiance-intense-whitening-golden-medium-03-compact,-8-g', 180, '', 15, '', 93, '3.9', 3, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(8, 'SDL815452992', 'Tokyo Talkies Polyester Dresses', 'tokyo-talkies-polyester-dresses', 1449, '', 62, '', 1, '2.6', 2, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(9, 'SDL646366940', 'Open box InFocus M370i (8GB-White)', 'open-box-infocus-m370i-(8gb-white)', 5199, '', 2, '', 0, '3.8', 3, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(10, 'SDL999145129', 'Marc 3 Ltr Solitaire Instant Geyser - Ivory', 'marc-3-ltr-solitaire-instant-geyser---ivory', 3610, '', 49, '', 13, '3.5', 2, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(11, '1721342', 'Orient Fabri Joy Dry Iron White (1000 Watts)', 'orient-fabri-joy-dry-iron-white-(1000-watts)', 699, '', 29, '', 0, '4.2', 2, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(12, 'SDL049294041', 'Dolphin XL Leatherette Bean Bag Cover Black & Royal Blue', 'dolphin-xl-leatherette-bean-bag-cover-black-&-royal-blue', 1199, '', 50, '', 0, '5.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(13, 'SDL711730510', 'Wajbee Blue Slim Faded', 'wajbee-blue-slim-faded', 1499, '', 76, '', 153, '3.4', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(14, 'SDL282352124', 'HP Black Laptop Bags', 'hp-black-laptop-bags', 1108, '', 52, '', 273, '3.7', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(15, 'SDL753269052', 'Butterflies Red Shoulder Bag', 'butterflies-red-shoulder-bag', 2199, '', 55, '', 176, '3.9', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(16, 'SDL814331436', 'Status Red Rug Polyester Printed', 'status-red-rug-polyester-printed', 4999, '', 80, '', 24, '4.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(17, 'SDL235888477', 'The Power of Your Subconscious Mind', 'the-power-of-your-subconscious-mind', 199, '', 54, '', 3, '4.2', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(18, 'SDL553144961', 'Goldmedal i-Strip LED Spike Guard with Surge Protector and 6-outlet International Sockets', 'goldmedal-i-strip-led-spike-guard-with-surge-protector-and-6-outlet-international-sockets', 649, '', 14, '', 21, '4.4', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(19, 'SDL509689093', 'Refurbished Xiaomi Mi4i (16 GB) (White)', 'refurbished-xiaomi-mi4i-(16-gb)-(white)', 9499, '', 0, '', 1, '3.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(20, 'SDL401111367', 'Bayer Contour TS Blood Glucose- 50 Test Strips', 'bayer-contour-ts-blood-glucose--50-test-strips', 1400, '', 36, '', 140, '4.4', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(21, 'SDL022011360', 'Intex 301 N FMU 4.1 Speaker System', 'intex-301-n-fmu-4.1-speaker-system', 3499, '', 51, '', 80, '3.7', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(22, 'SDL678685750', 'Sony Usb 2.1 Amp Ac Adaptor Cp-ad2 With Micro Usb Cable', 'sony-usb-2.1-amp-ac-adaptor-cp-ad2-with-micro-usb-cable', 990, '', 38, '', 150, '4.3', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(23, 'SDL185074905', 'Everything Imported Plastic Toothpaste Dispensers', 'everything-imported-plastic-toothpaste-dispensers', 499, '', 59, '', 488, '3.1', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(24, 'SDL774739577', 'Fogg Brown Leather Analog Watch for Men', 'fogg-brown-leather-analog-watch-for-men', 1199, '', 71, '', 8, '3.8', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(25, 'SDL396245637', 'Forever Living Aloe Vera Gel 1 Pc', 'forever-living-aloe-vera-gel-1-pc', 1203, '', 30, '', 86, '4.1', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(26, 'SDL854292628', 'Blaupunkt Car Mobile Chargers - Black', 'blaupunkt-car-mobile-chargers---black', 799, '', 46, '', 5, '4.4', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(27, 'SDL945923589', 'Autofy O2 Desert Storm - Open Face Helmet Brown M', 'autofy-o2-desert-storm---open-face-helmet-brown-m', 999, '', 37, '', 0, '0.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(28, 'SDL646205677', 'Aurion 18 Kg Dumbbell Set With Accessories', 'aurion-18-kg-dumbbell-set-with-accessories', 3499, '', 66, '', 36, '3.6', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(29, 'SDL134366646', 'Dukes Truffel Gift Pack 360gm', 'dukes-truffel-gift-pack-360gm-', 599, '', 23, '', 0, '5.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(30, 'SDL152517745', 'JBN Creation Cream Silk Angrakha Style Indo Western with Maroon Jodhpuri Breeches', 'jbn-creation-cream-silk-angrakha-style-indo-western-with-maroon-jodhpuri-breeches', 1199, '', 68, '', 46, '3.7', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(31, '1236773', 'Prestige Popular 3 Ltr Aluminium  Outer Lid Pressure Cooker', 'prestige-popular-3-ltr-aluminium--outer-lid-pressure-cooker', 1140, '', 26, '', 158, '4.1', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(32, 'SDL861113363', 'I Kall K12 (64 MB) Blue', 'i-kall-k12-(64-mb)-blue', 599, '', 5, '', 5, '3.2', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(33, 'SDL536597006', 'Abaco Pomace Olive Oil 1Ltr- Buy 1 Get 1 free', 'abaco-pomace-olive-oil-1ltr--buy-1-get-1-free', 1900, '', 53, '', 13, '4.1', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(34, 'SDL594316169', 'CVT 3200 80 cm (32) HD Ready LED TV', 'cvt-3200-80-cm-(32)-hd-ready-led-tv', 12000, '', 4, '', 1, '3.9', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(35, 'SDL424143561', 'Belkin 1m High Speed Hdmi Cable With Ethernet', 'belkin-1m-high-speed-hdmi-cable-with-ethernet', 799, '', 19, '', 16, '4.6', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(36, 'SDL586637112', 'Fastrack P223BU2 Sunglasses', 'fastrack-p223bu2-sunglasses', 850, '', 21, '', 58, '4.1', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(37, 'SDL542834865', 'Philips BG1025-15 Body Groomer Black', 'philips-bg1025-15-body-groomer-black', 1495, '', 28, '', 269, '4.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(38, 'SDL446190652', 'Highlander Navy Casuals Slim Fit Shirt', 'highlander-navy-casuals-slim-fit-shirt', 999, '', 45, '', 8, '4.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(39, 'SDL077346192', 'Verdioz White Embroidery Poly Cotton Mosquito Net with free 3 saviours', 'verdioz-white-embroidery-poly-cotton-mosquito-net-with-free-3-saviours', 2199, '', 55, '', 25, '3.8', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(40, 'SDL188105812', 'Zakk VR Virtual Reality 3D Glass for All Android & iOS Smartphones with Bluetooth Remote', 'zakk-vr-virtual-reality-3d-glass-for-all-android-&-ios-smartphones-with-bluetooth-remote', 4999, '', 84, '', 8, '3.3', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(41, 'SDL691291518', 'Digisol 300 Mbps Wireless Router (DG-HR3400)Wireless Routers Without Modem', 'digisol-300-mbps-wireless-router-(dg-hr3400)wireless-routers-without-modem', 1499, '', 44, '', 790, '4.3', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(42, NULL, NULL, NULL, NULL, '', NULL, '', NULL, NULL, NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(43, 'SDL193075434', 'Sandisk Cruzer Blade SDCZ50-016G-I35 16GB USB 2.0 Utility Pendrive - Pack of 2', 'sandisk-cruzer-blade-sdcz50-016g-i35-16gb-usb-2.0-utility-pendrive---pack-of-2', 778, '', 11, '', 825, '4.2', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(44, 'SDL087767982', 'Relish Multicolour Leather Round Analog Watch', 'relish-multicolour-leather-round-analog-watch', 699, '', 59, '', 8, '4.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(45, 'SDL709309011', 'Envent Musique-4.1 Speaker System with 20W RMS', 'envent-musique-4.1-speaker-system-with-20w-rms', 3999, '', 58, '', 10, '3.4', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(46, 'SDL907014199', 'Eco Alpine Jumbo Bucket and Heavy Rod Mop with 1 Free Refill Inside (Blue)', 'eco-alpine-jumbo-bucket-and-heavy-rod-mop-with-1-free-refill-inside-(blue)', 2599, '', 65, '', 4, '4.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(47, 'SDL947785518', 'Rock Hard Multi Color Cotton T-Shirt', 'rock-hard-multi-color-cotton-t-shirt', 799, '', 63, '', 3, '3.8', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(48, 'SDL243047695', 'Maybelline Colossal 12H Black Kajal 0.35 gm Pack Of 2', 'maybelline-colossal-12h-black-kajal-0.35-gm-pack-of-2', 400, '', 33, '', 105, '3.8', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(49, 'SDL033507246', 'Brilliant 6 Pcs Non Stick Cookware Set Metallic Red', 'brilliant-6-pcs-non-stick-cookware-set-metallic-red', 2999, '', 62, '', 1, '3.4', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(50, 'SDL134959386', 'Magikware Pink Fruit & Vegetable Juicer', 'magikware-pink-fruit-&-vegetable-juicer', 999, '', 70, '', 46, '3.6', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(51, 'SDL409109426', 'Skullcandy JIB In-Ear W/Pill Mic S2DUL-J846 Blue Black', 'skullcandy-jib-in-ear-w/pill-mic-s2dul-j846-blue-black', 999, '', 40, '', 6, '3.9', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(52, '1094817', 'Yonex GR 303 Badminton Racket- Assorted', 'yonex-gr-303-badminton-racket--assorted', 570, '', 30, '', 58, '4.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(53, 'SDL253900881', 'Cello Elegant Casserole Set 3 Pcs', 'cello-elegant-casserole-set-3-pcs-', 999, '', 44, '', 49, '4.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(54, 'SDL631656512', 'boAt Bassheads 600 White & Blue On Ear Wired Headphones With Mic White', 'boat-bassheads-600-white-&-blue-on-ear-wired-headphones-with-mic-white', 1999, '', 68, '', 12, '4.1', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(55, 'SDL020254813', 'THE LEGEND OF LAKSHMI PRASAD', 'the-legend-of-lakshmi-prasad', 299, '', 48, '', 4, '4.2', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(56, 'SDL546985085', 'POND\'S Men Energy Charge Face Wash 100 g', 'pond\'s-men-energy-charge-face-wash-100-g', 170, '', 10, '', 13, '4.2', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(57, 'SDL250739576', 'F&D F313U 2.1 Desktop Speakers (USB powered) - Black', 'f&d-f313u-2.1-desktop-speakers-(usb-powered)---black', 1990, '', 50, '', 316, '3.8', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(58, 'SDL456870757', 'StickersKart flowers & trees PVC Wall Stickers', 'stickerskart-flowers-&-trees-pvc-wall-stickers', 449, '', 67, '', 21, '4.1', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(59, 'SDL016303853', 'Buildskill 13 mm 650W Impact Drill Machine Kit with Reversible Function + 105 Accessories', 'buildskill-13-mm-650w-impact-drill-machine-kit-with-reversible-function-+-105-accessories', 2999, '', 60, '', 4, '3.4', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(60, 'SDL422349377', 'John Players Grey Sweatshirt', 'john-players-grey-sweatshirt', 1799, '', 15, '', 0, '2.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(61, NULL, NULL, NULL, NULL, '', NULL, '', NULL, NULL, NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(62, 'SDL216804529', 'Dabur Shilajit Gold Pack Of 2 X 20 Capsules', 'dabur-shilajit-gold-pack-of-2-x-20-capsules', 780, '', 25, '', 28, '3.9', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(63, 'SDL461624527', 'VLCC Henna 100gm (Buy 1 Get 1)', 'vlcc-henna-100gm-(buy-1-get-1)', 99, '', 35, '', 436, '4.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(64, 'SDL194305755', 'Nike Gray Daily Slippers', 'nike-gray-daily-slippers', 1395, '', 10, '', 1, '3.8', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(65, '1207811', 'Omron Nebulizer (NE - C801)', 'omron-nebulizer-(ne---c801)', 2950, '', 43, '', 7, '3.9', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(66, 'SDL070282037', 'Lakme Youth Infinity Skin Firming Day Creme 50 G', 'lakme-youth-infinity-skin-firming-day-creme-50-g', 725, '', 10, '', 35, '4.1', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(67, 'SDL267473865', 'Parker Silver Roller Ball Pen', 'parker-silver-roller-ball-pen', 575, '', 13, '', 0, '4.5', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(68, 'SDL902025613', 'Brown Boots for Kids', 'brown-boots-for-kids', 1596, '', 81, '', 26, '3.7', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(69, 'SDL188135754', 'Muscle Pharm Mass gainer 6 lb Chocolate', 'muscle-pharm-mass-gainer-6-lb-chocolate', 3750, '', 33, '', 0, '0.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(70, 'SDL790564753', 'Eternal Multi Color Georgette Dresses', 'eternal-multi-color-georgette-dresses', 2299, '', 59, '', 0, '0.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(71, 'SDL973947022', 'Crazeis Analog Wrist Watch', 'crazeis-analog-wrist-watch', 1499, '', 89, '', 7, '3.3', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(72, 'SDL784711342', 'Lavie Brown Faux Leather Box Clutch', 'lavie-brown-faux-leather-box-clutch', 2460, '', 54, '', 0, '3.7', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(73, 'SDL235888477', 'The Power of Your Subconscious Mind', 'the-power-of-your-subconscious-mind', 199, '', 54, '', 3, '4.2', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(74, 'SDL367579058', 'Kataria Jewellers The Trinetta BIS Hallmarked Gold and Real Certified Diamonds Designer Ring', 'kataria-jewellers-the-trinetta-bis-hallmarked-gold-and-real-certified-diamonds-designer-ring', 9374, '', 47, '', 0, '4.5', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(75, 'SDL235521667', 'Sukkhi Alloy Gold Plated Kundan Necklace Set', 'sukkhi-alloy-gold-plated-kundan-necklace-set', 1845, '', 84, '', 267, '3.2', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(76, 'SDL207509046', 'Rock Micro Usb Flat Data Cable', 'rock-micro-usb-flat-data-cable', 299, '', 17, '', 3, '4.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(77, 'SDL588108570', 'Philips AT 610 Shaver - Black', 'philips-at-610-shaver---black', 2295, '', 36, '', 299, '3.9', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(78, 'SDL206831663', 'Orpat 1200 air flora CeilingFan brown', 'orpat-1200-air-flora-ceilingfan-brown', 1210, '', 13, '', 83, '4.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(79, 'SDL158378278', 'Kesar Sarees Grey Saree', 'kesar-sarees-grey-saree', 2150, '', 77, '', 149, '3.3', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(80, 'SDL900571578', 'Allen A-909 Wireless Mouse Black', 'allen-a-909-wireless-mouse-black', 550, '', 55, '', 98, '3.6', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(81, 'SDL624459869', 'Generic Assorted Colors Selfie Stick with Auxillary Cable', 'generic-assorted-colors-selfie-stick-with-auxillary-cable', 999, '', 88, '', 36, '3.8', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(82, 'SDL328637599', 'House Of Marley SMILE JAMICA EM-JE041 SB In Ear Wired Earphones With Mic Signature Black', 'house-of-marley-smile-jamica-em-je041-sb-in-ear-wired-earphones-with-mic-signature-black', 1990, '', 51, '', 0, '4.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(83, 'SDL953285268', 'Micromax Bolt S301 (4GB, Black)-(Without Charger&Earphone)', 'micromax-bolt-s301-(4gb,-black)-(without-charger&earphone)', 2999, '', 32, '', 167, '3.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(84, 'SDL491332242', 'Karbonn K41 32 MB White Silver', 'karbonn-k41-32-mb-white-silver', 1590, '', 37, '', 0, '0.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(85, 'SDL438177093', 'DishTV HD Connection with Recorder-TamilPack (1 Month Family-Sport and Full-on HD with 300 Movie Points) with Lifetime Warranty (worth 1000)', 'dishtv-hd-connection-with-recorder-tamilpack-(1-month-family-sport-and-full-on-hd-with-300-movie-points)-with-lifetime-warranty-(worth-1000)', 2490, '', 48, '', 2, '4.2', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(86, 'SDL499803305', 'Plaza Quartz Motion-Anchor And Steering Design Pendulum Wall Clock', 'plaza-quartz-motion-anchor-and-steering-design-pendulum-wall-clock', 999, '', 50, '', 59, '3.3', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(87, 'SDL883746761', 'Maharaja Whiteline 25 Litres Classico Super Water Heater White & Blue', 'maharaja-whiteline-25-litres-classico-super-water-heater-white-&-blue', 8299, '', 39, '', 6, '3.9', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(88, 'SDL095277916', 'Quick Heal Antivirus Latest Version ( 2 / 1 ) DVD', 'quick-heal-antivirus-latest-version-(-2-/-1-)-dvd', 1099, '', 58, '', 96, '4.2', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(89, 'SDL584818331', 'Himalaya Baby Shampoo 400 Ml', 'himalaya-baby-shampoo-400-ml', 280, '', 29, '', 24, '4.2', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(90, 'SDL947282266', 'U.S. Polo Assn. Multi Color Casual High Ankle Length - 3 Pair Socks', 'u.s.-polo-assn.-multi-color-casual-high-ankle-length---3-pair-socks', 429, '', 32, '', 0, '3.7', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(91, 'SDL082660618', 'Red Tape RTR0652 Brown Formal Shoes', 'red-tape-rtr0652-brown-formal-shoes', 3795, '', 55, '', 0, '3.4', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(92, 'SDL634877183', 'Campus Sutra Blue Hooded Sweatshirt', 'campus-sutra-blue-hooded-sweatshirt', 1999, '', 60, '', 0, '0.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(93, 'SDL695208966', 'Dabur Shilajit 30 Capsules', 'dabur-shilajit-30-capsules', 195, '', 40, '', 27, '3.6', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(94, 'SDL062304542', 'Nova NHT 1045 W Beard Trimmer White', 'nova-nht-1045-w-beard-trimmer-white', 995, '', 70, '', 1568, '3.7', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(95, 'SDL291880390', 'KC Silver Stainless Steel Dustbin', 'kc-silver-stainless-steel-dustbin', 599, '', 50, '', 40, '3.6', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(96, 'SDL916344332', 'Motorola FW200L Fixed Wireless GSM Landline Phone - Black', 'motorola-fw200l-fixed-wireless-gsm-landline-phone---black', 2490, '', 22, '', 48, '4.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(97, 'SDL088819455', 'Omron HEM-7113 BP Monitor', 'omron-hem-7113-bp-monitor', 2500, '', 53, '', 28, '4.1', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(98, 'SDL119643053', 'STRIKE ORDEM 5', 'strike-ordem-5', 1999, '', 80, '', 0, '3.6', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(99, 'SDL618928289', 'Domex Original Toilet Cleaner Expert 1 l', 'domex-original-toilet-cleaner-expert-1-l', 129, '', 10, '', 50, '4.2', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(100, 'SDL131535487', 'One Touch Select Glucose Monitor with 50 Test Strips Combo', 'one-touch-select-glucose-monitor-with-50-test-strips-combo', 2385, '', 46, '', 72, '4.3', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(101, 'SDL754807928', 'Scrazy Frozen Sister Anna Elsa Doll - Set of 2', 'scrazy-frozen-sister-anna-elsa-doll---set-of-2', 899, '', 69, '', 13, '3.5', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(102, 'SDL827782677', 'ZAAP AQUA Waterproof/Shockproof Bluetooth Wireless Speaker with Built-In Microphone | IP67 Rugged Design for Shower/Outdoor', 'zaap-aqua-waterproof/shockproof-bluetooth-wireless-speaker-with-built-in-microphone-|-ip67-rugged-design-for-shower/outdoor', 2000, '', 28, '', 26, '4.7', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(103, 'SDL864907076', 'Smiles Creation Lighting Drum Keyboard  Musical Toy', 'smiles-creation-lighting-drum-keyboard--musical-toy', 799, '', 58, '', 5, '4.4', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(104, 'SDL205597603', 'Altedo Silver Analog Watch', 'altedo-silver-analog-watch', 2099, '', 79, '', 8, '4.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(105, 'SDL494396796', 'Miss Chase Maroon Cotton Mini Skater Dresses For Women Sleeveless Round Neck Casual Wear', 'miss-chase-maroon-cotton-mini-skater-dresses-for-women-sleeveless-round-neck-casual-wear', 999, '', 50, '', 3, '3.8', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(106, 'SDL136363943', 'Puma Black Leather Wallet', 'puma-black-leather-wallet', 1299, '', 69, '', 669, '3.8', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(107, 'SDL947666908', 'GMI cream Pure Crepe Round Neck Printed Kurti', 'gmi-cream-pure-crepe-round-neck-printed-kurti', 1299, '', 76, '', 32, '3.4', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(108, 'SDL246016332', 'Radheshyam Enterprise Blue Net Circular Semi Stitched Lehenga', 'radheshyam-enterprise-blue-net-circular-semi-stitched-lehenga', 999, '', 50, '', 2, '3.9', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(109, 'SDL131910219', 'Routeen Black Slim Solid', 'routeen-black-slim-solid', 1299, '', 74, '', 1, '3.1', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(110, 'SDL992124230', 'Nike Dart 11 Msl Navy Sport Shoes', 'nike-dart-11-msl-navy-sport-shoes', 4195, '', 12, '', 0, '4.7', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(111, 'SDL076095465', 'Skmei Black Trendy Casual Quartz Watch', 'skmei-black-trendy-casual-quartz-watch', 2999, '', 82, '', 89, '4.0', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(112, 'SDL523124510', 'Lucent\'s  General Knowledge Paperback (English) 6th Edition', 'lucent\'s--general-knowledge-paperback-(english)-6th-edition', 180, '', 27, '', 131, '4.2', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(113, 'SDL770225076', 'IRIS 12 KG Dumbell', 'iris-12-kg-dumbell', 2400, '', 65, '', 13, '3.1', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(114, '1803120', 'Roger & Moris White Board (2 x 1.5 feet)', 'roger-&-moris-white-board-(2-x-1.5-feet)', 899, '', 64, '', 117, '3.7', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(115, 'SDL535327662', 'Shilpihandicrafts Off White Necklace Set of 2', 'shilpihandicrafts-off-white-necklace-set-of-2', 1200, '', 80, '', 4, '3.6', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(116, 'SDL438213936', 'Shree Ganesh Red Cotton Dress Material', 'shree-ganesh-red-cotton-dress-material', 1299, '', 62, '', 20, '3.8', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(117, 'SDL182448723', 'Double Down (Diary of a Wimpy Kid book 11)', 'double-down-(diary-of-a-wimpy-kid-book-11)-', 399, '', 44, '', 3, '4.3', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(118, 'SDL779721993', 'ADS Compact Powder A8030-2', 'ads-compact-powder-a8030-2', 593, '', 63, '', 10, '3.5', NULL, '0', 0, '1', '', NULL, NULL, NULL, NULL, '', '', NULL),
+(119, '', '', '', 0, '', 0, '', NULL, NULL, NULL, NULL, 1, 'In stock', NULL, NULL, NULL, NULL, NULL, '', '', NULL),
+(120, '', '', '', 0, '', 0, '', NULL, NULL, NULL, NULL, 1, 'In stock', NULL, NULL, NULL, NULL, NULL, '', '', NULL),
+(121, '', '', '', 0, '', 0, '', NULL, NULL, NULL, NULL, 1, 'In stock', NULL, NULL, NULL, NULL, NULL, '', '', NULL),
+(122, '', '', '', 0, '', 0, '', NULL, NULL, NULL, NULL, 1, 'In stock', NULL, NULL, NULL, NULL, NULL, '', '', NULL),
+(123, '', '', '', 0, '', 0, '', NULL, NULL, NULL, NULL, 1, 'In stock', NULL, NULL, NULL, NULL, NULL, '', '', NULL),
+(124, '', '', '', 0, '', 0, '', NULL, NULL, NULL, NULL, 1, 'In stock', NULL, NULL, NULL, NULL, NULL, '', '', NULL),
+(125, '4567778', 'hello', 'hello', 100, '<p><br></p>hello&nbsp; world<br>', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 0, 'In stock', '', 'hello', 'hello', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(126, '4567778', 'hello', 'hello', 100, '<p><br></p>hello&nbsp; world<br>', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 0, 'In stock', '', 'hello', 'hello', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(127, '4567778', 'hello world', 'hello-world', 100, '<p><br></p>hello&nbsp; world<br>', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'hello world', 'hello world', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(128, '4567778', 'hello world', 'hello-world', 100, '<p><br></p>hello&nbsp; world<br>', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'hello world', 'hello world', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(129, '4567778', 'hello world', 'hello-world', 100, '<p><br></p>hello&nbsp; world<br>', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'hello world', 'hello world', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(130, '4567778', 'hello world', 'hello-world', 100, '<p><br></p>hello&nbsp; world<br>', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'hello world', 'hello world', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(131, '4567778', 'hello world', 'hello-world', 100, '<p><br></p>hello&nbsp; world<br>', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'hello world', 'hello world', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(132, '4567778', 'hello world', 'hello-world', 100, '<p><br></p>hello&nbsp; world<br>', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'hello world', 'hello world', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(133, '4567778', 'hello world', 'hello-world', 100, '<p><br></p>hello&nbsp; world<br>', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'hello world', 'hello world', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(134, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(135, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(136, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(137, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(138, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(139, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(140, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(141, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(142, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(143, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(144, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(145, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(146, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(147, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(148, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(149, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(150, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(151, '8w98ew98', 'gog', 'gog', 2000, '<p><br></p>heekkwq', 20, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'gog', 'gogs', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(152, 'yes', 'helios', 'helios', 100, '<p>2000<br></p>', 30, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'helios', 'helios', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(153, 'yes', 'helios', 'helios', 100, '<p>2000<br></p>', 30, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'helios', 'helios', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL),
+(154, 'yes', 'helios', 'helios', 100, '<p>2000<br></p>', 30, 'percentage', NULL, NULL, NULL, '18,24,25', 3, 'In stock', '', 'helios', 'helios', '', 'orange,purple', 'orange,purple', 'orange,purple', NULL);
 
 -- --------------------------------------------------------
 
@@ -1063,132 +1147,21 @@ INSERT INTO `products` (`id`, `sku`, `title`, `slug`, `price`, `sale_price`, `di
 CREATE TABLE `product_files` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `url` varchar(104) DEFAULT NULL
+  `file_path` varchar(500) NOT NULL,
+  `img_order` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `product_files`
 --
 
-INSERT INTO `product_files` (`id`, `product_id`, `url`) VALUES
-(1, 1, 'https://n4.sdlcdn.com/imgs/b/u/9/Intex-LED-3216-81-cm-SDL730883102-1-7a980.jpg'),
-(2, 2, 'https://n4.sdlcdn.com/imgs/c/g/a/Campus-Sutra-Black-Cotton-Quilted-SDL638477211-1-306e1.jpg'),
-(3, 3, 'https://n4.sdlcdn.com/imgs/d/g/a/SDL921382269_1-2fe4d.jpg'),
-(4, 4, 'https://n4.sdlcdn.com/imgs/a/k/3/Lenovo-2-0-Speaker-M0521-SDL092510367-1-e972a.jpg'),
-(5, 5, 'https://n4.sdlcdn.com/imgs/a/n/e/Titan-Leather-Black-Men-Regular-SDL837914446-1-3471c.jpg'),
-(6, 6, 'https://n4.sdlcdn.com/imgs/a/g/5/SDL466773337_1391415453_image1-6da2b.jpg'),
-(7, 7, 'https://n4.sdlcdn.com/imgs/b/x/c/Lakme-Perfect-Radiance-Intense-Whitening-1220794-1-00e8e.jpg'),
-(8, 8, 'https://n4.sdlcdn.com/imgs/c/0/v/Tokyo-Talkies-Maroon-Polyester-Dresses-SDL747193321-1-36ece.jpg'),
-(9, 9, 'https://n4.sdlcdn.com/imgs/c/4/6/UNBOXED_InFocus_M370i_8GB_White_SDL646366940_1_09d6d-9dab1.jpg'),
-(10, 10, 'https://n4.sdlcdn.com/imgs/b/6/r/Marc-3-Instant-Water-Heater-SDL999145129-1-0a986.jpg'),
-(11, 11, 'https://n4.sdlcdn.com/imgs/c/7/8/orient_dry_iron_1_excl-9d478.jpg'),
-(12, 12, 'https://n4.sdlcdn.com/imgs/a/x/q/XL-Leatherette-Bean-Bag-Cover-SDL049294041-1-39706.jpg'),
-(13, 13, 'https://n4.sdlcdn.com/imgs/b/w/y/Wajbee-Blue-Slim-Fit-Jeans-SDL711730510-1-9b248.JPG'),
-(14, 14, 'https://n4.sdlcdn.com/imgs/b/6/c/Bags_opt_1_-34246.jpg'),
-(15, 15, 'https://n4.sdlcdn.com/imgs/b/s/7/SDL753269052_1-fe8b2.jpg'),
-(16, 16, 'https://n4.sdlcdn.com/imgs/c/k/4/Status-Red-Geometriacl-Taba-Rug-SDL814331436-1-547ce.jpg'),
-(17, 17, 'https://n4.sdlcdn.com/imgs/b/g/8/The-Power-of-Your-Subconscious-SDL235888477-1-980c7.jpg'),
-(18, 18, 'https://n4.sdlcdn.com/imgs/c/f/s/Gold-Medal-4-6-Extension-SDL553144961-4-e6a2f.jpg'),
-(19, 19, 'https://n4.sdlcdn.com/imgs/b/f/8/Refurbished-Xiaomi-Mi4i-16-GB-SDL509689093-1-28ee9.jpg'),
-(20, 20, 'https://n4.sdlcdn.com/imgs/a/7/b/Bayer-Contour-TS-Blood-Glucose-SDL401111367-1-9d4b1.jpg'),
-(21, 21, 'https://n4.sdlcdn.com/imgs/a/2/j/IntexIT-301-OS-4-1-SDL022011360-1-6e09b.jpg'),
-(22, 22, 'https://n4.sdlcdn.com/imgs/a/t/v/Sony-Usb-2-1-Amp-SDL678685750-1-19f00.jpg'),
-(23, 23, 'https://n4.sdlcdn.com/imgs/a/h/f/Everything-Imported-White-Toothpaste-Dispenser-SDL185074905-1-0db2b.jpg'),
-(24, 24, 'https://n4.sdlcdn.com/imgs/b/x/g/Fogg-Brown-Leather-Analog-Watch-SDL774739577-1-0966c.jpg'),
-(25, 25, 'https://n4.sdlcdn.com/imgs/a/m/3/Forever-Living-Aloe-Vera-Gel-SDL396245637-1-63f7b.jpg'),
-(26, 26, 'https://n4.sdlcdn.com/imgs/c/9/i/Blaupunkt-Fast-Car-Charger-SDL854292628-4-0d24d.jpg'),
-(27, 27, 'https://n4.sdlcdn.com/imgs/d/8/p/Untitled_1_1_-741c3.jpg'),
-(28, 28, 'https://n4.sdlcdn.com/imgs/a/5/x/Aurion-18-Kg-Dumbbell-Set-SDL646205677-1-e9ca7.jpg'),
-(29, 29, 'https://n4.sdlcdn.com/imgs/c/n/j/Dukes-Dukes-Milk-Biscuits-360-SDL134366646-1-b8e1a.jpg'),
-(30, 30, 'https://n4.sdlcdn.com/imgs/b/y/8/Jbn-Creation-Cream-Angrakha-Style-SDL152483805-1-0900a.jpg'),
-(31, 31, 'https://n4.sdlcdn.com/imgs/a/1/9/Prestige-3-Ltrs-Popular-Aluminium-1236773-1-46221.jpg'),
-(32, 32, 'https://n4.sdlcdn.com/imgs/b/6/o/I-Kall-K12-4GB-and-SDL861113363-1-b24aa.jpg'),
-(33, 33, 'https://n4.sdlcdn.com/imgs/d/p/f/ABACOOlivePomaceOil1LtPet_BOGOOffer-9160e.JPG'),
-(34, 34, 'https://n4.sdlcdn.com/imgs/c/m/m/cvt_32_1inch-ad28f.jpg'),
-(35, 35, 'https://n4.sdlcdn.com/imgs/a/l/x/Belkin-F3y021qe1m-1m-High-Speed-SDL424143561-1-c657f.jpg'),
-(36, 36, 'https://n4.sdlcdn.com/imgs/a/j/2/Fastrack-P223BU2-Sunglasses-SDL586637112-1-b7a11.jpg'),
-(37, 37, 'https://n4.sdlcdn.com/imgs/a/t/5/Philips-Body-Groomer-Black-SDL542834865-1-e3315.jpg'),
-(38, 38, 'https://n4.sdlcdn.com/imgs/c/x/d/Highlander-Navy-Casuals-Slim-Fit-SDL431893792-1-cc2c8.jpg'),
-(39, 39, 'https://n4.sdlcdn.com/imgs/b/x/6/MOSQUITONET_EMBROIDERY_BLUE__4_-36d99.jpg'),
-(40, 40, 'https://n4.sdlcdn.com/imgs/b/8/l/Zakk-Other-Active-3D-Glasses-SDL188105812-1-e998f.jpg'),
-(41, 41, 'https://n4.sdlcdn.com/imgs/b/3/g/SDL691291518_4-d0ee5.jpg'),
-(42, 42, NULL),
-(43, 43, 'https://n4.sdlcdn.com/imgs/b/g/g/Sandisk-Cruzer-Blade-16gb-Pen-SDL193075434-1-06983.jpg'),
-(44, 44, 'https://n4.sdlcdn.com/imgs/a/8/z/Relish-Multicolour-Leather-Round-Analog-SDL087767982-1-56884.jpg'),
-(45, 45, 'https://n4.sdlcdn.com/imgs/b/2/m/SDL709309011_1-8c987.jpg'),
-(46, 46, 'https://n4.sdlcdn.com/imgs/b/t/d/Eco-Alpine-Jumbo-Bucket-and-SDL907014199-6-11eea.jpg'),
-(47, 47, 'https://n4.sdlcdn.com/imgs/b/e/q/Rock-Hard-Orange-and-Black-SDL945726464-1-44dcb.jpg'),
-(48, 48, 'https://n4.sdlcdn.com/imgs/a/k/w/Maybelline-Colossal-Kajal-6H-Black-SDL243047695-1-fdd98.jpg'),
-(49, 49, 'https://n4.sdlcdn.com/imgs/b/h/o/Brilliant-Aluminium-Cookware-Set-6-SDL033507246-1-497ba.jpg'),
-(50, 50, 'https://n4.sdlcdn.com/imgs/c/v/k/IMG_20160916_WA0003-6273b.jpg'),
-(51, 51, 'https://n4.sdlcdn.com/imgs/b/2/m/Skullcandy-S2DUL-J846-In-Ear-SDL409109426-1-bca80.jpg'),
-(52, 52, 'https://n4.sdlcdn.com/imgs/a/b/t/282_ESG_YON_newa_M_1_2x-862a5.jpg'),
-(53, 53, 'https://n4.sdlcdn.com/imgs/b/m/t/Cello-Elegant-Casseroles-Set-3-SDL253900881-1-e0134.jpg'),
-(54, 54, 'https://n4.sdlcdn.com/imgs/c/q/s/Boat-Bassheads-600-White-Blue-SDL631656512-1-3fb92.jpg'),
-(55, 55, 'https://n4.sdlcdn.com/imgs/c/9/f/THE-LEGEND-OF-LAKSHMI-PRASAD-SDL020254813-1-4c4aa.jpg'),
-(56, 56, 'https://n4.sdlcdn.com/imgs/c/t/g/30045495-0d803.jpg'),
-(57, 57, 'https://n4.sdlcdn.com/imgs/a/7/g/F-D-F313U-Elegant-2-SDL250739576-1-d66bc.jpg'),
-(58, 58, 'https://n4.sdlcdn.com/imgs/a/y/a/Aquire-Pvc-Wall-Stickers-SDL456870757-1-142a7.jpg'),
-(59, 59, 'https://n4.sdlcdn.com/imgs/d/7/8/Buildskill-BED2050-650W-13mm-Corded-SDL016303853-3-30c19.jpg'),
-(60, 60, 'https://n4.sdlcdn.com/imgs/d/h/o/John-Players-Grey-Sweatshirt-SDL327705737-1-a8bb0.jpg'),
-(61, 61, NULL),
-(62, 62, 'https://n4.sdlcdn.com/imgs/b/z/g/1-2c30e.jpg'),
-(63, 63, 'https://n4.sdlcdn.com/imgs/b/s/q/SDL461624527_1-d8a7c.jpg'),
-(64, 64, 'https://n4.sdlcdn.com/imgs/c/p/x/Nike-Gray-Daily-SDL291743119-1-6e1b8.jpg'),
-(65, 65, 'https://n4.sdlcdn.com/imgs/a/a/z/NEBULIZERS_NE_C801_M_1_2x_New-3d05d.jpg'),
-(66, 66, 'https://n4.sdlcdn.com/imgs/d/t/3/Lakme-Youth-Infinity-Skin-Firming-SDL070282037-1-00a1e.jpg'),
-(67, 67, 'https://n4.sdlcdn.com/imgs/c/v/3/Parker-Silver-Roller-Ball-Pen-SDL267473865-1-a3262.jpg'),
-(68, 68, 'https://n4.sdlcdn.com/imgs/b/7/6/Trilokani-Brown-Boots-SDL902025613-1-8a877.jpg'),
-(69, 69, 'https://n4.sdlcdn.com/imgs/d/p/b/Muscle-Pharm-Mass-gainer-1-SDL188135754-1-83055.jpg'),
-(70, 70, 'https://n4.sdlcdn.com/imgs/c/u/m/Eternal-Multi-Color-Georgette-Dresses-SDL747863298-1-fbe09.jpg'),
-(71, 71, 'https://n4.sdlcdn.com/imgs/d/1/p/Crazeis-Analog-Wrist-Watch-For-SDL973947022-1-51b3a.jpg'),
-(72, 72, 'https://n4.sdlcdn.com/imgs/c/5/7/Lavie-Brown-Faux-Leather-Box-SDL784711342-1-8acc6.jpg'),
-(73, 73, 'https://n4.sdlcdn.com/imgs/b/g/8/The-Power-of-Your-Subconscious-SDL235888477-1-980c7.jpg'),
-(74, 74, 'https://n4.sdlcdn.com/imgs/a/3/h/Kataria-Jewellers-14Kt-Gold-Diamonds-SDL280836861-1-08606.jpg'),
-(75, 75, 'https://n4.sdlcdn.com/imgs/b/u/9/Sukkhi-Gold-Plated-Four-Strings-SDL235521667-1-2b1c9.jpg'),
-(76, 76, 'https://n4.sdlcdn.com/imgs/a/t/5/Rock-Micro-Usb-Flat-Data-SDL207509046-1-839e4.jpg'),
-(77, 77, 'https://n4.sdlcdn.com/imgs/b/s/7/SDL588108570_1-ab355.jpg'),
-(78, 78, 'https://n4.sdlcdn.com/imgs/b/y/b/Orpat-48-Inches-Air-Flora-SDL206831663-1-f9f5c.jpg'),
-(79, 79, 'https://n4.sdlcdn.com/imgs/a/3/i/Riytham-Fashion-Gray-Cotton-Saree-SDL158378278-1-fb201.jpg'),
-(80, 80, 'https://n4.sdlcdn.com/imgs/c/l/p/allen_a_909_original_imae-9e8eb.jpeg'),
-(81, 81, 'https://n4.sdlcdn.com/imgs/c/g/w/Generic-Assorted-Colors-Selfie-Stick-SDL624459869-1-0a758.jpg'),
-(82, 82, 'https://n4.sdlcdn.com/imgs/c/f/x/House-Of-Marley-SMILE-JAMICA-SDL328637599-1-f2062.jpg'),
-(83, 83, 'https://n4.sdlcdn.com/imgs/a/4/p/Micromax-S301-4GB-Black-SDL953285268-1-96dbd.jpg'),
-(84, 84, 'https://n4.sdlcdn.com/imgs/d/2/3/Karbonn-K41-32-MB-White-SDL491332242-1-db43e.jpg'),
-(85, 85, 'https://n4.sdlcdn.com/imgs/d/5/h/1-3dcee.jpg'),
-(86, 86, 'https://n4.sdlcdn.com/imgs/d/x/g/Motion-Red-Anchor-And-Steering-SDL499803305-1-b6283.jpg'),
-(87, 87, 'https://n4.sdlcdn.com/imgs/b/7/0/SDL883746761-0184f.jpg'),
-(88, 88, 'https://n4.sdlcdn.com/imgs/a/z/w/Quick-Heal-Antivirus-2015-SDL095277916-1-41781.jpg'),
-(89, 89, 'https://n4.sdlcdn.com/imgs/d/c/s/SDL584818331-c07c1.jpg'),
-(90, 90, 'https://n4.sdlcdn.com/imgs/c/v/i/U-S-Polo-Assn-Multi-SDL947282266-1-3aa87.jpg'),
-(91, 91, 'https://n4.sdlcdn.com/imgs/b/z/o/Red-Tape-Brown-Formal-Shoes-SDL395947474-1-cbd75.jpg'),
-(92, 92, 'https://n4.sdlcdn.com/imgs/c/7/r/Campus-Sutra-Blue-Hooded-Sweatshirt-SDL634877183-1-c65dd.jpg'),
-(93, 93, 'https://n4.sdlcdn.com/imgs/a/6/e/Shilajit30Cap_3DPack-51a34.jpg'),
-(94, 94, 'https://n4.sdlcdn.com/imgs/b/t/g/SDL062304542_M_1_2x-d6650.jpg'),
-(95, 95, 'https://n4.sdlcdn.com/imgs/a/n/n/Kc-Stainless-Steel-Dustbin-Round-SDL291880390-1-f62af.jpg'),
-(96, 96, 'https://n4.sdlcdn.com/imgs/b/m/h/Motorola-FW200L-Fixed-Wireless-GSM-SDL916344332-1-b161f.jpg'),
-(97, 97, 'https://n4.sdlcdn.com/imgs/a/0/w/Omron-HEM-7113-BP-Monitor-SDL088819455-1-2808b.jpg'),
-(98, 98, 'https://n4.sdlcdn.com/imgs/c/l/m/ACE-STRIKE-ORDEM-5-SDL119643053-1-0c44b.jpg'),
-(99, 99, 'https://n4.sdlcdn.com/imgs/d/0/z/Domex-Original-Toilet-Cleaner-Expert-SDL618928289-1-d128f.jpg'),
-(100, 100, 'https://n4.sdlcdn.com/imgs/c/6/5/One-Touch-Select-Glucose-Monitor-SDL131535487-1-f06b1.jpeg'),
-(101, 101, 'https://n4.sdlcdn.com/imgs/e/c/6/SDL754807928_2__9b83f-65be2.JPG'),
-(102, 102, 'https://n4.sdlcdn.com/imgs/b/v/u/1-af9d2.jpg'),
-(103, 103, 'https://n4.sdlcdn.com/imgs/d/0/0/Smiles-Creation-Lighting-Drum-Keyboard-SDL864907076-1-447ef.jpg'),
-(104, 104, 'https://n4.sdlcdn.com/imgs/a/2/v/ALTEDO-Silver-Analog-Wrist-Watch-SDL205597603-1-5b53b.jpg'),
-(105, 105, 'https://n4.sdlcdn.com/imgs/a/p/5/Miss-Chase-Whole-Wide-Whirl-SDL459040860-1-6a87f.jpg'),
-(106, 106, 'https://n4.sdlcdn.com/imgs/a/l/l/Puma-Black-Leather-Wallet-SDL136363943-1-70836.jpg'),
-(107, 107, 'https://n4.sdlcdn.com/imgs/a/t/q/Gmi-White-Pure-Crepe-Round-SDL473946834-1-a5db6.jpg'),
-(108, 108, 'https://n4.sdlcdn.com/imgs/c/3/y/Radheshyam-Enterprise-Blue-Net-Circular-SDL246016332-1-c8f05.JPG'),
-(109, 109, 'https://n4.sdlcdn.com/imgs/c/v/d/Routeen-Black-Slim-Solid-SDL061936099-1-305cf.jpg'),
-(110, 110, 'https://n4.sdlcdn.com/imgs/a/7/j/Nike-Dart-11-Msl-Navy-SDL991486272-1-34bf1.jpg'),
-(111, 111, 'https://n4.sdlcdn.com/imgs/a/u/k/Skmei-Gray-Imported-Trendy-Casual-SDL076095465-1-042ff.jpg'),
-(112, 112, 'https://n4.sdlcdn.com/imgs/b/f/t/General-Knowledge-6-E-Pb-SDL523124510-1-c864f.jpg'),
-(113, 113, 'https://n4.sdlcdn.com/imgs/a/l/6/IRIS-12-KG-Dumbell-SDL770225076-1-1fa16.jpg'),
-(114, 114, 'https://n4.sdlcdn.com/imgs/d/3/n/Roger-Moris-White-Board-Small-1803120-1-07a31.JPG'),
-(115, 115, 'https://n4.sdlcdn.com/imgs/c/v/z/Shilpihandicrafts-Off-White-Necklace-Set-SDL535327662-1-217c3.jpg'),
-(116, 116, 'https://n4.sdlcdn.com/imgs/a/q/f/Cotton-Printed-Suits-SDL438213936-1-ac65e.jpg'),
-(117, 117, 'https://n4.sdlcdn.com/imgs/b/y/1/Diary-of-a-Wimpy-Kid-SDL182448723-1-d827c.jpg'),
-(118, 118, 'https://n4.sdlcdn.com/imgs/a/o/u/Ads-Compact-Powder-A8030-2-SDL779721993-1-bd8ea.jpg');
+INSERT INTO `product_files` (`id`, `product_id`, `file_path`, `img_order`) VALUES
+(1, 1, 'hello', '3'),
+(2, 153, 'assets/uploads/products/1594042023_8b700b2807391ef0b991.png', '1'),
+(3, 154, 'assets/uploads/products/1594044238_b39bfdab93c3b7d30dfa.png', '1'),
+(4, 154, 'assets/uploads/products/1594044238_f540ed04a6f3d269fe60.png', '2'),
+(5, 154, 'assets/uploads/products/1594044238_90fe3e0e9f48c17e2d4f.png', '3'),
+(6, 154, 'assets/uploads/products/1594044238_bb422c0ce9f080f29434.png', '4');
 
 -- --------------------------------------------------------
 
@@ -1213,7 +1186,7 @@ CREATE TABLE `rating` (
 CREATE TABLE `settings` (
   `id` int(6) UNSIGNED NOT NULL,
   `name` varchar(30) NOT NULL,
-  `value` varchar(30) NOT NULL
+  `value` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -1222,8 +1195,8 @@ CREATE TABLE `settings` (
 
 INSERT INTO `settings` (`id`, `name`, `value`) VALUES
 (44, 'fabook_login', 'on'),
-(45, 'facebook_app_secrete', 'hhhhhhhhhhbaba'),
-(46, 'facebook_graph_version', 'v7.2'),
+(45, 'facebook_app_secrete', 'hhhhhhhhhhbabasss'),
+(46, 'facebook_graph_version', ''),
 (47, 'status', 'on'),
 (48, 'google_app_name', 'doolbay'),
 (49, 'facebook_app_id', '7d998jerjskds83'),
@@ -1232,7 +1205,7 @@ INSERT INTO `settings` (`id`, `name`, `value`) VALUES
 (52, 'google_redirect_url', 'doolbay.com'),
 (53, 'facebook_link', 'https://facebook.com/doolbay'),
 (54, 'category_id', '1'),
-(55, 'slider_layout', 'Select slider layout'),
+(55, 'slider_layout', 'Select layout'),
 (56, 'slide_interval', '3000'),
 (57, 'slider_Erasing', '1'),
 (58, 'slider_duration', '800'),
@@ -1242,7 +1215,46 @@ INSERT INTO `settings` (`id`, `name`, `value`) VALUES
 (62, 'site_seo_title', 'doolbay'),
 (63, 'site_keywords', 'shopping,script,online'),
 (64, 'posts_seo_title', 'doolbay blog'),
-(65, 'site_name', 'Doolbay');
+(65, 'site_name', 'Doolbay'),
+(66, 'contact_email', 'hello@gmail.coms'),
+(67, 'contact_phone', '0758307272'),
+(68, 'site_description', 'this is my online shop'),
+(69, 'business_type', 'eccomr'),
+(70, 'business_address', 'kampala, Uganda'),
+(71, 'google_tracking_code', 'UA-XXXXX-X'),
+(72, 'return_policy', '<p>hello world<br></p>'),
+(73, 'regional_settings', ''),
+(74, 'site_language', ''),
+(75, 'site_currency', ''),
+(76, 'site_timezone', ''),
+(77, 'terms_&_conditions', ''),
+(78, 'active_return_policy', 'on'),
+(79, 'privacy_policy', '<p><br></p>lorem why<br>'),
+(81, 'email_host_name', ''),
+(82, 'sender_email', ''),
+(83, 'sender_display_name', ''),
+(84, 'auth_email', ''),
+(85, 'auth_password', ''),
+(86, 'twilio_accout_sid', ''),
+(87, 'twilio_auth_token', ''),
+(88, 'twilio_service_id', ''),
+(89, 'google_api_keys', ''),
+(90, 'fixer_api_keys', ''),
+(91, 'name', ''),
+(92, 'active_privacy_policy', 'on'),
+(93, 'active_contact_us', 'on'),
+(94, 'active_terms_conditions', '1'),
+(95, 'terms_conditions', '<p>terms<br></p>'),
+(96, 'shipping_confirmation_email', 'on'),
+(97, 'digital_download_link_email', 'on'),
+(98, 'order_confirmation', '1'),
+(99, 'ready_for_pickup_email', 'on'),
+(100, 'create_order_invoices', '1'),
+(101, 'auto_product_approval', 'on'),
+(102, 'order_confirmation_email', 'on'),
+(103, 'contact_us', ''),
+(104, 'logo', 'assets/uploads/settings/google design_6.jpg'),
+(105, 'favicon', 'assets/uploads/settings/Screenshot_2020-06-29 Printify Drop Shipping Print on Demand for Ecommerce.png');
 
 -- --------------------------------------------------------
 
@@ -1264,27 +1276,6 @@ CREATE TABLE `sliders` (
   `order` int(50) NOT NULL DEFAULT 0,
   `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `types`
---
-
-CREATE TABLE `types` (
-  `id` int(11) NOT NULL,
-  `name` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `slug` varchar(250) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `image` varchar(200) COLLATE utf8mb4_unicode_520_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
---
--- Dumping data for table `types`
---
-
-INSERT INTO `types` (`id`, `name`, `slug`, `image`) VALUES
-(18, 'premium', 'premium', ''),
-(24, 'featured', 'featured', '');
 
 -- --------------------------------------------------------
 
@@ -1394,6 +1385,13 @@ ALTER TABLE `address`
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `parentid_fk` (`parentid`);
+
+--
+-- Indexes for table `collection`
+--
+ALTER TABLE `collection`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1415,6 +1413,12 @@ ALTER TABLE `countries`
   ADD PRIMARY KEY (`name`);
 
 --
+-- Indexes for table `coupons`
+--
+ALTER TABLE `coupons`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `pages`
 --
 ALTER TABLE `pages`
@@ -1430,24 +1434,19 @@ ALTER TABLE `payments`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Indexes for table `product_files`
 --
 ALTER TABLE `product_files`
-  ADD PRIMARY KEY (`id`);
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Indexes for table `settings`
 --
 ALTER TABLE `settings`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `types`
---
-ALTER TABLE `types`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1473,6 +1472,12 @@ ALTER TABLE `address`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
+-- AUTO_INCREMENT for table `collection`
+--
+ALTER TABLE `collection`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
 -- AUTO_INCREMENT for table `companies`
 --
 ALTER TABLE `companies`
@@ -1482,6 +1487,12 @@ ALTER TABLE `companies`
 -- AUTO_INCREMENT for table `config`
 --
 ALTER TABLE `config`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `coupons`
+--
+ALTER TABLE `coupons`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -1497,16 +1508,22 @@ ALTER TABLE `payments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
+
+--
+-- AUTO_INCREMENT for table `product_files`
+--
+ALTER TABLE `product_files`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
-
---
--- AUTO_INCREMENT for table `types`
---
-ALTER TABLE `types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1519,6 +1536,16 @@ ALTER TABLE `users`
 --
 ALTER TABLE `wish_list`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `categories`
+--
+ALTER TABLE `categories`
+  ADD CONSTRAINT `parentid_fk` FOREIGN KEY (`parentid`) REFERENCES `categories` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -2,31 +2,7 @@
     <div class='row'>
         <div class='col-md-2 pb-3 category-column'>
             <div class="bg-white shadow-xs rounded slide-container overflow-hidden p-2">
-                <ul class="navbar-nav mr-auto category-nav" id="navAccordion">
-                    <?php foreach ($categories as $category):?>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-collapse nav-link-show" href="#" id="hasSubItems"
-                            data-toggle="collapse" data-target="#collapseSubItems4" aria-controls="collapseSubItems4"
-                            aria-expanded="true">
-                            <ion-icon name="car-sport-outline"></ion-icon>
-                            <?=$category['root_name']?>
-                        </a>
-                        <ul class="nav-second-level collapse" id="collapseSubItems4" data-parent="#navAccordion">
 
-                            <h6><?=$category['down1_name']?></h6>
-                            <hr>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span class="nav-link-text"><?=$category['down2_name']?></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <?php endforeach ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Item 5</a>
-                    </li>
-                </ul>
             </div>
         </div>
         <div class='col-md-8 px-md-0 shadow-xs slide-container'>

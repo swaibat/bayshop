@@ -187,25 +187,4 @@
         </div>
     </div>
 </div>
-<script>
-// $(document).ready(() => {
-//     $(".modal-bod").load("/email/order_confirmation.html");
-// })
-    // $('.btn').click((e) => {
-    //     e.preventDefault();
-    // })
-    $('.custom-control-input').change((e) => {
-        e.target.checked ? $('.custom-control-input').val('1') : $('.custom-control-input').val('0');
-    })
-    const policies = () => {
-        const {
-            id,
-            checked
-        } = this.event.target;
-        if (checked) {
-            $(`.${id}`).addClass("show");
-        } else {
-            $(`.${id}`).removeClass("show");
-        }
-    }
-</script>
+

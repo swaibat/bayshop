@@ -10,7 +10,8 @@
     overflow-x: hidden;
     transition: width 0.1s;
 }
-.panel-open{
+
+.panel-open {
     width: 380px;
 }
 
@@ -52,40 +53,49 @@
                 <p class='mb-1'>Preview on google</p>
                 <small class='mb-2'>These changes will take time to be shown in Google</small>
                 <div class="border py-3 px-3 mt-2">
-                    <p class='seo-description mb-1'><span class='site'>www.doolbay.com</span> > products > dodo</p>
-                    <h3 class='seo-title'>dodo | Doolbay</h3>
-                    <p class='seo-description truncate-overflow'>Excepteur sint reprehenderit magna ex do excepteur
+                    <p class='seo-description mb-1'><span class='site'>www.doolbay.com</span> > products > <span class="seo_title_text">dodo</span></p>
+                    <h3 class='seo-title'><span class="seo_title_text">dodo</span> | Doolbay</h3>
+                    <p class='seo-description seo_description_text truncate-overflow'>Excepteur sint reprehenderit
+                        magna ex do excepteur
                         deserunt ullamco do aliqua laboris cupidatat proident.</p>
 
                 </div>
                 <div class="form-row mt-3">
                     <div class="form-group w-100">
                         <label for="seo_title">SEO title</label>
-                        <input type="text" class="form-control" id="seo_title" placeholder="Enter title">
+                        <input type="text" class="form-control" name="seo_title" id="seo_title"
+                            placeholder="Enter title">
                     </div>
                     <div class="form-group w-100">
                         <label for="seo_description">SEO description</label>
-                        <textarea class="form-control" name="seo_description" id="seo_description" placeholder="Enter deacription"></textarea>
+                        <textarea class="form-control" name="seo_description" id="seo_description"
+                            placeholder="Enter deacription"></textarea>
                     </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <h5 class='mb-1'>social Share</h5>
-                <small class='seo-description'>Below is the preview of your social share can if you feel it can look better than this you can edit the <b>Cover Image</b>, <b>title</b> and <b>description</b></small>
-                <div class="border py-3 px-3 mt-2">
-                    <p class='seo-description mb-1'><span class='site'>www.doolbay.com</span> > products > dodo</p>
-                    <h3 class='seo-title'>dodo | Doolbay</h3>
-                    <p class='seo-description truncate-overflow'>Excepteur sint reprehenderit magna ex do excepteur
+                <small class='seo-description'>Below is the preview of your social share can if you feel it can look
+                    better than this you can edit the <b>Cover Image</b>, <b>title</b> and <b>description</b></small>
+                <div class="d-flex border py-3 px-3 mt-2">
+                <img class='img-thumbnail' width="150" height="200" src="<?= base_url('assets/uploads/products/1593434716_3b6cfd649046db50a2c5.jpg')?>" alt="">
+                <div class="">
+                    <p class='seo-description mb-1'><span class='site'>www.doolbay.com</span></p>
+                    <h3 class='seo-title '>dodo | Doolbay</h3>
+                    <p class='seo-description social_desctiption_text truncate-overflow'>Excepteur sint reprehenderit magna ex do excepteur
                         deserunt ullamco do aliqua laboris cupidatat proident.</p>
+                        </div>
                 </div>
                 <div class="form-row mt-3">
                     <div class="form-group w-100">
                         <label for="social_title">Social title</label>
-                        <input type="text" class="form-control" name='social_title' id="social_title" placeholder="Enter title">
+                        <input type="text" class="form-control" name='social_title' id="social_title"
+                            placeholder="Enter title">
                     </div>
                     <div class="form-group w-100">
                         <label for="social_description">Social description</label>
-                        <textarea class="form-control" name="social_description" id="social_description" placeholder="Enter description"></textarea>
+                        <textarea class="form-control" name="social_description" id="social_description"
+                            placeholder="Enter description"></textarea>
                     </div>
                 </div>
             </div>
@@ -97,10 +107,27 @@
     </div>
 </div>
 <script>
-    $("#edit-seo").click(()=>{
-        $(".sidepanel").addClass("panel-open");
-    })
-    $("#close-panel").click(()=>{
-        $(".sidepanel").removeClass("panel-open");
-    })
+$(".sidepanel .form-control").keyup(({target}) => {
+    // console.log(target.value);
+    $(`.${target.id}_text`).text(target.value)
+})
+$("#title").change(({target})=>{
+    $("#seo_title, #social_title").val(target.value)
+    $(".seo_title_text, .social_title_text").text(target.value)
+})
+$("#description").change(({target})=>{
+    $("#seo_description, #social_description").val(target.value)
+    $(".seo_description_text, .social_description_text").text(target.value)
+})
+$("#edit-seo").click(() => {
+    $(".sidepanel").addClass("panel-open");
+})
+$("#close-panel").click(() => {
+    $(".sidepanel").removeClass("panel-open");
+})
+
+// $("#seo_description").change((e)=>{
+//     console.log(e.target.value)
+//     $("#seo-description-text").val($(this).val())
+// })
 </script>
