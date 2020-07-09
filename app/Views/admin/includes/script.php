@@ -73,6 +73,7 @@
     </div>
 </div>
 <?= script_tag('assets/shared/popper/popper.min.js'); ?>
+<?= script_tag('assets/shared/validator/index.js'); ?>
 <?= script_tag('assets/plugins/nicescroll/jquery.nicescroll.min.js'); ?>
 <?= script_tag('assets/plugins/toastify-js/toastify-js.js'); ?>
 <?= script_tag('assets/plugins/jquery-multifile/jquery-multifile.js'); ?>

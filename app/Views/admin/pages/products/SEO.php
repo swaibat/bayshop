@@ -76,10 +76,10 @@
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <h5 class='mb-1'>social Share</h5>
                 <small class='seo-description'>Below is the preview of your social share can if you feel it can look
-                    better than this you can edit the <b>Cover Image</b>, <b>title</b> and <b>description</b></small>
-                <div class="d-flex border py-3 px-3 mt-2">
-                <img class='img-thumbnail' width="150" height="200" src="<?= base_url('assets/uploads/products/1593434716_3b6cfd649046db50a2c5.jpg')?>" alt="">
-                <div class="">
+                    better than this you can edit the <b>title</b> and <b>description</b></small>
+                <div class="d-flex border p-2 mt-2 bg-light rounded">
+                <img id="social-img" class='rounded border' src="" alt="">
+                <div class="pl-3">
                     <p class='seo-description mb-1'><span class='site'>www.doolbay.com</span></p>
                     <h3 class='seo-title '>dodo | Doolbay</h3>
                     <p class='seo-description social_desctiption_text truncate-overflow'>Excepteur sint reprehenderit magna ex do excepteur
@@ -115,9 +115,10 @@ $("#title").change(({target})=>{
     $("#seo_title, #social_title").val(target.value)
     $(".seo_title_text, .social_title_text").text(target.value)
 })
-$("#description").change(({target})=>{
-    $("#seo_description, #social_description").val(target.value)
-    $(".seo_description_text, .social_description_text").text(target.value)
+$(".summernote-simple").change(({target})=>{
+    console.log(target.value);
+    // $("#seo_description, #social_description").val(target.value)
+    // $(".seo_description_text, .social_description_text").text(target.value)
 })
 $("#edit-seo").click(() => {
     $(".sidepanel").addClass("panel-open");
@@ -130,4 +131,5 @@ $("#close-panel").click(() => {
 //     console.log(e.target.value)
 //     $("#seo-description-text").val($(this).val())
 // })
+
 </script>

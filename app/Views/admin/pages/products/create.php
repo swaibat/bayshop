@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <div id="display-btns" class="row">
                         <div class="col-6">
-                            <label class='btn bg-light d-flex justify-content-around' for="pro-image">
+                            <label id='img-upload-label' class='btn bg-light d-flex justify-content-around' for="pro-image">
                                 <span class="mr-2">
                                     <svg class="bi bi-image" width="4em" height="4em" viewBox="0 0 16 16"
                                         fill="rgb(174, 174, 248)" xmlns="http://www.w3.org/2000/svg">
@@ -37,7 +37,7 @@
                                 multiple>
                         </div>
                         <div class="col-6">
-                            <label class='btn bg-light d-flex justify-content-around' for="pro-image">
+                            <label id='video-upload-label' class='btn bg-light d-flex justify-content-around' for="pro-image">
                                 <span class="mr-2">
                                     <svg class="bi bi-camera-video" width="4em" height="4em" viewBox="0 0 16 16"
                                         fill="rgb(174, 174, 248)" xmlns="http://www.w3.org/2000/svg">
@@ -73,18 +73,16 @@
                 </div>
                 <div class="card-body">
                         <div class="form-row">
-                            <div class="form-group col-md-8 mb-4">
-                                <label for="title">title</label>
-                                <input type="text" class="form-control" name="title" id="title"
-                                    placeholder="add product title">
+                            <div class="form-group col-md-8">
+                                <label for="title">title *</label>
+                                <input type="text" class="form-control" name="title" id="title" placeholder="add product title">
                             </div>
-                            <div class="form-group col-md-4 mb-4">
+                            <div class="form-group col-md-4">
                                 <label for="ribbon">Ribbon</label>
-                                <input type="text" class="form-control" name="ribbon" id="ribbon"
-                                    placeholder="eg. new arrival">
+                                <input type="text" class="form-control" name="ribbon" id="ribbon" placeholder="eg. new arrival">
                             </div>
-                            <div class="form-group col-md-4 mb-4">
-                                <label for="price">Price</label>
+                            <div class="form-group col-md-4">
+                                <label for="price">Price *</label>
                                 <div id="price" class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">USD</span>
@@ -92,7 +90,7 @@
                                     <input type="text" name="price" class="form-control" placeholder="100">
                                 </div>
                             </div>
-                            <div class="form-group col-md-5 mb-4">
+                            <div class="form-group col-md-5">
                                 <label for="inputPassword4">Discount</label>
                                 <div id="discount" class="input-group ">
                                     <input type="text" name="discount" class="form-control"
@@ -113,6 +111,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-12">
+                                <label for="inputPassword4">Description</label>
                                 <textarea class="summernote-simple form-control rounded" name="description"></textarea>
                             </div>
                         </div>
@@ -121,59 +120,68 @@
             <!-- product variables -->
             <div class="card dool-card">
                 <div class="card-header">
-                    <h6>Product options</h6>
-                    <small>if product has variables like different colors,sizes or materials </small>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                        <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+                    <h6>Product Options/Variables</h6>
+                    <div class="custom-control custom-switch justify-content-start">
+                        <input type="checkbox" class="custom-control-input" id="enable-variable">
+                        <label class="custom-control-label" for="enable-variable" data-toggle="collapse" href="#collapseVariables" role="button" aria-expanded="false" aria-controls="collapseVariables">This product has variables like <b>Material, colors, materials</b></label>
                     </div>
                 </div>
+                <div class="collapse" id="collapseVariables">
                 <div class="card-body d-flex flex-column">
                     <div class="custom-control custom-switch justify-content-start my-3">
-                        <input type="checkbox" class="custom-control-input"
-                            id="terms_conditions" onchange="policies()">
-                        <label class="custom-control-label" for="terms_conditions">Sizes</label>
+                        <input type="checkbox" class="custom-control-input" id="size">
+                        <label class="custom-control-label" for="size" data-toggle="collapse" href="#size" role="button" aria-expanded="false" aria-controls="size">Sizes</label>
                     </div>
-                    <div class="collapse terms_conditions">
+                    <div id="size" class="collapse">
                         <select class="form-control select2" name="sizes[]" multiple="multiple">
-                            <option selected>orange</option>
-                            <option>white</option>
-                            <option selected>purple</option>
+                            <option>S</option>
+                            <option>M</option>
+                            <option>L</option>
+                            <option>XL</option>
+                            <option>XXL</option>
+                            <option>3XL</option>
                         </select>
                     </div>
                     <div class="custom-control custom-switch justify-content-start my-3">
                         <input type="checkbox" class="custom-control-input"
-                            id="return_policy" onchange="policies()">
-                        <label class="custom-control-label" for="return_policy">Material</label>
+                            id="material">
+                        <label class="custom-control-label" for="material"  data-toggle="collapse" href="#material" role="button" aria-expanded="false" aria-controls="material">Material</label>
                     </div>
-                    <div class="collapse return_policy">
+                    <div id="material" class="collapse material">
                         <select class="form-control select2" name="materials[]" multiple="multiple">
-                            <option selected>orange</option>
-                            <option>white</option>
-                            <option selected>purple</option>
+                            <option>silk</option>
+                            <option>leather</option>
                         </select>
                     </div>
                     <div class="custom-control custom-switch justify-content-start my-3">
-                        <input type="checkbox" class="custom-control-input"
-                            id="privacy_policy" onchange="policies()">
-                        <label class="custom-control-label" for="privacy_policy">colors </label>
+                        <input type="checkbox" class="custom-control-input" id="color">
+                        <label class="custom-control-label" for="color"  data-toggle="collapse" href="#color" role="button" aria-expanded="false" aria-controls="color">colors </label>
                     </div>
-                    <div class="collapse privacy_policy">
+                    <div id="color"  class="collapse color">
                         <div class="form-group mt-3">
                             <select class="form-control select2" name="colors[]" multiple="multiple">
-                                <option selected>orange</option>
+                                <option>orange</option>
                                 <option>white</option>
-                                <option selected>purple</option>
+                                <option>purple</option>
+                                <option>greeb</option>
+                                <option>yellow</option>
+                                <option >red</option>
                             </select>
                         </div>
 
+                    </div>
                     </div>
                 </div>
             </div>
             <div class="card dool-card">
                 <div class="card-header">
                     <h6>Tracking</h6>
+                    <div class="custom-control custom-switch justify-content-start">
+                        <input type="checkbox" class="custom-control-input" id="enable-tracking">
+                        <label class="custom-control-label" for="enable-tracking" data-toggle="collapse" href="#collapse-tracking" role="button" aria-expanded="false" aria-controls="collapse-tracking">Enable product Tracking</label>
+                    </div>
                 </div>
+                <div class="collapse" id="collapse-tracking">
                 <div class="card-body">
                     <div class="form-row">
                         <div class="form-group col-md-4">
@@ -185,14 +193,12 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="SKU">SKU</label>
-                            <div class="input-group mb-3">
-                                <input type="text" name="sku" id='sku' class="form-control" placeholder="enter SKU">
-                            </div>
+                                <input type="text" name="sku" id='sku' class="form-control" placeholder="enter SKU">     
                         </div>
                         <div class="form-group col-md-4">
                             <label for="weight">Weight</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="weight" id="weight" placeholder="0.0">
+                            <div class="input-group" id="weight">
+                                <input type="text" class="form-control" name="weight" placeholder="0.0">
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">kg</span>
                                 </div>
@@ -200,6 +206,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
         <div class="col-md-4">
@@ -211,8 +218,9 @@
                 </div>
                 <div class=" card-body form-group">
                     <div class="form-group">
-                        <label for="category_id">Select Categories</label>
+                        <label for="category_id">Select Category *</label>
                         <select name="category_id" id="category_id" class="custom-select">
+                        <option value="">Select . . . </option>
                             <?php foreach ($categories as $category):?>
                             <?php if ($category['sub']):?>
                             <optgroup label="<?=$category['name']?>">
@@ -221,7 +229,7 @@
                                 <?php endforeach; ?>
                             </optgroup>
                             <?php else: ?>
-                            <option value="hello">hello</option>
+                            <option value="<?=$category['id']?>"><?=$category['name']?></option>
                             <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
@@ -235,7 +243,7 @@
                 </div>
                 <ul class="card-body" id="collection">
                     <?php foreach ($collection as $collection):?>
-                    <li class="py-2">
+                    <li  class="py-2 collection-prev">
                         <div class="custom-control custom-checkbox d-flex align-items-center">
                             <input name="collection_id[]" type="checkbox" class="collection custom-control-input"
                                 value="<?=$collection['id']?>" id="<?=$collection['id']?>">
@@ -244,9 +252,20 @@
                         </div>
                     </li>
                     <?php endforeach ?>
+                    <li class="pt-3 add-collection-field d-none">
+                        <div id="discount" class="input-group ">
+                            <input type="text" id="collection_name" class="form-control rounded" placeholder="enter collection name">
+                            <div class="input-group-append">
+                                <div class="input-group-text d-fex justify-content-between bg-white border-0 p-0">
+                                    <span class="btn btn-sm btn-primary mx-3"  onclick="saveCollection()"><ion-icon name="checkmark-outline"></ion-icon> </span>
+                                    <span id="discard-collection" class="btn btn-sm btn-outline-primary"><ion-icon name="close-outline"></ion-icon></span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
                 <div class="card-footer">
-                    <span class=' btn btn-sm btn-outline-primary' id='add-collection'>Add new Collection</span>
+                    <button class=' btn btn-sm btn-outline-primary' id='add-collection'>Add new Collection</button>
                 </div>
             </div>
 
@@ -256,7 +275,7 @@
                         Others
                     </h6>
                 </div>
-                <ul class="card-body list-group">
+                <ul class="card-body list-group px-0 pt-0">
                     <li class="list-group-item border-0 cursor-pointer">
                         <span class="icon-lg mr-2">
                             <ion-icon name="gift-outline"></ion-icon>
@@ -297,76 +316,41 @@
 </form>
 
 <script>
-// $(".select3").select2({
-//     tags: true,
-//     tokenSeparators: [',', ' ']
-// })
-$('.collection').change(() => {
-    var str = '';
-    $('.collection:checked').each(function() {
-        str = +$(this).val()
-    });
-    console.log(str);
-})
-$('.variable').change((e) => {
-    console.log(e.target.value)
-})
 
 const saveCollection = () => {
     // e.preventDefault();
-    // console.log($('#collection_name').val());
-    $.post("<?=base_url('/admin/collection/create')?>", {
-                name: $('#collection_name').val()
-            },
+    $.post("<?=base_url('/admin/collection/create')?>", { name: $('#collection_name').val() })
+        .done(function(res) {
 
-            function() {
-                alert("success");
-            })
-        .done(function() {
-            alert("second success");
+            $(`<li class="py-2 collection-prev">
+                <div class="custom-control custom-checkbox d-flex align-items-center">
+                    <input name="collection_id[]" type="checkbox" class="collection custom-control-input" value="${res.data.id}" id="${res.data.id}" checked>
+                    <label class="custom-control-label" for="${res.data.id}">${res.data.name}</label>
+                </div>
+            </li>`).insertAfter($('#collection .collection-prev:last'));
+            $('.add-collection-field input').val('');
         })
         .fail(function() {
             alert("error");
         })
-        .always(function() {
-            alert("finished");
-        });
-}
-
-const discardCollection = () => {
-    // e.preventDefault();
-    // $( "div" ).filter( $( "#add-collection-field" ) )
-    console.log($("div").filter($("#add-collection-field")).length);
-
 }
 
 $(document).ready(function() {
 
     $("#add-collection").click(() => {
-        addNewFields()
-        // console.log('hello')
+        $('.add-collection-field').removeClass('d-none');
+    $('#add-collection').attr('disabled',true);
+    });
+    $("#discard-collection").click(() => {
+        $('.add-collection-field').addClass('d-none');
+        $('#add-collection').removeAttr('disabled',true);
+        $('.add-collection-field input').val('');
     });
 
-    function addNewFields() {
-        $(`
-        <li class="pt-3 add-collection-field">
-            <div id="discount" class="input-group ">
-                <input type="text" id="collection_name" class="form-control rounded" placeholder="enter collection name">
-                <div class="input-group-append">
-                    <div class="input-group-text d-fex justify-content-between bg-white border-0 p-0">
-                        <span class="btn btn-sm btn-primary mx-3"  onclick="saveCollection()"> X </span>
-                        <span class="btn btn-sm btn-outline-primary" onclick="discardCollection()"> X </span>
-                    </div>
-                </div>
-            </div>
-        </li>
-        `).appendTo('#collection');
-    }
 
 });
 
 $('#discount-check').change(function(e) {
-    // console.log('hello');
     e.target.checked ? $('#discount').addClass('d-none') : $('#discount').removeClass('d-none');
 })
 var num = 0;
@@ -385,7 +369,6 @@ $(document).ready(function(event) {
         }
         $(".preview-image.preview-show-" + no).remove();
         productFiles = productFiles.filter(e => {
-            console.log(e.name, $(this).data('name'));
             return e.name != $(this).data('name')
         })
     });
@@ -395,7 +378,6 @@ $(document).ready(function(event) {
             $('#display-btns').addClass("d-none");
             $('#img-preview').removeClass("d-none");
         }
-        console.log(event.target.files);
         var files = event.target.files; //FileList object
         var output = $(".preview-images-zone");
         for (let i = 0; i < files.length; i++) {
@@ -411,10 +393,8 @@ $(document).ready(function(event) {
                 var picReader = new FileReader();
 
                 picReader.addEventListener('load', function(event) {
-                    // console.log($("#pro-image").val())
                     var picFile = event.target;
-                    console.log(file);
-
+                    productFiles.length==1 && $("#social-img").attr('src', picFile.result)
                     var html = `<div class="preview-image border rounded preview-show-${num}">
                         <span class="image-cancel text-danger" data-name="${file.name}" data-no="${num}
                         "><ion-icon name="close-circle-outline"></ion-icon></span>
@@ -436,14 +416,39 @@ $(document).ready(function(event) {
     })
 
 });
-
+$('button:not(#submit)').click((e)=>e.preventDefault())
 $("#form").submit(function(event) {
     event.preventDefault();
     const formData = new FormData();
-    $(".helper-text-danger").remove();
-    productFiles.map(e => formData.append('image[]', e))
-    $(this).serializeArray().map(({name,value})=>formData.append(name,value));
-    $.ajax({
+    $(".form-text").remove();
+    productFiles.length
+    ?productFiles.map(e => formData.append('filesf[]', e))
+    :($(`#img-upload-label`).removeClass('bg-light').addClass('alert-danger').after(`<small class="form-text text-danger">Upload atleat one image or Video</small>`),
+    $(`#video-upload-label`).removeClass('bg-light').addClass('alert-warning').after(`<small class="form-text text-warning">product with videoclip sale 3X more</small>`))
+    const reqBody = $(this).serializeArray();
+    reqBody.map(({name,value})=>formData.append(name,value));
+    const discount_type = $('input[name="discount_type"]:checked').val()
+    validate(
+        reqBody,
+      {
+        title: { req: true, min: 3 },
+        price: { req: true, max: 13 },
+        discount: { maxInt: discount_type === 'percentage' ? 100 : JSON.parse($('input[name="price"]').val()),
+            discount_type
+        },
+        description: { min: 12 },
+        category_id: { req: true },
+        status: { req: true, },
+        sku: { min: 5 },
+        weight: { min: 1 }
+      },
+      errors => {
+          if(errors.length) {
+              errors.map(error=>{
+            $(`#${error.key}`).after(`<small class="form-text text-danger">${error.value}</small>`)
+        })
+    }else{
+        $.ajax({
         type: "POST",
         enctype: "multipart/form-data",
         url: $(this).attr("action"),
@@ -451,12 +456,11 @@ $("#form").submit(function(event) {
         processData: false,
         contentType: false,
     }).done(function(res) {
-        console.log(res)
         res.errors ?
             Object.entries(res.errors).map((error) => {
                 $(`#${error[0]}`).after(
                     `<small class="helper-text-danger">${error[1]}</small>`
-                );
+                )
             }) :
             Toastify({
                 text: res.message,
@@ -468,5 +472,9 @@ $("#form").submit(function(event) {
             backgroundColor: "#FFA500",
         }).showToast();
     });
+    }
+    }
+    );
+    
 });
 </script>

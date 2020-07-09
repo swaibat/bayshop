@@ -16,7 +16,7 @@
         </div>
         <?= form_open(base_url('auth/login'), ['method' => 'post', 'id' => 'form', 'novalidate' => '',]); ?>
         <div class="form-group">
-            <label for="username">Email address</label>
+            <label for="username">Username</label>
             <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
         </div>
         <div class="form-group">

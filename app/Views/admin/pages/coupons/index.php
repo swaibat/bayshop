@@ -20,3 +20,9 @@
 		</div>
 	</div>
 </div>
+<script>
+$(document).ready(()=>{
+    console.log(new Date().toString())
+    // $("#valid-from").val('2020-01-08');
+});
+</script>

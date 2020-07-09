@@ -84,7 +84,10 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     $routes->add('coupons/create', 'Coupon::create');
     $routes->add('coupons/(:num)/edit', 'Coupon::edit');
 });
-
+// api routes
+// $routes->group('api/v1', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
+//     $routes->add('products', 'Product', );
+// });
 // vendor pages
 $routes->group('vendor', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
     $routes->add('products', 'Product', );

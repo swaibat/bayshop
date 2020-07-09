@@ -33,6 +33,9 @@ class Product extends BaseController
             'products'      => $this->products->orderBy('id', 'DESC')->findAll(),
             'collection'    => $this->collection->findAll(),
         ];
+        if($this->request->uri->getSegment(1)=='api'){
+            return $this->res->setJSON(['status' => 200, 'data'  => $this->products->findAll()]);
+        } 
         return view($this->backpath.'/index', $data);
     }
 
@@ -67,7 +70,7 @@ class Product extends BaseController
             $path = 'assets/uploads/products/';
             $order      = 1;
             if ($imagefile = $this->request->getFiles()) {
-                foreach ($imagefile['image'] as $img) {
+                foreach ($imagefile['files'] as $img) {
                     if ($img->isValid() && !$img->hasMoved()) {
                         $file_name = $img->getRandomName();
                         $this->product_files->save([

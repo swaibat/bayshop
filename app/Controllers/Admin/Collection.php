@@ -31,7 +31,7 @@ class Collection extends BaseController
                 'image'                 => $this->request->getVar('location'),
             ];
             $this->collection->save($data);
-            return $this->response->setJSON($data);
+            return $this->response->setJSON(['status'=>201,'data'=> array_replace($data,['id'=>$this->collection->insertID()])]);
         }
         $data = [
             'folder_name'       => 'products',
