@@ -14,14 +14,18 @@ class Coupon extends BaseController
             'folder_name'   => 'coupons',
             'page_name'     => 'index',
             'page_title'    => 'coupons',
+            'collection'    => $this->collection->findAll(),
             'coupons'       => $this->coupons->findAll(),
+            'products'      => $this->products->findAll()
         ];
         echo view($this->backpath.'/index', $data);
     }
 
     // CREATE A NEW COUPON
     public function create()
-    {
+    {   if (isset($_POST) && !empty($_POST)) {
+        return $this->response->setJSON(['status_code'=> 201,'message'=>$_POST]);
+    }
         if ($this->validate([
             'name' => 'required|min_length[3]|max_length[255]',
         ])) {
@@ -30,11 +34,12 @@ class Coupon extends BaseController
                 'type'                  => url_title($this->request->getVar('type')),
                 'code'                  => $this->request->getVar('code'),
                 'offer'                 => $this->request->getVar('offer'),
-                'collection_id'         => $this->request->getVar('collection_id'),
+                'buy_x_get_y'           => implode(",",$this->request->getVar('buy_x_get_y')),
+                'apply_to_collection'   => $this->request->getVar('apply_to_collection'),
                 'user_id'               => $this->request->getVar('user_id'),
                 'status'                => $this->request->getVar('status'),
-                'expiry_date'           => $this->request->getVar('expiry date'),
-                'collection'            => $this->collection->findAll()
+                'valid_from'            => $this->request->getVar('vaid_from'),
+                'valid_to'              => $this->request->getVar('valid_to')
             ];
             $this->user->save($data);
             return $this->response->setJSON(['status_code'=> 201,'message'=>'coupon created succesfully','data'=>$data]);
@@ -43,7 +48,9 @@ class Coupon extends BaseController
             'folder_name'       => 'coupons',
             'page_name'         => 'create',
             'page_title'        => 'Create Coupon',
-            'errors'            => $this->validation->getErrors()
+            'collection'        => $this->collection->findAll(),
+            'errors'            => $this->validation->getErrors(),
+            'products'      => $this->products->findAll()
         ];
         echo view('admin/view', $data);
     }
