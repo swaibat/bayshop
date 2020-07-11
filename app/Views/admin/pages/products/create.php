@@ -1,4 +1,4 @@
-<form id="form" class="" method="post" action="<?= base_url('admin/products/create'); ?>">
+<form id="form" class="" method="post" action="<?= base_url('admin/products/create'); ?>" novalidate="">
     <nav id='action-nav' class="d-flex justify-content-between align-items-center  p-0 m-0 ">
         <h5 class='text-white my-3'><?= $page_title ?></h5>
         <div class="d-flex ml-4">
@@ -75,11 +75,11 @@
                         <div class="form-row">
                             <div class="form-group col-md-8">
                                 <label for="title">title *</label>
-                                <input type="text" class="form-control" name="title" id="title" placeholder="add product title">
+                                <input type="text" class="form-control" name="title" id="title" placeholder="add product title" required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="ribbon">Ribbon</label>
-                                <input type="text" class="form-control" name="ribbon" id="ribbon" placeholder="eg. new arrival">
+                                <input type="text" class="form-control" name="ribbon" id="ribbon" placeholder="eg. new arrival" minlength="3">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="price">Price *</label>
@@ -87,7 +87,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">USD</span>
                                     </div>
-                                    <input type="text" name="price" class="form-control" placeholder="100">
+                                    <input type="text" name="price" class="form-control" placeholder="100" min="3" required>
                                 </div>
                             </div>
                             <div class="form-group col-md-5">
@@ -102,7 +102,7 @@
                                                     <input type="radio" name="discount_type" id="option1" value="percentage" checked> %
                                                 </label>
                                                 <label class="btn">
-                                                    <input type="radio" name="discount_type" id="option2" value='price' >
+                                                    <input type="radio" name="discount_type" id="option2" value='price' min="1" >
                                                     USD
                                                 </label>
                                             </div>
@@ -219,7 +219,7 @@
                 <div class=" card-body form-group">
                     <div class="form-group">
                         <label for="category_id">Select Category *</label>
-                        <select name="category_id" id="category_id" class="custom-select">
+                        <select name="category_id" id="category_id" class="custom-select" required>
                         <option value="">Select . . . </option>
                             <?php foreach ($categories as $category):?>
                             <?php if ($category['sub']):?>
@@ -316,165 +316,136 @@
 </form>
 
 <script>
-
 const saveCollection = () => {
-    // e.preventDefault();
-    $.post("<?=base_url('/admin/collection/create')?>", { name: $('#collection_name').val() })
-        .done(function(res) {
-
-            $(`<li class="py-2 collection-prev">
-                <div class="custom-control custom-checkbox d-flex align-items-center">
-                    <input name="collection_id[]" type="checkbox" class="collection custom-control-input" value="${res.data.id}" id="${res.data.id}" checked>
-                    <label class="custom-control-label" for="${res.data.id}">${res.data.name}</label>
-                </div>
-            </li>`).insertAfter($('#collection .collection-prev:last'));
-            $('.add-collection-field input').val('');
-        })
-        .fail(function() {
-            alert("error");
-        })
+  // e.preventDefault();
+  $.post("<?=base_url('/admin/collection/create')?>", { name: $('#collection_name').val() })
+    .done(function (res) {
+      $(`<li class="py-2 collection-prev">
+              <div class="custom-control custom-checkbox d-flex align-items-center">
+                  <input name="collection_id[]" type="checkbox" class="collection custom-control-input" value="${res.data.id}" id="${res.data.id}" checked>
+                  <label class="custom-control-label" for="${res.data.id}">${res.data.name}</label>
+              </div>
+          </li>`).insertAfter($('#collection .collection-prev:last'));
+      $('.add-collection-field input').val('');
+    }).fail(function () {
+      alert("error");
+    })
 }
 
-$(document).ready(function() {
-
-    $("#add-collection").click(() => {
-        $('.add-collection-field').removeClass('d-none');
-    $('#add-collection').attr('disabled',true);
-    });
-    $("#discard-collection").click(() => {
-        $('.add-collection-field').addClass('d-none');
-        $('#add-collection').removeAttr('disabled',true);
-        $('.add-collection-field input').val('');
-    });
-
-
+$(document).ready(function () {
+  $("#add-collection").click(() => {
+    $('.add-collection-field').removeClass('d-none');
+    $('#add-collection').attr('disabled', true);
+  });
+  $("#discard-collection").click(() => {
+    $('.add-collection-field').addClass('d-none');
+    $('#add-collection').removeAttr('disabled', true);
+    $('.add-collection-field input').val('');
+  });
 });
 
-$('#discount-check').change(function(e) {
-    e.target.checked ? $('#discount').addClass('d-none') : $('#discount').removeClass('d-none');
+$('#discount-check').change(function (e) {
+  e.target.checked ? $('#discount').addClass('d-none') : $('#discount').removeClass('d-none');
 })
 var num = 0;
 var productFiles = [];
-
-$(document).ready(function(event) {
-
-    $(".preview-images-zone").sortable();
-
-    $(document).on('click', '.image-cancel', function() {
-        let no = $(this).data('no');
-        if ($('div.preview-image').length == 1) {
-            $('#display-btns').removeClass("d-none");
-            $('#img-preview').addClass("d-none");
-
-        }
-        $(".preview-image.preview-show-" + no).remove();
-        productFiles = productFiles.filter(e => {
-            return e.name != $(this).data('name')
-        })
-    });
-
-    $('#pro-image').change((event) => {
-        if ($('div.preview-image').length == 0) {
-            $('#display-btns').addClass("d-none");
-            $('#img-preview').removeClass("d-none");
-        }
-        var files = event.target.files; //FileList object
-        var output = $(".preview-images-zone");
-        for (let i = 0; i < files.length; i++) {
-            var file = files[i];
-            productFiles.push(file);
-            var checkdiv = $('div.preview-image').length;
-            // lemit line
-            if (num <= 9 || checkdiv <= 9) {
-
-                var num = checkdiv;
-                // if (!file.type.match('image')) continue;
-
-                var picReader = new FileReader();
-
-                picReader.addEventListener('load', function(event) {
-                    var picFile = event.target;
-                    productFiles.length==1 && $("#social-img").attr('src', picFile.result)
-                    var html = `<div class="preview-image border rounded preview-show-${num}">
-                        <span class="image-cancel text-danger" data-name="${file.name}" data-no="${num}
-                        "><ion-icon name="close-circle-outline"></ion-icon></span>
-                        <div class="image-zone">
-                        ${ file.type.match('image')
-                        ?`<img class="rounded" id="pro-img-${num}" src="${picFile.result}">`
-                        : `<video src="${picFile.result}"></video>`
-                        }
-                        
-                        </div>
-                        </div>`;
-
-                    $(html).insertBefore("#add-btn");
-                    num = num + 1;
-                });
-            }
-            picReader.readAsDataURL(file);
-        }
+$(document).ready(function (event) {
+  $(".preview-images-zone").sortable();
+  $(document).on('click', '.image-cancel', function () {
+    let no = $(this).data('no');
+    if ($('div.preview-image').length == 1) {
+      $('#display-btns').removeClass("d-none");
+      $('#img-preview').addClass("d-none");
+    }
+    $(".preview-image.preview-show-" + no).remove();
+    productFiles = productFiles.filter(e => {
+      return e.name != $(this).data('name')
     })
+  });
+
+  $('#pro-image').change((event) => {
+    if ($('div.preview-image').length == 0) {
+      $('#display-btns').addClass("d-none");
+      $('#img-preview').removeClass("d-none");
+    }
+    var files = event.target.files; //FileList object
+    var output = $(".preview-images-zone");
+    for (let i = 0; i < files.length; i++) {
+      var file = files[i];
+      productFiles.push(file);
+      var checkdiv = $('div.preview-image').length;
+      // lemit line
+      if (num <= 9 || checkdiv <= 9) {
+
+        var num = checkdiv;
+        // if (!file.type.match('image')) continue;
+
+        var picReader = new FileReader();
+
+        picReader.addEventListener('load', function (event) {
+          var picFile = event.target;
+          productFiles.length == 1 && $("#social-img").attr('src', picFile.result)
+          var html = `<div class="preview-image border rounded preview-show-${num}">
+                      <span class="image-cancel text-danger" data-name="${file.name}" data-no="${num}
+                      "><ion-icon name="close-circle-outline"></ion-icon></span>
+                      <div class="image-zone">
+                      ${ file.type.match('image')
+              ? `<img class="rounded" id="pro-img-${num}" src="${picFile.result}">`
+              : `<video src="${picFile.result}"></video>`
+            }
+                      
+                      </div>
+                      </div>`;
+
+          $(html).insertBefore("#add-btn");
+          num = num + 1;
+        });
+      }
+      picReader.readAsDataURL(file);
+    }
+  })
 
 });
-$('button:not(#submit)').click((e)=>e.preventDefault())
-$("#form").submit(function(event) {
-    event.preventDefault();
-    const formData = new FormData();
-    $(".form-text").remove();
-    productFiles.length
-    ?productFiles.map(e => formData.append('filesf[]', e))
-    :($(`#img-upload-label`).removeClass('bg-light').addClass('alert-danger').after(`<small class="form-text text-danger">Upload atleat one image or Video</small>`),
-    $(`#video-upload-label`).removeClass('bg-light').addClass('alert-warning').after(`<small class="form-text text-warning">product with videoclip sale 3X more</small>`))
-    const reqBody = $(this).serializeArray();
-    reqBody.map(({name,value})=>formData.append(name,value));
-    const discount_type = $('input[name="discount_type"]:checked').val()
-    validate(
-        reqBody,
-      {
-        title: { req: true, min: 3 },
-        price: { req: true, max: 13 },
-        discount: { maxInt: discount_type === 'percentage' ? 100 : JSON.parse($('input[name="price"]').val()),
-            discount_type
-        },
-        description: { min: 12 },
-        category_id: { req: true },
-        status: { req: true, },
-        sku: { min: 5 },
-        weight: { min: 1 }
-      },
-      errors => {
-          if(errors.length) {
-              errors.map(error=>{
-            $(`#${error.key}`).after(`<small class="form-text text-danger">${error.value}</small>`)
-        })
-    }else{
-        $.ajax({
+$('button:not(#submit)').click((e) => e.preventDefault())
+$("#form").submit(function (event) {
+  event.preventDefault();
+  const formData = new FormData();
+  $(".form-text").remove();
+  productFiles.length
+    ? productFiles.map(e => formData.append('filesf[]', e))
+    : ($(`#img-upload-label`).removeClass('bg-light').addClass('alert-danger').after(`<small class="form-text text-danger">Upload atleat one image or Video</small>`),
+      $(`#video-upload-label`).removeClass('bg-light').addClass('alert-warning').after(`<small class="form-text text-warning">product with videoclip sale 3X more</small>`))
+  const reqBody = $(this).serializeArray();
+  reqBody.map(({ name, value }) => formData.append(name, value));
+  // const discount_type = $('input[name="discount_type"]:checked').val()
+  validate(reqBody, errors => {
+    if (!errors.length) {
+      $.ajax({
         type: "POST",
         enctype: "multipart/form-data",
         url: $(this).attr("action"),
         data: formData,
         processData: false,
         contentType: false,
-    }).done(function(res) {
+      }).done(function (res) {
         res.errors ?
-            Object.entries(res.errors).map((error) => {
-                $(`#${error[0]}`).after(
-                    `<small class="helper-text-danger">${error[1]}</small>`
-                )
-            }) :
-            Toastify({
-                text: res.message,
-                backgroundColor: "#228B22",
-            }).showToast();
-    }).fail(function(err) {
+          Object.entries(res.errors).map((error) => {
+            $(`#${error[0]}`).after(
+              `<small class="helper-text-danger">${error[1]}</small>`
+            )
+          }) :
+          Toastify({
+            text: res.message,
+            backgroundColor: "#228B22",
+          }).showToast();
+      }).fail(function (err) {
         Toastify({
-            text: "Error operation failed",
-            backgroundColor: "#FFA500",
+          text: "Error operation failed",
+          backgroundColor: "#FFA500",
         }).showToast();
-    });
+      });
     }
-    }
-    );
-    
+  }
+  );
 });
 </script>

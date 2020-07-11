@@ -443,7 +443,7 @@ $(function() {
 
   // popover
   $('[data-toggle="popover"]').popover({
-    container: 'body'
+    container: 'body',
   });
 
   // Select2
@@ -498,20 +498,6 @@ $(function() {
     });
   }
   
-function validateForm(){
-  $(this).serializeArray().map((e)=>{
-    const field = $(`[name="${e.name}"]`)
-    field.attr('required') && !e.value && $(`#${e.name}`).after(showError(`${e.name} is required`));
-    e.value && field.attr('minlength') > e.value.length && $(`#${e.name}`).after(showError(`${e.name} length shouldn't be greater than ${field.attr('min')}`));
-    e.value && field.attr('maxlength') < e.value.length && $(`#${e.name}`).after(showError(`${e.name} length shouldn't be less than ${field.attr('max')}`));
-    e.value && field.attr('min') > JSON.parse(e.value) && $(`#${e.name}`).after(showError(`${e.name} shouldn't be greater than ${field.attr('min')}`));
-    e.value && field.attr('max') < JSON.parse(e.value) && $(`#${e.name}`).after(showError(`${e.name} shouldn't be less than ${field.attr('max')}`));
-})
-function showError(error) {
-    errors.push(error);
-    return `<small class="form-text text-danger">${error}</small>`
-};
-}
-  
 
+  
 });

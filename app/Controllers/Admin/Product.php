@@ -42,6 +42,9 @@ class Product extends BaseController
     // CREATE A NEW PRODUCT
     public function create()
     {
+        if(!isset($_SESSION['user']) || $this->backpath != $this->request->uri->getSegment(1)){ 
+            return redirect()->to('/');
+        }
         
         if (isset($_POST) && !empty($_POST)) {
             // return print_r($this->request->getFiles());

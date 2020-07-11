@@ -33,16 +33,16 @@
         <div class="coupon-form form-row mt-3">
             <div class="form-group col-md-6">
                 <label for="name">Coupon Name *</label>
-                <input type="text" class="form-control" name="name" id="name" placeholder="enter name" min="4" required>
+                <input type="text" class="form-control" name="name" id="name" placeholder="enter name" minlength="3" required>
             </div>
             <div class="form-group col-md-6">
                 <label for="code">Coupon code *</label>
-                <input type="text" class="form-control" name="code" id="code" placeholder="enter code" required>
+                <input type="text" class="form-control" name="code" id="code" minlength="3" placeholder="enter code" required>
             </div>
             <div class="form-group col-md-8">
                 <label>coupon valid From - To</label>
                 <div class="input-group mb-3">
-                    <input type="date" name="valid-from" id="valid-from" min="" class="form-control">
+                    <input type="date" name="valid-from" id="valid-from" class="form-control">
                     <input type="date" name="valid-to" id="valid-to" class="form-control" disabled>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                     <div class="input-group-prepend" id="price-adon">
                         <span class="input-group-text">USD</span>
                     </div>
-                    <input type="text" name="offer" class="form-control" placeholder="enter your">
+                    <input type="text" name="offer" class="form-control" placeholder="enter your" min="1">
                     <div class="input-group-prepend d-none" id="discount-group">
                         <span class="input-group-text">%</span>
                     </div>
@@ -130,33 +130,35 @@ $('[name="type"]').change(() => {
     selected === 'discount' && ($(".offer-container").removeClass('d-none'),$("#buy-x").addClass('d-none'),$('#price-adon').addClass('d-none'),$('#discount-group').removeClass('d-none'));
     selected === 'sale' &&($(".offer-container").removeClass('d-none'),$("#buy-x").addClass('d-none'),$('#discount-group').addClass('d-none'),$('#price-adon').removeClass('d-none'));
 })
+
 // ajax post
-const errors =[]
 $("form").submit(function(event) {
     event.preventDefault();
+    console.log('hello')
     $(".form-text").remove();
-    validateForm();
-    if(!errors.length){
-        $.post($(this).attr("action"),$('form').serialize()).done(function(res) {
-            console.log(res)
+    validate($(this).serializeArray(), errors => {
+    if (!errors.length) {
+      $.post($(this).attr("action"),$(this).serializeArray())
+      .done(function (res) {
         res.errors ?
-            Object.entries(res.errors).map((error) => {
-                $(`#${error[0]}`).after(
-                    `<small class="helper-text-danger">${error[1]}</small>`
-                )
-            }) :
-            Toastify({
-                text: res.message,
-                backgroundColor: "#228B22",
-            }).showToast();
-    }).fail(function(err) {
+          Object.entries(res.errors).map((error) => {
+            $(`#${error[0]}`).after(
+              `<small class="helper-text-danger">${error[1]}</small>`
+            )
+          }) :
+          Toastify({
+            text: res.message,
+            backgroundColor: "#228B22",
+          }).showToast();
+      }).fail(function (err) {
         Toastify({
-            text: "Error operation failed",
-            backgroundColor: "#FFA500",
+          text: "Error operation failed",
+          backgroundColor: "#FFA500",
         }).showToast();
-    });
-    }});
-    
-});
+      });
+    }
+  })
+});   
+
 
 </script>

@@ -1,46 +1,23 @@
+const errors = []
+function validate(reqData, cb) {
+  reqData.map(({ name, value }) => {
+    const field = $(`[name="${name}"]`);
 
-function validate(reqData, data, cb) {
-    const errors = []
-    reqData.map((el)=>{
-        const value = data[el.name];
-        let objValue = el.value;
-        // console.log(el.name, value)
-
-        value && value.req && (!el.value || !objValue)&&errors.push({key:el.name,value:`${el.name.split('_')[0]} is required`});
-      
-        value &&value.alpha && objValue && !objValue.match(/^[a-zA-Z]+$/)
-            && errors.push({key:el.name,value:`${el.name} should be alphabetic`});
-      
-        value && value.bool && objValue && !objValue.match(/^(true|false)$/)
-            && errors.push({key:el.name,value:`${el.name} should be either true or false`});
-      
-          value && value.alphaNum && objValue && !objValue.match(/^[a-zA-Z0-9]*$/)
-            && errors.push({key:el.name,value:`${el.name} should be alphanumeric`});
-      
-          value && value.num && objValue && !objValue.match(/^[0-9]+$/)
-            && errors.push({key:el.name,value:`${el.name} should be an integer`});
-      
-          value &&value.min && objValue && objValue.length < value.min
-            && errors.push({key:el.name,value:`${el.name} should be greater than ${value.min - 1}`});
-      
-          value && value.max && objValue && objValue.length > value.max
-            && errors.push({key:el.name,value:`${el.name} should be less than ${value.max}`});
-
-        value && value.maxInt && objValue && JSON.parse(objValue) > value.maxInt
-            && errors.push({key:el.name,value:value.discount_type === 'percentage'?`${el.name} should be less than ${value.maxInt}%`:`${el.name} should be less than the price`});
-      
-          value && value.email
-          && objValue
-          && !objValue.match(
-            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          )
-            && errors.push({key:el.name,value:`Invalid ${el.name} address`});
-      
-          value &&value.confirm && objValue && !value.confirm.match(objValue)
-            && errors.push({key:el.name,value:`${el.name} provided do not match`});
-    })
-    if (errors) {
-        return cb(errors);
-    }
+    const minLen = field.attr('minlength') && JSON.parse(field.attr('minlength'));
+    const maxLen = field.attr('maxlength') && JSON.parse(field.attr('maxlength'));
+    // const min = field.attr('min') && JSON.parse(field.attr('min').trim());
+    const max = field.attr('max') && JSON.parse(field.attr('max'));
+    field.attr('required') && !value && $(`#${name}`).after(showError(`${name} is required`));
+    value && minLen > value.length && $(`#${name}`).after(showError(`${name} is too short (${minLen} minimum)`));
+    value && maxLen < value.length && $(`#${name}`).after(showError(`${name} is too long (${maxLen} maximum)`));
+    // value && min > value && $(`#${name}`).after(showError(`${name} is less (${min} minimum)`));
+    value && max < value && $(`#${name}`).after(showError(`${name} is much try (${max} maximum)`));
+  })
+  if (errors) return cb(errors);
+  
 }
 
+function showError(error) {
+  errors.push(error);
+  return `<small class="form-text text-danger">${error}</small>`;
+};

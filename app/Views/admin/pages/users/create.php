@@ -1,103 +1,127 @@
-<form id="form" action="<?= base_url('admin/users/create') ?>" enctype="multipart/form-data" method="post" accept-charset="utf-8" novalidate="">
-	<div class="modal-header border-0">
-		<h6 class="modal-title position-absolute bg-primary text-white" id="mymodalLabel"><?= $page_title ?></h6>
-		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-	<div class="form-row modal-body p-4">
-		<div class="col-md-6">
-			<div class="cv-form-group input-group mb-3 mt-4 px-3">
-				<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-						<ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon>
-					</span></div><input name="name" type="text" class="form-control custom-input" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">fullnames</label>
-			</div>
-		</div>
-		<div class="col-md-6">
-			<div class="cv-form-group input-group mb-3 mt-4 px-3">
-				<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-						<ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon>
-					</span></div><input name="username" type="text" class="form-control custom-input" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">username</label>
-			</div>
-		</div>
-		<div class="col-md-9">
-			<div class="cv-form-group input-group mb-3 mt-4 px-3">
-				<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-						<ion-icon name="mail-outline" role="img" class="md hydrated" aria-label="mail outline"></ion-icon>
-					</span></div><input name="email" type="email" class="form-control custom-input" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">email address</label>
-			</div>
-		</div>
-		<div class="col-md-7">
-			<div class="cv-form-group input-group mb-3 mt-4 px-3">
-				<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-						<ion-icon name="locate-outline" role="img" class="md hydrated" aria-label="locate outline"></ion-icon>
-					</span></div><input name="address" type="text" class="form-control custom-input" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">physical address</label>
-			</div>
-		</div>
-		<div class="col-md-5">
-			<div class="cv-form-group input-group mb-3 mt-4 px-3">
-				<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-						<ion-icon name="call-outline" role="img" class="md hydrated" aria-label="call outline"></ion-icon>
-					</span></div><input name="phone" type="number" class="form-control custom-input" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">Telephone number</label>
-			</div>
-		</div>
-		<div class="col-md-6">
-			<div class="cv-form-group input-group mb-3 mt-4 px-3">
-				<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-						<ion-icon name="briefcase-outline" role="img" class="md hydrated" aria-label="briefcase outline"></ion-icon>
-					</span></div><input name="company" type="text" class="form-control custom-input" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">company</label>
-			</div>
-		</div>
-		<div class="col-md-6">
-			<div class="cv-form-group input-group mb-3 mt-4 px-3">
-				<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-						<ion-icon name="lock-closed-outline" role="img" class="md hydrated" aria-label="lock closed outline"></ion-icon>
-					</span></div><input name="password" type="password" class="form-control custom-input" autocomplete="new-password" value="">
-				<div class="input-group-prepend"><span type="button" class="input-group-text bg-white rounded-0 cv-chev right">
-						<ion-icon name="eye-outline" role="img" class="md hydrated" aria-label="eye outline"></ion-icon>
-					</span></div><span class="bar"></span><label class="cv-label left text-capitalize">password</label>
-			</div>
-		</div>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-		<button type="submit" class="btn btn-primary btn-sm">submit</button>
-	</div>
+<form id="form" action="<?= base_url('admin/users/create') ?>" enctype="multipart/form-data" method="post"
+    accept-charset="utf-8" novalidate="">
+    <div class="modal-header border-0">
+        <h6 class="modal-title position-absolute bg-primary text-white" id="mymodalLabel"><?= $page_title ?></h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="form-row modal-body p-4">
+        <div class="form-group col-md-6">
+            <label class="text-capitalize">fullnames *</label>
+            <div class="input-group" id="name">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-white ">
+                        <ion-icon name="person-outline"></ion-icon>
+                    </span>
+                </div>
+                <input name="name" type="text" placeholder="john Doe" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="text-capitalize">username *</label>
+            <div class="input-group" id="username">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-white ">
+                        <ion-icon name="person-outline"></ion-icon>
+                    </span>
+                </div>
+                <input name="username" type="text" placeholder='john' class="form-control" required>
+            </div>
+        </div>
+        <div class="form-group col-md-9">
+            <label class="text-capitalize">email *</label>
+            <div class="input-group" id="email">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-white ">
+                        <ion-icon name="mail-outline"></ion-icon>
+                    </span>
+                </div>
+                <input name="email" type="email" placeholder="jane@example.com" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-group col-md-7">
+            <label class="text-capitalize">physical address *</label>
+            <div class="input-group" id="address">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-white ">
+                        <ion-icon name="locate-outline"></ion-icon>
+                    </span>
+                </div>
+                <input name="address" type="text" placeholder="search or enter your location" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-group col-md-5">
+            <label class="text-capitalize">Telephone number</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-white ">
+                        <ion-icon name="call-outline"></ion-icon>
+                    </span>
+                </div>
+                <input name="phone" type="number" placeholder="(801) 73764334" class="form-control">
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="text-capitalize">company</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-white ">
+                        <ion-icon name="briefcase-outline"></ion-icon>
+                    </span>
+                </div>
+                <input name="company" placeholder="enter company name" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+		<label class="text-capitalize">password *</label>
+            <div class="input-group" id="password">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-white ">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                    </span>
+                </div>
+                <input name="password" type="password" class="form-control" required>
+                <div class="input-group-prepend">
+                    <span type="button" class="input-group-text bg-white rounded-0 cv-chev right">
+                        <ion-icon name="eye-outline"></ion-icon>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary btn-sm">submit</button>
+    </div>
 </form>
 
 <script>
-	$("#form").submit(function(event) {
-		event.preventDefault();
-		var post_url = $(this).attr("action");
-		var request_method = $(this).attr("method");
-		var form_data = $(this).serialize();
-		$.ajax({
-			url: post_url,
-			type: request_method,
-			data: form_data
-		}).done(function(response) {
-			Toastify({
-				text: response.message,
-				duration: 3000,
-				gravity: "top",
-				position: 'right',
-				backgroundColor: "#228B22",
-				stopOnFocus: true,
-			}).showToast();
-			setTimeout(() => {
-				location.reload()
-				$("#mymodal").modal("toggle");
-			}, 1500);
+$("form").submit(function(event) {
+    event.preventDefault();
+    $(".form-text").remove();
+    validate($(this).serializeArray(), errors => {
+    if (!errors.length) {
+      $.post($(this).attr("action"),$(this).serializeArray())
+      .done(function (res) {
+        res.errors ?
+          Object.entries(res.errors).map((error) => {
+            $(`#${error[0]}`).after(
+              `<small class="helper-text-danger">${error[1]}</small>`
+            )
+          }) :
+          setTimeout(() => {
+            location.reload()
+            $("#mymodal").modal("toggle");
+        }, 1500);
+      }).fail(function (err) {
+        Toastify({
+          text: "Error operation failed",
+          backgroundColor: "#FFA500",
+        }).showToast();
+      });
+    }
+  })
+});   
 
-		}).fail(function(err) {
-			Toastify({
-				text: 'Error operation failed',
-				duration: 3000,
-				gravity: "top",
-				position: 'right',
-				backgroundColor: '#FFA500',
-				stopOnFocus: true,
-			}).showToast();
-		});
-	});
 </script>
