@@ -7,7 +7,7 @@
 function stat_card($data)
 {
   return '<div class="col-md-3 border-right">
-  <div class="d-flex w-100 flex-column box2">
+  <div class="d-flex w-100 flex-column box2 bg-white p-3 rounded">
     <div class="d-flex justify-content-between">
       <span class="d-flex">
         <ion-icon class="stat-icon mr-3 mb-0" src="' . $data['icon'] . '"></ion-icon>

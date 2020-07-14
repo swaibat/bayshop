@@ -33,6 +33,7 @@ socket.on("online", function(users) {
                 ${user.ip}
               </td>
               <td data-label="Amount" class="text-center" style="font-size: large;">
+              <div class="d-flex">
                 <ion-icon data-toggle="tooltip" data-placement="top" title="Tooltip on top" name="logo-${user.name
                   .split(" ")[0]
                   .toLocaleLowerCase()}"></ion-icon>
@@ -44,12 +45,14 @@ socket.on("online", function(users) {
                   (user.device_type === "mobile" && "phone-portrait") ||
                   (user.device_type === "tablet" && "tablet-portrait")
                 }"></ion-icon>
+                </div>
+
               </td>
               <td>
                 <a href="${
                   user.referer
                 }">
-                <marquee behavior="scroll" direction="left">${user.referer}</marquee>
+                <marquee behavior="alternate" direction="left">${user.referer}</marquee>
                 </a>
                 
               </td>

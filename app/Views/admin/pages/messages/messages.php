@@ -1,11 +1,11 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.min.css">
-<style>
+<!-- <style>
     .contact * {
         pointer-events: none;
     }
-</style>
-<div id="frame" class="shadow-xs">
+</style> -->
+<div id="frame" class="shadow-xs w-100">
     <div id="sidepanel">
         <div id="profile">
             <div class="wrap">

@@ -5,7 +5,6 @@
 @import "./../../plugins/select2/dist/css/select2.min.css";
 @import "./../../plugins/summernote/summernote-bs4.min.css";
 @import "./../../plugins/toastify-js/toastify-js.min.css";
-@import "./../../plugins/jvectormap/jquery-jvectormap-2.0.5.css";
 @import "./app.css";
 @import "./partials/sidenav.css";
 @import "./partials/products.css";
@@ -13,4 +12,3 @@
 @import "./partials/chat.css";
 @import "./partials/default.css";
 @import "./partials/products-page.css";
-@import "../../plugins/phone-input/css/intlInputPhone.min.css"
