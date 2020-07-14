@@ -1,13 +1,12 @@
 <form id="form" class="" method="post" action="<?= base_url('admin/products/create'); ?>" novalidate="">
-    <nav id='action-nav' class="d-flex justify-content-between align-items-center  p-0 m-0 ">
-        <h5 class='text-white my-3'><?= $page_title ?></h5>
-        <div class="d-flex ml-4">
+    <nav id='action-nav' class="d-flex justify-content-between align-items-center mb-2 mt-n5 ">
+        <div class="d-flex ml-auto mb-1 ">
             <button class="btn btn-light">
                 Cancel
             </button>
             <button id="submit" type="submit" class="btn btn-light ml-3 px-4">
                 save
-            </button>
+            </button> 
         </div>
     </nav>
     <div class="row">

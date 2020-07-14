@@ -356,7 +356,7 @@
 }
 #frame #sidepanel #search input {
   padding: 10px 0 10px 46px;
-  width: calc(100% - 25px);
+  width: 100%;
   border: none;
   background: #fff;
   color: #141414;

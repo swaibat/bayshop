@@ -166,8 +166,9 @@ label {
     border: none;
 }
   
-.table td, .table th {
-    padding: .5rem;
+.table td {
     vertical-align: middle;
 }
-
+.table {
+    color: #5a6167;
+}
