@@ -1,7 +1,7 @@
-<div class="card p-3 shadow-xs">
-    <div class="card-header d-flex justify-content-between align-items-center p-0">
+<div class="dool-card card w-100">
+    <div class="card-header d-flex justify-content-between align-items-center">
         <div class="btn-group">
-            <button class="btn bg-success mb-n4" style="width:1rem; height:1rem;"></button>
+            <button class="btn bg-success my-2 online-table-label"></button>
             <button class="btn">Active Visitors 1/1</button>
         </div>
         <span>
@@ -18,6 +18,7 @@
 
 <script>
 socket.on("online", function(users) {
+  console.log(users)
     // $("#online-users").text(users.length);
     // $("#ofline-users").text(JSON.parse($("#users").text()) - users.length);
     $("#table").empty();
@@ -26,7 +27,7 @@ socket.on("online", function(users) {
                 (user) => `<tr>
               <td class="d-flex align-items-center" data-label="Account">
                 <span class="avatar-letter text-capitalize" style="background:${'#'+Math.floor(Math.random()*16777215).toString(16)}">${user.username.substr(0, 1)}</span>
-                <img height="25" width="35" class="rounded border ml-3" src="https://restcountries.eu/data/uga.svg" alt="" srcset="">
+                <img height="25" width="35" class="rounded border ml-3" src="<?=base_url('assets/flags/')?>/${user.country && user.country.toLowerCase()}.svg" alt="" srcset="">
                 <span class="ml-2">${user.username}</span>
               </td>
               <td>
@@ -49,15 +50,12 @@ socket.on("online", function(users) {
 
               </td>
               <td>
-                <a href="${
-                  user.referer
-                }">
-                <marquee behavior="alternate" direction="left">${user.referer}</marquee>
+                <a href="${user.referer}">
+                <i class="fas fa-external-link-alt"></i> ${user.referer.split('/')[4]}
                 </a>
-                
               </td>
               <td class='time'>
-                <h6 id="time-${user.id}"></h6>
+                <h6 class="text-nowrap" id="time-${user.id}"></h6>
               </td>
               <td class="text-right" id="time">
                 2 <ion-icon name="stats-chart"></ion-icon>
@@ -66,6 +64,7 @@ socket.on("online", function(users) {
                 </span>
               </td>
               </tr>
+              
               ${setInterval(function () {
                 date_future = new Date(user.time);
                 date_now = new Date();

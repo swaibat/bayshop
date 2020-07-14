@@ -1,4 +1,4 @@
-<div class="card border-0 shadow-xs p-3">
+<div class="card border-0 shadow-xs p-3 w-100">
 	<div class="row">
 		<div class="col-sm-12 mt-n3">
 			<button data-toggle="modal" data-target="#mymodal" data-modal='modal-lg' data-id="<?= base_url('admin/coupon/create'); ?>" id="menu" class="btn btn-sm btn-primary mb-n5">

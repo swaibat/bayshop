@@ -29,7 +29,7 @@ class Category extends BaseController
             'page_name'         => 'category',
             'page_title'        => 'categories',
         ];
-        $data['categories'] = $this->categories->where('parent_id', 0)->findAll();
+        $data['categories'] = $this->categories->findAll();
         return view($this->backpath.'/index', $data);
     }
 
@@ -44,7 +44,6 @@ class Category extends BaseController
             $data = [
                 'name'          => $this->request->getVar('name'),
                 'slug'          => url_title($this->request->getVar('name')),
-                'status'        => $this->request->getVar('status'),
                 'vendor_id'     => $this->user_data['id'],
             ];
             $this->categories->save($data);

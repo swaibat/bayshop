@@ -1,7 +1,6 @@
 <form id="form" class="w-100" method="post" action="<?= base_url('admin/settings'); ?>">
-    <nav id='action-nav' class="d-flex justify-content-between align-items-center  p-0 m-0 ">
-        <h5 class='text-white my-3'><?= $page_title ?></h5>
-        <div class="d-flex ml-4">
+    <nav id='action-nav' class="d-flex justify-content-between align-items-center  p-0 mt-n5 mb-3 ">
+        <div class="d-flex ml-auto">
             <button class="btn btn-light">
                 Cancel
             </button>

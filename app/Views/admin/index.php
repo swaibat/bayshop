@@ -21,8 +21,8 @@
                             alt="User picture">
                     </div>
                     <div class="user-info">
-                        <span class="user-name">Jhon
-                            <strong>Smith</strong>
+                        <span class="user-name">
+                            <strong class="text-capitalize"><?= $_SESSION['user']['username']?></strong>
                         </span>
                         <span class="user-role">Administrator</span>
                         <span class="user-status">
@@ -86,10 +86,13 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?= base_url('admin/orders')?>">Categories</a>
+                                        <a href="<?= base_url('admin/categories')?>">Categories</a>
                                     </li>
                                     <li>
-                                        <a href="<?= base_url('admin/categories')?>">Collection</a>
+                                        <a href="<?= base_url('admin/collection')?>">Collection</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= base_url('admin/orders')?>">Orders</a>
                                     </li>
                                 </ul>
                             </div>
@@ -113,21 +116,12 @@
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-chart-line"></i>
-                                <span>Coupons</span>
+                                <span>Gifts & Offers</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="#">Pie chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Line chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Bar chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Histogram</a>
+                                        <a href="<?= base_url('admin/coupons')?>">Coupons</a>
                                     </li>
                                 </ul>
                             </div>
@@ -175,7 +169,7 @@
                     <i class="fa fa-cog"></i>
                     <span class="badge-sonar"></span>
                 </a>
-                <a href="#">
+                <a href="<?= base_url('auth/logout')?>">
                     <i class="fa fa-power-off"></i>
                 </a>
             </div>

@@ -1,17 +1,10 @@
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.min.css">
-<!-- <style>
-    .contact * {
-        pointer-events: none;
-    }
-</style> -->
 <div id="frame" class="shadow-xs w-100">
     <div id="sidepanel">
         <div id="profile">
             <div class="wrap">
                 <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
                 <span class="d-flex flex-column ml-3">
-                    <span class="ml-2">Mike Ross</span>
+                    <span class="ml-2"><?=$_SESSION['user']['username']?></span>
                     <small class="ml-2">Online</small>
                 </span>
 
@@ -154,6 +147,7 @@
     const sessionUser = <?= $_SESSION['user'] ?>;
     let activeChat;
     $('#contacts .contact').click(evt => {
+        console.log(evt.target);
         activeChat = evt.target.id;
         $.ajax({
             type: "GET",

@@ -1,4 +1,4 @@
-<div class="card border-0 shadow-xs p-3">
+<div class="card border-0 shadow-xs p-3 w-100">
 	<div class="row">
 		<div class="col-sm-12 mt-n3">
 			<button data-toggle="modal" data-target="#mymodal" data-modal='' data-id="<?= base_url('admin/categories/create'); ?>" id="menu" class="btn btn-sm btn-primary mb-n5">
@@ -6,12 +6,12 @@
 			</button>
 			<?php $count = 1;
 			$table = new \CodeIgniter\View\Table();
-			$table->setHeading(array('No.', 'Category', 'type', 'created at', 'status', 'Action'));
+			$table->setHeading(array('No.', 'Category', 'created at','Action'));
 			foreach ($categories as $category) {
 				$table->addRow([
-					$count++, $category['name'], get_name_by_id($category['type'], $types),
+					$count++, $category['name'],
 					date("d-m-Y, H:i:s", strtotime($category['created_at'])),
-					get_status($category),
+					'<span class="btn btn-sm btn-outline-primary"><i class="fa fa-plus"></i> add sub category</span>'.
 					edit_delete('categories', $category, ['type' => 'modal'])
 				]);
 			}
