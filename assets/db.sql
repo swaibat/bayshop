@@ -92,6 +92,7 @@ CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(37) NOT NULL,
   `parentid` int(11) DEFAULT NULL
+  `vendor_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

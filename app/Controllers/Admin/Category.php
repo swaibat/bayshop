@@ -28,8 +28,8 @@ class Category extends BaseController
             'folder_name'       => 'categories',
             'page_name'         => 'category',
             'page_title'        => 'categories',
+            'categories'        => group_categories($this->categories->findAll())
         ];
-        $data['categories'] = $this->categories->findAll();
         return view($this->backpath.'/index', $data);
     }
 
@@ -43,11 +43,12 @@ class Category extends BaseController
         if ($this->validate($this->category, $this->category_errors)) {
             $data = [
                 'name'          => $this->request->getVar('name'),
+                'parentid'      => $this->request->getVar('parentid'),
                 'slug'          => url_title($this->request->getVar('name')),
                 'vendor_id'     => $this->user_data['id'],
             ];
             $this->categories->save($data);
-            return $this->res->setJSON(['status' => 201, 'message' => 'Category Created Successfully']);
+            return $this->res->setJSON(['status' => 201, 'message' => 'Category Created Successfully','data'=>$data]);
         } elseif (isset($_POST) && !empty($_POST)) {
             return $this->res->setJSON(['status' => 400, 'errors'  => $this->validation->getErrors()]);
         }
@@ -74,12 +75,14 @@ class Category extends BaseController
             return redirect()->to('/');
         }
         $id = $this->request->uri->getSegment(3);
+        // return print_r($this->categories->find($id));
         if ($this->validate($this->category, $this->category_errors)) {
             $data = [
                 'name'          => $this->request->getVar('name'),
+                'parentid'      => $this->request->getVar('parentid'),
                 'slug'          => url_title($this->request->getVar('name')),
-                'status'        => $this->request->getVar('status'),
-                'message'       => 'Category updated successfully'
+                'vendor_id'     => $this->user_data['id'],
+
             ];
             $this->categories->update($id, $data);
             return $this->res->setJSON(['status' => 200, 'message' => 'Category updated Successfully']);
@@ -87,7 +90,7 @@ class Category extends BaseController
             return $this->res->setJSON(['status' => 400, 'errors'  => $this->validation->getErrors()]);
         }
         if($this->admin_user){
-            $data['categories'] = $this->categories->findAll();
+            $data['categories'] = group_categories($this->categories->findAll());
             $data['category']   = $this->categories->find($id);
         }else{
             $data['categories'] = $this->categories->where('vendor_id', $this->user_data['id'])->findAll();
@@ -97,7 +100,8 @@ class Category extends BaseController
             'folder_name'       => 'categories',
             'page_name'         => 'update',
             'page_title'        => 'Update Category',
-            'errors'            => $this->validation->getErrors()
+            'errors'            => $this->validation->getErrors(),
+            'category'          => $this->categories->find($id)
         ];
         return view($this->backpath.'/view', $data);
     }

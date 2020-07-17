@@ -4,7 +4,7 @@ const socketio = require("socket.io");
 const cors = require("cors");
 const _ = require("lodash");
 const userAgent = require("user-agent-parse");
-const { user, users } = require("./users");
+// const { user } = require("./users");
 
 // userAgent.parse('Mozilla/5.0 (Windows; U; Windows NT 5.1; en) AppleWebKit/526.9 (KHTML, like Gecko) Version/4.0dp1 Safari/526.8');
 
@@ -18,7 +18,8 @@ app.use(cors());
 app.use(router);
 
 let connection = [];
-let last_48_users = [];
+const users = []
+
 const hour = new Date().getHours();
 io.on("connection", (socket) => {
   console.log('hshshsd');
@@ -30,20 +31,30 @@ io.on("connection", (socket) => {
      * Online users and activity
      */
     if (data){
+      // console.log(data);
       data.socketId = socket.id;
       data.referer = socket.handshake.headers.referer
-      const get = user.getUserById(data);
-      get ? (get.socketId = data.socketId) : user.add(data, socket, userAgent);
+      let userExists = users.find((user) => user.id === data.id);
+      // console.log('user', get);
+      if(!userExists){
+        users.push({
+          ...data,
+          ...userAgent.parse(socket.handshake.headers["user-agent"]),
+          referer: socket.handshake.headers.referer,
+          time: new Date(),
+        })
+      }else{
+        userExists = data
+        userExists.on = true;
+      };
       console.log(users);
       io.emit("online", users);
-    }else{
-      
     }
   });
   // check message sending
   socket.on("new message", (data) => {
-    const user =
-      users && users.find((user) => user.id == data.response.receiver_id);
+    const user = users && users.find((user) => user.id == data.response.receiver_id);
+    console.log(data,user);
     user &&
       socket.broadcast
         .to(user.socketId)
@@ -59,7 +70,12 @@ io.on("connection", (socket) => {
      */
     setTimeout(() => {
       if (connection.length > 1) {
-        const index = user.getUserBySocketId(socket);
+        const index = users.find((user) => {
+          if(user.socketId === socket.id){
+            user.on = false;
+          }
+          return user;
+        });
         users.indexOf(index !== -1) && users.splice(index, 1);
         io.emit("online", users);
       }
