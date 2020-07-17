@@ -144,10 +144,9 @@
     });
 
     // get user chat
-    const sessionUser = <?= $_SESSION['user'] ?>;
+    const sessionUser = <?= json_encode($_SESSION['user']) ?>;
     let activeChat;
     $('#contacts .contact').click(evt => {
-        console.log(evt.target);
         activeChat = evt.target.id;
         $.ajax({
             type: "GET",
@@ -157,7 +156,8 @@
             $(`
                 <ul class="chat-content">
                 ${response && response.messages.map(e =>{
-                        return (`<li class=${sessionUser.id === (e.sender_id || e.receiver_id) ? "replies" : "sent"}>
+                    // console.log(e);
+                        return (`<li class=${sessionUser.id === e.sender_id ? "replies" : "sent"}>
                             <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
                             <p>
                                 ${e.message}
@@ -195,6 +195,7 @@
             contentType: false,
             cache: false,
         }).done(function(response) {
+            console.log(response);
             socket.emit('new message', {
                 response
             });

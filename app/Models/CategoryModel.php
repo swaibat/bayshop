@@ -8,7 +8,7 @@ use CodeIgniter\Model;
 class CategoryModel extends Model
 {
     protected $table = 'categories';
-    protected $allowedFields = ['name', 'slug', 'vendor_id'];
+    protected $allowedFields = ['name','parentid', 'slug', 'vendor_id'];
     public function get_products_by_category($slug)
     {
         $db      = \Config\Database::connect();

@@ -674,7 +674,7 @@ label.false {
 }
 
 .border-dashed {
-    border: dashed 1.5px gainsboro;
+    border: dashed 1.5px #c1e4fe;
 }
 
 .custom-validator {
@@ -1544,11 +1544,7 @@ svg #main-circ {
     align-items: center;
     justify-content: center;
 }
-.input-group-text .btn-group > .btn-group > .btn, .btn-group > .btn:not(:last-child):not(.dropdown-toggle) {
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
 
-}
 .bootstrap-tagsinput .badge {
     margin: 2px !important;
 }
@@ -1829,7 +1825,7 @@ video {
     border: 4px solid #007bff;
     position: absolute;
     /* top: 78px; */
-    left: -.9rem;
+    left: -.8rem;
     z-index: 1;
 }
 
@@ -1870,3 +1866,16 @@ video {
 .contact * {
     pointer-events: none;
 }
+.pointer-0{
+    pointer-events: none;
+}
+.btn:active,
+ .btn:focus,
+ .btn.active {
+   background: #c1e4fe;
+   outline: 0;
+   -webkit-box-shadow: none;
+   box-shadow: none;
+   border:solid 1px #3899ec;
+   color:#3899ec;
+ }
