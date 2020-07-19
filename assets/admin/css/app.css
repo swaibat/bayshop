@@ -1871,11 +1871,54 @@ video {
 }
 .btn:active,
  .btn:focus,
- .btn.active {
+ .btn.active,.cat-icon {
    background: #c1e4fe;
    outline: 0;
    -webkit-box-shadow: none;
    box-shadow: none;
    border:solid 1px #3899ec;
-   color:#3899ec;
+   color:#3899ec !important;
  }
+/* .category tr td:nth-child(1){
+    border:none;
+} */
+
+.category tbody tr:nth-of-type(2n+1) td {
+    border-top:none !important;
+    margin: 0;
+}
+li a.page{
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+}
+.cat-icon {
+    margin-right: 10px;
+    min-width: 30px;
+    min-height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 4px;
+    padding: .5rem;
+}
+.cat-icon ion-icon {
+    font-size: 20px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.category th {
+    border-bottom: none;
+    background: gainsboro !important;
+}
+
+.table-list th {
+    vertical-align: middle;
+    border-bottom: 1px solid #dee2e6;
+}
+.table-list th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
