@@ -447,12 +447,11 @@ $(function() {
   });
 
   // Select2
-  if(jQuery().select2) {
-    $(".select2").select2({
-      tags: true,
-      tokenSeparators: [',', ' ']
-  });
-  }
+  //   $(".select2").select2({
+  //     tags: true,
+  //     tokenSeparators: [',', ' ']
+  // });
+
 
   $(".notification-toggle").dropdown();
   $(".notification-toggle").parent().on('shown.bs.dropdown', function() {

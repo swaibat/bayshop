@@ -23,6 +23,13 @@ class Home extends BaseController
         return view($this->themePath, $data);
     }
 
+    public function products_search(){
+        $search_term    = $this->request->getVar('term');
+        $data           = $this->products->search($search_term);
+        return $this->response->setJSON(['data'=> $data]);
+        return print_r($data);
+    }
+
     public function vendors()
     {
         $data = [

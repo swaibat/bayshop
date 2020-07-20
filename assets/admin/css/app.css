@@ -1763,8 +1763,9 @@ video {
     border-radius: 4px;
     display: inline-block;
     margin-left: 5px;
-    padding: 0;
+    padding: 0 0.35rem .1rem 0;
     color: #6777ef;
+    padding: .5rem;
 }
 .select2-container {
     width: 100% !important;

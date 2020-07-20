@@ -31,10 +31,10 @@
                                             placeholder="eg. new arrival" minlength="3">
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label for="name">Add products to collection</label>
-                                        <select class="form-control select2-ajax"></select>
-                                        <!-- <input type="text" class="form-control" name="name" id="name"
-                                            placeholder="eg. separate producst with commas" minlength="3"> -->
+                                        <label for="products">Add products to collection</label>
+                                        <select name="products" class="form-control js-example-data-ajax" multiple>
+                                            <option></option>
+                                        </select>
                                     </div>
                                     <div class="col-md-12 mt-2">
                                         <label id="img-label" for="image"
@@ -51,6 +51,7 @@
                                                 </span>
                                             </div>
                                         </label>
+
                                         <div class="rounded d-none" id="image-holder">
                                             <span class="btn position-absolute">H</span>
                                         </div>
@@ -96,7 +97,8 @@
                                                             id="menu">
                                                             <i class="fas fa-edit ml-2"></i>
                                                         </button>
-                                                        <button data-toggle="modal" data-target="#delmodal" name="collection" id="<?= $collection['id'] ?>"
+                                                        <button data-toggle="modal" data-target="#delmodal"
+                                                            name="collection" id="<?= $collection['id'] ?>"
                                                             class="btn border-left delete" data-toggle="modal"
                                                             data-target="#exampleModal">
                                                             <i class="fas fa-trash ml-2"></i>
@@ -116,123 +118,76 @@
         </div>
     </div>
 </div>
-<?= script_tag('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-rc.2/js/select2.full.js'); ?>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js'></script>
 <?= script_tag('assets/admin/plugins/listJs/list.min.js'); ?>
 <script>
-// var $ajax = $(".select2-ajax");
+$(document).ready(function() {
+    $(".js-example-data-ajax").select2({
+        ajax: {
+            url: "http://localhost/products/search",
+            dataType: "json",
+            width: 'element',
+            delay: 250,
+            data: function(params) {
+                // console.log(params)
+                return {
+                    term: params.term, // search term
+                };
+            },
+            processResults: function(res, params) {
+                // parse the results into the format expected by Select2
+                // since we are using custom formatting functions we do not need to
+                // alter the remote JSON res, except to indicate that infinite
+                // scrolling can be used
+                // console.log(res);
+                return {
+                    results: res.data,
+                };
+            },
+            cache: true
+        },
+        placeholder: "Search for a products",
+        minimumInputLength: 1,
+        templateResult: formatRepo,
+        templateSelection: formatRepoSelection
+    });
 
-// function formatRepo (repo) {
-  
-//   if (repo.loading) return repo.text;
-//   console.log(repo.loading);
-//   var markup = "<div class='select2-result-repository clearfix'>" +
-//       "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" +
-//       "<div class='select2-result-repository__meta'>" +
-//       "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
+    function formatRepo(product) {
+        console.log(product);
+        if (product.loading) {
+            return product.text;
+        }
 
-//   if (repo.description) {
-//     markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
-//   }
+        var $container = $(
+            `<li class="list-group-item border-bottom">
+                <img width="40" height="40" class='rounded' src='${product.filepath} '>
+                ${product.title}
+            </li>`
+        );
 
-//   markup += "<div class='select2-result-repository__statistics'>" +
-//     "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> " + repo.forks_count + " Forks</div>" +
-//     "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count + " Stars</div>" +
-//     "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count + " Watchers</div>" +
-//     "</div>" +
-//     "</div></div>";
+        return $container;
+    }
 
-//   return markup;
-// }
-
-// function formatRepoSelection (repo) {
-//   return repo.full_name || repo.text;
-// }
-
-// $ajax.select2({
-//   ajax: {
-//     url: "https://api.github.com/search/repositories",
-//     dataType: 'json',
-//     delay: 250,
-//     data: function (params) {
-//       return {
-//         q: params.term, // search term
-//         page: params.page
-//       };
-//     },
-//     processResults: function (data, params) {
-//       // parse the results into the format expected by Select2
-//       // since we are using custom formatting functions we do not need to
-//       // alter the remote JSON data, except to indicate that infinite
-//       // scrolling can be used
-//       console.log(data, params);
-//       params.page = params.page || 1;
-
-//       return {
-//         results: data.items,
-//         pagination: {
-//           more: (params.page * 30) < data.total_count
-//         }
-//       };
-//     },
-//     cache: true
-//   },
-//   escapeMarkup: function (markup) { return markup; },
-//   minimumInputLength: 1,
-//   templateResult: formatRepo,
-//   templateSelection: formatRepoSelection,
-//   theme: 'adwitt'
-// });
-// $(".edit-sub").click((e)=>{
-//     const input = $(`#input-${e.currentTarget.id.split('-')[2]}`);
-//     $(e.currentTarget).toggleClass('fa-edit').toggleClass('fa-check');
-//     input.attr('disabled')?input.attr('disabled', false):input.attr('disabled', true);
-// })
-/* List.js is required to make this table work. */
-
-// var options = {
-//     valueNames: [{
-//         data: ['timestamp']
-//     }, {
-//         data: ['status']
-//     }, 'jSortNumber', 'jSortName', 'jSortTotal'],
-//     page: 6,
-//     pagination: {
-//         innerWindow: 1,
-//         left: 0,
-//         right: 0,
-//         paginationClass: "pagination",
-//     }
-// };
-
-// var tableList = new List('tableID', options);
-
-// $('.jPaginateNext').on('click', function() {
-//     var list = $('.pagination').find('li');
-//     $.each(list, function(position, element) {
-//         if ($(element).is('.active')) {
-//             $(list[position + 1]).trigger('click');
-//         }
-//     })
-// });
-
-
-// $('.jPaginateBack').on('click', function() {
-//     var list = $('.pagination').find('li');
-//     $.each(list, function(position, element) {
-//         if ($(element).is('.active')) {
-//             $(list[position - 1]).trigger('click');
-//         }
-//     })
-// });
-
-
+    function formatRepoSelection(product) {
+        return product.title;
+    }
+});
 
 $("#short-form").submit(function(event) {
     event.preventDefault();
+    const formData = new FormData($(this)[0]);
     $(".form-text").remove();
     validate($(this).serializeArray(), errors => {
         if (!errors.length) {
-            $.post($(this).attr("action"), $(this).serializeArray())
+            $.ajax({
+                    type: "POST",
+                    enctype: "multipart/form-data",
+                    url: $(this).attr("action"),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                })
                 .done(function(res) {
                     $('input').val('');
                     res.errors ?
@@ -241,7 +196,7 @@ $("#short-form").submit(function(event) {
                                 `<small class="helper-text-danger">${error[1]}</small>`
                             )
                         }) :
-                        $(addToTable('colection',res.data)).appendTo('.list');
+                        $(addToTable('colection', res.data)).appendTo('.list');
                 }).fail(function(err) {
                     Toastify({
                         text: "Error operation failed",
