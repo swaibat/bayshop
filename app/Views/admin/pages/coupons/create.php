@@ -81,6 +81,7 @@
                     <option value=""></option>
                     <option value="all_products">All products</option>
                     <option value="specific_collection">Specific Collection</option>
+                    <option value="specific_products">Specific products</option>
                 </select>
             </div>
             <div id="collection_option" class="form-group col-md-4 d-none">

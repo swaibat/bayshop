@@ -21,8 +21,7 @@
                     </div>
                 </div>
                 <div class="card dool-card p-3">
-                    <table class="table table-list w-100 table-hover mt-2 category p-3 bg-white" data-currentpage="1"
-                        style="height:268px;">
+                    <table class="table table-list w-100 table-hover mt-2 category p-3 bg-white" data-currentpage="1">
                         <thead>
                             <th>Username</th>
                             <th>Email</th>
@@ -77,43 +76,6 @@
 //     input.attr('disabled')?input.attr('disabled', false):input.attr('disabled', true);
 // })
 /* List.js is required to make this table work. */
-
-var options = {
-    valueNames: [{
-        data: ['timestamp']
-    }, {
-        data: ['status']
-    }, 'jSortNumber', 'jSortName', 'jSortTotal'],
-    page: 7,
-    pagination: {
-        innerWindow: 1,
-        left: 0,
-        right: 0,
-        paginationClass: "pagination",
-    }
-};
-
-var tableList = new List('tableID', options);
-
-$('.jPaginateNext').on('click', function() {
-    var list = $('.pagination').find('li');
-    $.each(list, function(position, element) {
-        if ($(element).is('.active')) {
-            $(list[position + 1]).trigger('click');
-        }
-    })
-});
-
-
-$('.jPaginateBack').on('click', function() {
-    var list = $('.pagination').find('li');
-    $.each(list, function(position, element) {
-        if ($(element).is('.active')) {
-            $(list[position - 1]).trigger('click');
-        }
-    })
-});
-
 
 
 $("#add-sub,#form").submit(function(event) {

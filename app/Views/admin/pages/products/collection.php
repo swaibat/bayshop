@@ -18,7 +18,7 @@
                 </div>
                 <div class="card dool-card p-3">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6" id="dynamic">
                             <form id='short-form' action="<?= base_url('admin/collection/create') ?>" method="post"
                                 enctype="multipart/form-data" accept-charset="utf-8" novalidate="">
                                 <div class="card-header">
@@ -32,7 +32,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="products">Add products to collection</label>
-                                        <select name="products" class="form-control js-example-data-ajax" multiple>
+                                        <select name="products[]" class="form-control js-example-data-ajax" multiple>
                                             <option></option>
                                         </select>
                                     </div>
@@ -65,11 +65,12 @@
                             </form>
                         </div>
                         <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header"><?= $page_title ?></div>
+                            <div class="card border-0">
+                                <div class="card-header">
+                                <h6 class="card-title text-capitalize"><?= $page_title ?></h6>
+                                </div>
                                 <div class="card-body">
-                                    <table class="table table-list w-100 table-hover" data-currentpage="1"
-                                        style="height:268px;">
+                                    <table class="table table-list w-100 table-hover" data-currentpage="1">
                                         <thead>
                                             <th>collection Name</th>
                                             <th>Products In</th>
@@ -91,10 +92,7 @@
                                                 </td>
                                                 <td class="text-right">
                                                     <div class="btn-group btn-group-sm">
-                                                        <button class="btn" data-toggle="modal" data-target="#mymodal"
-                                                            data-modal=""
-                                                            data-id="<?= base_url() . '/admin/collection/' . $collection['id'] . '/update'?>"
-                                                            id="menu">
+                                                        <button class="btn update-collection"  data-action="<?= base_url() . '/admin/collection/' . $collection['id'] . '/update'?>">
                                                             <i class="fas fa-edit ml-2"></i>
                                                         </button>
                                                         <button data-toggle="modal" data-target="#delmodal"
@@ -120,9 +118,34 @@
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js'></script>
-<?= script_tag('assets/admin/plugins/listJs/list.min.js'); ?>
+<?= script_tag('assets/plugins/listJs/list.min.js'); ?>
 <script>
 $(document).ready(function() {
+    $('.update-collection').click((e) => {
+        e.preventDefault();
+    $("#dynamic").html(""); // leave it blank before ajax call
+    $.ajax({
+      url: $(this).data("action"),
+      type: "POST",
+      dataType: "html",
+    })
+      .done(function (data) {
+        $("#dynamic").html("");
+        $("#dynamic").html(data); // load response
+      })
+      .fail(function () {
+        $("#modal-loader").hide();
+      });
+  });
+    $('#image').change(function() {
+        const file = $(this)[0].files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            $("#img-label").removeClass('d-flex').addClass('d-none');
+            $('#image-holder').removeClass('d-none').css("background-image", "url(" + reader.result + ")")
+        };
+        file ? reader.readAsDataURL(file) : '';
+    });
     $(".js-example-data-ajax").select2({
         ajax: {
             url: "http://localhost/products/search",
@@ -136,13 +159,8 @@ $(document).ready(function() {
                 };
             },
             processResults: function(res, params) {
-                // parse the results into the format expected by Select2
-                // since we are using custom formatting functions we do not need to
-                // alter the remote JSON res, except to indicate that infinite
-                // scrolling can be used
-                // console.log(res);
                 return {
-                    results: res.data,
+                    results: res.data
                 };
             },
             cache: true
@@ -154,7 +172,6 @@ $(document).ready(function() {
     });
 
     function formatRepo(product) {
-        console.log(product);
         if (product.loading) {
             return product.text;
         }
@@ -189,14 +206,13 @@ $("#short-form").submit(function(event) {
                     contentType: false,
                 })
                 .done(function(res) {
-                    $('input').val('');
+                    $('input,select').val('');
                     res.errors ?
                         Object.entries(res.errors).map((error) => {
                             $(`#${error[0]}`).after(
                                 `<small class="helper-text-danger">${error[1]}</small>`
                             )
-                        }) :
-                        $(addToTable('colection', res.data)).appendTo('.list');
+                        }) : $(addToTable('colection', res.data)).insertBefore( ".list tr:first" );;
                 }).fail(function(err) {
                     Toastify({
                         text: "Error operation failed",

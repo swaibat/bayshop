@@ -12,7 +12,7 @@ class Coupon extends BaseController
     {
         $data = [
             'folder_name'   => 'coupons',
-            'page_name'     => 'index',
+            'page_name'     => 'coupons',
             'page_title'    => 'coupons',
             'collection'    => $this->collection->findAll(),
             'coupons'       => $this->coupons->findAll(),

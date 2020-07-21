@@ -87,7 +87,7 @@
 <?= script_tag('/assets/admin/js/script.js'); ?>
 <script>
 function addToTable(page,data){
-return `<tr>
+return `<tr class="highlighter">
     <td class="jSortName">
         <span class="cat-icon text-center">
             <ion-icon name="car-sport"></ion-icon>

@@ -8,6 +8,6 @@ use CodeIgniter\Model;
 class CollectionModel extends Model
 {
     protected $table = 'collection';
-    protected $allowedFields = ['name','slug','image'];
+    protected $allowedFields = ['name','slug','products','image'];
 
 }

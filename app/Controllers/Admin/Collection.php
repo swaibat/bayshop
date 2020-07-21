@@ -28,8 +28,17 @@ class Collection extends BaseController
                 'name'                  => $this->request->getVar('name'),
                 'slug'                  => url_title($this->request->getVar('name')),
                 'image'                 => $this->request->getVar('location'),
-                // 'products'              => implode(",",$this->request->getVar('products')),
+                'products'              => implode(",",$this->request->getVar('products')),
             ];
+            $path = 'assets/uploads/collection/';
+            if ($img = $this->request->getFile('image')) {
+                // return print_r();
+                    if ($img->isValid() && !$img->hasMoved()) {
+                        $file_name = $img->getRandomName();
+                        $data['image'] = $path.$file_name;
+                        $img->move($path, $file_name);
+                }
+            }
             $this->collection->save($data);
             return $this->response->setJSON(['status'=>201,'message'=>'collection created successfully','data'=> array_replace($data,['id'=>$this->collection->insertID()])]);
         }

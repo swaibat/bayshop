@@ -202,7 +202,7 @@ body {
 }
 
 .cv-nav {
-    /*! border-left: 1px solid #dee2e6 !important; */
+    /*! border-left: 1px solid #c1e4fe; !important; */
     padding: 0.5rem 2rem;
 }
 
@@ -1916,10 +1916,37 @@ li a.page{
 
 .table-list th {
     vertical-align: middle;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid #c1e4fe;;
 }
 .table-list th {
     padding: .75rem;
     vertical-align: top;
-    border-top: 1px solid #dee2e6;
+    border-top: 1px solid #c1e4fe;;
+}
+
+.highlighter {
+    animation: fadeoutBg 3s; /***Transition delay 3s fadeout is class***/
+    -moz-animation: fadeoutBg 3s; /* Firefox */
+    -webkit-animation: fadeoutBg 3s; /* Safari and Chrome */
+    -o-animation: fadeoutBg 3s; /* Opera */
+}
+
+@keyframes fadeoutBg {
+    from { background-color: #99d7fd; } /** from color **/
+    to { background-color: white; } /** to color **/
+}
+
+@-moz-keyframes fadeoutBg { /* Firefox */
+    from { background-color: #99d7fd; }
+    to { background-color: white; }
+}
+
+@-webkit-keyframes fadeoutBg { /* Safari and Chrome */
+    from { background-color: #99d7fd; }
+    to { background-color: white; }
+}
+
+@-o-keyframes fadeoutBg { /* Opera */
+    from { background-color: #99d7fd; }
+    to { background-color: white; }
 }
