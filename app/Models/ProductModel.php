@@ -46,4 +46,17 @@ class ProductModel extends Model
         $query = $builder->getResultArray();
         return $query;
     }
+
+    function search($search_term)
+    {
+        $db      = \Config\Database::connect();
+        $db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
+        $builder = $db->table('products');
+        $builder->select('*');
+        $builder->like('title', $search_term);
+        $builder->join('product_files', 'products.id = product_files.product_id');
+        $builder->orderBy('products.id', 'ASC');
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
 }

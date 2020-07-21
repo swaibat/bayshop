@@ -202,7 +202,7 @@ body {
 }
 
 .cv-nav {
-    /*! border-left: 1px solid #dee2e6 !important; */
+    /*! border-left: 1px solid #c1e4fe; !important; */
     padding: 0.5rem 2rem;
 }
 
@@ -1763,8 +1763,9 @@ video {
     border-radius: 4px;
     display: inline-block;
     margin-left: 5px;
-    padding: 0;
+    padding: 0 0.35rem .1rem 0;
     color: #6777ef;
+    padding: .5rem;
 }
 .select2-container {
     width: 100% !important;
@@ -1871,11 +1872,81 @@ video {
 }
 .btn:active,
  .btn:focus,
- .btn.active {
+ .btn.active,.cat-icon {
    background: #c1e4fe;
    outline: 0;
    -webkit-box-shadow: none;
    box-shadow: none;
    border:solid 1px #3899ec;
-   color:#3899ec;
+   color:#3899ec !important;
  }
+/* .category tr td:nth-child(1){
+    border:none;
+} */
+
+.category tbody tr:nth-of-type(2n+1) td {
+    border-top:none !important;
+    margin: 0;
+}
+li a.page{
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+}
+.cat-icon {
+    margin-right: 10px;
+    min-width: 30px;
+    min-height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 4px;
+    padding: .5rem;
+}
+.cat-icon ion-icon {
+    font-size: 20px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.category th {
+    border-bottom: none;
+    background: gainsboro !important;
+}
+
+.table-list th {
+    vertical-align: middle;
+    border-bottom: 1px solid #c1e4fe;;
+}
+.table-list th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #c1e4fe;;
+}
+
+.highlighter {
+    animation: fadeoutBg 3s; /***Transition delay 3s fadeout is class***/
+    -moz-animation: fadeoutBg 3s; /* Firefox */
+    -webkit-animation: fadeoutBg 3s; /* Safari and Chrome */
+    -o-animation: fadeoutBg 3s; /* Opera */
+}
+
+@keyframes fadeoutBg {
+    from { background-color: #99d7fd; } /** from color **/
+    to { background-color: white; } /** to color **/
+}
+
+@-moz-keyframes fadeoutBg { /* Firefox */
+    from { background-color: #99d7fd; }
+    to { background-color: white; }
+}
+
+@-webkit-keyframes fadeoutBg { /* Safari and Chrome */
+    from { background-color: #99d7fd; }
+    to { background-color: white; }
+}
+
+@-o-keyframes fadeoutBg { /* Opera */
+    from { background-color: #99d7fd; }
+    to { background-color: white; }
+}

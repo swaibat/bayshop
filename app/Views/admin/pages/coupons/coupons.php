@@ -3,8 +3,8 @@
         <div class="col-sm-12 mt-n5">
             <div id="tableID" class="table-list-container">
                 <div class="d-flex justify-content-end align-items-start mb-3">
-                <button data-toggle="modal" data-target="#mymodal" data-modal=''
-                        data-id="<?= base_url('admin/categories/create'); ?>" id="menu"
+                <button data-toggle="modal" data-target="#mymodal" data-modal='modal-lg'
+                        data-id="<?= base_url('admin/coupons/create'); ?>" id="menu"
                         class="btn btn-sm btn-primary">
                         <i class="fas fa-plus"></i>
                     </button>
@@ -31,32 +31,22 @@
 
                         <!-- IMPORTANT, class="list" must be on tbody -->
                         <tbody class="list">
-                            <?php foreach ($categories as $category) {?>
+                            <?php foreach ($coupons as $coupon) {?>
                             <tr>
                                 <td class="jSortName">
                                     <span class="cat-icon text-center">
                                         <ion-icon name="car-sport"></ion-icon>
-                                    </span><?= $category['name'] ?>
-                                </td>
-                                <td>
-                                    <span
-                                        class="badge badge-pill border"><?= $category['sub'] ? count($category['sub']) : '0' ?></span>
+                                    </span><?= $coupon['name'] ?>
                                 </td>
                                 <td class="text-right">
                                     <div class="btn-group btn-group-sm">
-                                        <button class="btn" data-toggle="collapse"
-                                            data-target="#accordion-<?=$category['id']?>">
-                                            Sub <span
-                                                class="badge badge-pill border"><?= $category['sub'] ? count($category['sub']) : '0' ?></span>
-                                            <i class="fas fa-chevron-circle-down ml-2"></i>
-                                        </button>
                                         <button class="btn" data-toggle="modal" data-target="#mymodal" data-modal=""
-                                            data-id="<?= base_url() . '/admin/categories/' . $category['id'] . '/update'?>"
+                                            data-id="<?= base_url() . '/admin/coupons/' . $coupon['id'] . '/update'?>"
                                             id="menu">
                                             Edit <i class="fas fa-edit ml-2"></i>
                                         </button>
                                         <button data-toggle="modal" data-target="#delmodal" name="categories"
-                                            id="<?= $category['id'] ?>" class="btn btn-primary delete"
+                                            id="<?= $coupon['id'] ?>" class="btn btn-primary delete"
                                             data-toggle="modal" data-target="#exampleModal">
                                             Delete <i class="fas fa-trash ml-2"></i>
                                         </button>
@@ -64,23 +54,23 @@
                                 </td>
                             </tr>
 
-                            <tr height="0">
+                            <!-- <tr height="0">
                                 <td class="p-0" colspan="3">
-                                    <div id="accordion-<?= $category['id'] ?>" class="collapse bg-light p-2">
+                                    <div id="accordion-<?= $coupon['id'] ?>" class="collapse bg-light p-2">
                                         <div class="form-group bg-white p-2 rounded">
                                             <form action="<?= base_url('admin/categories/create'); ?>" class="d-flex"
                                                 id="add-sub">
-                                                <input type="hidden" name="parentid" value="<?= $category['id'] ?>">
+                                                <input type="hidden" name="parentid" value="<?= $coupon['id'] ?>">
                                                 <input type="text" name="name" id="name" class="form-control"
-                                                    placeholder="add a new subcategory to <?= $category['name'] ?> ">
+                                                    placeholder="add a new subcategory to <?= $coupon['name'] ?> ">
                                                 <button class="btn" type="submit"><i class="fas fa-plus"></i></button>
                                             </form>
                                         </div>
 
                                         <div class="p-3 bg-white rounded">
-                                            <?php if ($category['sub']){ ?>
-                                            <ul class="list-group list-group-flush" id="<?= $category['id'] ?>">
-                                                <?php foreach ($category['sub'] as $key => $value){?>
+                                            <?php if ($coupon['sub']){ ?>
+                                            <ul class="list-group list-group-flush" id="<?= $coupon['id'] ?>">
+                                                <?php foreach ($coupon['sub'] as $key => $value){?>
                                                 <li class="list-group-item px-0 d-flex justify-content-between"
                                                     id="<?=$value['name']?>">
                                                     <span id="input-<?=$value['id']?>"
@@ -116,7 +106,7 @@
                                         </div>
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> -->
                             <?php } ?>
                         </tbody>
                     </table>

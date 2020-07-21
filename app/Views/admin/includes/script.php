@@ -86,9 +86,30 @@
 <?= script_tag("assets/shared/jquery/jquery-ui.min.js"); ?>
 <?= script_tag('/assets/admin/js/script.js'); ?>
 <script>
-$(function() {
-    $("#datepicker").datepicker();
-});
+function addToTable(page,data){
+return `<tr class="highlighter">
+    <td class="jSortName">
+        <span class="cat-icon text-center">
+            <ion-icon name="car-sport"></ion-icon>
+        </span>
+        ${data.name}
+         </td>
+    <td>
+        <span class="badge badge-pill border">3</span>
+    </td>
+    <td class="text-right">
+        <div class="btn-group btn-group-sm">
+            <button class="btn" data-toggle="modal" data-target="#mymodal" data-modal="" data-id="http://localhost/admin/collection/${data.id}/update" id="menu">
+                <i class="fas fa-edit ml-2"></i>
+            </button>
+            <button data-toggle="modal" data-target="#delmodal" name="collection" id="${data.id}" class="btn border-left delete">
+                <i class="fas fa-trash ml-2"></i>
+            </button>
+        </div>
+    </td>
+</tr>`;
+}
+
 </script>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcAP0GrIyhCe_kJfKY1Cb4OYOeP5vmhsQ&callback=initMap"> -->
 <!-- </script> -->

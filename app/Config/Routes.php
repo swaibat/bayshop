@@ -84,10 +84,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     $routes->add('coupons/create', 'Coupon::create');
     $routes->add('coupons/(:num)/edit', 'Coupon::edit');
 });
-// api routes
-// $routes->group('api/v1', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
-//     $routes->add('products', 'Product', );
-// });
+
 // vendor pages
 $routes->group('vendor', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
     $routes->add('products', 'Product', );
@@ -152,8 +149,9 @@ $routes->add('email/(:segment)', 'Email',['namespace' => 'App\Controllers\Admin'
 
 $routes->group('/', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->add('products', 'Home::products');
+    $routes->add('products/search?(:segment)', 'Home::products_search', );
     $routes->add('vendors', 'Home::vendors');
-    $routes->add('products/(:segment)', 'Home::product');
+    // $routes->add('products/(:segment)', 'Home::product');
     $routes->add('shopping/cart', 'Home::shopping_cart');
     $routes->add('shopping/login', 'Home::buyer_login');
     $routes->add('shipping/address', 'Home::shipping_address');
