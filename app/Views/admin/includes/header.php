@@ -13,6 +13,7 @@
     <?= script_tag('assets/plugins/toastify-js/toastify-js.js'); ?>
     <?= script_tag('assets/plugins/jquery-multifile/jquery-multifile.js'); ?>
     <?= script_tag('server/node_modules/socket.io-client/dist/socket.io.dev.js'); ?>
+    <?= script_tag('assets/plugins/listJs/list.min.js'); ?>
     <script>
     const socket = io('http://localhost:1000/');
     $(document).ready(function() {

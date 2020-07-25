@@ -3,10 +3,9 @@
         <div class="col-sm-12 mt-n5">
             <div id="tableID" class="table-list-container">
                 <div class="d-flex justify-content-end align-items-start mb-3">
-                    <button data-toggle="modal" data-target="#mymodal" data-modal='modal-lg'
-                        data-id="<?= base_url('admin/users/create'); ?>" id="menu" class="btn btn-sm btn-primary">
+                    <a href="<?= base_url('admin/products/create'); ?>" class="btn btn-sm btn-primary">
                         <i class="fas fa-plus"></i>
-                    </button>
+                    </a>
                     <div class="table-search ml-3">
                         <input class="search form-control form-control-sm" placeholder="Search">
                     </div>
@@ -31,28 +30,28 @@
 
                         <!-- IMPORTANT, class="list" must be on tbody -->
                         <tbody class="list">
-                            <?php foreach ($users as $users) {?>
+                            <?php foreach ($orders as $order) {?>
                             <tr>
                                 <td class="jSortName">
                                     <span class="cat-icon text-center">
                                         <ion-icon name="car-sport"></ion-icon>
-                                    </span><?= $users['username'] ?>
+                                    </span><?=$order['title'] ?>
                                 </td>
                                 <td>
-                                    </span><?= $users['email'] ?>
+                                    </span><?=$order['sku'] ?>
                                 </td>
                                 <td>
-                                    </span><?= $users['role'] ?>
+                                    </span><?=$order['price'] ?>
                                 </td>
                                 <td class="text-right">
                                     <div class="btn-group btn-group-sm">
                                         <button class="btn" data-toggle="modal" data-target="#mymodal" data-modal=""
-                                            data-id="<?= base_url() . '/admin/users/' . $users['id'] . '/update'?>"
+                                            data-id="<?= base_url() . '/admin/products/' .$order['id'] . '/update'?>"
                                             id="menu">
                                             <i class="fas fa-edit ml-2"></i>
                                         </button>
-                                        <button data-toggle="modal" data-target="#delmodal" name="users"
-                                            id="<?= $users['id'] ?>" class="btn delete" data-toggle="modal"
+                                        <button data-toggle="modal" data-target="#delmodal" name="products"
+                                            id="<?=$order['id'] ?>" class="btn delete" data-toggle="modal"
                                             data-target="#exampleModal">
                                             <i class="fas fa-trash ml-2"></i>
                                         </button>

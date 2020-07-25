@@ -41,15 +41,10 @@ $(document).ready(() => {
   $(".delete").click((e) => {
     e.preventDefault();
     $("#del-confirm").click(() => {
-      $.ajax({
-        url: `/admin/delete/${e.target.name}/${e.target.id}`,
-        type: "post",
-      }).done(() => {
+      $.post(`/admin/delete/${e.target.name}/${e.target.id}`)
+      .done(() => {
         $("#delmodal").modal("toggle");
         $(`#row_${e.target.id}`).css("background", "#f2c994").fadeOut(1500);
-        setTimeout(() => {
-          window.location.reload();
-        }, 1500);
       });
     });
   });

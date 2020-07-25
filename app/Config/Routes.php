@@ -68,7 +68,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     // SETTINGS
     $routes->add('settings', 'Setting');
     // PAYMENTS
-    $routes->add('Orders', 'Payment');
+    $routes->add('orders', 'Order');
+    
     // PAYMENTS
     $routes->add('analytics', 'Analytic');
     // USERS
@@ -82,7 +83,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     // COUPONS
     $routes->add('coupons', 'Coupon');
     $routes->add('coupons/create', 'Coupon::create');
-    $routes->add('coupons/(:num)/edit', 'Coupon::edit');
+    $routes->add('coupons/(:num)/update', 'Coupon::update');
 });
 
 // vendor pages
