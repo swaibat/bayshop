@@ -2,7 +2,7 @@
 
 use CodeIgniter\Database\Migration;
 
-class Slider extends Migration
+class Currency extends Migration
 {
 	public function up()
     {
@@ -13,30 +13,28 @@ class Slider extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
 			],
-            'title' => [
+			'name' => [
                 'type' => 'VARCHAR',
-				'constraint' => '100',
+				'constraint' => '50',
 				'unique'         => true,
-            ],
-            'description' => [
+			],
+			'value' => [
+                'type' => 'FLOAT',
+			],
+			'base' => [
                 'type' => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => '50',
 			],
-			'product_link' => [
-				'type'    	=> 'TEXT',
-				'null'     	=> true,
-			],
-			'image_link' => [
-				'type'    	=> 'TEXT',
-				'null'     	=> true,
+            'updated_at' => [
+                'type' => 'DATETIME',
 			],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('sliders');
+        $this->forge->createTable('currencies');
     }
 
     public function down()
     {
-        $this->forge->dropTable('sliders');
+        $this->forge->dropTable('currencies');
     }
 }

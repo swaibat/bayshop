@@ -16,6 +16,7 @@ class Collection extends Migration
             'name' => [
                 'type' => 'VARCHAR',
                 'constraint' => '100',
+                'unique'         => true,
             ],
             'slug' => [
                 'type' => 'VARCHAR',

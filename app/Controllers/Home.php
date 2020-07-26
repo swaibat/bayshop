@@ -18,8 +18,9 @@ class Home extends BaseController
         $data = [
             'page_name'     => 'products',
             'page_title'    => 'products',
-            'products'      => $this->products->get_products()
+            'products'      => $this->products->findAll()
         ];
+        return print_r($this->products->findAll());
         return view($this->themePath, $data);
     }
 
@@ -42,6 +43,7 @@ class Home extends BaseController
 
     public function product()
     {
+        // return $this->products->get_product($slug);
         $slug = $this->request->uri->getSegment(2);
         $data = [
             'page_name'     => 'product_details',

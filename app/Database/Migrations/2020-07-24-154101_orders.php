@@ -2,7 +2,7 @@
 
 use CodeIgniter\Database\Migration;
 
-class Orders extends Migration
+class Order extends Migration
 {
 	public function up()
 	{

@@ -152,7 +152,7 @@ $routes->group('/', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->add('products', 'Home::products');
     $routes->add('products/search?(:segment)', 'Home::products_search', );
     $routes->add('vendors', 'Home::vendors');
-    // $routes->add('products/(:segment)', 'Home::product');
+    $routes->add('product/(:segment)', 'Home::product');
     $routes->add('shopping/cart', 'Home::shopping_cart');
     $routes->add('shopping/login', 'Home::buyer_login');
     $routes->add('shipping/address', 'Home::shipping_address');

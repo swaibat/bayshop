@@ -2,7 +2,7 @@
 
 use CodeIgniter\Database\Migration;
 
-class Categories extends Migration
+class Message extends Migration
 {
 	public function up()
     {
@@ -13,36 +13,28 @@ class Categories extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
 			],
-            'name' => [
-                'type' => 'VARCHAR',
-                'constraint' => '100',
-                'unique'         => true,
-            ],
-            'slug' => [
-                'type' => 'VARCHAR',
-                'constraint' => '100',
-			],
-			'parent_id' => [
-                'type' => 'INT',
-				'constraint' => 11,
-				'null'     	=> true,
-			],
-			'user_id' => [
+			'sender_id' => [
                 'type' => 'INT',
                 'constraint' => 11,
-            ],      
-            'image' => [
+			],
+			'receiver_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
+			],
+			'messages' => [
                 'type' => 'VARCHAR',
-				'constraint' => '255',
-				'null'     	=> true,
+                'constraint' => '255',
             ],
+            'created_at' => [
+                'type' => 'DATETIME',
+			],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('categories');
+        $this->forge->createTable('messages');
     }
 
     public function down()
     {
-        $this->forge->dropTable('categories');
+        $this->forge->dropTable('messages');
     }
 }
