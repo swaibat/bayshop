@@ -6,7 +6,7 @@ class Coupon extends Migration
 {
     public function up()
     {
-		$this->db->disableForeignKeyChecks();
+		// $this->db->disableForeignKeyChecks();
         $this->forge->addField([
             'id' => [
                 'type' => 'INT',
@@ -58,9 +58,9 @@ class Coupon extends Migration
             ],
         ]);
 		$this->forge->addKey('id', true);
-		$this->forge->addForeignKey('user_id','users','id');
-		$this->forge->createTable('coupons');
-		$this->db->enableForeignKeyChecks();
+        $this->forge->createTable('coupons');
+        // $this->forge->addForeignKey('user_id','users','id');
+		// $this->db->enableForeignKeyChecks();
     }
 
     public function down()

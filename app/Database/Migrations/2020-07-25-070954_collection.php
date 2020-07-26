@@ -37,11 +37,11 @@ class Collection extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('categories');
+        $this->forge->createTable('collection');
     }
 
     public function down()
     {
-        $this->forge->dropTable('categories');
+        $this->forge->dropTable('collection');
     }
 }

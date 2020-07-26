@@ -6,7 +6,7 @@ class Payment extends Migration
 {
 	public function up()
     {
-		$this->db->disableForeignKeyChecks();
+		// $this->db->disableForeignKeyChecks();
         $this->forge->addField([
             'id' => [
                 'type' => 'INT',
@@ -51,13 +51,13 @@ class Payment extends Migration
             ],
         ]);
 		$this->forge->addKey('id', true);
-		$this->forge->addForeignKey('user_id','users','id');
-		$this->forge->createTable('coupons');
-		$this->db->enableForeignKeyChecks();
+		$this->forge->createTable('payments');
+		// $this->forge->addForeignKey('user_id','users','id');
+		// $this->db->enableForeignKeyChecks();
     }
 
     public function down()
     {
-        $this->forge->dropTable('coupons');
+        $this->forge->dropTable('payments');
     }
 }

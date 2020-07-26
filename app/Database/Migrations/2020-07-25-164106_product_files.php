@@ -6,7 +6,7 @@ class ProductFile extends Migration
 {
     public function up()
     {
-        $this->db->disableForeignKeyChecks();
+        // $this->db->disableForeignKeyChecks();
         $this->forge->addField([
             'id' => [
                 'type' => 'INT',
@@ -28,9 +28,9 @@ class ProductFile extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('product_id', 'products', 'id');
-        $this->forge->createTable('product_files');
-        $this->db->enableForeignKeyChecks();
+		$this->forge->createTable('product_files');
+		// $this->forge->addForeignKey('product_id', 'products', 'id');
+        // $this->db->enableForeignKeyChecks();
     }
 
     //--------------------------------------------------------------------

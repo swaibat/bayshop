@@ -6,7 +6,7 @@ class Product extends Migration
 {
 	public function up()
     {
-		$this->db->disableForeignKeyChecks();
+		// $this->db->disableForeignKeyChecks();
         $this->forge->addField([
             'id' => [
                 'type' => 'INT',
@@ -15,6 +15,11 @@ class Product extends Migration
                 'auto_increment' => true,
 			],
             'title' => [
+                'type' => 'VARCHAR',
+				'constraint' => '100',
+				'unique'         => true,
+			],
+			'slug' => [
                 'type' => 'VARCHAR',
 				'constraint' => '100',
 				'unique'         => true,
@@ -110,10 +115,10 @@ class Product extends Migration
 			],
         ]);
 		$this->forge->addKey('id', true);
-		$this->forge->addForeignKey('users_id','users','id');
-		$this->forge->addForeignKey('categories_id','categories','id');
 		$this->forge->createTable('products');
-		$this->db->enableForeignKeyChecks();
+		// $this->forge->addForeignKey('users_id','users','id');
+		// $this->forge->addForeignKey('categories_id','categories','id');
+		// $this->db->enableForeignKeyChecks();
     }
 
     public function down()
