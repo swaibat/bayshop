@@ -20,7 +20,6 @@ class Home extends BaseController
             'page_title'    => 'products',
             'products'      => $this->products->findAll()
         ];
-        return print_r($this->products->findAll());
         return view($this->themePath, $data);
     }
 

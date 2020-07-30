@@ -17,7 +17,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('Install');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -149,6 +149,7 @@ $routes->add('email/(:segment)', 'Email',['namespace' => 'App\Controllers\Admin'
 
 
 $routes->group('/', ['namespace' => 'App\Controllers'], function ($routes) {
+    $routes->add('install', 'Install::install');
     $routes->add('products', 'Home::products');
     $routes->add('products/search?(:segment)', 'Home::products_search', );
     $routes->add('vendors', 'Home::vendors');
