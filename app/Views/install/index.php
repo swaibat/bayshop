@@ -10,20 +10,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/">
 
     <!-- Bootstrap core CSS -->
-    <?= link_tag('assets/admin/css/style.css'); ?>
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="manifest" href="/docs/4.5/assets/img/favicons/manifest.json">
-    <link rel="mask-icon" href="/docs/4.5/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
-    <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon.ico">
-
-    <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
-    <meta name="theme-color" content="#563d7c">
-
-
+    <link href="http://localhost/assets/admin/css/style.css" rel="stylesheet" type="text/css" />
     <style>
     body {
         background: white;
@@ -47,7 +34,7 @@
     <main role="main" class='w-100'>
         <div class="container text-center">
             <div class="row">
-                <a class="col-md-4" href="install">
+                <a class="col-md-4" href="setup?installation">
                     <div class="install-btn text-primary rounded p-4">
                         <span class="main-install-icon"><i class="fas fa-cogs"></i></span>
                         <h4>Install Script</h4>

@@ -8,6 +8,12 @@ if (phpversion() < $minPHPVersion)
 }
 unset($minPHPVersion);
 
+try{
+	file_exists("env") && rename("env", ".env");
+} catch (\Throwable $e) {
+	return print_r('oops error happened while trying to access Env file make sure env file is present');
+}
+// shell_exec('cd server'); 
 // Path to the front controller (this file)
 define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR);
 

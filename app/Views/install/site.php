@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <title>Installation</title>
+    <title>Sticky Footer Navbar Template · Bootstrap</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/">
 
@@ -52,25 +52,38 @@
             </div>
             <div class="col-md-6">
                 <div class="shadow-sm p-4 rounded">
-                    <form id="db-form" action="/setup?installation" >
-                    <h4 class="mb-4">Database Details</h4>
-                    <div class="form-group">
-                            <label for="host">Database Host</label>
-                            <input type="text" name="hostname" class="form-control" id="host"  value="localhost" reuired>
-                        </div>
-                    <div class="form-group">
-                            <label for="databse">Database name</label>
-                            <input type="text" name="database" class="form-control" id="database" placeholder="Enter database name" required>
-                        </div>
+                    <form id="db-form" action="/setup?site">
+                        <h4 class="mb-4">Site Settings</h4>
                         <div class="form-group">
-                            <label for="db-username">Db username</label>
-                            <input type="text" name="username" class="form-control" id="db-username" placeholder="Enter database username" required>
+                            <label for="site_url">Site Name</label>
+                            <input type="text" name="site_url" class="form-control" id="site_url"  required>
                         </div>
-                        <div class="form-group">
-                            <label for="db-password">Db password</label>
-                            <input type="password" name="password" class="form-control" id="db-password" placeholder="Enter database Password">
+                        <div class="col-12 px-0 my-3">
+                            <div class="custom-control custom-checkbox mr-sm-2">
+                                <input type="checkbox" name='add_data' value="1" class="custom-control-input" id="customControlAutosizing">
+                                <label class="custom-control-label" for="customControlAutosizing">Add sample data to your site</label>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                        <h5>Admin login details</h5>
+                        <hr>
+                            <div class="form-group">
+                                <label for="db-username">username</label>
+                                <input type="text" name="username" class="form-control" id="username"
+                                    placeholder="Enter database username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="db-username">email</label>
+                                <input type="email" name="email" class="form-control" id="email"
+                                    placeholder="Enter database username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Admin password</label>
+                                <input type="password" name="password" class="form-control" id="password"
+                                    placeholder="Enter database Password">
+                            </div>
+                        
+                        
+                        <button type="submit" class="btn btn-sm btn-primary">complete</button>
                     </form>
                 </div>
             </div>
@@ -94,29 +107,32 @@
 <?= script_tag('assets/plugins/nicescroll/jquery.nicescroll.min.js'); ?>
 <?= script_tag('assets/plugins/toastify-js/toastify-js.js'); ?>
 <?= script_tag('assets/shared/bootstrap-4.4.1/js/bootstrap.min.js'); ?>
+
 </html>
 <script>
-
 $("#db-form").submit(function(event) {
     event.preventDefault();
     $(".form-text").remove();
+    console.log($(this).serializeArray());
     validate($(this).serializeArray(), errors => {
-    if (!errors.length) {
-      $.post($(this).attr("action"),$(this).serializeArray())
-      .done(function (res) {
-        res.errors ?
-          Object.entries(res.errors).map((error) => {
-            $(`#${error[0]}`).after(
-              `<small class="helper-text-danger">${error[1]}</small>`
-            )
-          }) : location.replace('/setup?site');
-      }).fail(function (err) {
-        Toastify({
-          text: "Error operation failed",
-          backgroundColor: "#FFA500",
-        }).showToast();
-      });
-    }
-  })
-}); 
+        if (!errors.length) {
+            $.post($(this).attr("action"), $(this).serializeArray())
+                .done(function(res) {
+                    console.log(res);
+                    res.errors ?
+                        Object.entries(res.errors).map((error) => {
+                            $(`#${error[0]}`).after(
+                                `<small class="helper-text-danger">${error[1]}</small>`
+                            )
+                        }) : location.replace('/setup?complete');
+                }).fail(function(err) {
+                    Toastify({
+                        text: "Error operation failed",
+                        backgroundColor: "#FFA500",
+                    }).showToast();
+                });
+        }
+    })
+});
+$('#site_url').val(location.origin);
 </script>
