@@ -6,7 +6,7 @@
  */
 function stat_card($data)
 {
-  return '<div class="col-md-3 border-right">
+  return '<div class="col-md-3">
   <div class="d-flex w-100 flex-column box2 bg-white p-3 rounded">
     <div class="d-flex justify-content-between">
       <span class="d-flex">

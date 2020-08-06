@@ -24,31 +24,46 @@
                 <div class="card dool-card p-3">
                     <table class="table table-list w-100 table-hover mt-2 category p-3 bg-white" data-currentpage="1">
                         <thead>
-                            <th>Category Name</th>
-                            <th></th>
+                            <th>Type</th>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>valid from</th>
+                            <th>valid to</th>
                             <th class="text-right">Operations</th>
                         </thead>
 
                         <!-- IMPORTANT, class="list" must be on tbody -->
                         <tbody class="list">
                             <?php foreach ($coupons as $coupon) {?>
-                            <tr>
+                            <tr id="row_<?= $coupon['id'] ?>">
                                 <td class="jSortName">
                                     <span class="cat-icon text-center">
-                                        <ion-icon name="car-sport"></ion-icon>
-                                    </span><?= $coupon['name'] ?>
+                                        <ion-icon src="<?= base_url('assets/images/'.$coupon['type'].'.svg');?> "></ion-icon>
+                                    </span><?= $coupon['type'] ?>
+                                </td>
+                                <td class="jSortName">
+                                    <?= $coupon['name'] ?>
+                                </td>
+                                <td class="jSortName">
+                                    <b class="text-uppercase"><?= $coupon['code'] ?></b>
+                                </td>
+                                <td class="jSortName">
+                                    <?= $coupon['valid_from'] ?>
+                                </td>
+                                <td class="jSortName">
+                                    <?= $coupon['valid_to']?$coupon['valid_to']:'No Expiry' ?>
                                 </td>
                                 <td class="text-right">
                                     <div class="btn-group btn-group-sm">
-                                        <button class="btn" data-toggle="modal" data-target="#mymodal" data-modal=""
+                                        <button class="btn" data-toggle="modal" data-target="#mymodal" data-modal="modal-lg"
                                             data-id="<?= base_url() . '/admin/coupons/' . $coupon['id'] . '/update'?>"
                                             id="menu">
-                                            Edit <i class="fas fa-edit ml-2"></i>
+                                            <i class="fas fa-edit ml-2"></i>
                                         </button>
-                                        <button data-toggle="modal" data-target="#delmodal" name="categories"
-                                            id="<?= $coupon['id'] ?>" class="btn btn-primary delete"
+                                        <button data-toggle="modal" data-target="#delmodal" name="coupons"
+                                            id="<?= $coupon['id'] ?>" class="btn delete"
                                             data-toggle="modal" data-target="#exampleModal">
-                                            Delete <i class="fas fa-trash ml-2"></i>
+                                            <i class="fas fa-trash ml-2"></i>
                                         </button>
                                     </div>
                                 </td>

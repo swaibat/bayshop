@@ -1867,6 +1867,9 @@ video {
 .contact * {
     pointer-events: none;
 }
+.btn * {
+    pointer-events: none;
+}
 .pointer-0{
     pointer-events: none;
 }

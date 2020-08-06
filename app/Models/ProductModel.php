@@ -29,9 +29,8 @@ class ProductModel extends Model
         $builder->select('*');
         $builder->join('product_files', 'products.id = product_files.product_id');
         $builder->where('products.slug', $slug);
-        $builder->orderBy('products.id', 'ASC');
         $query = $builder->get();
-        return reset($query->getResultArray());
+        return $query->getResultArray();
     }
 
     function get_product_by_id($id)

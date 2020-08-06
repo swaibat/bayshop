@@ -17,7 +17,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController(getenv('default_controller'));
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -68,7 +68,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     // SETTINGS
     $routes->add('settings', 'Setting');
     // PAYMENTS
-    $routes->add('Orders', 'Payment');
+    $routes->add('orders', 'Order');
+    
     // PAYMENTS
     $routes->add('analytics', 'Analytic');
     // USERS
@@ -82,7 +83,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     // COUPONS
     $routes->add('coupons', 'Coupon');
     $routes->add('coupons/create', 'Coupon::create');
-    $routes->add('coupons/(:num)/edit', 'Coupon::edit');
+    $routes->add('coupons/(:num)/update', 'Coupon::update');
 });
 
 // vendor pages
@@ -148,10 +149,11 @@ $routes->add('email/(:segment)', 'Email',['namespace' => 'App\Controllers\Admin'
 
 
 $routes->group('/', ['namespace' => 'App\Controllers'], function ($routes) {
+    $routes->add('setup', 'Install');
     $routes->add('products', 'Home::products');
     $routes->add('products/search?(:segment)', 'Home::products_search', );
     $routes->add('vendors', 'Home::vendors');
-    // $routes->add('products/(:segment)', 'Home::product');
+    $routes->add('product/(:segment)', 'Home::product');
     $routes->add('shopping/cart', 'Home::shopping_cart');
     $routes->add('shopping/login', 'Home::buyer_login');
     $routes->add('shipping/address', 'Home::shipping_address');

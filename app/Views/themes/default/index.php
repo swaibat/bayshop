@@ -310,16 +310,13 @@
     $("#add-to-cart").click(function() {
         const session = <?= json_encode($_SESSION['cart']) ?> || [];
         const body = {
-            id: '<?= $product['
-            id ']?>',
+            id: '<?= $product['id']?>',
             qty: $('#quantity').val(),
             size: $('#size').val(),
             color: $(".radio:checked").val(),
-            slug: '<?=$product['
-            slug ']?>'
+            slug: '<?=$product['slug']?>'
         }
-        if (!session.find(e => e.id == '<?= $product['
-                id ']?>') || session.length < 1) {
+        if (!session.find(e => e.id == '<?= $product['id ']?>') || session.length < 1) {
             $.post("/home/add_to_cart", body, function(data, status) {
                 session.push(body)
                 alert("Data: " + data + "\nStatus: " + status);

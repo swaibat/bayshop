@@ -114,7 +114,7 @@
                                                                 <span class="offerUnit_href">
                                                                     <div class="offerUnit_href_afterWrap">
                                                                         <a class="offerUnit_imgWrap_sdPlusInc_rel"
-                                                                            href="/products/<?= $product['slug']?>">
+                                                                            href="/product/<?= $product['slug']?>">
                                                                             <div class="offerUnit_sdPlusWrap_abs"></div>
                                                                             <img class="offerUnit_img OfferImg b-lazy b-loaded"
                                                                                 src="<?= $product['url']?>" alt="">
