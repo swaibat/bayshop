@@ -1,3 +1,7 @@
+<?php
+use App\Models\UserModel;
+$this->user = new UserModel();
+?>
 <!doctype html>
 <html lang="en" class="h-100">
 
@@ -10,7 +14,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/">
 
     <!-- Bootstrap core CSS -->
-    <?= link_tag('assets/admin/css/style.css'); ?>
+    <?=link_tag('assets/admin/css/style.css');?>
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -56,33 +60,35 @@
                         <h4 class="mb-4">Site Settings</h4>
                         <div class="form-group">
                             <label for="site_url">Site Name</label>
-                            <input type="text" name="site_url" class="form-control" id="site_url"  required>
+                            <input type="text" name="site_url" class="form-control" id="site_url" required>
                         </div>
                         <div class="col-12 px-0 my-3">
                             <div class="custom-control custom-checkbox mr-sm-2">
-                                <input type="checkbox" name='add_data' value="1" class="custom-control-input" id="customControlAutosizing">
-                                <label class="custom-control-label" for="customControlAutosizing">Add sample data to your site</label>
+                                <input type="checkbox" name='add_data' value="1" class="custom-control-input"
+                                    id="customControlAutosizing">
+                                <label class="custom-control-label" for="customControlAutosizing">Add sample data to
+                                    your site</label>
                             </div>
                         </div>
                         <h5>Admin login details</h5>
                         <hr>
-                            <div class="form-group">
-                                <label for="db-username">username</label>
-                                <input type="text" name="username" class="form-control" id="username"
-                                    placeholder="Enter database username" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="db-username">email</label>
-                                <input type="email" name="email" class="form-control" id="email"
-                                    placeholder="Enter database username" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Admin password</label>
-                                <input type="password" name="password" class="form-control" id="password"
-                                    placeholder="Enter database Password">
-                            </div>
-                        
-                        
+                        <div class="form-group">
+                            <label for="db-username">username</label>
+                            <input type="text" name="username" class="form-control" id="username"
+                                placeholder="Enter database username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="db-username">email</label>
+                            <input type="email" name="email" class="form-control" id="email"
+                                placeholder="Enter database username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Admin password</label>
+                            <input type="password" name="password" class="form-control" id="password"
+                                placeholder="Enter database Password">
+                        </div>
+
+
                         <button type="submit" class="btn btn-sm btn-primary">complete</button>
                     </form>
                 </div>
@@ -101,12 +107,12 @@
         integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous">
     </script> -->
 </body>
-<?= script_tag('assets/shared/jquery/jquery-3.5.1.min.js'); ?>
-<?= script_tag('assets/shared/popper/popper.min.js'); ?>
-<?= script_tag('assets/shared/validator/index.js'); ?>
-<?= script_tag('assets/plugins/nicescroll/jquery.nicescroll.min.js'); ?>
-<?= script_tag('assets/plugins/toastify-js/toastify-js.js'); ?>
-<?= script_tag('assets/shared/bootstrap-4.4.1/js/bootstrap.min.js'); ?>
+<?=script_tag('assets/shared/jquery/jquery-3.5.1.min.js');?>
+<?=script_tag('assets/shared/popper/popper.min.js');?>
+<?=script_tag('assets/shared/validator/index.js');?>
+<?=script_tag('assets/plugins/nicescroll/jquery.nicescroll.min.js');?>
+<?=script_tag('assets/plugins/toastify-js/toastify-js.js');?>
+<?=script_tag('assets/shared/bootstrap-4.4.1/js/bootstrap.min.js');?>
 
 </html>
 <script>
